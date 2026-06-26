@@ -3,7 +3,7 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import { buildView, emptySelection, type ProductView } from "@/lib/data/view";
 import { DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
 import { cleanSpecs } from "@/lib/data/clean";
-import type { Assumptions, Competitor, Product, Selection } from "@/lib/types";
+import type { Assumptions, Competitor, Decision, PipelineStatus, Product, Selection } from "@/lib/types";
 
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
 
@@ -121,6 +121,24 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
     match_reason: c.match_reason,
     source: c.source,
   }));
+}
+
+export interface ProductWithPipeline extends ProductView {
+  pipelineStatus: PipelineStatus;
+  pipelineDecision: Decision | null;
+}
+
+/** Catalog enriched with each product's pipeline stage (for the /pipeline board). */
+export async function getCatalogWithPipeline(): Promise<ProductWithPipeline[]> {
+  const [views, pipeline] = await Promise.all([getCatalog(), getPipelineStatuses()]);
+  return views.map((v) => {
+    const p = pipeline[v.product.external_ref];
+    return {
+      ...v,
+      pipelineStatus: (p?.status ?? "new") as PipelineStatus,
+      pipelineDecision: (p?.decision ?? null) as Decision | null,
+    };
+  });
 }
 
 /** Pipeline stage per product, keyed by external_ref (serializable Record for client props). */

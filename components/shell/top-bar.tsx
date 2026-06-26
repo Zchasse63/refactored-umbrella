@@ -12,7 +12,7 @@ const NAV: { href: string; label: string; ready: boolean }[] = [
   { href: "/catalog", label: "Catalog", ready: true },
   { href: "/products", label: "Products", ready: true },
   { href: "/board", label: "Board", ready: true },
-  { href: "/pipeline", label: "Pipeline", ready: false },
+  { href: "/pipeline", label: "Pipeline", ready: true },
   { href: "/dashboard", label: "Dashboard", ready: true },
   { href: "/exports", label: "Exports", ready: false },
 ];

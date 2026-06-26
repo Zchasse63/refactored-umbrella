@@ -7,7 +7,7 @@ import { buildSearchProfile } from "@/lib/ai/build-profile";
 import { verifyCompetitor } from "@/lib/ai/verify-competitor";
 import { keepaFinder } from "@/lib/keepa/product-finder";
 import { getKeepaProducts, mapKeepaToCompetitor } from "@/lib/keepa/client";
-import type { Product, Tier } from "@/lib/types";
+import type { Decision, PipelineStatus, Product, Tier } from "@/lib/types";
 
 type Result = { ok: true } | { error: string };
 
@@ -69,6 +69,31 @@ export async function saveQuote(ref: string, landed: number | null): Promise<Res
     if (error) return { error: error.message };
   }
   revalidate(ref);
+  return { ok: true };
+}
+
+/**
+ * Move a product across the shared pipeline. The DB trigger pipeline_transition_guard
+ * (public.can_transition) is the source of truth for legality; this also pre-checks so
+ * the UI can fail fast. RLS gates the write to members; the trigger gates the transition.
+ */
+export async function movePipeline(
+  ref: string,
+  newStatus: PipelineStatus,
+  decision: Decision | null = null,
+): Promise<Result> {
+  const r = await resolveProduct(ref);
+  if (!r.ok) return { error: r.error };
+  const patch: Record<string, unknown> = { status: newStatus, updated_by: r.user.id };
+  if (newStatus === "decision") patch.decision = decision;
+  const { error } = await r.sb.from("pipeline_status").update(patch).eq("product_id", r.productId);
+  if (error) {
+    if (/illegal pipeline transition/i.test(error.message)) return { error: "Move not allowed for your role" };
+    return { error: error.message };
+  }
+  revalidatePath("/pipeline");
+  revalidatePath("/dashboard");
+  revalidatePath("/board");
   return { ok: true };
 }
 
