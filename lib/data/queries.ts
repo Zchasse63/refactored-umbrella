@@ -18,7 +18,8 @@ function rowToProduct(r: any): Product {
     brand: r.brand,
     source: r.source,
     name: r.name_clean || r.name,
-    model: r.model,
+    // model_clean (AI-extracted) survives re-seed, which only rewrites the mapper-owned model col
+    model: r.model || r.model_clean,
     group_name: r.group_name,
     subsection: r.subsection,
     categories: r.categories ?? [],

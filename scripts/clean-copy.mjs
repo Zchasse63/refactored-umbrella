@@ -29,6 +29,9 @@ if (!process.env.ANTHROPIC_API_KEY) throw new Error("missing ANTHROPIC_API_KEY")
 const sb = createClient(SUPABASE_URL, SERVICE, { auth: { persistSession: false } });
 const ai = new Anthropic();
 const ONLY_MISSING = process.argv.includes("--missing");
+// Backfill just the AI-extracted model code (into model_clean) for legacy appliances
+// whose mapper-owned `model` is null (and was wiped/never set by re-seed).
+const MODELS_ONLY = process.argv.includes("--legacy-models");
 
 const PROMPT = (p) => {
   const specs = (p.specs ?? []).map((s) => `${s.label}: ${s.value}`).join("; ") || "(none)";
@@ -81,10 +84,12 @@ async function cleanOne(p) {
 
 async function run() {
   let q = sb.from("products").select("id, external_ref, name, line, specs, features").order("line").order("name");
-  if (ONLY_MISSING) q = q.is("summary", null);
+  if (MODELS_ONLY) q = q.eq("line", "appliance").is("model", null).is("model_clean", null);
+  else if (ONLY_MISSING) q = q.is("summary", null);
   const { data: products, error } = await q;
   if (error) throw error;
-  console.log(`Cleaning ${products.length} products${ONLY_MISSING ? " (missing only)" : ""}...`);
+  const mode = MODELS_ONLY ? " (legacy model backfill)" : ONLY_MISSING ? " (missing only)" : "";
+  console.log(`Cleaning ${products.length} products${mode}...`);
 
   const CONC = 6;
   let idx = 0, done = 0, failed = 0;
@@ -93,10 +98,15 @@ async function run() {
       const p = products[idx++];
       try {
         const c = await cleanOne(p);
-        const upd = { name_clean: c.name_clean, summary: c.summary, features_clean: c.features_clean };
-        if (c.model) upd.model = c.model; // never null out an existing model (beauty has real ones)
-        const { error: uerr } = await sb.from("products").update(upd).eq("id", p.id);
-        if (uerr) throw uerr;
+        // model goes to model_clean (durable; seed never touches it). model_clean only when extracted.
+        const upd = MODELS_ONLY
+          ? {}
+          : { name_clean: c.name_clean, summary: c.summary, features_clean: c.features_clean };
+        if (c.model) upd.model_clean = c.model;
+        if (Object.keys(upd).length) {
+          const { error: uerr } = await sb.from("products").update(upd).eq("id", p.id);
+          if (uerr) throw uerr;
+        }
         done++;
       } catch (e) {
         failed++;
