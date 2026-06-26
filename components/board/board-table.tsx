@@ -4,14 +4,14 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { sortBoardViews, type BoardSortKey } from "@/lib/data/board-sort";
 import type { ProductView } from "@/lib/data/view";
 import type { Role, Tier } from "@/lib/types";
 
 const LINE_SHORT: Record<string, string> = { appliance: "Appl", beauty: "Beauty", foodservice: "Food" };
 const TIER_VARIANT: Record<Tier, "pass" | "warn" | "neutral"> = { pursue: "pass", maybe: "warn", pass: "neutral" };
-const TIER_RANK: Record<Tier, number> = { pursue: 0, maybe: 1, pass: 2 };
 
-type SortKey = "headroom" | "net" | "targetSell" | "landed" | "tier" | "name";
+type SortKey = BoardSortKey;
 
 /** Dense comparison cockpit — rank every SKU by the negotiation numbers. Read-only. */
 export function BoardTable({ views }: { views: ProductView[]; role: Role }) {
@@ -19,27 +19,7 @@ export function BoardTable({ views }: { views: ProductView[]; role: Role }) {
   const [dir, setDir] = useState<"asc" | "desc">("desc");
   const [tier, setTier] = useState<Tier | "all">("all");
 
-  const rows = useMemo(() => {
-    const filtered = tier === "all" ? views : views.filter((v) => v.selection.tier === tier);
-    const key = (v: ProductView): number | string => {
-      switch (sortKey) {
-        case "headroom": return v.economics.verdict?.headroom ?? Number.NEGATIVE_INFINITY;
-        case "net": return v.economics.liveNetPct ?? Number.NEGATIVE_INFINITY;
-        case "targetSell": return v.selection.target_sell_price ?? Number.NEGATIVE_INFINITY;
-        case "landed": return v.economics.targetLanded ?? Number.NEGATIVE_INFINITY;
-        case "tier": return v.selection.tier ? TIER_RANK[v.selection.tier] : 99;
-        case "name": return v.product.name.toLowerCase();
-      }
-    };
-    return [...filtered].sort((a, b) => {
-      const ka = key(a), kb = key(b);
-      if (typeof ka === "string" && typeof kb === "string") {
-        return dir === "asc" ? ka.localeCompare(kb) : kb.localeCompare(ka);
-      }
-      const d = (ka as number) - (kb as number);
-      return dir === "asc" ? d : -d;
-    });
-  }, [views, sortKey, dir, tier]);
+  const rows = useMemo(() => sortBoardViews(views, sortKey, dir, tier), [views, sortKey, dir, tier]);
 
   function toggle(key: SortKey) {
     if (sortKey === key) setDir((d) => (d === "asc" ? "desc" : "asc"));

@@ -126,7 +126,7 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
 /** Pipeline stage per product, keyed by external_ref (serializable Record for client props). */
 export async function getPipelineStatuses(): Promise<Record<string, { status: string; decision: string | null }>> {
   const sb = createSupabaseServer();
-  const { data } = await sb.from("pipeline_status").select("status, decision, product:products(external_ref)");
+  const { data } = await sb.from("pipeline_status").select("status, decision, product:product_id(external_ref)");
   const out: Record<string, { status: string; decision: string | null }> = {};
   for (const r of (data ?? []) as any[]) {
     const ref = r.product?.external_ref;
