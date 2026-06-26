@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server";
-import fs from "node:fs";
 import path from "node:path";
 import ExcelJS from "exceljs";
 import { createSupabaseServer } from "@/lib/supabase/server";
@@ -14,8 +13,16 @@ interface Body {
   moqEdits?: Record<string, number | null>;
 }
 
+// only same-origin /products/*.jpg|png paths may be fetched (no SSRF, no traversal)
+const SAFE_IMAGE = /^\/products\/[a-z0-9/_-]+\.(jpe?g|png)$/i;
+
+function requestOrigin(req: NextRequest): string {
+  const proto = req.headers.get("x-forwarded-proto") ?? "https";
+  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
+  return host ? `${proto}://${host}` : req.nextUrl.origin;
+}
+
 export async function POST(req: NextRequest) {
-  // auth: must be a signed-in member (RLS still applies to the reads below)
   const sb = createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
@@ -40,15 +47,31 @@ export async function POST(req: NextRequest) {
       .filter((v) => order.has(v.product.external_ref))
       .sort((a, b) => order.get(a.product.external_ref)! - order.get(b.product.external_ref)!);
 
-    const rows = selected.map((v, i) =>
-      buildRfqRow(v, i + 1, moqEdits[v.product.external_ref] ?? null),
+    const rows = selected.map((v, i) => buildRfqRow(v, i + 1, moqEdits[v.product.external_ref] ?? null));
+
+    // Pre-fetch clean product images from the CDN (public/ is not on the function's disk
+    // on Netlify). Same-origin /products/*.{jpg,png} only.
+    const origin = requestOrigin(req);
+    const imageBuffers = new Map<string, { buf: Buffer; ext: "jpeg" | "png" }>();
+    await Promise.all(
+      rows
+        .filter((r) => r.imagePath && SAFE_IMAGE.test(r.imagePath))
+        .map(async (r) => {
+          try {
+            const resp = await fetch(new URL(r.imagePath!, origin).toString());
+            if (!resp.ok) return;
+            const ab = await resp.arrayBuffer();
+            const e = path.extname(r.imagePath!).slice(1).toLowerCase();
+            imageBuffers.set(r.imagePath!, { buf: Buffer.from(ab), ext: e === "png" ? "png" : "jpeg" });
+          } catch {
+            /* skip an image that fails to load — never fail the whole RFQ */
+          }
+        }),
     );
 
     const wb = new ExcelJS.Workbook();
     wb.creator = "The Portal";
-    wb.created = new Date();
     const ws = wb.addWorksheet("RFQ", { views: [{ state: "frozen", ySplit: 1 }] });
-
     ws.columns = RFQ_COLUMNS.map((c) => ({ header: c.header, key: c.key, width: c.width }));
     const headerRow = ws.getRow(1);
     headerRow.font = { bold: true, color: { argb: "FFFFFFFF" } };
@@ -57,6 +80,7 @@ export async function POST(req: NextRequest) {
     headerRow.height = 22;
 
     const moneyCols = new Set(RFQ_COLUMNS.filter((c) => (c as any).money).map((c) => c.key));
+    const imageColIdx = RFQ_COLUMNS.findIndex((c) => c.key === "imageCol");
 
     rows.forEach((r) => {
       const row = ws.addRow({
@@ -76,37 +100,29 @@ export async function POST(req: NextRequest) {
         const cell = row.getCell(key);
         if (typeof cell.value === "number") cell.numFmt = '"$"#,##0.00';
       }
-      // embed a clean product image (export_ok only)
-      if (r.imagePath) {
-        // containment: never read outside public/products, regardless of the DB value
-        const productsDir = path.resolve(process.cwd(), "public", "products");
-        const file = path.resolve(process.cwd(), "public", r.imagePath.replace(/^\/+/, ""));
-        const safe = file === productsDir || file.startsWith(productsDir + path.sep);
-        if (safe && fs.existsSync(file)) {
-          const ext = path.extname(file).slice(1).toLowerCase();
-          const imageId = wb.addImage({ buffer: fs.readFileSync(file) as any, extension: ext === "jpg" ? "jpeg" : (ext as any) });
-          row.height = 56;
-          const col = RFQ_COLUMNS.findIndex((c) => c.key === "imageCol");
-          ws.addImage(imageId, {
-            tl: { col: col + 0.15, row: row.number - 1 + 0.1 },
-            ext: { width: 72, height: 72 },
-          });
-        }
+      const img = r.imagePath ? imageBuffers.get(r.imagePath) : undefined;
+      if (img) {
+        const imageId = wb.addImage({ buffer: img.buf as any, extension: img.ext });
+        row.height = 56;
+        ws.addImage(imageId, {
+          tl: { col: imageColIdx + 0.15, row: row.number - 1 + 0.1 } as any,
+          ext: { width: 72, height: 72 },
+        });
       }
     });
 
-    // a small footer note (neutral / unbranded by default)
     ws.addRow([]);
-    const note = ws.addRow([`Target Landed Cost is DDP (duty-paid, delivered). MOQ Ask is our requested minimum. Generated ${new Date().toISOString().slice(0, 10)}.`]);
+    const note = ws.addRow([
+      `Target Landed Cost is DDP (duty-paid, delivered). MOQ Ask is our requested minimum. Generated ${new Date().toISOString().slice(0, 10)}.`,
+    ]);
     note.font = { italic: true, color: { argb: "FF6B7280" }, size: 9 };
 
     const buffer = await wb.xlsx.writeBuffer();
-    const filename = `rfq-${new Date().toISOString().slice(0, 10)}.xlsx`;
     return new Response(buffer, {
       status: 200,
       headers: {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Disposition": `attachment; filename="rfq-${new Date().toISOString().slice(0, 10)}.xlsx"`,
         "Cache-Control": "no-store",
       },
     });
