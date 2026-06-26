@@ -85,7 +85,8 @@ export async function movePipeline(
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
   const patch: Record<string, unknown> = { status: newStatus, updated_by: r.user.id };
-  if (newStatus === "decision") patch.decision = decision;
+  // carry the decision only while in the decision stage; clear it when leaving
+  patch.decision = newStatus === "decision" ? decision : null;
   const { error } = await r.sb.from("pipeline_status").update(patch).eq("product_id", r.productId);
   if (error) {
     if (/illegal pipeline transition/i.test(error.message)) return { error: "Move not allowed for your role" };

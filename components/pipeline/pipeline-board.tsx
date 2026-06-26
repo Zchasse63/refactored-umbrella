@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import { Lock, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -35,6 +35,20 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
     return m;
   }, [views, optimistic]);
 
+  // Evict each optimistic entry once the revalidated server props catch up to it — no
+  // flicker on success, and no stranded cards if a concurrent user moves one further.
+  useEffect(() => {
+    setOptimistic((prev) => {
+      let changed = false;
+      const next = { ...prev };
+      for (const v of views) {
+        const ref = v.product.external_ref;
+        if (ref in next && next[ref] === v.pipelineStatus) { delete next[ref]; changed = true; }
+      }
+      return changed ? next : prev;
+    });
+  }, [views]);
+
   function commit(ref: string, to: PipelineStatus, decision: Decision | null = null) {
     startTransition(async () => {
       const res = await movePipeline(ref, to, decision);
@@ -42,6 +56,7 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
         setOptimistic((s) => { const n = { ...s }; delete n[ref]; return n; }); // revert
         setError(res.error);
       }
+      // on success: keep the optimistic entry until the effect above evicts it (no flicker)
     });
   }
 
@@ -74,9 +89,9 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
         {STAGES.map((stage) => {
           const items = columns[stage.id];
-          const locked = dragRef
-            ? !canTransition(stageOf(views.find((x) => x.product.external_ref === dragRef)!), stage.id, role)
-            : false;
+          // guard: views can refresh (force-dynamic + revalidate) while a drag is in flight
+          const draggedView = dragRef ? views.find((x) => x.product.external_ref === dragRef) : undefined;
+          const locked = draggedView ? !canTransition(stageOf(draggedView), stage.id, role) : false;
           return (
             <div
               key={stage.id}
