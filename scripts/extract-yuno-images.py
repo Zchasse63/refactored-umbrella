@@ -12,6 +12,25 @@ import json, os, re, sys
 
 import fitz  # pymupdf
 import openpyxl
+from PIL import Image, ImageChops, ImageFilter
+
+
+def autoframe(im, pad_frac=0.10, out=560):
+    """Trim the near-white border to the product, center it on a square white canvas with
+    a uniform margin, scale to a consistent size, and lightly sharpen (source is low-res).
+    Fixes inconsistent aspect ratios / edge-cramped products across the deck."""
+    im = im.convert("RGB")
+    diff = ImageChops.difference(im, Image.new("RGB", im.size, (255, 255, 255))).convert("L")
+    bbox = diff.point(lambda p: 255 if p > 14 else 0).getbbox()
+    if bbox:
+        im = im.crop(bbox)
+    w, h = im.size
+    side = int(round(max(w, h) * (1 + 2 * pad_frac)))
+    canvas = Image.new("RGB", (side, side), (255, 255, 255))
+    canvas.paste(im, ((side - w) // 2, (side - h) // 2))
+    if side != out:
+        canvas = canvas.resize((out, out), Image.LANCZOS)
+    return canvas.filter(ImageFilter.UnsharpMask(radius=1.2, percent=85, threshold=2))
 
 PDF = os.path.expanduser("~/Downloads/Yuno Group Small Appliances May 2026.pdf")
 XLSX = os.path.expanduser("~/Downloads/Yuno_RoyalStar_Product_Catalog_May2026.xlsx")
@@ -187,7 +206,6 @@ def main():
     if mode == "--apply":
         # convert extracted crops -> web JPGs in public/, and flag the source JSON so
         # a re-seed keeps the photo (mapYunoUS reads has_photo).
-        from PIL import Image
         man = json.load(open(f"{CROPDIR}/manifest.json"))
         pubdir = "/Users/zach/Desktop/Viral Project/public/products/appliance"
         os.makedirs(pubdir, exist_ok=True)
@@ -219,8 +237,10 @@ def main():
             for p, ir, sr in page_matches(doc, pi, page_for[pi]):
                 if p["slug"] in covered:
                     continue
-                clip = fitz.Rect(ir.x0 - 2, ir.y0 - 2, ir.x1 + 2, ir.y1 + 2)
-                page.get_pixmap(matrix=fitz.Matrix(4, 4), clip=clip).save(f"{CROPDIR}/{p['slug']}.png")
+                # render the photo region at high DPI (WYSIWYG, handles masks/clipping), then auto-frame
+                pix = page.get_pixmap(matrix=fitz.Matrix(8, 8), clip=fitz.Rect(ir))
+                im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+                autoframe(im).save(f"{CROPDIR}/{p['slug']}.png")
                 covered.add(p["slug"])
                 manifest.append({"slug": p["slug"], "rec": p["rec"], "name": p["name"], "page": pi + 1,
                                  "layout": "table" if pi in TABLE_PAGES else "card"})
