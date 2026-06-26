@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify's Next.js runtime — handles App Router, middleware (edge), SSR, and image opt.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

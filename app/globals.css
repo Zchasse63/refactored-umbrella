@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Layer 2 semantic tokens — DESIGN_GUIDE §5.2.2 (light, both registers) ─── */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 210 20% 96%;
+  --muted-fg: 215 16% 38%;
+  --card: 0 0% 100%;
+  --border: 214 20% 91%;
+  --border-strong: 214 18% 82%;
+  --input: 214 20% 88%;
+  --ring: 239 84% 67%;
+
+  --primary: 222 47% 18%;
+  --primary-fg: 0 0% 100%;
+  --secondary: 210 20% 94%;
+  --secondary-fg: 215 25% 27%;
+
+  /* economics hues — meaning only */
+  --target: 239 84% 67%;          /* indigo-500 — Target + focus, reserved */
+  --target-fg: 0 0% 100%;
+  --target-muted: 226 100% 97%;
+  --target-muted-fg: 239 84% 67%;
+
+  --quoted: 38 92% 50%;           /* amber-500 — Quoted (cost side) */
+  --quoted-fg: 26 83% 14%;
+  --quoted-muted: 48 100% 96%;
+  --quoted-muted-fg: 32 81% 29%;
+
+  --actual: 215 16% 47%;          /* slate-500 — Actual */
+  --actual-fg: 0 0% 100%;
+  --actual-muted: 210 20% 96%;
+
+  --pass: 160 84% 39%;            /* emerald-600 — PASS/Go */
+  --pass-fg: 0 0% 100%;
+  --pass-muted: 152 76% 94%;
+  --pass-muted-fg: 163 88% 20%;
+
+  --fail: 347 77% 50%;            /* rose-600 — FAIL */
+  --fail-fg: 0 0% 100%;
+  --fail-muted: 356 100% 95%;
+  --fail-muted-fg: 343 80% 30%;
+
+  --warn: 38 92% 50%;
+  --partner: 258 90% 66%;         /* violet-500 — Partner/market/override/terminology */
+  --partner-fg: 0 0% 100%;
+  --partner-muted: 252 100% 97%;
+  --partner-muted-fg: 263 70% 35%;
+  --needs-photo: 38 92% 50%;
+  --needs-photo-fg: 26 83% 14%;
+
+  --accent-owner: 38 92% 50%;     /* role dot — Owner (filled amber) */
+  --accent-partner: 258 90% 66%;  /* role dot — Partner (hollow violet) */
+
+  --radius: 12px;
+}
+
+/* Cockpit register: denser surfaces, smaller radius, faint cool-gray page */
+[data-register="cockpit"] {
+  --background: 210 20% 98.5%;
+  --radius: 8px;
+}
+
+/* Dark cockpit (DESIGN_GUIDE §5.2.3) — additive; storefront stays light forever */
+.dark[data-register="cockpit"] {
+  --background: 222 47% 9%;
+  --card: 222 40% 13%;
+  --foreground: 210 20% 92%;
+  --muted: 222 30% 18%;
+  --muted-fg: 215 16% 62%;
+  --border: 216 24% 22%;
+  --border-strong: 216 20% 30%;
+  --input: 216 24% 26%;
+  --ring: 234 89% 74%;
+  --target: 234 89% 74%;
+  --quoted: 43 96% 56%;
+  --actual: 214 20% 69%;
+  --pass: 158 64% 52%;
+  --fail: 350 95% 71%;
+  --partner: 255 92% 76%;
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv05" 1, "cv08" 1;
+  }
+}
+
+@layer components {
+  /* THE MONO + TABULAR RULE — any number with business meaning or an identifier code */
+  .numeric {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+  /* Section eyebrow — the defining label style of the app */
+  .text-section-label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground;
+  }
+}

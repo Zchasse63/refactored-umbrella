@@ -1,0 +1,3524 @@
+{
+ "sections": [
+  "Facial Steamers",
+  "Hydration & Oxygen Infusion",
+  "Beauty Import & Ion Devices",
+  "Blackhead & Pore Care",
+  "Facial Cleansing Devices",
+  "Foot & Nail Care",
+  "Beauty & Body Care",
+  "Hair Styling",
+  "Hair Dryers",
+  "Massagers & Beauty Devices"
+ ],
+ "count": 57,
+ "products": [
+  {
+   "id": "pdf1-p5",
+   "pdf": "pdf1",
+   "page": 5,
+   "section": "Facial Steamers",
+   "name": "Hot & Cold Aromatherapy Facial Steamer",
+   "model": "NV8388",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8388"
+    },
+    {
+     "label": "Working Time",
+     "value": "20 minutes (hot fog) / 70 minutes (cold fog)"
+    },
+    {
+     "label": "Rated power",
+     "value": "320W"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "180mL"
+    },
+    {
+     "label": "Rated frequency",
+     "value": "50Hz"
+    },
+    {
+     "label": "Color box size",
+     "value": "230*130*235mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "650*480*273mm"
+    },
+    {
+     "label": "Single color box weight",
+     "value": "1.33KG"
+    },
+    {
+     "label": "Number of boxes packed",
+     "value": "10 units"
+    },
+    {
+     "label": "Weight per box",
+     "value": "13.3KG"
+    }
+   ],
+   "selling_points": [
+    "Hot spray opens pores to clean the skin and replenish nutrients and moisture, while cold spray contracts pores to lock in moisture",
+    "It can switch between cold and hot water freely, meeting the hydration needs of different seasons. The nano-water mist particles are more easily absorbed by the skin",
+    "The hollow belly pouch design allows for fumigation with fruits, vegetables, Chinese herbal medicines, essential oils, etc., to extract the essence of nutrients",
+    "The nozzle Angle is adjustable, making it more convenient to steam the face"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p05_x48.png",
+   "all_images": [
+    "p05_x48.png",
+    "p05_x49.png",
+    "p05_x50.png",
+    "p05_x51.png"
+   ],
+   "chosen_image": "p05_x49.png",
+   "chosen_image_path": "extract/pdf1_images/p05_x49.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p5.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo",
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "All four candidates are marketing assets with Chinese text. Candidate 1 best shows the actual physical steamer device (the white/tan unit is clearly visible on its own next to the model), beating the text/steam-effect panels in 0 and 3 where the device is small or absent. Candidate 2 also shows the device but the model in a face mask makes it busier and less product-focused. Candidate 1 is acceptable: the device is clearly visible and usable, but it has a model (face visible), Chinese marketing text, and a colored/pink background, so it is not a clean catalog-ready render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p6",
+   "pdf": "pdf1",
+   "page": 6,
+   "section": "Facial Steamers",
+   "name": "Rotating Aromatherapy Hot & Cold Facial Steamer",
+   "model": "NV8398A",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8398A"
+    },
+    {
+     "label": "Working Time",
+     "value": "30+-5 minutes (hot fog)/75+- 10 minutes (cold fog)"
+    },
+    {
+     "label": "Rated power",
+     "value": "320W"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "300mL"
+    },
+    {
+     "label": "Rated frequency",
+     "value": "50Hz"
+    },
+    {
+     "label": "Color box size",
+     "value": "195*165*295mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "900*430*335mm"
+    },
+    {
+     "label": "Single color box weight",
+     "value": "2KG"
+    },
+    {
+     "label": "Number of boxes packed",
+     "value": "10 units"
+    },
+    {
+     "label": "Weight per box",
+     "value": "20KG"
+    }
+   ],
+   "selling_points": [
+    "Hot and cold aromatherapy, steamed face with fruit and vegetable essential oils",
+    "Built-in water tank, allowing water to be added directly at the water inlet",
+    "Rotating the nozzle can spray a wider range, providing a greater and more uniform steam volume",
+    "Advanced mirror surface, with variable face steaming mode to observe the skin's hydration status",
+    "The aromatherapy blue design allows for the addition of fruit and vegetable essential oils for aromatherapy face steaming, which not only hydrates but also provides nutrients"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p06_x60.png",
+   "all_images": [
+    "p06_x60.png",
+    "p06_x55.png",
+    "p06_x59.png",
+    "p06_x57.png"
+   ],
+   "chosen_image": "p06_x55.png",
+   "chosen_image_path": "extract/pdf1_images/p06_x55.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p6.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "marketing_overlay"
+   ],
+   "qc_reason": "Candidate 1 is the cleanest shot of the actual device: the white facial steamer is the clear central subject, shown isolated and steaming on a simple dark gradient background with only minor Chinese marketing text (360-degree rotation callout). It beats candidate 0 (device held by a model on a busy pink/purple studio backdrop), candidate 2 (close-up control-button infographic showing only a partial detail of the device with Chinese text), and candidate 3 (a patent certificate document with a coiled cord and no clear device). Graded acceptable rather than good because of the Chinese marketing text and colored/gradient background; the device is clearly visible and usable, so no reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p7",
+   "pdf": "pdf1",
+   "page": 7,
+   "section": "Facial Steamers",
+   "name": "Rotating Hot & Cold Aroma Facial Steamer",
+   "model": "NV8388B",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8388B"
+    },
+    {
+     "label": "Working time",
+     "value": "20 minutes -80 minutes"
+    },
+    {
+     "label": "Rated power",
+     "value": "320W"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "300mL"
+    },
+    {
+     "label": "Rated frequency",
+     "value": "50Hz"
+    },
+    {
+     "label": "Color box size",
+     "value": "150*250*245mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "830*540*285mm"
+    },
+    {
+     "label": "Color box single unit weight",
+     "value": ""
+    }
+   ],
+   "selling_points": [
+    "The 360° rotating nozzle can spray a wider range, providing greater and more uniform steam volume",
+    "7 gear adjustment, dual hot and cold spray",
+    "Essential oils, dried flowers, fruits and vegetables, etc. can be added for aromatherapy",
+    "Touchscreen switch, more high-tech",
+    "Cold spray, hot spray, alternating cold and hot, water replenishment, oil control and cleaning - six modes to meet various needs"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p07_x70.png",
+   "all_images": [
+    "p07_x70.png",
+    "p07_x68.png",
+    "p07_x64.png",
+    "p07_x66.png"
+   ],
+   "chosen_image": "p07_x66.png",
+   "chosen_image_path": "extract/pdf1_images/p07_x66.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p7.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "model_photo"
+   ],
+   "qc_reason": "Candidate 3 shows the white facial steamer clearly on a near-white background with only minor Chinese text and a small skin/face inset — the cleanest device-focused shot. Candidate 0 is a busy dark marketing collage dominated by a model with heavy Chinese text; candidate 1 is an atmospheric steam shot with the device only partially shown; candidate 2 is a cartoon-penguin infographic where the device is not clearly visible. Graded acceptable because of the colored/text elements and small model face, not catalog-clean.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p8",
+   "pdf": "pdf1",
+   "page": 8,
+   "section": "Facial Steamers",
+   "name": "Hot & Cold Aromatherapy Facial Steamer",
+   "model": "NV8385",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8385"
+    },
+    {
+     "label": "Working Time",
+     "value": "15 minutes (hot fog)/50 minutes"
+    },
+    {
+     "label": "Rated power",
+     "value": "320W"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "220mL"
+    },
+    {
+     "label": "Rated frequency",
+     "value": "50Hz"
+    },
+    {
+     "label": "Color box size",
+     "value": "200*138*235mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "460*435*505mm"
+    },
+    {
+     "label": "Single color box weight",
+     "value": "1.4 kilograms"
+    },
+    {
+     "label": "Weight of one box",
+     "value": "16.8 kilograms"
+    }
+   ],
+   "selling_points": [
+    "Hot spray opens pores to clean the skin and replenish nutrients and moisture, while cold spray contracts pores to lock in moisture",
+    "It can switch between cold and hot water freely, meeting the hydration needs of different seasons. The nano-water mist particles are more easily absorbed by the skin",
+    "The hollow belly pouch design allows for fumigation with fruits, vegetables, Chinese herbal medicines, essential oils, etc., to extract the essence of nutrients",
+    "The nozzle Angle is adjustable, making face steaming more convenient.",
+    "High-tech touch screen switch with LCD display of face steaming status."
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p08_x79.png",
+   "all_images": [
+    "p08_x79.png",
+    "p08_x76.png",
+    "p08_x74.png",
+    "p08_x78.png"
+   ],
+   "chosen_image": "p08_x76.png",
+   "chosen_image_path": "extract/pdf1_images/p08_x76.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p8.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "accessory_icons",
+    "small_product_in_frame"
+   ],
+   "qc_reason": "Candidate 1 shows the facial steamer clearly centered on a simple near-white background with only minor Chinese text and small accessory icons, making it the most catalog-ready device shot. Candidate 0 also shows the device clearly but sits on a colored lifestyle background with prominent marketing text. Candidate 2 is a skin-layer infographic with no clear device, and candidate 3 is a busy collage with a hand and text panels. Tier is acceptable rather than good because of the residual Chinese text and accessory icons; not a clean isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p9",
+   "pdf": "pdf1",
+   "page": 9,
+   "section": "Facial Steamers",
+   "name": "Mini Aromatherapy Facial Steamer",
+   "model": "NV8308A",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8308A"
+    },
+    {
+     "label": "Rated Voltage",
+     "value": "220V"
+    },
+    {
+     "label": "Power",
+     "value": "300W"
+    },
+    {
+     "label": "Capacity",
+     "value": "160mL"
+    },
+    {
+     "label": "Rated frequency",
+     "value": "50Hz"
+    },
+    {
+     "label": "Continuous working time",
+     "value": "approximately 25 minutes"
+    },
+    {
+     "label": "Packaging size",
+     "value": "200*120*180mm"
+    },
+    {
+     "label": "Outer packaging size",
+     "value": "670*430*208mm"
+    }
+   ],
+   "selling_points": [
+    "Nanometer ion spray, with fine ultrafine particles, rapidly penetrates from the stratum corneum to the base layer",
+    "Steam your face with essential oils to make it more diverse.",
+    "A great helper for makeup removal, the hot mist warm steam utilizes thermal expansion and contraction to reopen tight pores",
+    "Steaming the face helps with cleansing, facilitates the absorption of masks, helps open pores to remove blackheads, and helps make makeup more adherent before makeup.",
+    "Deep cleaning of dirt: Hot spray steam opens pores, expels dirt and grease, and achieves a cleaning effect"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p09_x82.png",
+   "all_images": [
+    "p09_x82.png",
+    "p09_x83.png",
+    "p09_x84.png",
+    "p09_x85.png"
+   ],
+   "chosen_image": "p09_x82.png",
+   "chosen_image_path": "extract/pdf1_images/p09_x82.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p9.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest, most catalog-ready shot: both physical steamer units (green and pink) are shown large, well-lit, and centered on pedestals against a simple soft-pink background, with only minor Chinese marketing text near the top. Candidate 1 shows the device clearly but on a busy handbag background buried under heavy Chinese marketing text. Candidate 2 is an aromatherapy collage with a hand pouring oil plus scent-pod close-ups. Candidate 3 is a 4-panel model usage-scenario infographic where the device is small/unclear. None is a clean white-background render, so the best available is acceptable rather than good. needs_reshoot is false because the device is clearly and usably depicted.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p11",
+   "pdf": "pdf1",
+   "page": 11,
+   "section": "Hydration & Oxygen Infusion",
+   "name": "Oxygen Injection Instrument",
+   "model": "",
+   "specs": [
+    {
+     "label": "Input voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Rated power",
+     "value": "8W"
+    },
+    {
+     "label": "Charging time",
+     "value": "Approximately 2.5 hours"
+    },
+    {
+     "label": "Continuous working time",
+     "value": "approximately 20 minutes"
+    },
+    {
+     "label": "Color box size",
+     "value": "123*64*195mm"
+    },
+    {
+     "label": "Outer box dimensions",
+     "value": "416*395*356mm"
+    }
+   ],
+   "selling_points": [
+    "High-pressure penetration reaches the skin's base layer. In the 3.0 era of oxygen injection, the high-pressure micro-pore water light technology can spray nourishing toner",
+    "The essence with strong penetrating power nourishes without any discount. It is atomized through micro-pores and decomposed into nano-molecules, reaching the skin base for easy absorption and doubling the effect.",
+    "The fine mist is sprayed evenly and delicately, making it easier to absorb",
+    "Toner, astringent water, toner, essence, hydrosol and milk can be added to keep the skin lustrous, fair and delicate"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p11_x93.png",
+   "all_images": [
+    "p11_x93.png",
+    "p11_x95.png",
+    "p11_x94.png",
+    "p11_x96.png"
+   ],
+   "chosen_image": "p11_x95.png",
+   "chosen_image_path": "extract/pdf1_images/p11_x95.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p11.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 1 shows the white oxygen-injection device standing upright, prominently and clearly displayed on a simple light/neutral background. It is the only frame where the device is the clear, uncluttered focus. It carries a red Chinese marketing text badge on the left, so it is not a fully clean render, hence 'acceptable' rather than 'good'. Candidate 0 is a text-heavy marketing poster with only a small device inset. Candidate 2 shows the device held in a hand within an infographic layout with Chinese callouts. Candidate 3 is a skin-layer diagram where the device tip is small and partial. All three are inferior to 1 because the device is either secondary, annotated, or buried in a diagram.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p12",
+   "pdf": "pdf1",
+   "page": 12,
+   "section": "Hydration & Oxygen Infusion",
+   "name": "Water-Light Oxygen Injection Instrument",
+   "model": "NV8088B",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8088B"
+    },
+    {
+     "label": "Power input",
+     "value": "5V-1.6A"
+    },
+    {
+     "label": "Rated power",
+     "value": "6W"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "800mAh"
+    },
+    {
+     "label": "Plastic pot capacity",
+     "value": "20ML"
+    },
+    {
+     "label": "Metal pot capacity",
+     "value": "5ML"
+    },
+    {
+     "label": "Product size",
+     "value": "43*50*185MM"
+    },
+    {
+     "label": "Outer box size",
+     "value": "480*380*325MM"
+    }
+   ],
+   "selling_points": [
+    "Fine nozzle for fine atomization, 0.3mm fine nozzle, no water droplets, atomization 0.28um, quickly quenches hunger and thirst, evenly atomizes water mist, and takes care of every corner of the skin",
+    "True penetration, say goodbye to \"epidermal hydration\". 135kpa opens up the skin's pathways, and 280m/S force pushes the crushed essence into the skin's base for a virtuous cycle, restoring skin elasticity.",
+    "60-second pre-makeup hydration ensures no powder clogging when applying makeup. It's like absorbing the mask and increasing the skin's moisture content, suitable for all skin types.",
+    "Toner, astringent water, toner, essence, hydrosol and milk can be added to keep the skin lustrous, fair and delicate"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p12_x99.png",
+   "all_images": [
+    "p12_x99.png",
+    "p12_x100.png",
+    "p12_x101.png",
+    "p12_x102.png"
+   ],
+   "chosen_image": "p12_x99.png",
+   "chosen_image_path": "extract/pdf1_images/p12_x99.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p12.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest, most catalog-ready shot: the green oxygen-injection device is isolated and prominently shown standing upright on a plain light-green background with only negligible Chinese text. Candidate 1 is a busy marketing collage with heavy Chinese text and feature callouts; candidate 2 shows the device in a model's hand with spec callouts; candidate 3 is a text-heavy benefits infographic where the device is barely visible. Graded acceptable rather than good because of the colored (non-white) background and minor Chinese marketing text rather than a pure isolated white-background render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p13",
+   "pdf": "pdf1",
+   "page": 13,
+   "section": "Hydration & Oxygen Infusion",
+   "name": "Spray Oxygen Injection Instrument",
+   "model": "NV8088A",
+   "specs": [
+    {
+     "label": "PRODUCT MODEL",
+     "value": "NV8088A"
+    },
+    {
+     "label": "Input",
+     "value": "5V===1A"
+    },
+    {
+     "label": "Battery Capacity",
+     "value": "1100mAh"
+    },
+    {
+     "label": "Color Box",
+     "value": "232*142*62mm"
+    },
+    {
+     "label": "Carton Size",
+     "value": "496*375*335mm"
+    },
+    {
+     "label": "Packing",
+     "value": "20"
+    }
+   ],
+   "selling_points": [
+    "High pressure oxygen injection can inject oxygen and nutrients into the deep layers of the skin",
+    "Spray oxygen gently, and massage skin with pure oxygen in the form of spray and active concentrated ingredients",
+    "Two kinds of water injection bottles can be matched at will, and essence water and makeup water can be used in proportion",
+    "Humanized design, easy adjustment of oxygen injection size"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p13_x105.png",
+   "all_images": [
+    "p13_x105.png",
+    "p13_x106.png",
+    "p13_x107.png",
+    "p13_x108.png"
+   ],
+   "chosen_image": "p13_x105.png",
+   "chosen_image_path": "extract/pdf1_images/p13_x105.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p13.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "colored_background",
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 shows the device clearly isolated on a plain purple gradient with no model and only negligible small Chinese text at the top, making it the cleanest, most catalog-ready option. Candidates 1, 2, and 3 all carry heavy Chinese marketing headlines and/or models (2 and 3), so they rank lower. Best candidate is graded acceptable rather than good because the background is colored purple (not white) and there is minor Chinese text; the device is clearly visible and usable, so no reshoot is required.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p14",
+   "pdf": "pdf1",
+   "page": 14,
+   "section": "Hydration & Oxygen Infusion",
+   "name": "Nano Spray Water Replenisher",
+   "model": "NV8088",
+   "specs": [
+    {
+     "label": "PRODUCT MODEL",
+     "value": "NV8088"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "30mL"
+    },
+    {
+     "label": "Input",
+     "value": "5V===1A"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "2200mAh"
+    },
+    {
+     "label": "Product weight",
+     "value": "100g"
+    },
+    {
+     "label": "Color Box",
+     "value": "183*103.5*50mm"
+    },
+    {
+     "label": "Carton size",
+     "value": "570*415*268mm"
+    },
+    {
+     "label": "Single weight of color box",
+     "value": "0.35KG"
+    },
+    {
+     "label": "Packing",
+     "value": "50tower"
+    },
+    {
+     "label": "One box heavy",
+     "value": "17.5KG"
+    }
+   ],
+   "selling_points": [
+    "Ultrasonic nano spray is easier to penetrate into the skin protective layer and moisturize for a long time",
+    "Open type 30ml water tank, four-color light design, with power bank function",
+    "Fashionable and compact, portable for anytime, anywhere hydration and moisturization"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p14_x117.png",
+   "all_images": [
+    "p14_x117.png",
+    "p14_x114.png",
+    "p14_x116.png",
+    "p14_x112.png"
+   ],
+   "chosen_image": "p14_x117.png",
+   "chosen_image_path": "extract/pdf1_images/p14_x117.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p14.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo",
+    "chinese_text",
+    "busy_collage",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 0 is the only frame where the actual physical device is shown large and clearly (two full units, white/gold and pink), which beats the measurement/diagram and charging-demo panels per ranking rules. It is a busy marketing collage with a model's face, large Chinese marketing text, and a red banner, so the device is clear and usable but not clean catalog-ready -> acceptable. Candidate 1 is a feature panel with caliper/measurement shots and small device. Candidate 2 is a power-bank charging demo with the device off to the side. Candidate 3 is a skin-layer infographic with no clear device. None of the alternatives show the device more cleanly than 0.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p15",
+   "pdf": "pdf1",
+   "page": 15,
+   "section": "Hydration & Oxygen Infusion",
+   "name": "Nano Spray Water Replenisher",
+   "model": "NV8089",
+   "specs": [
+    {
+     "label": "PRODUCT MODEL",
+     "value": "NV8089"
+    },
+    {
+     "label": "Water tank capacity",
+     "value": "20mL"
+    },
+    {
+     "label": "Input",
+     "value": "5V===1A"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "2200mA"
+    },
+    {
+     "label": "Color box",
+     "value": "102.5*44.5*167mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "520 * 235 * 390mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.4KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "40 units"
+    },
+    {
+     "label": "Weight",
+     "value": "16KG"
+    }
+   ],
+   "selling_points": [
+    "Circular body design, compact and stylish",
+    "Nano water supplement, large water tank, spray more durable",
+    "Reverse makeup mirror, illuminating your natural beauty",
+    "Equipped with power bank function"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p15_x127.png",
+   "all_images": [
+    "p15_x127.png",
+    "p15_x123.png",
+    "p15_x125.png",
+    "p15_x121.png"
+   ],
+   "chosen_image": "p15_x123.png",
+   "chosen_image_path": "extract/pdf1_images/p15_x123.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p15.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Product is a pink handheld nano-spray facial mister (NV8089). Candidate 1 shows the device clearly and prominently on a plain white background with only minor Chinese marketing text at the top, making it the cleanest, most catalog-ready option. Candidate 0 is a busy marketing collage with a model's face and large Chinese text; candidate 2 is a lifestyle/feature shot of the device plugged into a phone on a colored background; candidate 3 shows the device in a hand over a stylized water background. All clearly show the device, but 1 is the most isolated and clean. Graded acceptable rather than good because of the residual Chinese text; not poor since the device is clearly visible, so no reshoot is required.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p17",
+   "pdf": "pdf1",
+   "page": 17,
+   "section": "Beauty Import & Ion Devices",
+   "name": "Ultrasonic Import Device",
+   "model": "NV8529",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8529"
+    },
+    {
+     "label": "Stable power",
+     "value": "3W"
+    },
+    {
+     "label": "Input",
+     "value": "5V"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "800mAh"
+    },
+    {
+     "label": "Product size",
+     "value": "154 * 38 * 34.5mm"
+    }
+   ],
+   "selling_points": [
+    "Ultrasonic import and export effectively alleviate skin aging.",
+    "EMS electromagnetic skin rejuvenation accelerates skin metabolism.",
+    "Deep cleaning with positive and negative ions promotes nutrient absorption."
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p17_x138.png",
+   "all_images": [
+    "p17_x138.png",
+    "p17_x139.png",
+    "p17_x135.png",
+    "p17_x136.png"
+   ],
+   "chosen_image": "p17_x139.png",
+   "chosen_image_path": "extract/pdf1_images/p17_x139.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p17.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "feature_callout_labels"
+   ],
+   "qc_reason": "Candidate 1 shows the white/gold ultrasonic device large and clearly centered on a simple pink background with only minor marketing/feature-label Chinese text and no model. It outranks the model-held shots (0 with male model + heavy V脸 text and Taobao LIVE overlay; 2 with female model and smaller device) and the heat-diagram infographic (3) where the device is barely shown. Graded acceptable because the device is clearly visible and usable but has Chinese text and a colored background, falling short of a clean isolated white-background render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p18",
+   "pdf": "pdf1",
+   "page": 18,
+   "section": "Beauty Import & Ion Devices",
+   "name": "Eye Beauty Device",
+   "model": "NV8518A",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8518A"
+    },
+    {
+     "label": "Product size",
+     "value": "143 * 23.5 * 21mm"
+    },
+    {
+     "label": "Input",
+     "value": "1.5V (AAA7 battery)"
+    },
+    {
+     "label": "Color box size",
+     "value": "170 * 80 * 35mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "425 * 360 * 190mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.2KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "50 units"
+    },
+    {
+     "label": "Weight",
+     "value": "10KG"
+    }
+   ],
+   "selling_points": [
+    "Effectively remove fine lines around the eyes, dark circles, eye bags, and other fine lines",
+    "Ions introduce active essence, accelerate collagen growth, and restore skin firmness and elasticity",
+    "Micro vibration massage, simulating the principles of traditional Chinese medicine meridian massage, relieves eye pressure and fatigue, fades dark circles, and eliminates eye bags and edema"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p18_x149.png",
+   "all_images": [
+    "p18_x149.png",
+    "p18_x143.png",
+    "p18_x147.png",
+    "p18_x145.png"
+   ],
+   "chosen_image": "p18_x149.png",
+   "chosen_image_path": "extract/pdf1_images/p18_x149.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p18.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "two_color_variants_shown",
+    "marketing_background_with_feature_icons"
+   ],
+   "qc_reason": "Candidate 0 is the only frame that shows the full physical device clearly and prominently: two color variants (pink and purple) of the eye beauty device displayed large on a clean light/white promotional background. It has a Chinese marketing headline and small feature icons at the bottom, so it is not a fully clean isolated render, but the device is unmistakably the focus and the image is usable for catalog purposes. Candidates 1, 2, and 3 are all infographic/diagram/collage panels (skin-penetration diagrams, measurement scales, model faces, and small multi-thumbnail layouts) where the device is small or unclear, so they rank well below 0. Grade is acceptable due to the Chinese text and busy marketing treatment rather than good.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p19",
+   "pdf": "pdf1",
+   "page": 19,
+   "section": "Beauty Import & Ion Devices",
+   "name": "Ionic Beauty Device",
+   "model": "NV8528",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8528"
+    },
+    {
+     "label": "Vibration rate",
+     "value": "9000 r/min"
+    },
+    {
+     "label": "Input",
+     "value": "3V (CR2032)"
+    },
+    {
+     "label": "Color box size",
+     "value": "190 * 80 * 36mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "395 * 380 * 195mm"
+    },
+    {
+     "label": "Color box weight (unit)",
+     "value": "0.2KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "50 units per box"
+    },
+    {
+     "label": "Weight",
+     "value": "10KG"
+    }
+   ],
+   "selling_points": [
+    "Positive ions: quickly remove dirt accumulated in pores, decompose metabolic residues and precipitated pigments, and release them.",
+    "Negative ions: effectively introduce nutrient solution into the dermis layer to repair broken fibers."
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p03_x426.png",
+   "all_images": [
+    "p03_x426.png",
+    "p19_x156.png",
+    "p19_x155.png",
+    "p19_x153.png"
+   ],
+   "chosen_image": "p03_x426.png",
+   "chosen_image_path": "extract/pdf1_images/p03_x426.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p19.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "busy_background"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest available shot: the pink ionic beauty device is the large, clear hero subject shown in full detail. It is not catalog-clean because of the styled lifestyle background (curtains, pedestal, plant) and a large Chinese marketing headline overlay ('把美容师带回家'), so it grades 'acceptable' rather than 'good'. Candidate 1 shows the device but is a purple promo tile with a model face and Chinese text; candidate 2 is a busy model collage with only a tiny product inset; candidate 3 is a skin-diagram infographic with no clear device. None offer a clean isolated white-background render, but the device is clearly visible and usable in candidate 0, so no reshoot is required.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p20",
+   "pdf": "pdf1",
+   "page": 20,
+   "section": "Beauty Import & Ion Devices",
+   "name": "Cold & Hot Ion Beauty Device",
+   "model": "NV8538",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8538"
+    },
+    {
+     "label": "Product size",
+     "value": "175 * 50 * 30mm"
+    },
+    {
+     "label": "Output",
+     "value": "DC6.5V/2A"
+    },
+    {
+     "label": "Input",
+     "value": "AC100-240V/5-60Hz"
+    },
+    {
+     "label": "Color Box Size",
+     "value": "240 * 165 * 75mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "498 * 348 * 395mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.65KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "20 units"
+    },
+    {
+     "label": "Weight",
+     "value": "13KG"
+    }
+   ],
+   "selling_points": [
+    "Professional beauty salon level product, with deep cleaning of positive and negative ions imported and exported, promoting nutrient absorption while deep cleaning",
+    "Cold and hot care accelerates skin metabolism, increases cell vitality, and effectively alleviates skin aging",
+    "Positive and negative ions combined with cold and hot care cycles can effectively lighten and remove spots, achieving whitening effects"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p20_x165.png",
+   "all_images": [
+    "p20_x165.png",
+    "p20_x164.png",
+    "p20_x160.png",
+    "p20_x162.png"
+   ],
+   "chosen_image": "p20_x165.png",
+   "chosen_image_path": "extract/pdf1_images/p20_x165.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p20.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo"
+   ],
+   "qc_reason": "Index 0 is the cleanest candidate: a model holds the actual device against a clean white background with no marketing text, and the device is clearly visible. It beats indices 1, 2, and 3, which are all dark Chinese-text marketing infographics/collages (cold-hot tech diagram, callout panels, skin-benefit collage) where the device is small or secondary. Graded acceptable rather than good because a model (face visible) is present instead of an isolated product render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p22",
+   "pdf": "pdf1",
+   "page": 22,
+   "section": "Blackhead & Pore Care",
+   "name": "Microcrystalline Blackhead Remover",
+   "model": "NV8530A",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8530A"
+    },
+    {
+     "label": "Input",
+     "value": "5V==1A"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "850mAh"
+    },
+    {
+     "label": "Product size",
+     "value": "74.8 * 59.2 * 205mm"
+    }
+   ],
+   "selling_points": [
+    "4 levels of suction adjustable, removing all pimples and blackheads",
+    "Multiple interchangeable suction tips for easy handling of various skin types",
+    "Compact and easy to carry, clean the skin anytime, anywhere",
+    "Charging dock, easy and fast to put down and charge"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p22_x170.png",
+   "all_images": [
+    "p22_x170.png",
+    "p22_x171.png"
+   ],
+   "chosen_image": "p22_x170.png",
+   "chosen_image_path": "extract/pdf1_images/p22_x170.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p22.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "busy_collage"
+   ],
+   "qc_reason": "Two candidates, both showing the mint-green device clearly with Chinese marketing text. Candidate 0 shows the device large and clear on a simple lifestyle background (countertop + plant) with just one line of header text, making it the cleanest option. Candidate 1 is a denser marketing collage with a 'new arrival' badge, multiple text panels, and replacement-head graphics. Neither is a clean isolated white-background render, so the best available is acceptable: device clearly visible and usable but with Chinese text and a styled/busy background.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p23",
+   "pdf": "pdf1",
+   "page": 23,
+   "section": "Blackhead & Pore Care",
+   "name": "Microcrystalline Blackhead Remover",
+   "model": "NV8530",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8530"
+    },
+    {
+     "label": "Input",
+     "value": "5V==="
+    },
+    {
+     "label": "Usage time",
+     "value": "Approximately 150 minutes"
+    },
+    {
+     "label": "Charging time",
+     "value": "about 100 minutes"
+    },
+    {
+     "label": "Color box size",
+     "value": "139 * 55 * 211mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "610 * 310 * 405mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.64KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "50"
+    },
+    {
+     "label": "units per box Weight",
+     "value": "30KG"
+    }
+   ],
+   "selling_points": [
+    "Acne blackhead killer, three in one effect",
+    "Four types of suction tips are interchangeable, and can also be used for skin grinding and care",
+    "Strong suction, up to 60 Pa, good effect",
+    "LCD display, easy and convenient to operate"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p03_x420.png",
+   "all_images": [
+    "p03_x420.png",
+    "p23_x179.png",
+    "p23_x177.png",
+    "p23_x175.png"
+   ],
+   "chosen_image": "p23_x179.png",
+   "chosen_image_path": "extract/pdf1_images/p23_x179.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p23.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "infographic_diagram",
+    "shows_accessory_heads_not_just_device"
+   ],
+   "qc_reason": "Candidate 1 shows the blackhead remover device on a near-plain white background with its detachable suction heads and only minor Chinese text at the top, making it the cleanest, most catalog-ready view of the actual device. Candidate 0 is a busy marketing layout with large 'ABSORB BLACKHEADS' text and a feature-icon row; candidate 2 is a feature infographic with a Chinese text panel about modes; candidate 3 is a dark tech-style collage where the device is dim and partially obscured. Tier is acceptable (not good) because of the minor Chinese marketing text and the accessory-head layout rather than a single clean isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p24",
+   "pdf": "pdf1",
+   "page": 24,
+   "section": "Blackhead & Pore Care",
+   "name": "Blackhead Suction Device",
+   "model": "NV8531A",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8531A"
+    },
+    {
+     "label": "Input",
+     "value": "5V==="
+    },
+    {
+     "label": "Usage time",
+     "value": "Approximately 120 minutes"
+    },
+    {
+     "label": "Net weight",
+     "value": "133g"
+    },
+    {
+     "label": "Color box size",
+     "value": "106 * 201 * 56mm"
+    },
+    {
+     "label": "Product size",
+     "value": "173 * 44 * 40mm"
+    }
+   ],
+   "selling_points": [
+    "Tested by FDA technology, sensitive skin is not allergic",
+    "5-speed adjustable suction, removes all pimples and blackheads",
+    "5 interchangeable suction tips for easy handling of various skin types",
+    "Compact and easy to carry, clean the skin anytime, anywhere",
+    "LCD displays low charge and charging status, work prompts, etc"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p03_x421.png",
+   "all_images": [
+    "p03_x421.png",
+    "p24_x183.png",
+    "p24_x187.png",
+    "p24_x185.png"
+   ],
+   "chosen_image": "p24_x183.png",
+   "chosen_image_path": "extract/pdf1_images/p24_x183.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p24.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "infographic_diagram",
+    "callout_overlay"
+   ],
+   "qc_reason": "Candidate 1 is the cleanest view of the actual physical device: the white blackhead-suction wand is shown clearly on a simple pink background with only minor Chinese text and an LCD-display callout overlay. It beats candidate 0 (heavier MKS marketing-poster text), candidate 2 (model using device on nose), and candidate 3 (dark cutaway infographic where the device is small/unclear). No clean isolated white-background render exists, so this grades as acceptable rather than good.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p52",
+   "pdf": "pdf1",
+   "page": 52,
+   "section": "Facial Cleansing Devices",
+   "name": "Hot Compress Silicone Facial Cleanser",
+   "model": "NV8295",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8295"
+    },
+    {
+     "label": "Product Weight",
+     "value": "108g"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "800mAh"
+    },
+    {
+     "label": "Rated power",
+     "value": "3.5A"
+    },
+    {
+     "label": "Input",
+     "value": "5V=="
+    },
+    {
+     "label": "Color box size",
+     "value": "129 * 171 * 40mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "440 * 380 * 435mm"
+    }
+   ],
+   "selling_points": [
+    "Warm and relax pores, promote facial microcirculation",
+    "Release vibration pulses to effectively clean pores",
+    "Ergonomic and comfortable grip",
+    "IPX7 full body waterproof, safer and more reliable"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p52_x358.png",
+   "all_images": [
+    "p52_x358.png",
+    "p52_x360.png",
+    "p52_x364.png",
+    "p52_x356.png",
+    "p52_x362.png"
+   ],
+   "chosen_image": "p52_x364.png",
+   "chosen_image_path": "extract/pdf1_images/p52_x364.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p52.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo",
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 2 is the cleanest, most catalog-ready of the five: the purple silicone facial cleanser is clearly shown held in both hands against a near-white background with only minor Chinese text at the top. Candidates 0 and 1 also show the device but sit on busier colored marketing panels with more text; candidate 4 is a marketing collage of the device in water with heavy text; candidate 3 is a dark lifestyle shot where the device is unclear. No candidate is a clean isolated render (no model, no text), so the best available is graded acceptable rather than good due to the visible model and minor Chinese text.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p53",
+   "pdf": "pdf1",
+   "page": 53,
+   "section": "Facial Cleansing Devices",
+   "name": "Ultrasonic Facial Cleanser",
+   "model": "NV8296",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8296"
+    },
+    {
+     "label": "Input",
+     "value": "3.7V"
+    },
+    {
+     "label": "Working time",
+     "value": "675min"
+    },
+    {
+     "label": "Waterproof rating",
+     "value": "IPX7"
+    },
+    {
+     "label": "Product size",
+     "value": "52 * 52 * 102mm"
+    }
+   ],
+   "selling_points": [
+    "Ultrasonic waves 25000 times/minute, quickly clean pore dirt",
+    "DuPont ultra-fine sharpened brush, soft and comfortable without damaging the skin",
+    "Food grade silicone, more skin friendly to use",
+    "UV lamp disinfection box, multifunctional for sterilization, disinfection, and drying"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p53_x370.png",
+   "all_images": [
+    "p53_x370.png",
+    "p53_x367.png",
+    "p53_x369.png",
+    "p53_x368.png"
+   ],
+   "chosen_image": "p53_x370.png",
+   "chosen_image_path": "extract/pdf1_images/p53_x370.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p53.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "infographic_diagram",
+    "busy_collage"
+   ],
+   "qc_reason": "Candidate 0 most clearly shows the actual physical device (the ultrasonic cleanser head mounted on its white charging base), with the product as the dominant subject. It carries heavy Chinese marketing text (MKS logo, large red headline) over a framed light background, so it is not a clean catalog render but is clearly usable. Candidates 1 and 3 are infographic/cutaway diagrams where the device is smaller and surrounded by callouts; candidate 2 is a dark marketing shot of the UV sterilizer case accessory. Per ranking, a clearly visible device beats diagram/accessory shots, so 0 wins. Graded acceptable due to the Chinese text and busy branded background.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p54",
+   "pdf": "pdf1",
+   "page": 54,
+   "section": "Facial Cleansing Devices",
+   "name": "Silicone Import Facial Cleanser",
+   "model": "NV8290A",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8290A"
+    },
+    {
+     "label": "Input voltage",
+     "value": "3.7V"
+    },
+    {
+     "label": "Continuous working time",
+     "value": "180min"
+    },
+    {
+     "label": "Waterproof rating",
+     "value": "IPX7"
+    },
+    {
+     "label": "color box packaging size",
+     "value": "100 * 80 * 32mm"
+    }
+   ],
+   "selling_points": [
+    "Quickly clean pore dirt and effectively prevent acne and blackheads",
+    "IPX7 waterproof, durable and long-lasting power",
+    "DuPont 0.5mm silicone wool, soft and comfortable",
+    "Food grade silicone, more skin friendly to use",
+    "Essence introduction, photon rejuvenation, facial cleansing and skin care"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p54_x373.png",
+   "all_images": [
+    "p54_x373.png",
+    "p54_x375.png",
+    "p54_x376.png",
+    "p54_x374.png"
+   ],
+   "chosen_image": "p54_x375.png",
+   "chosen_image_path": "extract/pdf1_images/p54_x375.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p54.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 1 shows the single silicone facial cleanser large, sharp, and as the clear hero of the shot on a simple light-pink background, with only minor Chinese marketing text at the top. It beats candidate 0 and 3 (model shots where the device is small/obscured) and candidate 2 (multi-unit display on a busier colored background). Graded acceptable rather than good because of the Chinese marketing text and the non-white colored background.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p55",
+   "pdf": "pdf1",
+   "page": 55,
+   "section": "Facial Cleansing Devices",
+   "name": "Microwave Facial Cleanser",
+   "model": "NV8258",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8258"
+    },
+    {
+     "label": "Rated current",
+     "value": "500mA"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V=="
+    },
+    {
+     "label": "Host size",
+     "value": "152 * 28 * 34mm"
+    },
+    {
+     "label": "Color box size",
+     "value": "210 * 110 * 50mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "575 * 560 * 240mm"
+    },
+    {
+     "label": "box Weight per unit",
+     "value": "0.2KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "40"
+    },
+    {
+     "label": "units per box Weight",
+     "value": "8KG"
+    }
+   ],
+   "selling_points": [
+    "Imported PBT ultra-fine bristles from Germany, deeply cleanse and damage free skin.",
+    "360 times/second microwave technology, cleaning fine particles",
+    "Three function brush heads for massage, foundation make-up and cleaning to meet different needs"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p55_x385.png",
+   "all_images": [
+    "p55_x385.png",
+    "p55_x384.png",
+    "p55_x382.png",
+    "p55_x380.png"
+   ],
+   "chosen_image": "p55_x385.png",
+   "chosen_image_path": "extract/pdf1_images/p55_x385.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p55.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "model_photo",
+    "busy_collage",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 0 is the only image that shows the physical device clearly: a model holds the pink microwave facial cleanser near her face, and the interchangeable brush heads are displayed at the bottom. It carries heavy Chinese marketing text (微波洁面 / 深层清洁 多效呵护), a starburst badge, and a busy promotional collage layout with a model, so it is not clean enough to be 'good'. Candidates 1, 2, and 3 are all infographic/feature-callout or text-heavy panels where the device appears small, annotated, or as a silhouette on gray/gradient backgrounds — not catalog-ready product shots. Since a clear view of the device outranks diagram/text panels, candidate 0 wins and grades as 'acceptable'.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p56",
+   "pdf": "pdf1",
+   "page": 56,
+   "section": "Facial Cleansing Devices",
+   "name": "V-Face Cleansing Device",
+   "model": "NV8268",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8268"
+    },
+    {
+     "label": "Rated power",
+     "value": "1.5W"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "DC 5V"
+    },
+    {
+     "label": "Host size",
+     "value": "200 * 45 * 47mm"
+    },
+    {
+     "label": "Color box size",
+     "value": "200 * 45 * 47mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "520 * 403 * 400mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.6KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "30"
+    },
+    {
+     "label": "units per box Weight",
+     "value": "18KG"
+    }
+   ],
+   "selling_points": [
+    "Exclusive patented double-sided rotation technology, 360 ° clean without dead corners",
+    "Imported PBT ultra-fine bristles from Germany for deep cleansing and zero damage to the skin",
+    "Seamless body, seat charger, waterproof all over the body",
+    "Unique V-face lifting design"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p56_x395.png",
+   "all_images": [
+    "p56_x395.png",
+    "p56_x389.png",
+    "p56_x391.png",
+    "p56_x393.png"
+   ],
+   "chosen_image": "p56_x395.png",
+   "chosen_image_path": "extract/pdf1_images/p56_x395.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p56.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "busy_collage",
+    "colored_background",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 0 shows the white cleansing device clearly and at the largest size of any candidate, though on a blue water marketing background with Chinese promotional text and additional color variants. Candidates 1 and 2 are infographic/skin-diagram panels where the device is barely or not shown; candidate 3 is a model holding the device with small text but a smaller device view. A clear device shot beats the diagrams/text panels, so 0 wins. Best tier is acceptable due to the colored busy background and Chinese marketing text.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p57",
+   "pdf": "pdf1",
+   "page": 57,
+   "section": "Facial Cleansing Devices",
+   "name": "Colorful Silicone Facial Cleanser",
+   "model": "NV8290",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8290"
+    },
+    {
+     "label": "Input",
+     "value": "5V===1A"
+    },
+    {
+     "label": "Weight",
+     "value": "Approximately 90g"
+    },
+    {
+     "label": "Product size",
+     "value": "Approximately 90 * 34 * 105mm"
+    },
+    {
+     "label": "Waterproof rating",
+     "value": "IPX5"
+    },
+    {
+     "label": "color box size",
+     "value": "172 * 128 * 53mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "708 * 400 * 325mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.3KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "24 units"
+    }
+   ],
+   "selling_points": [
+    "2-in-1 facial cleansing and massage, skin friendly soft silicone brush head, deeply cleanses the skin",
+    "Multiple silicone particle designs for facial multi area cleaning",
+    "IPX5 waterproof design, 7500 vibrations per minute for massage and cleaning",
+    "Blue and Red Color Therapy"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p57_x399.png",
+   "all_images": [
+    "p57_x399.png",
+    "p57_x405.png",
+    "p57_x403.png",
+    "p57_x401.png"
+   ],
+   "chosen_image": "p57_x403.png",
+   "chosen_image_path": "extract/pdf1_images/p57_x403.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p57.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "multiple_products"
+   ],
+   "qc_reason": "Single product: MKS colorful silicone facial cleanser (NVB290). Candidate 2 shows the actual device clearly on a plain white background (two views displaying the red and blue LED light-therapy faces) with only minor Chinese label text, making it the cleanest catalog-ready shot. Candidate 0 shows the full device but is a busy model collage with heavy Chinese marketing text (tier 3). Candidate 1 is just a close-up of the silicone bristle surface, and candidate 3 is a vibration-frequency infographic where the device is small. Candidate 2 wins: device clearly visible, white background, negligible text. Graded acceptable rather than good because it has Chinese label text and shows two device views rather than a single clean isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p58",
+   "pdf": "pdf1",
+   "page": 58,
+   "section": "Facial Cleansing Devices",
+   "name": "Colorful Silicone Facial Cleanser",
+   "model": "NV8291",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8291"
+    },
+    {
+     "label": "Input",
+     "value": "5V===1A"
+    },
+    {
+     "label": "Weight",
+     "value": "Approximately 115g"
+    },
+    {
+     "label": "Product Size",
+     "value": "Approximately 56 * 23 * 107mm"
+    },
+    {
+     "label": "Waterproof rating",
+     "value": "IPX7"
+    },
+    {
+     "label": "color box size",
+     "value": "56 * 23 * 107mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "465 * 265 * 300mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.3KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "50"
+    },
+    {
+     "label": "units per box Weight",
+     "value": "15KG"
+    }
+   ],
+   "selling_points": [
+    "Food grade silicone, soft and skin friendly",
+    "Whole body washing, less likely to harbor bacteria",
+    "Intelligent dual vibration cleansing technology, transmitted from the surface of the skin to the deep layers, cleanses impurities in pores",
+    "Waterproof design, safe separation of body power supply",
+    "Multi level vibration intensity adjustment, adjustable as needed",
+    "Intelligent red blue light"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p04_x432.png",
+   "all_images": [
+    "p04_x432.png",
+    "p58_x413.png",
+    "p58_x411.png",
+    "p58_x409.png"
+   ],
+   "chosen_image": "p58_x411.png",
+   "chosen_image_path": "extract/pdf1_images/p58_x411.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p58.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "held_in_hand",
+    "minor_marketing_text"
+   ],
+   "qc_reason": "Candidate 2 shows the silicone facial cleanser device most clearly and cleanly: the brush is large, in-focus, and prominent on a near-white background with only minor Chinese text at the top. It beats candidate 0 (busy pink/purple marketing collage with FACE BRUSH and Chinese text), candidate 1 (model holding device against face with certification icons and text), and candidate 3 (infographic/diagram with numbered annotations where the device is small). Graded acceptable rather than good because it is held in a hand and carries minor Chinese marketing text instead of being a clean isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p26",
+   "pdf": "pdf1",
+   "page": 26,
+   "section": "Foot & Nail Care",
+   "name": "Electric Nail Grinder",
+   "model": "NV8625",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8625"
+    },
+    {
+     "label": "Operating current",
+     "value": "200mA"
+    },
+    {
+     "label": "Rated power",
+     "value": "1W"
+    },
+    {
+     "label": "Operating speed",
+     "value": "~20000r/min"
+    },
+    {
+     "label": "Operating voltage",
+     "value": "DC5V"
+    },
+    {
+     "label": "Product size",
+     "value": "157 * 22.5mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "600 * 198 * 353mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.15KG"
+    }
+   ],
+   "selling_points": [
+    "Configure 11 types of grinding heads to meet diverse nail repair needs",
+    "Electroplated body, exquisite and compact",
+    "Meet various needs such as onychomycosis, nail polish removal, nail polish grinding, and polishing",
+    "High speed motor, forward and reverse rotation, infinite speed regulation, low-frequency noise reduction, more professional and understanding of you."
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p26_x195.png",
+   "all_images": [
+    "p26_x195.png",
+    "p26_x192.png",
+    "p26_x193.png",
+    "p26_x194.png"
+   ],
+   "chosen_image": "p26_x192.png",
+   "chosen_image_path": "extract/pdf1_images/p26_x192.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p26.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 1 shows the pink electric nail grinder large, in-focus, and clearly as the actual physical device on a simple blush/pink background with only minor Chinese marketing text. It beats candidate 0 (text-heavy marketing banner), candidate 2 (infographic of 11 grinding-head accessories, not the device), and candidate 3 (device shown but cluttered with cable and more text). Tier is acceptable because the device is clearly visible and usable but the shot has Chinese text and a colored, non-plain background rather than a clean isolated white render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p27",
+   "pdf": "pdf1",
+   "page": 27,
+   "section": "Foot & Nail Care",
+   "name": "Electric Nail Grinder",
+   "model": "NV8625A",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8625A"
+    },
+    {
+     "label": "Product size",
+     "value": "170 * 22.8mm"
+    },
+    {
+     "label": "Input",
+     "value": "DC5V=-2A"
+    },
+    {
+     "label": "Output",
+     "value": "DC7.4V=2.5A"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "800mAh"
+    },
+    {
+     "label": "Charging time",
+     "value": "40-50 minutes"
+    },
+    {
+     "label": "Working hours",
+     "value": "25-3 hours"
+    }
+   ],
+   "selling_points": [
+    "High speed motor, stronger power, forward and reverse rotation, adjustable as desired",
+    "Low noise battery cells, quiet experience, and rechargeable lithium battery cells. Long lasting battery life",
+    "5-speed speed regulation, flexible operation, classic design, comfortable grip"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p27_x198.png",
+   "all_images": [
+    "p27_x198.png",
+    "p27_x199.png",
+    "p27_x200.png",
+    "p27_x201.png"
+   ],
+   "chosen_image": "p27_x198.png",
+   "chosen_image_path": "extract/pdf1_images/p27_x198.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p27.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 shows the full physical nail grinder (white pen-style device) standing vertically on a near-white background with only minor Chinese marketing text at the top — the cleanest, most catalog-ready option. Candidate 1 is a text-heavy dark infographic ('15000 RPM motor'); candidate 2 shows only the ceramic grinding-head attachment, not the full device; candidate 3 is a model-hand/nail demo. Because the best shot still carries Chinese marketing text (rather than a fully clean isolated white-background render), it grades as acceptable rather than good.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p28",
+   "pdf": "pdf1",
+   "page": 28,
+   "section": "Foot & Nail Care",
+   "name": "Electric Foot Grinder",
+   "model": "NV8615G",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8615G"
+    },
+    {
+     "label": "Input Voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Rated Voltage",
+     "value": "3.7V"
+    },
+    {
+     "label": "Input Power",
+     "value": "3V"
+    },
+    {
+     "label": "Battery Capacity",
+     "value": "1500mAh"
+    },
+    {
+     "label": "Product Dimensions",
+     "value": "39*68*181mm"
+    },
+    {
+     "label": "Color Box Dimensions",
+     "value": "122*54*210mm"
+    },
+    {
+     "label": "Outer Box Dimensions",
+     "value": "560*455*340mm"
+    }
+   ],
+   "selling_points": [
+    "Diamond grinding head, more durable and gentle to clean, does not harm the skin",
+    "Two different thicknesses of frosted particle roller heads solve the problem of dead skin and calluses on the feet with different thicknesses.",
+    "The back light effect can also be taken care of in low light environments",
+    "Dual gear design with different levels of force, adjustable to different frequencies and speeds to solve different skin types and dead skin problems"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p28_x204.png",
+   "all_images": [
+    "p28_x204.png",
+    "p28_x207.png",
+    "p28_x205.png",
+    "p28_x206.png"
+   ],
+   "chosen_image": "p28_x204.png",
+   "chosen_image_path": "extract/pdf1_images/p28_x204.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p28.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "small_inset_diagram",
+    "colored_marketing_background"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest, most catalog-ready option: it shows the full physical electric foot grinder standing upright on a plain light background, clearly depicting the actual device. It is graded 'acceptable' rather than 'good' because it includes Chinese marketing text across the top and a small product-detail inset at the lower left, so it is not a perfectly clean no-text render. The other candidates are worse: 1 is a busy peach-toned marketing panel showing only the roller head with motion graphics and Chinese text; 2 is a feature/detail close-up of the dual grinding heads with callout text on a gray background; 3 is a low-light lifestyle in-use shot on a foot with Chinese text. All three show the device less clearly or more partially than 0, so candidate 0 wins.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p29",
+   "pdf": "pdf1",
+   "page": 29,
+   "section": "Foot & Nail Care",
+   "name": "Electric Foot Grinder",
+   "model": "NV8615C",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8615C"
+    }
+   ],
+   "selling_points": [
+    "3 types of specialized grinding heads, no need for manual switching",
+    "Remove dead skin and calluses, painless without harming the skin",
+    "Quick disassembly, grinding head cleaning, and repeated use"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p29_x210.png",
+   "all_images": [
+    "p29_x210.png",
+    "p29_x211.png",
+    "p29_x213.png",
+    "p29_x212.png"
+   ],
+   "chosen_image": "p29_x211.png",
+   "chosen_image_path": "extract/pdf1_images/p29_x211.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p29.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 1 shows the full electric foot grinder standing upright, large and in sharp focus, clearly the actual physical device. It beats 0 (foot infographic/diagram), 2 (hand holding only the detachable roller head), and 3 (busy motor-cutaway marketing collage). It is not catalog-clean: soft pink background and Chinese marketing text ('柔嫩美足 三头设计'), so it grades acceptable rather than good. No plain-white isolated render exists in the sheet.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p30",
+   "pdf": "pdf1",
+   "page": 30,
+   "section": "Foot & Nail Care",
+   "name": "Vacuum Foot Grinder",
+   "model": "NV8615B",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8615B"
+    }
+   ],
+   "selling_points": [
+    "Remove dead skin and calluses, painless without harming the skin",
+    "Coarse and fine grinding brush head, stronger power",
+    "Removable grinding head for flushing",
+    "With vacuum function, dandruff has nowhere to escape"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p04_x431.png",
+   "all_images": [
+    "p04_x431.png",
+    "p30_x216.png",
+    "p30_x217.png",
+    "p30_x218.png"
+   ],
+   "chosen_image": "p30_x217.png",
+   "chosen_image_path": "extract/pdf1_images/p30_x217.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p30.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_hand",
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 2 shows the vacuum foot grinder held in a hand against a clean, near-white neutral background with only minor Chinese marketing text (\"掌心大小 随行随用\"). The device is large, in focus, and clearly visible, making it the most catalog-ready option. Candidates 0 and 3 are busy pink marketing collages with heavy Chinese text and infographic claims; candidate 1 shows the device on feet with a marketing icon row. None is a clean isolated white-background render, so 2 grades as acceptable rather than good due to the hand model and minor text, but it does not need a reshoot.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p31",
+   "pdf": "pdf1",
+   "page": 31,
+   "section": "Foot & Nail Care",
+   "name": "Vacuum Foot Grinder",
+   "model": "NV8615D",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8615D"
+    },
+    {
+     "label": "Input",
+     "value": "3.7V"
+    },
+    {
+     "label": "Product size",
+     "value": "180 * 64 * 89.5mm"
+    }
+   ],
+   "selling_points": [
+    "Remove dead skin and calluses, painless without harming the skin",
+    "Coarse and fine grinding brush head, stronger power",
+    "Removable grinding head for flushing",
+    "With vacuum function, dandruff has nowhere to escape"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p31_x221.png",
+   "all_images": [
+    "p31_x221.png",
+    "p31_x223.png",
+    "p31_x224.png",
+    "p31_x222.png"
+   ],
+   "chosen_image": "p31_x223.png",
+   "chosen_image_path": "extract/pdf1_images/p31_x223.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p31.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 1 shows the foot grinder device clearly and centered on a simple teal background with only minor Chinese text (真空吸力). It is the cleanest of the four: 0 is a busy marketing collage with heavy Chinese text and grinder-head closeups, 2 is a pink skin/feet before-after infographic where the device is not the focus, and 3 shows the device but with more scattered callout text. No model present. Not catalog-perfect (colored background plus Chinese text), so acceptable rather than good, but device is clearly visible and usable — no reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p32",
+   "pdf": "pdf1",
+   "page": 32,
+   "section": "Foot & Nail Care",
+   "name": "Electric Foot Grinder",
+   "model": "NV8615",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8615"
+    },
+    {
+     "label": "Input",
+     "value": "5V==1A"
+    },
+    {
+     "label": "Charging time",
+     "value": "8 hours"
+    },
+    {
+     "label": "Waterproof level",
+     "value": "IPX4"
+    },
+    {
+     "label": "color box size",
+     "value": "111 * 72 * 203mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "430 * 410 * 620mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.4KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "50"
+    },
+    {
+     "label": "units per box Weight",
+     "value": "20KG"
+    }
+   ],
+   "selling_points": [
+    "Remove dead skin and calluses, painless without harming the skin",
+    "Can exfoliate, foot and nail repair dual-use",
+    "Coarse and fine brush grinding head, with stronger power",
+    "Removable grinding head for flushing"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p32_x234.png",
+   "all_images": [
+    "p32_x234.png",
+    "p32_x228.png",
+    "p32_x232.png",
+    "p32_x230.png"
+   ],
+   "chosen_image": "p32_x230.png",
+   "chosen_image_path": "extract/pdf1_images/p32_x230.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p32.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 3 shows two clean product renders of the foot grinder on a white background with the device as the clear focus; only minor Chinese spec callouts. It beats 0 (busy marketing collage with large Chinese text and model foot), 1 (infographic/diagram with small device), and 2 (in-use water shot with text). Graded acceptable rather than good due to the Chinese callout text and two product views in one frame rather than a single isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p33",
+   "pdf": "pdf1",
+   "page": 33,
+   "section": "Foot & Nail Care",
+   "name": "Electric Pedicure Tool",
+   "model": "NV8615E",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8615E"
+    },
+    {
+     "label": "Rated power",
+     "value": "12W"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "1800mAh"
+    },
+    {
+     "label": "Continuous working time",
+     "value": "about 1.5h"
+    },
+    {
+     "label": "Power adapter voltage",
+     "value": "Input 100V-240V~"
+    },
+    {
+     "label": "Color box size",
+     "value": "264.5 * 175 * 59.5mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "381 * 365 * 295mm"
+    }
+   ],
+   "selling_points": [
+    "Advanced alloy with 7 grinding heads, better hardness and durability, reducing skin discomfort and pulling sensation. The grinding heads are detachable and washable, making them more hygienic",
+    "I am skilled in foot grinding and nail repair, solving problems such as calluses, dead skin, and uneven nails on the feet,",
+    "Two speed adjustment, one gentle low speed, to cope with mild dead skin and armor grinding. Two strong high speeds, to solve thick skin cracking and calluses,"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p33_x237.png",
+   "all_images": [
+    "p33_x237.png",
+    "p33_x238.png",
+    "p33_x239.png",
+    "p33_x240.png"
+   ],
+   "chosen_image": "p33_x237.png",
+   "chosen_image_path": "extract/pdf1_images/p33_x237.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p33.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "minor_chinese_text"
+   ],
+   "qc_reason": "Candidate 0 is a clean, vertical product render of the full white/silver electric pedicure tool isolated on a soft near-plain background with only minor Chinese text - the device is the clear focus. It beats: 1 (device head close-up but on a colored pink bg with large marketing text), 2 (infographic/diagram of 7 alloy grinding heads with Chinese text), and 3 (before/after heel/skin photos where the device is not shown). Tier good because the background is essentially plain and text is negligible.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p35",
+   "pdf": "pdf1",
+   "page": 35,
+   "section": "Beauty & Body Care",
+   "name": "Electric Shaver",
+   "model": "NV8708C",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8708C"
+    },
+    {
+     "label": "Rated power",
+     "value": "2W"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Charging time",
+     "value": "approximately 90 minutes"
+    },
+    {
+     "label": "Product Net Weight",
+     "value": "Approximately 60g"
+    },
+    {
+     "label": "Product Size",
+     "value": "74.5 x 44 x 43.8mm"
+    }
+   ],
+   "selling_points": [
+    "Precision electroplating is bright and trendy, with ultra-high appearance and a super smooth feel. It is a fashionable shaving choice for young people",
+    "Clean and comfortable shaving without getting stuck, clean and comfortable shaving",
+    "Air cushion knife net, flexible and smooth without redness, honeycomb knife net, closely adheres to facial contours, 360 ° beard cleaning leaves no dead corners",
+    "Ergonomic \"little waist\" grip feels more comfortable, double-layer electroplating process, and the blade can be washed with water",
+    "Long endurance Type-C fast charging travel worry free"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p35_x245.png",
+   "all_images": [
+    "p35_x245.png",
+    "p35_x246.png",
+    "p35_x247.png",
+    "p35_x248.png"
+   ],
+   "chosen_image": "p35_x246.png",
+   "chosen_image_path": "extract/pdf1_images/p35_x246.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p35.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "infographic_diagram"
+   ],
+   "qc_reason": "All four candidates are Chinese marketing slides for the electric shaver (NV8708C). Candidate 1 is the strongest: the silver round shaver is shown large, sharp, and unmistakably as the focal point on a clean near-white background, with only minor marketing text ('新品Mini 强劲动力') and a couple of feature callout boxes. Candidate 0 is on a dark stylized background with the device smaller; candidate 2 is a more text-heavy ergonomics panel; candidate 3 is a busy Type-C charging scene. Because the best option still carries Chinese marketing text and feature callouts (not a clean isolated render), it grades as acceptable rather than good. The device is clearly visible and usable, so no reshoot is required.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p36",
+   "pdf": "pdf1",
+   "page": 36,
+   "section": "Beauty & Body Care",
+   "name": "Electric Shaver",
+   "model": "NV8618G",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8618G"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V==="
+    },
+    {
+     "label": "Charging time",
+     "value": "about 2 hours"
+    },
+    {
+     "label": "Full charge usage time",
+     "value": "about 60 minutes"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "600mAh"
+    },
+    {
+     "label": "Product size",
+     "value": "50 * 30 * 165mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "500 * 440 * 325mm"
+    }
+   ],
+   "selling_points": [
+    "Two in one, one machine with multiple uses, the combination of R-type razor and mesh razor makes shaving smoother and safer,",
+    "The beloved choice for dual protection of sensitive skin, no black spots left after hair removal, clean and gentle shaving without lagging, no damage to the skin, fit and apply, say goodbye to \"hairy hands and feet\" when shaving",
+    "600mAh lithium battery extends standby time, provides long- lasting battery life, and supports Type-C fast charging.",
+    "The powerful low-noise motor quickly shaves the whole body, with high power, low noise, and strong power, and can eliminate quickly."
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p36_x251.png",
+   "all_images": [
+    "p36_x251.png",
+    "p36_x254.png",
+    "p36_x252.png",
+    "p36_x253.png"
+   ],
+   "chosen_image": "p36_x251.png",
+   "chosen_image_path": "extract/pdf1_images/p36_x251.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p36.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest near-isolated product render: the pink/white electric shaver stands upright and is clearly visible on a soft light-pink/white gradient background. It only carries minor Chinese marketing text at the top, keeping it short of a clean catalog 'good' grade but well usable. The other candidates are weaker: 1 is a busy infographic collage with brush-head closeups and inset usage photos; 2 is a model underarm shot with Chinese text overlay; 3 is a marketing closeup of the shaver head against a hair/skin texture with text. Since 0 shows the device clearly with only light text on a simple background, it grades 'acceptable'.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p37",
+   "pdf": "pdf1",
+   "page": 37,
+   "section": "Beauty & Body Care",
+   "name": "Multifunctional Hair Clipper",
+   "model": "NV8708B",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8708B"
+    },
+    {
+     "label": "Rated power",
+     "value": "5W"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "600mAh"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Charging time",
+     "value": "1.5 hours"
+    },
+    {
+     "label": "Color box size",
+     "value": "156*78*215mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "510*326*478MM"
+    }
+   ],
+   "selling_points": [
+    "10000rpm powerful motor for tight and smooth shaving Wet and dry shaving, micro adjustable shaver head Multi functional shaver head, cordless and rechargeable Intelligent LCD display indicator light, anti slip handle design"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p37_x257.png",
+   "all_images": [
+    "p37_x257.png",
+    "p37_x258.png",
+    "p37_x259.png",
+    "p37_x260.png"
+   ],
+   "chosen_image": "p37_x260.png",
+   "chosen_image_path": "extract/pdf1_images/p37_x260.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": false,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p37.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "multiple_products",
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 3 is the cleanest, most catalog-ready option: white background with the clipper, charging dock, USB cable, and attachment combs clearly visible and almost no marketing text. Graded acceptable rather than good because it is a multi-piece kit layout (full accessory spread) rather than a single isolated product render. Candidate 0 shows the device clearly but on a colored leafy background with Chinese text; candidate 1 has the device on white but with a large Chinese marketing banner; candidate 2 is a busy model/grooming infographic collage where the device is only shown in small insets, so it is the weakest.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p38",
+   "pdf": "pdf1",
+   "page": 38,
+   "section": "Beauty & Body Care",
+   "name": "Multifunctional Shaver",
+   "model": "",
+   "specs": [
+    {
+     "label": "Charging time",
+     "value": "about 2 hours"
+    },
+    {
+     "label": "Full charge usage time",
+     "value": "about 55 minutes"
+    },
+    {
+     "label": "Battery specification",
+     "value": "500mm/L"
+    },
+    {
+     "label": "Rated input",
+     "value": "5V ---1A"
+    },
+    {
+     "label": "Color box size",
+     "value": "153 * 57 * 210mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "500 * 440 * 325mm"
+    }
+   ],
+   "selling_points": [
+    "Three head replacement meets the full body hair treatment and shaving experience, suitable for both dry and wet use",
+    "Even novice shavers with dual safety are not afraid. The combination of dynamic and static dual blade heads further enhances the anti shaving effect",
+    "IPX7 waterproof, the whole machine is waterproof and can enjoy a clean shower time. The waterproof body does not need to avoid water"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p38_x263.png",
+   "all_images": [
+    "p38_x263.png",
+    "p38_x264.png",
+    "p38_x265.png",
+    "p38_x266.png"
+   ],
+   "chosen_image": "p38_x265.png",
+   "chosen_image_path": "extract/pdf1_images/p38_x265.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p38.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 2 clearly shows the physical shaver standing upright alongside its attachment heads on a simple light/blue background with only minor Chinese text, making it the cleanest, most catalog-ready view of the actual device. Candidate 0 is a marketing poster with two models, candidate 1 is a model holding the device with a text/icon panel, and candidate 3 is a pure infographic with icons and no clear device. Since the best option has a colored background and some Chinese marketing text rather than a clean isolated white-background render, it grades as acceptable rather than good.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p39",
+   "pdf": "pdf1",
+   "page": 39,
+   "section": "Beauty & Body Care",
+   "name": "Nose Hair Trimmer",
+   "model": "NV8618E",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8618E"
+    },
+    {
+     "label": "Charging Voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Working voltage",
+     "value": "3.7V"
+    },
+    {
+     "label": "Power",
+     "value": "3W"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "400mAh"
+    },
+    {
+     "label": "Color box size",
+     "value": "35 * 29 * 134MM"
+    },
+    {
+     "label": "Outer box size",
+     "value": "62 * 32 * 32.5CM"
+    }
+   ],
+   "selling_points": [
+    "The blade is round and smooth, with a three-dimensional arch shaped blade that protects sensitive nasal mucosa",
+    "10000rpm high speed, precise trimming of messy nasal hair in the nasal cavity without pulling or pulling, painless.",
+    "The blade has a certain distance to avoid excessive trimming and appropriately shorten nasal hair",
+    "The blade can be disassembled and washed with water to reduce bacterial growth",
+    "USB charging, efficient and long-lasting battery life,"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p39_x269.png",
+   "all_images": [
+    "p39_x269.png",
+    "p39_x270.png",
+    "p39_x271.png",
+    "p39_x272.png"
+   ],
+   "chosen_image": "p39_x269.png",
+   "chosen_image_path": "extract/pdf1_images/p39_x269.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p39.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 is a clean, near-isolated product render of the nose hair trimmer on a white background with the full device clearly visible vertically; only a small line of Chinese marketing text at the top keeps it from being fully catalog-ready, so it grades acceptable. It clearly beats candidate 1 (stylized close-up of just the head with 360 text on dark bg), candidate 2 (model face with small product insets and Chinese text), and candidate 3 (internal motor cutaway infographic with 8000RPM text where the whole product is not shown).",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p40",
+   "pdf": "pdf1",
+   "page": 40,
+   "section": "Beauty & Body Care",
+   "name": "Portable Cold-Light Teeth Whitening Device",
+   "model": "JY005D6",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "JY005D6"
+    },
+    {
+     "label": "Input",
+     "value": "3.7V"
+    },
+    {
+     "label": "Color box size",
+     "value": "100 * 143 * 43mm"
+    }
+   ],
+   "selling_points": [
+    "Medical beauty grade professional blue light technology, cold light teeth sterilization, using 16 LED2835 patches. This technology is widely used in professional medical beauty equipment and has been proven safe and effective by medical devices,",
+    "The peroxide content of the low concentration whitening gel is less than 3%, which meets the national safety dosage standard. It protects the bright white smile, is mild and safe, and does not harm the teeth, and is more effective, mild and stimulating without side effects.",
+    "Integrated design IPX7 waterproof, can be directly cleaned with clean water, portable and more hygienic",
+    "Effectively deal with various problems such as blue light grade dental beauty devices, tetracycline teeth, fluorosis teeth, and external coloring of natural teeth",
+    "Built in power supply for long-lasting use, 360 degree wireless use, low failure rate of all in one machine without connector"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p40_x279.png",
+   "all_images": [
+    "p40_x279.png",
+    "p40_x278.png",
+    "p40_x280.png"
+   ],
+   "chosen_image": "p40_x278.png",
+   "chosen_image_path": "extract/pdf1_images/p40_x278.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p40.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "minor_marketing_text"
+   ],
+   "qc_reason": "Candidate 1 shows the actual cold-light teeth whitening device (lit blue LED mouthpiece plus white base unit) clearly and prominently on a clean dark-blue background with only minor text, making it the most catalog-ready. Candidate 0 is a busy marketing collage with a Chinese headline and a teeth-shade chart, and candidate 2 is a text-heavy infographic featuring accessory whitening pens rather than the main device. Graded acceptable rather than good because the chosen shot has a colored/branded background and minor Chinese/English marketing text instead of a clean isolated white-background render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p41",
+   "pdf": "pdf1",
+   "page": 41,
+   "section": "Beauty & Body Care",
+   "name": "Manicure Kit",
+   "model": "NV8658",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8658"
+    },
+    {
+     "label": "Color box size",
+     "value": "184 * 42 * 46mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "435 * 390 * 460mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.4KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "30 units per box"
+    },
+    {
+     "label": "Weight",
+     "value": "12KG"
+    }
+   ],
+   "selling_points": [
+    "No need for bottom layer or sealant, one step to color and one step to remove armor, with bright and full colors",
+    "16 colors to choose from, stunning fingertips",
+    "Easy to carry, always achieving the perfect woman"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p41_x284.png",
+   "all_images": [
+    "p41_x284.png",
+    "p41_x290.png",
+    "p41_x288.png",
+    "p41_x286.png"
+   ],
+   "chosen_image": "p41_x284.png",
+   "chosen_image_path": "extract/pdf1_images/p41_x284.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p41.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "busy_collage",
+    "dark_background",
+    "multiple_products"
+   ],
+   "qc_reason": "Candidate 0 is the only image clearly showing the actual physical device (white UV/LED nail lamp plus kit components); it beats the others which are a hand/nail application collage (1), a pink text infographic (2), and a nail-tip color swatch chart (3). Candidate 0 is not catalog-clean: large Chinese marketing text, a dark busy poster layout, and several kit items bundled together, so it grades acceptable rather than good. Not poor because the device itself is unambiguous and usable.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p42",
+   "pdf": "pdf1",
+   "page": 42,
+   "section": "Beauty & Body Care",
+   "name": "Crystal Facial Mask Machine",
+   "model": "NV8328",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8328"
+    },
+    {
+     "label": "Color box size",
+     "value": "370 * 160 * 300mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "530 * 475 * 460mm"
+    },
+    {
+     "label": "Single weight of color box",
+     "value": "1.6kg"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "5 units"
+    },
+    {
+     "label": "Weight",
+     "value": "8.25kg"
+    }
+   ],
+   "selling_points": [
+    "DIY facial mask with more than 50 kinds of effects can be customized according to your skin condition",
+    "Another MKS fruit and vegetable facial mask machine is equivalent to a facial mask that can whiten, remove wrinkles, replenish water, control oil, etc",
+    "Self made fruit and vegetable facial mask, self selected natural additive free material, safe and healthy"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p42_x298.png",
+   "all_images": [
+    "p42_x298.png",
+    "p42_x296.png",
+    "p42_x294.png",
+    "p42_x300.png"
+   ],
+   "chosen_image": "p42_x298.png",
+   "chosen_image_path": "extract/pdf1_images/p42_x298.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p42.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background",
+    "decorative_props"
+   ],
+   "qc_reason": "Candidate 0 clearly shows the actual physical device (white/pink crystal facial mask machine) large and prominent, far better than the alternatives. Candidate 1 is an infographic with a reclining model and tiny icons; candidate 2 shows only a small device atop a busy fruit/recipe collage; candidate 3 is a pure text promo panel ('1=365') with no clear device. Candidate 0 is graded 'acceptable' rather than 'good' because it sits on a magenta gradient background with decorative fruit/sample-mask props and Chinese marketing text rather than a clean isolated white-background render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p43",
+   "pdf": "pdf1",
+   "page": 43,
+   "section": "Beauty & Body Care",
+   "name": "Microcrystalline Firming & Rejuvenation Device",
+   "model": "NV8539",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8539"
+    },
+    {
+     "label": "Color box size",
+     "value": "184mm * 42mm * 46mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "500 * 440 * 400MM"
+    },
+    {
+     "label": "Single weight of color box",
+     "value": "0.6kg"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "20 units"
+    },
+    {
+     "label": "Weight",
+     "value": "18.5kg"
+    }
+   ],
+   "selling_points": [
+    "Microcrystalline probe effectively removes damaged defects and rough epidermal cells, using More easily absorbed skincare products later on",
+    "Vacuum suction can lift and massage the skin, providing three- dimensional sculpting and lifting, making the skin more vibrant from the bottom layer",
+    "One overnight charge can last for three weeks, and one care only takes 5 minutes",
+    "Wireless one click operation, more convenient to use"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p43_x303.png",
+   "all_images": [
+    "p43_x303.png",
+    "p43_x304.png",
+    "p43_x305.png"
+   ],
+   "chosen_image": "p43_x303.png",
+   "chosen_image_path": "extract/pdf1_images/p43_x303.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p43.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo",
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 clearly shows the physical device (white/gold microcrystalline wand) held by a model with face visible and Chinese marketing text overlay. Per ranking rules, a clear device shot beats infographics/diagrams even with a model and Chinese text. Candidate 1 is a spec infographic/collage where the device is small and embedded among icons and numbers. Candidate 2 is a skin-cross-section diagram with no standalone device. Best choice is 0; graded acceptable because the device is clearly visible and usable but the image includes a model and Chinese marketing text rather than a clean isolated render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p44",
+   "pdf": "pdf1",
+   "page": 44,
+   "section": "Beauty & Body Care",
+   "name": "Facial Massager",
+   "model": "NV8668",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8668"
+    },
+    {
+     "label": "Color box size",
+     "value": "165 * 80 * 35mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "468 * 390 * 320mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.15KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "40 units"
+    },
+    {
+     "label": "Weight",
+     "value": "6KG"
+    }
+   ],
+   "selling_points": [
+    "Efficient vibration massage system, massaging acupoints on the face, can effectively promote facial metabolism, drive away facial dullness, and restore rosy skin",
+    "Regular massage around the eyes can effectively improve dark circles and reduce wrinkles around the corners of the eyes",
+    "One click switch, easy to use"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p44_x309.png",
+   "all_images": [
+    "p44_x309.png",
+    "p44_x311.png",
+    "p44_x315.png",
+    "p44_x313.png"
+   ],
+   "chosen_image": "p44_x309.png",
+   "chosen_image_path": "extract/pdf1_images/p44_x309.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p44.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "model_photo",
+    "chinese_text",
+    "english_marketing_text",
+    "colored_background",
+    "busy_marketing_banner"
+   ],
+   "qc_reason": "Contact sheet for Facial Massager (NVB668) has 4 candidates, all pink marketing banners/infographics with Chinese text. No clean isolated product render exists. Candidate 0 best shows the actual device: the white facial massager wand is large and clearly visible, held by a smiling model on a pink background, alongside 'ELECTRIC EYE BEAUTY' English and Chinese marketing text. Candidate 3 also shows the device but it is smaller. Candidate 1 is a text-heavy infographic collage and Candidate 2 is a lifestyle benefits diagram (woman in yoga pose with callouts) where the device is not clearly shown. Per ranking, a clearly visible device beats diagrams/text panels, so 0 wins. Graded 'acceptable' because the device is clearly visible and usable but the image has a model, colored busy background, and marketing text rather than being a clean catalog render.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p4",
+   "pdf": "pdf2",
+   "page": 4,
+   "section": "Hair Styling",
+   "name": "Negative-Ion Straightening Comb",
+   "model": "",
+   "specs": [],
+   "selling_points": [
+    "Negative ion hair care function.",
+    "High-temperature resistant comb teeth will not melt or deform even after long-term heating.",
+    "The temperature is digitally displayed and the operation is simple and clear.",
+    "Rapid heating, reaching the maximum temperature of around 230℃ in about 3 minutes.",
+    "Ergonomic, more comfortable to hold and use.",
+    "Rotate the wire 360 degrees to avoid entanglement.",
+    "Equipped with safety protection function, it will automatically shut down after 1 hour, ensuring safe use.",
+    "100-230℃, with 13 temperature Settings."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x67.png",
+   "all_images": [
+    "p03_x67.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x67.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x67.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p4.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Single candidate (0) is a clean, isolated product render of the straightening comb on a plain white background. It shows two clear views (side profile and the magenta-bristle comb head), with no marketing text, no model, and no measurement/diagram clutter. Catalog-ready.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p5",
+   "pdf": "pdf2",
+   "page": 5,
+   "section": "Hair Styling",
+   "name": "Wireless Straightening Comb",
+   "model": "",
+   "specs": [],
+   "selling_points": [
+    "Min body, convenient to carry; Light in weight, only 250g.",
+    "Large-capacity battery, 3000mAH; It has a long service life.",
+    "Anti-scald comb teeth, protecting the scalp;",
+    "Three temperature Settings, 160°-180 °. -200° is suitable for different hair types",
+    "Global voltage, easy to use.",
+    "Automatic shutdown, safe and reliable."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x73.png",
+   "all_images": [
+    "p03_x73.png",
+    "p03_x75.png",
+    "p03_x83.png"
+   ],
+   "chosen_image": "p03_x73.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x73.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p5.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "multiple_products"
+   ],
+   "qc_reason": "Slot 0 is a clean isolated product render of the wireless straightening comb on a plain white background with no text and no model — catalog-ready. It shows the device in three colorways (bronze, mint, silver), so it depicts multiple color variants rather than a single unit, but the device is crisp and clearly the actual physical product. Slot 1 is blank/empty. Slot 0 is the only and best candidate, graded good.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p6",
+   "pdf": "pdf2",
+   "page": 6,
+   "section": "Hair Styling",
+   "name": "Multifunctional Hair Comb",
+   "model": "AS-JF16L",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "AS-JF16L"
+    }
+   ],
+   "selling_points": [
+    "It has a negative ion function, which can easily smooth frizzy hair, help make the hair smooth and shiny, and soften the hair strands.",
+    "It is equipped with a vibration massage function and a replaceable vibration massage head module, which can relieve fatigue and discomfort, soothe the scalp, and refresh the mind.",
+    "It is equipped with an automatic liquid dispensing function and a replaceable automatic liquid dispensing module. When used in combination with hair care essence, it can dispense the liquid more evenly, conveniently and hygienely. The operation is easy and intelligent.",
+    "It is equipped with a scalp water and oil detection function, featuring an LCD display that can monitor the individual's scalp water and oil conditions in real time and adjust hair care methods accordingly.",
+    "Equipped with an airbag elastic comb, it adopts a replaceable design. Daily hair combing can relax the scalp and provide a comfortable and pleasant experience.",
+    "Wireless charging base, equipped with a wireless induction charging base, makes storage and placement more convenient and practical."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p06_x30.png",
+   "all_images": [
+    "p06_x30.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p06_x30.png",
+   "chosen_image_path": "extract/pdf2_images/p06_x30.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p6.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "multiple_products"
+   ],
+   "qc_reason": "The only candidate (index 0) is a clean, isolated product render on a plain white background with no marketing text and no model. It clearly shows the actual physical device (Multifunctional Hair Comb AS-JF16L) from multiple angles/views, including the handle and comb/brush heads. This is catalog-ready. The only minor note is that several views/components of the device appear in one frame rather than a single hero shot, but all show the same physical product cleanly.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p7",
+   "pdf": "pdf2",
+   "page": 7,
+   "section": "Hair Styling",
+   "name": "Blow-Dry Hot Air Brush",
+   "model": "",
+   "specs": [],
+   "selling_points": [
+    "Three modes to choose from: low-speed hot air, high-speed hot air, and cold air",
+    "It integrates blow-drying and combing functions, allowing you to easily create various hairstyles",
+    "Multiple usage methods: It can be used for curly hair, straight hair, dry hair and fluffy hair",
+    "Rotate the wire 360 degrees to avoid entanglement",
+    "The comb teeth are made of aluminum shell anti-scald material, ensuring safe use",
+    "When combing hair, nylon teeth and tufted bristles are used to comb and massage the scalp, making it less likely for hair to tangle"
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p07_x33.png",
+   "all_images": [
+    "p07_x33.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p07_x33.png",
+   "chosen_image_path": "extract/pdf2_images/p07_x33.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p7.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Only candidate (0) is a clean, isolated product render of the actual device (black/gold round-barrel blow-dry hot air brush) on a plain white background. No text, no model, no measurement or diagram overlays. Catalog-ready.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p8",
+   "pdf": "pdf2",
+   "page": 8,
+   "section": "Hair Dryers",
+   "name": "High-Speed Hair Dryer (120,000 rpm)",
+   "model": "",
+   "specs": [],
+   "selling_points": [
+    "With hundreds of millions of negative ions, it can quickly inject high-concentration negative ions into the hair strands along the wind speed, making the hair scales smooth and the hair shiny and soft",
+    "It adopts a 120,000-rpm high-speed brushless motor with low noise of less than 76dB",
+    "Two-level gear selection, three major functional modes, three-color lighting corresponding, simple and easy to distinguish operation, can meet the needs of different users: ① Cold wind: The LED light shows blue ② Warm air: The LED light shows green ③ Hot air: The LED light shows red",
+    "It adopts a magnetic air collection nozzle that can rotate 360° without any restraint",
+    "It has an automatic cleaning function. Press and hold for 6 seconds to switch to the internal cleaning function",
+    "High air volume, with a powerful body-sensing wind speed of 21m/s, penetrates the hair strands and removes moisture from the tips",
+    "It is equipped with safety protection functions, an intelligent chip built in, and constant temperature control of the air outlet temperature to prevent hair quality problems caused by high temperatures",
+    "It features an exquisite and compact body design, weighing approximately 462g"
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x78.png",
+   "all_images": [
+    "p03_x78.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x78.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x78.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p8.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Only one candidate (index 0): a clean, isolated render of the high-speed hair dryer on a plain white background with no marketing text, no model, and no measurement/diagram clutter. The device is sharp and clearly shown, making it a top-tier catalog-ready product image.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p9",
+   "pdf": "pdf2",
+   "page": 9,
+   "section": "Hair Dryers",
+   "name": "High-Speed Hair Dryer (110,000 rpm)",
+   "model": "",
+   "specs": [
+    {
+     "label": "Hot and cold cycle",
+     "value": "The LED light shows blue, yellow and red in a cycle"
+    }
+   ],
+   "selling_points": [
+    "With 100 to 200 million levels of negative ions, it can quickly inject high-concentration negative ions into the hair strands along the wind speed, making the hair scales smooth and the hair shiny and soft",
+    "It adopts a 110,000-rpm high-speed brushless motor with low noise of less than 76dB",
+    "Four major functional modes, with three-color lights corresponding clearly and distinguishable, can meet different needs: ① Cold wind: The LED light shows blue ② Warm air: The LED light shows yellow ③ Hot air: The LED light shows red",
+    "It adopts a magnetic air collection nozzle that can rotate 360° without any restraint",
+    "It has an automatic cleaning function. Press and hold for 6 seconds to switch to the internal cleaning function",
+    "The exquisite and compact body design weighs approximately 460g",
+    "Equipped with safety protection functions, it is built with an intelligent chip and maintains a constant temperature to control the air temperature at the air outlet, avoiding hair quality problems caused by high temperatures."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x77.png",
+   "all_images": [
+    "p03_x77.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x77.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x77.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p9.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Single candidate (0) is a clean isolated render of the white high-speed hair dryer on a plain white background with no text, no model, and no measurement overlay. Catalog-ready.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p46",
+   "pdf": "pdf1",
+   "page": 46,
+   "section": "Massagers & Beauty Devices",
+   "name": "Eye Massager",
+   "model": "NV8708A",
+   "specs": [
+    {
+     "label": "Product Model",
+     "value": "NV8708A"
+    },
+    {
+     "label": "Product Material",
+     "value": "ABS"
+    },
+    {
+     "label": "Product size",
+     "value": "217 * 110 * 76mm"
+    },
+    {
+     "label": "Rated power",
+     "value": "5W"
+    },
+    {
+     "label": "Charging voltage",
+     "value": "5V"
+    },
+    {
+     "label": "Standard voltage",
+     "value": "3.7V"
+    },
+    {
+     "label": "Color box size",
+     "value": "90X150X192MM"
+    },
+    {
+     "label": "Outer box size",
+     "value": "445X384X520MM"
+    }
+   ],
+   "selling_points": [
+    "Four massage modes, two adjustable levels Automatic timing, constant temperature hot compress 180 ° folding, Type-C interface charging"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p46_x320.png",
+   "all_images": [
+    "p46_x320.png",
+    "p46_x321.png",
+    "p46_x322.png",
+    "p46_x323.png"
+   ],
+   "chosen_image": "p46_x321.png",
+   "chosen_image_path": "extract/pdf1_images/p46_x321.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p46.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Contact sheet for Eye Massager (NVM708A) with 4 candidates. Index 1 is the cleanest near-catalog shot: white device shown clearly and prominently on a plain white background, though it carries Chinese marketing text and is held in a hand. Index 0 is a clean plain-background shot but the device is worn by a model. Indexes 2 (model in heated/orange mode) and 3 (folded device on dark bg) both have a model or busy/dark background plus Chinese text. Per ranking, the product-on-white shot with minor text beats the model shots. Graded acceptable due to the Chinese marketing text and hand presence; device is clearly visible and usable, so no reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p47",
+   "pdf": "pdf1",
+   "page": 47,
+   "section": "Massagers & Beauty Devices",
+   "name": "Neck (Cervical) Massager",
+   "model": "NV8589B",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8589B"
+    },
+    {
+     "label": "Rated voltage",
+     "value": "5V==="
+    },
+    {
+     "label": "Rated power",
+     "value": "5W"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "300mAh"
+    },
+    {
+     "label": "Product size",
+     "value": "155 * 145 * 45mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "595 * 382 * 400MM"
+    }
+   ],
+   "selling_points": [
+    "16 levels of pulse intensity, enjoy different massage speeds",
+    "5 massage modes, simulating traditional massage techniques, wireless remote control for more convenient operation, intimate SPA for easy access",
+    "Intelligent voice prompts, simple and easy to operate",
+    "A 40 degree constant temperature hot compress relaxes tense muscles"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p47_x326.png",
+   "all_images": [
+    "p47_x326.png",
+    "p47_x327.png",
+    "p47_x328.png",
+    "p47_x329.png"
+   ],
+   "chosen_image": "p47_x326.png",
+   "chosen_image_path": "extract/pdf1_images/p47_x326.png",
+   "image_quality": "acceptable",
+   "image_has_chinese": true,
+   "needs_clean_photo": true,
+   "final_image": "assets/final_opt/pdf1-p47.jpg",
+   "qc_tier": "acceptable",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 0 is the cleanest, most catalog-ready shot: the dark-blue cervical neck massager is rendered isolated on a plain near-white background with the device as the clear focus. It only carries minor Chinese marketing text at the top, so it beats the alternatives: candidate 1 is a model shot buried in a busy marketing collage with mode thumbnails, candidate 2 is a glowing dark-background marketing render with Chinese text, and candidate 3 shows the device on a colored fabric/lifestyle background with Chinese text. Graded acceptable rather than good because of the Chinese marketing text on the panel.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p48",
+   "pdf": "pdf1",
+   "page": 48,
+   "section": "Massagers & Beauty Devices",
+   "name": "Cervical Magnetic Thermal Massager",
+   "model": "",
+   "specs": [
+    {
+     "label": "Battery capacity",
+     "value": "1100mAh"
+    },
+    {
+     "label": "Rated current",
+     "value": "1A"
+    },
+    {
+     "label": "Input",
+     "value": "5V=="
+    },
+    {
+     "label": "Color box size",
+     "value": "208 * 178 * 58.5mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "445 * 390 * 355mm"
+    }
+   ],
+   "selling_points": [
+    "Detachable magnetic remote control with controllable force, providing a comfortable experience",
+    "Four magnetic sheet three-dimensional massage, all- round massage of the neck",
+    "Multi point massage method to relieve bone hyperplasia and promote blood circulation"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p48_x333.png",
+   "all_images": [
+    "p48_x333.png",
+    "p48_x335.png",
+    "p48_x332.png",
+    "p48_x334.png"
+   ],
+   "chosen_image": "p48_x335.png",
+   "chosen_image_path": "extract/pdf1_images/p48_x335.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p48.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "busy_background"
+   ],
+   "qc_reason": "Candidate 1 shows the neck massager device clearly on a simple wooden-desk background with only a small Chinese text banner, making it the most catalog-usable. It beats candidate 0 (busy red marketing collage with large title text and feature callouts), candidate 2 (device worn by a model with marketing text), and candidate 3 (washed-out low-contrast render with Chinese spec callouts). No clean isolated white-background render exists, so the best option is acceptable rather than good due to the lifestyle background and minor Chinese text.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p49",
+   "pdf": "pdf1",
+   "page": 49,
+   "section": "Massagers & Beauty Devices",
+   "name": "3D Roller Massager",
+   "model": "NV8510A",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "NV8510A"
+    },
+    {
+     "label": "Product size",
+     "value": "139 * 52 * 29mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "595 * 220 * 268MM"
+    },
+    {
+     "label": "Single weight of color box",
+     "value": "0.2KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "30 units"
+    }
+   ],
+   "selling_points": [
+    "3D curved surface, perfectly fitting",
+    "One step shaping, tighten the whole body",
+    "Electroplated material, caring for sensitive skin",
+    "Fashionable appearance, compact and portable"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p49_x338.png",
+   "all_images": [
+    "p49_x338.png",
+    "p49_x339.png",
+    "p49_x341.png",
+    "p49_x340.png"
+   ],
+   "chosen_image": "p49_x338.png",
+   "chosen_image_path": "extract/pdf1_images/p49_x338.png",
+   "image_quality": "good",
+   "image_has_chinese": true,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p49.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text",
+    "colored_background"
+   ],
+   "qc_reason": "Candidate 0 is an isolated product render with the 3D roller massager large and clearly centered. It is the cleanest device shot on the sheet. Downgraded from 'good' to 'acceptable' because it sits on a dark colored gradient background (not plain white) and carries minor Chinese marketing text. Candidates 1, 2, and 3 are model/lifestyle shots and infographic/skin-diagram collages where the device is secondary or partial, so 0 clearly wins.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf1-p50",
+   "pdf": "pdf1",
+   "page": 50,
+   "section": "Massagers & Beauty Devices",
+   "name": "Solar 3D Roller Shaper",
+   "model": "NV8512",
+   "specs": [
+    {
+     "label": "Product model",
+     "value": "NV8512"
+    },
+    {
+     "label": "Product size",
+     "value": "approximately 165 * 82 * 61mm"
+    },
+    {
+     "label": "Color box size",
+     "value": "165 * 85 * 61mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "425 * 365 * 280mm"
+    },
+    {
+     "label": "Color box Weight per unit",
+     "value": "0.4KG"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "24 units per box"
+    },
+    {
+     "label": "Carton weight",
+     "value": "9.6KG"
+    }
+   ],
+   "selling_points": [
+    "MKS solar powered 3D roller massager, gorgeous gold color, small and exquisite, your slimming companion",
+    "360 ° faceted construction roller, fitting facial and body curves, simulating human massage and kneading techniques, deep kneading",
+    "The solar panel structure at the center of the handle utilizes solar energy to generate microcurrents, promoting smooth and soft skin"
+   ],
+   "img_dir": "extract/pdf1_images",
+   "hero_image": "p50_x350.png",
+   "all_images": [
+    "p50_x350.png",
+    "p50_x347.png",
+    "p50_x349.png",
+    "p50_x345.png"
+   ],
+   "chosen_image": "p50_x345.png",
+   "chosen_image_path": "extract/pdf1_images/p50_x345.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf1-p50.jpg",
+   "qc_tier": "good",
+   "qc_issues": [
+    "chinese_text"
+   ],
+   "qc_reason": "Candidate 3 shows the Solar 3D Roller Shaper clearly and prominently on a near-plain light-gray background with only minor Chinese marketing text ('滚轮按摩，全身可用'), making it the most catalog-ready. Candidate 0 shows the device well-lit but on a busy lifestyle background with props (flowers, Eiffel Tower figurine). Candidate 2 shows the device clearly but on a busy water-splash background with prominent Chinese text ('IPX5级防水结构'). Candidate 1 is a usage infographic/diagram with the device shown small. No clean isolated white-background textless render exists, so the best (3) grades 'acceptable' rather than 'good' due to the minor Chinese text; device is clearly visible and usable, so no reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p11",
+   "pdf": "pdf2",
+   "page": 11,
+   "section": "Massagers & Beauty Devices",
+   "name": "Massage Gun",
+   "model": "AS-MD07L / 08L / 09L",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "AS-MD07L / 08L / 09L"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "1100mAh"
+    }
+   ],
+   "selling_points": [
+    "10-level force adjustment with concentrated, high-frequency percussion and no counter-vibration for added comfort.",
+    "Built-in storage box; compact and portable.",
+    "Intelligent pressure-sensitive speed regulation adjusts speed to the applied force, making it safe even for beginners.",
+    "Four interchangeable massage heads: spherical (shoulders, waist, arms, buttocks, legs); thumb-tip (spine crevices); U-shaped (waist, back, both sides of the spine, shoulders, calves); pointed tip (meridian, palm and foot).",
+    "1100mAh battery runs up to 7 hours at low speed (no load)."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x79.png",
+   "all_images": [
+    "p03_x79.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x79.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x79.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p11.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Only one candidate (index 0) is present. It is a clean, isolated product render of the massage gun on a plain white background, with a top hero view plus a secondary view showing the device with its attachment heads. No Chinese text, no model, no caliper/measurement shot, no infographic or busy collage. This is catalog-ready, so tier=good and no reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p12",
+   "pdf": "pdf2",
+   "page": 12,
+   "section": "Massagers & Beauty Devices",
+   "name": "EMS / RF Beauty Device",
+   "model": "AS-MD10L",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "AS-MD10L"
+    },
+    {
+     "label": "Dimensions",
+     "value": "93 * 92 * 123mm"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "1050mAh"
+    },
+    {
+     "label": "Charging",
+     "value": "Type-C"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "24 pieces"
+    },
+    {
+     "label": "Color box size",
+     "value": "187 * 114 * 103mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "480 * 385 * 335mm"
+    },
+    {
+     "label": "Net weight / box",
+     "value": "7.15kg"
+    },
+    {
+     "label": "Gross weight / box",
+     "value": "14.7kg"
+    }
+   ],
+   "selling_points": [
+    "Designed by the renowned French design team Miro; design patents applied for in China, Japan and Europe.",
+    "Integrates EMS, RF and massage to promote collagen production and lift and tighten the skin.",
+    "360° rotational massage reaches all areas with no blind spots.",
+    "5 phototherapy modes: color, blue, yellow, red and flash, to address various skin problems.",
+    "Three gear settings.",
+    "Type-C charging — simple and convenient."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x84.png",
+   "all_images": [
+    "p03_x84.png",
+    "p03_x80.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x84.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x84.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p12.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Candidate 0 is a clean isolated product render of the EMS/RF beauty device (rose gold colorway) on a soft plain pink background with no marketing text and no model. Only the minimal on-device 'L M H' control labels are present, which is negligible. Candidate 1 is similarly clean but sits on a busier blue/teal two-tone background; candidate 0 has the lightest, most neutral background and most even presentation, making it the cleanest catalog-ready choice.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p13",
+   "pdf": "pdf2",
+   "page": 13,
+   "section": "Massagers & Beauty Devices",
+   "name": "EMS Beauty Device",
+   "model": "AS-MD11L",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "AS-MD11L"
+    },
+    {
+     "label": "Dimensions",
+     "value": "100 * 75 * 131mm"
+    },
+    {
+     "label": "Battery capacity",
+     "value": "1050mAh"
+    },
+    {
+     "label": "Charging",
+     "value": "Type-C"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "24 pieces"
+    },
+    {
+     "label": "Color box size",
+     "value": "187 * 114 * 103mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "480 * 385 * 335mm"
+    },
+    {
+     "label": "Net weight / box",
+     "value": "5.16kg"
+    },
+    {
+     "label": "Gross weight / box",
+     "value": "14.3kg"
+    }
+   ],
+   "selling_points": [
+    "Originally designed by a renowned French designer with a unique appearance and shape.",
+    "Dual-mode: massage function and EMS beauty function — promote collagen production and lift and firm the skin.",
+    "360° rotational massage reaches all areas with no blind spots.",
+    "Two phototherapy skin-rejuvenation modes: LED red light + near-infrared — inhibit bacteria, whiten and fade spots.",
+    "Three gear settings.",
+    "Type-C charging — simple and convenient."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x85.png",
+   "all_images": [
+    "p03_x85.png",
+    "p13_x50.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x85.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x85.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p13.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Both candidates are clean isolated product renders of the actual EMS beauty device on plain black backgrounds with no text or models. Candidate 0 is the strongest: centered, symmetric, upright with the base/cradle open to reveal the internal applicator heads — a polished catalog-ready hero shot. Candidate 1 is also clean but shown at an off-center tilted angle. No reshoot needed.",
+   "needs_reshoot": false
+  },
+  {
+   "id": "pdf2-p14",
+   "pdf": "pdf2",
+   "page": 14,
+   "section": "Massagers & Beauty Devices",
+   "name": "Abdominal & Body Beauty Device (Facial + Body)",
+   "model": "AS-MD12L",
+   "specs": [
+    {
+     "label": "Model",
+     "value": "AS-MD12L"
+    },
+    {
+     "label": "Dimensions",
+     "value": "134 * 87 * 74mm"
+    },
+    {
+     "label": "Charging",
+     "value": "Magnetic"
+    },
+    {
+     "label": "Water resistance",
+     "value": "IPX5"
+    },
+    {
+     "label": "Packing quantity",
+     "value": "24 pieces"
+    },
+    {
+     "label": "Color box size",
+     "value": "198 * 121.5 * 90mm"
+    },
+    {
+     "label": "Outer box size",
+     "value": "516 * 422 * 296mm"
+    },
+    {
+     "label": "Net weight / box",
+     "value": "7kg"
+    },
+    {
+     "label": "Gross weight / box",
+     "value": "12.5kg"
+    }
+   ],
+   "selling_points": [
+    "Designed by the renowned French design team Miro; design patents applied for in China and Japan.",
+    "Integrates EMS, RF and massage to promote collagen production and lift and tighten the skin.",
+    "360° rotational massage reaches all areas with no blind spots.",
+    "Three phototherapy modes: blue, yellow and red, to address various skin problems.",
+    "Three gear settings.",
+    "Full-body massage, lifting and firming (neck, collarbone, abdomen, buttocks, thighs, etc.).",
+    "Magnetic charging — simple and convenient.",
+    "IPX5 splash resistance."
+   ],
+   "img_dir": "extract/pdf2_images",
+   "hero_image": "p03_x81.png",
+   "all_images": [
+    "p03_x81.png",
+    "p03_x82.png",
+    "p03_x75.png"
+   ],
+   "chosen_image": "p03_x81.png",
+   "chosen_image_path": "extract/pdf2_images/p03_x81.png",
+   "image_quality": "good",
+   "image_has_chinese": false,
+   "needs_clean_photo": false,
+   "final_image": "assets/final_opt/pdf2-p14.jpg",
+   "qc_tier": "good",
+   "qc_issues": [],
+   "qc_reason": "Candidate 0 is a clean isolated product render of the device on a plain white background with no text and no model — fully catalog-ready (tier good). Candidate 1 shows the same device but is held against a model's torso with large red Chinese marketing text, making it only acceptable. Per ranking preference, the clean white-background render wins.",
+   "needs_reshoot": false
+  }
+ ]
+}
