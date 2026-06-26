@@ -144,9 +144,11 @@ export interface RawYunoUS {
   us_voltage_confirmed?: boolean;
   status_note?: string | null;
   needs_verify?: boolean;
+  has_photo?: boolean; // a clean product photo was extracted from the US sell-sheet deck
 }
 
 export function mapYunoUS(p: RawYunoUS): Product {
+  const hasPhoto = p.has_photo === true;
   return {
     external_ref: `appliance:${p.slug}`,
     line: "appliance",
@@ -164,11 +166,12 @@ export function mapYunoUS(p: RawYunoUS): Product {
     msrp: null,
     our_cost: null,
     our_cost_source: null,
-    photo_state: "missing", // no image yet → "studio photo pending" placeholder
+    // sell-sheet photo if extracted; otherwise the "studio photo pending" placeholder
+    photo_state: hasPhoto ? "good" : "missing",
     image_has_chinese: false,
     voltage_flag: Boolean(p.voltage_flag),
-    export_ok: false,
-    primary_image_path: null,
+    export_ok: hasPhoto,
+    primary_image_path: hasPhoto ? `/products/appliance/${p.slug}.jpg` : null,
   };
 }
 

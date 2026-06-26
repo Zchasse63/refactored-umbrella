@@ -33,7 +33,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "CM-338BWA",
@@ -65,7 +66,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KM-C0518",
@@ -94,7 +96,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KM-C0501",
@@ -122,7 +125,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "KM-CM501W likely white finish variant",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "KM-C0520",
@@ -151,7 +155,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KM-C0528",
@@ -180,7 +185,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "TC01",
@@ -209,7 +215,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC01S likely silver finish variant",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC03",
@@ -237,7 +244,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC03+ likely upgraded version",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RC1801",
@@ -266,7 +274,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "RC1802 likely variant of RC1801",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC36A",
@@ -294,7 +303,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC36B likely color/finish variant",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC06",
@@ -323,7 +333,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "TC22",
@@ -352,7 +363,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC22Z likely finish variant",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC23",
@@ -381,7 +393,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "TC123A",
@@ -411,7 +424,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "VERIFY WITH YUNO — Sell sheet lists TC123 twice; pattern suggests A/B color variants — confirm with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC123B",
@@ -441,7 +455,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "VERIFY WITH YUNO — Sell sheet lists TC123 twice; pattern suggests A/B color variants — confirm with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC68PRO",
@@ -470,7 +485,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "TC51A",
@@ -500,7 +516,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC51A and TC51B are the two finish/color variants",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "TC51B",
@@ -530,7 +547,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "TC51A and TC51B are the two finish/color variants",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "KM-S100",
@@ -558,7 +576,8 @@
       "voltage_flag": true,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "CM5040",
@@ -587,7 +606,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "TC51R",
@@ -616,7 +636,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KM-S650",
@@ -649,7 +670,8 @@
       "voltage_flag": true,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KM-S5800",
@@ -714,7 +736,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "AS-NF12",
@@ -746,7 +769,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RS-AF3208",
@@ -777,7 +801,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RS-JN05D1W",
@@ -808,7 +833,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HD-ZG050EB",
@@ -839,7 +865,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HD-ZG050MB",
@@ -870,7 +897,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Sell sheet listed HD-ZG050MB twice; pattern confirms this Air Fryer is the correct one",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "YAF-50Q11",
@@ -901,7 +929,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RS-JN07D1VW",
@@ -932,7 +961,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RD2300",
@@ -965,7 +995,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "DH-KNJ01",
@@ -997,7 +1028,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RD1700",
@@ -1026,7 +1058,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "VERIFY WITH YUNO — Sell sheet uses RD1700 for two different products — confirm which one is truly RD1700",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RKX1062W-12",
@@ -1058,7 +1091,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — RKX1062W listed 5x at different sizes; suffix added per BDW freezer convention",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RKX1062W-14",
@@ -1090,7 +1124,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RKX1062W-23A",
@@ -1122,7 +1157,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RKX1062W-23B",
@@ -1154,7 +1190,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RKX1062W-25",
@@ -1186,7 +1223,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "AK-1218",
@@ -1217,7 +1255,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "ZCJ-B151-1",
@@ -1245,7 +1284,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RS-360BW",
@@ -1276,7 +1316,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "BW suffix = Black/Brown finish",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "T-04",
@@ -1306,7 +1347,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RS-360WW",
@@ -1336,7 +1378,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "WW suffix = White finish",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "T-46",
@@ -1366,7 +1409,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "AS-WF40",
@@ -1398,7 +1442,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-IH40L",
@@ -1431,7 +1476,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-IH50L",
@@ -1464,7 +1510,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-IH50L-DT",
@@ -1496,7 +1543,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "FAMILY VARIANT — Pattern-suggested variant suffix; confirm correct SKU with Yuno",
-      "needs_verify": true
+      "needs_verify": true,
+      "has_photo": true
     },
     {
       "sku": "RFB-IH429T",
@@ -1524,7 +1572,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-S50L",
@@ -1580,7 +1629,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-S50DR13",
@@ -1609,7 +1659,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RTB-S30B1",
@@ -1636,7 +1687,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RX-50F2",
@@ -1663,7 +1715,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RFB-V4066",
@@ -1690,7 +1743,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "YGF-606",
@@ -1718,7 +1772,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "IM-1200",
@@ -1749,7 +1804,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-18Q",
@@ -1779,7 +1835,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-16AT",
@@ -1808,7 +1865,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-16A",
@@ -1837,7 +1895,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-25Y",
@@ -1867,7 +1926,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-20AN",
@@ -1897,7 +1957,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZBQ-0255",
@@ -1926,7 +1987,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZBQ-0250",
@@ -1955,7 +2017,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HBZB-36F",
@@ -1985,7 +2048,8 @@
       "voltage_flag": true,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-36BS",
@@ -2015,7 +2079,8 @@
       "voltage_flag": true,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HZB-45BS",
@@ -2075,7 +2140,8 @@
       "voltage_flag": true,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "KTYD-PBJ05A",
@@ -2105,7 +2171,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "GM-322",
@@ -2135,7 +2202,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "380",
@@ -2165,7 +2233,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "8006B",
@@ -2195,7 +2264,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "HB3302",
@@ -2225,7 +2295,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RPB106W",
@@ -2255,7 +2326,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "AJL-PB102",
@@ -2285,7 +2357,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RZ-28M2",
@@ -2316,7 +2389,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BI817S3IN1",
@@ -2345,7 +2419,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "RJR301W",
@@ -2376,7 +2451,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "CP613",
@@ -2407,7 +2483,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "AS-JR363L",
@@ -2438,7 +2515,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": true,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-100D",
@@ -2467,7 +2545,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-150D",
@@ -2525,7 +2604,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-300D",
@@ -2583,7 +2663,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-140",
@@ -2611,7 +2692,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-180",
@@ -2751,7 +2833,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BDW-370",
@@ -2807,7 +2890,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BD-40",
@@ -2863,7 +2947,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BD-40G",
@@ -2975,7 +3060,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BD-88",
@@ -3059,7 +3145,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BD-165",
@@ -3087,7 +3174,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "JC-128VEX",
@@ -3114,7 +3202,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "JC-125DB",
@@ -3141,7 +3230,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BC-46",
@@ -3195,7 +3285,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BC-90",
@@ -3222,7 +3313,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BC-113",
@@ -3543,7 +3635,8 @@
       "voltage_flag": false,
       "us_voltage_confirmed": false,
       "status_note": "Confirmed on sell sheet",
-      "needs_verify": false
+      "needs_verify": false,
+      "has_photo": true
     },
     {
       "sku": "BCD-212R",
