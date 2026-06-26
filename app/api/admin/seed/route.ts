@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
-import { PRODUCTS, demoSelection, demoQuote } from "@/lib/data/fixtures";
-import { targetLanded, DEFAULT_GROSS_MARGIN } from "@/lib/calc/economics";
+import { PRODUCTS } from "@/lib/data/fixtures";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -68,59 +67,28 @@ export async function POST(req: NextRequest) {
     if (idErr) throw new Error(`product ids: ${idErr.message}`);
     const idByRef = new Map((idRows ?? []).map((r) => [r.external_ref, r.id]));
 
-    // 3. clean reseed of the demo layers
-    await admin.from("factory_quotes").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-    await admin.from("selections").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-    await admin.from("pipeline_status").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+    // 3. Pipeline status — give any product without a row a starting "new" status.
+    //    NO demo economics are seeded. Selections (partner targets) and factory_quotes
+    //    (owner quotes) are real user data: this route never creates or deletes them,
+    //    so re-seeding products is always safe to run against live data.
+    const { data: existingPipe } = await admin.from("pipeline_status").select("product_id");
+    const hasPipe = new Set((existingPipe ?? []).map((r) => r.product_id));
+    const pipelineRows = PRODUCTS.map((p) => idByRef.get(p.external_ref))
+      .filter((pid): pid is string => !!pid && !hasPipe.has(pid))
+      .map((pid) => ({ product_id: pid, status: "new", updated_by: ownerId }));
 
-    const pipelineRows: any[] = [];
-    const selectionRows: any[] = [];
-    const quoteRows: any[] = [];
-    PRODUCTS.forEach((p, i) => {
-      const pid = idByRef.get(p.external_ref);
-      if (!pid) return;
-      pipelineRows.push({ product_id: pid, status: "new", updated_by: ownerId });
-      const sel = demoSelection(p, i);
-      if (sel.target_sell_price != null || sel.tier) {
-        selectionRows.push({
-          product_id: pid,
-          partner_user_id: partnerId,
-          tier: sel.tier,
-          target_sell_price: sel.target_sell_price,
-          target_landed_cost:
-            sel.target_sell_price != null ? targetLanded(sel.target_sell_price, DEFAULT_GROSS_MARGIN) : null,
-          updated_by: partnerId,
-        });
-      }
-      const q = demoQuote(p, i, sel.target_sell_price);
-      if (q != null) {
-        quoteRows.push({
-          product_id: pid,
-          landed_cost_ddp: q,
-          moq: 1000,
-          lead_time_days: 35,
-          supplier: "Demo factory",
-          is_selected: true,
-          created_by: ownerId,
-        });
-      }
+    let pipelineAdded = 0;
+    if (pipelineRows.length) {
+      const { error } = await admin.from("pipeline_status").insert(pipelineRows);
+      if (error) throw new Error(`pipeline_status: ${error.message}`);
+      pipelineAdded = pipelineRows.length;
+    }
+
+    return NextResponse.json({
+      ok: true,
+      counts: { users: 2, products: productRows.length, pipeline_added: pipelineAdded },
+      note: "selections & factory_quotes are real user data — never seeded or cleared by this route",
     });
-
-    const ins = async (table: string, rows: any[]) => {
-      if (!rows.length) return 0;
-      const { error } = await admin.from(table).insert(rows);
-      if (error) throw new Error(`${table}: ${error.message}`);
-      return rows.length;
-    };
-
-    const counts = {
-      users: 2,
-      products: productRows.length,
-      pipeline: await ins("pipeline_status", pipelineRows),
-      selections: await ins("selections", selectionRows),
-      quotes: await ins("factory_quotes", quoteRows),
-    };
-    return NextResponse.json({ ok: true, counts });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }

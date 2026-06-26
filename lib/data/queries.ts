@@ -2,23 +2,29 @@ import "server-only";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { buildView, emptySelection, type ProductView } from "@/lib/data/view";
 import { DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
+import { cleanSpecs } from "@/lib/data/clean";
 import type { Assumptions, Competitor, Product, Selection } from "@/lib/types";
 
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
 
 function rowToProduct(r: any): Product {
+  // Prefer AI-cleaned copy where present; fall back to the raw factory import.
+  const cleanFeatures: string[] = Array.isArray(r.features_clean) && r.features_clean.length
+    ? r.features_clean
+    : (r.features ?? []);
   return {
     external_ref: r.external_ref,
     line: r.line,
     brand: r.brand,
     source: r.source,
-    name: r.name,
+    name: r.name_clean || r.name,
     model: r.model,
     group_name: r.group_name,
     subsection: r.subsection,
     categories: r.categories ?? [],
-    specs: r.specs ?? [],
-    features: r.features ?? [],
+    specs: cleanSpecs(r.specs),
+    features: cleanFeatures,
+    summary: r.summary ?? null,
     source_url: r.source_url,
     msrp: num(r.msrp),
     our_cost: num(r.our_cost),

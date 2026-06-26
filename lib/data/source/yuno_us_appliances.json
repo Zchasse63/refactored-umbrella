@@ -1,0 +1,3576 @@
+{
+  "source": "Yuno Group USA — RoyalStar US Sell-Sheet (May 2026)",
+  "market": "US 110-120V",
+  "count": 122,
+  "products": [
+    {
+      "sku": "CM0591",
+      "sku_sell_sheet": "CM0591",
+      "slug": "auto-drip-coffee-maker-cm0591",
+      "name": "Auto Drip Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Drip Coffee Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5 Cup"
+        },
+        {
+          "label": "Dimensions",
+          "value": "8.5\" x 5.6\" x 10.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Glass Carafe",
+        "On/Off Switch",
+        "Basket Filter",
+        "Warming Plate"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "CM-338BWA",
+      "sku_sell_sheet": "CM-338BWA",
+      "slug": "auto-drip-coffee-maker-cm-338bwa",
+      "name": "Auto Drip Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Drip Coffee Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "11.1\" x 13.7\" x 21.6\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Stainless Carafe",
+        "On/Off Switch",
+        "Basket Filter",
+        "Warming Plate"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KM-C0518",
+      "sku_sell_sheet": "KM-C0518",
+      "slug": "single-serve-coffee-maker-km-c0518",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "13\" x 4.5\" x 8.9\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule/Pod Compatible",
+        "20 Bar Pump",
+        "Adjustable Tray",
+        "Detachable Tank",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KM-C0501",
+      "sku_sell_sheet": "KM-C0501 / KM-CM501W",
+      "slug": "single-serve-coffee-maker-km-c0501",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "13.7\" x 4.3\" x 8.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule/Pod",
+        "20 Bar Pump",
+        "Removable Cup Holder",
+        "Americano (Hot Water) Option"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "KM-CM501W likely white finish variant",
+      "needs_verify": true
+    },
+    {
+      "sku": "KM-C0520",
+      "sku_sell_sheet": "KM-C0520",
+      "slug": "single-serve-coffee-maker-km-c0520",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "11.25\" x 4.6\" x 10.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule/Pod",
+        "20 Bar Pump",
+        "7 Temp Levels",
+        "Detachable Tank",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KM-C0528",
+      "sku_sell_sheet": "KM-C0528",
+      "slug": "single-serve-coffee-maker-km-c0528",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 4.3\" x 11.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule/Pod",
+        "20 Bar Pump",
+        "7 Temp Levels",
+        "Detachable Tank",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "TC01",
+      "sku_sell_sheet": "TC01 / TC01S",
+      "slug": "single-serve-coffee-maker-tc01",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "12.4\" x 5\" x 9.01\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nespresso Capsule",
+        "20 Bar Pump",
+        "Touch Control",
+        "Preheating",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC01S likely silver finish variant",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC03",
+      "sku_sell_sheet": "TC03 / TC03+",
+      "slug": "single-serve-coffee-maker-tc03",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "12.7\" x 5.3\" x 9.5\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nespresso Capsule",
+        "20 Bar Pump",
+        "Aluminum Construction",
+        "Optional Milk Frother/Tank"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC03+ likely upgraded version",
+      "needs_verify": true
+    },
+    {
+      "sku": "RC1801",
+      "sku_sell_sheet": "RC1801 / RC1802",
+      "slug": "single-serve-coffee-maker-rc1801",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "13.7\" x 7\" x 10.6\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nespresso Capsule",
+        "20 Bar Pump",
+        "Touch Control",
+        "Programmable",
+        "Detachable Tank"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "RC1802 likely variant of RC1801",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC36A",
+      "sku_sell_sheet": "TC36A / TC36B",
+      "slug": "single-serve-coffee-maker-k-cup-tc36a",
+      "name": "Single Serve Coffee Maker (K-Cup)",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "11\" x 4.1\" x 11.1\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "K-Cup",
+        "Adjustable Easy Touch",
+        "Preheating",
+        "Removable Drip Tray"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC36B likely color/finish variant",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC06",
+      "sku_sell_sheet": "TC06",
+      "slug": "single-serve-coffee-maker-tc06",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "11.6\" x 16.3\" x 8.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nespresso Capsule",
+        "20 Bar Pump",
+        "Touch Control",
+        "Programmable",
+        "Detachable Tank"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "TC22",
+      "sku_sell_sheet": "TC22 / TC22Z",
+      "slug": "single-serve-coffee-maker-tc22",
+      "name": "Single Serve Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Single-Serve Capsule",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "13.7\" x 4.3\" x 8.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule/Pod",
+        "20 Bar",
+        "Premium Aluminum/Mahogany",
+        "Instant Heating Thermoblock",
+        "Fully Programmable"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC22Z likely finish variant",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC23",
+      "sku_sell_sheet": "TC23",
+      "slug": "espresso-coffee-maker-tc23",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 10.8\" x 12.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule",
+        "20 Bar",
+        "Touchscreen",
+        "Premium Construction",
+        "Self-Cleaning"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "TC123A",
+      "sku_sell_sheet": "TC123",
+      "slug": "espresso-coffee-maker-tc123a",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "15.2\" x 10.8\" x 14.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule",
+        "20 Bar",
+        "Touchscreen",
+        "Premium Construction",
+        "Programmable",
+        "Self-Cleaning"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "VERIFY WITH YUNO — Sell sheet lists TC123 twice; pattern suggests A/B color variants — confirm with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC123B",
+      "sku_sell_sheet": "TC123",
+      "slug": "espresso-coffee-maker-tc123b",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "15.2\" x 10.8\" x 14.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule",
+        "20 Bar",
+        "Touchscreen",
+        "Premium Construction",
+        "Programmable",
+        "Self-Cleaning"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "VERIFY WITH YUNO — Sell sheet lists TC123 twice; pattern suggests A/B color variants — confirm with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC68PRO",
+      "sku_sell_sheet": "TC68PRO",
+      "slug": "espresso-coffee-maker-tc68pro",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "23.4\" x 13.1\" x 17.9\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Capsule",
+        "20 Bar",
+        "Touchscreen",
+        "Milk Container for Lattes/Cappuccinos",
+        "Premium Build"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "TC51A",
+      "sku_sell_sheet": "TC51A / TC51B",
+      "slug": "espresso-coffee-maker-tc51a",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "9\" x 8.26\" x 10.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "20 Bar",
+        "Touch Programmable",
+        "Steam & Hot Water",
+        "1 or 2 Cup",
+        "Stainless Housing",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC51A and TC51B are the two finish/color variants",
+      "needs_verify": true
+    },
+    {
+      "sku": "TC51B",
+      "sku_sell_sheet": "TC51A / TC51B",
+      "slug": "espresso-coffee-maker-tc51b",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "9\" x 8.26\" x 10.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "20 Bar",
+        "Touch Programmable",
+        "Steam & Hot Water",
+        "1 or 2 Cup",
+        "Stainless Housing",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "TC51A and TC51B are the two finish/color variants",
+      "needs_verify": true
+    },
+    {
+      "sku": "KM-S100",
+      "sku_sell_sheet": "KM-S100",
+      "slug": "espresso-coffee-maker-km-s100",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "13.7\" x 4.3\" x 8.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-240V, 50/60Hz"
+        }
+      ],
+      "features": [
+        "20 Bar",
+        "Electromagnetic Pumps",
+        "External Water Supply",
+        "Dual Thermoblock"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "CM5040",
+      "sku_sell_sheet": "CM5040",
+      "slug": "espresso-coffee-maker-cm5040",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "14.3\" x 14.3\" x 7.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "20 Bar",
+        "Touch Programmable",
+        "Steam & Hot Water",
+        "Built-in Bean Grinder",
+        "Stainless Housing"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "TC51R",
+      "sku_sell_sheet": "TC51R",
+      "slug": "espresso-coffee-maker-tc51r",
+      "name": "Espresso Coffee Maker",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "9.1\" x 8.26\" x 10.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "20 Bar",
+        "Full-Color Display",
+        "Steam & Hot Water",
+        "Touch Programmable",
+        "Stainless Housing"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KM-S650",
+      "sku_sell_sheet": "KM-S650",
+      "slug": "commercial-espresso-machine-km-s650",
+      "name": "Commercial Espresso Machine",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines (Commercial)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "6.5L Boiler"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.4\" x 26.7\" x 17.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-380V, 50/60Hz"
+        }
+      ],
+      "features": [
+        "Stainless Steel Boiler",
+        "Dual Pressure Gauges",
+        "Two 5\" LCD Screens",
+        "Variable Pressure",
+        "External Water Supply"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KM-S5800",
+      "sku_sell_sheet": "KM-S5800",
+      "slug": "commercial-espresso-machine-km-s5800",
+      "name": "Commercial Espresso Machine",
+      "category": "Coffee / Espresso",
+      "subcategory": "Espresso Machines (Commercial)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "6.5L Boiler"
+        },
+        {
+          "label": "Dimensions",
+          "value": "23.6\" x 29\" x 18.1\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-380V, 50/60Hz"
+        }
+      ],
+      "features": [
+        "Stainless Steel Boiler",
+        "Dual Pressure Gauges",
+        "Two 5\" LCD Screens",
+        "Variable Pressure",
+        "External Water Supply",
+        "Aluminum Frame"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "AS-AF360",
+      "sku_sell_sheet": "AS-AF360",
+      "slug": "air-fryer-as-af360",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 10\" x 11.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Preprogrammed Presets",
+        "LCD Touch Screen"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "AS-NF12",
+      "sku_sell_sheet": "AS-NF12",
+      "slug": "air-fryer-as-nf12",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "3.7L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "9.4\" x 9.4\" x 11\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Clear Glass Cooking Basket",
+        "Preset Cooks",
+        "Push Button + LCD"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RS-AF3208",
+      "sku_sell_sheet": "RS-AF3208",
+      "slug": "air-fryer-rs-af3208",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 10\" x 11.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Turn Knob Controls",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RS-JN05D1W",
+      "sku_sell_sheet": "RS-JN05D1W",
+      "slug": "air-fryer-rs-jn05d1w",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 10\" x 11.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Touch Button Controls",
+        "Auto Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HD-ZG050EB",
+      "sku_sell_sheet": "HD-ZG050EB",
+      "slug": "air-fryer-hd-zg050eb",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "6.5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "11.7\" x 15\" x 12.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Preset Cooks",
+        "LCD Touch Screen"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HD-ZG050MB",
+      "sku_sell_sheet": "HD-ZG050MB",
+      "slug": "air-fryer-hd-zg050mb",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "6.5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "11.7\" x 15\" x 12.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Preset Cooks",
+        "Turn Knob Controls"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Sell sheet listed HD-ZG050MB twice; pattern confirms this Air Fryer is the correct one",
+      "needs_verify": true
+    },
+    {
+      "sku": "YAF-50Q11",
+      "sku_sell_sheet": "YAF-50Q11",
+      "slug": "air-fryer-yaf-50q11",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.4\" x 12.4\" x 14.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Preset Cooks",
+        "LCD Touch Screen"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RS-JN07D1VW",
+      "sku_sell_sheet": "RS-JN07D1VW",
+      "slug": "air-fryer-rs-jn07d1vw",
+      "name": "Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "7L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "14.8\" x 14.8\" x 14\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Preset Cooks",
+        "LCD Touch Screen"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RD2300",
+      "sku_sell_sheet": "RD2300",
+      "slug": "multifunction-air-fryer-rd2300",
+      "name": "Multifunction Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Multifunction Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "23L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "16.5\" x 14.8\" x 13\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Microchip Temp Control",
+        "Turn Knob Controls",
+        "Glass Door",
+        "Multi-Rack",
+        "3 Trays Included"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "DH-KNJ01",
+      "sku_sell_sheet": "DH-KNJ01",
+      "slug": "multifunction-air-fryer-dh-knj01",
+      "name": "Multifunction Air Fryer",
+      "category": "Air Fryers",
+      "subcategory": "Multifunction Air Fryers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "Extra Large"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.75\" x 16\" x 9.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Combination Air Fryer/Grill/Griddle",
+        "Smart Thermometer",
+        "7-in-1",
+        "Touch Button + Accessory Pack"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RD1700",
+      "sku_sell_sheet": "RD1700",
+      "slug": "multifunction-air-fryer-combo-oven-rd1700",
+      "name": "Multifunction Air Fryer (Combo Oven)",
+      "category": "Air Fryers",
+      "subcategory": "Multifunction Air Fryers",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "19.7\" x 14.8\" x 8.1\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Combination Air Fryer/Pizza Oven/Grill",
+        "Internal Air Fryer",
+        "Grill Top",
+        "Precise Temp",
+        "Glass Door"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "VERIFY WITH YUNO — Sell sheet uses RD1700 for two different products — confirm which one is truly RD1700",
+      "needs_verify": true
+    },
+    {
+      "sku": "RKX1062W-12",
+      "sku_sell_sheet": "RKX1062W",
+      "slug": "multifunction-oven-rkx1062w-12",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "12L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "13.4\" x 9.8\" x 10.2\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick Coating"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — RKX1062W listed 5x at different sizes; suffix added per BDW freezer convention",
+      "needs_verify": true
+    },
+    {
+      "sku": "RKX1062W-14",
+      "sku_sell_sheet": "RKX1062W",
+      "slug": "multifunction-oven-rkx1062w-14",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "14L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12\" x 13\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick Coating"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "RKX1062W-23A",
+      "sku_sell_sheet": "RKX1062W",
+      "slug": "multifunction-oven-rkx1062w-23a",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "23L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "16.5\" x 15.1\" x 13\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick Coating"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "RKX1062W-23B",
+      "sku_sell_sheet": "RKX1062W",
+      "slug": "multifunction-oven-rkx1062w-23b",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "23L (alt config)"
+        },
+        {
+          "label": "Dimensions",
+          "value": "16.9\" x 15.6\" x 15.75\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick Coating"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "RKX1062W-25",
+      "sku_sell_sheet": "RKX1062W",
+      "slug": "multifunction-oven-rkx1062w-25",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "25L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "18\" x 16.9\" x 16.1\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick Coating"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — Pattern-suggested suffix; confirm correct variant SKU with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "AK-1218",
+      "sku_sell_sheet": "AK-1218",
+      "slug": "multifunction-oven-ak-1218",
+      "name": "Multifunction Oven",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Multifunction Ovens",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "12L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 5.9\" x 6.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multi-Cooking",
+        "Turn Knob Controls",
+        "Positional Rack"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "ZCJ-B151-1",
+      "sku_sell_sheet": "ZCJ-B151-1",
+      "slug": "3-in-1-breakfast-maker-zcj-b151-1",
+      "name": "3-in-1 Breakfast Maker",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Breakfast Makers",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "19.7\" x 10\" x 9.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Combination Coffee/Grill/Toaster Oven",
+        "Digital Temp",
+        "Turn Knob",
+        "Non-Stick"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RS-360BW",
+      "sku_sell_sheet": "RS-360BW",
+      "slug": "toaster-rs-360bw",
+      "name": "Toaster",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Toasters",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2-Slice"
+        },
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 5.9\" x 6.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Cancel/Reheat/Defrost",
+        "Warming Rack",
+        "Adjustable Heat"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "BW suffix = Black/Brown finish",
+      "needs_verify": true
+    },
+    {
+      "sku": "T-04",
+      "sku_sell_sheet": "T-04",
+      "slug": "toaster-t-04",
+      "name": "Toaster",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Toasters",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2-Slice"
+        },
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 5.9\" x 6.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Cancel/Reheat/Defrost",
+        "Adjustable Heat"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RS-360WW",
+      "sku_sell_sheet": "RS-360WW",
+      "slug": "toaster-rs-360ww",
+      "name": "Toaster",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Toasters",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2-Slice"
+        },
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 5.9\" x 6.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Cancel/Reheat/Defrost",
+        "Adjustable Heat"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "WW suffix = White finish",
+      "needs_verify": true
+    },
+    {
+      "sku": "T-46",
+      "sku_sell_sheet": "T-46",
+      "slug": "toaster-t-46",
+      "name": "Toaster",
+      "category": "Multifunction Ovens & Toasters",
+      "subcategory": "Toasters",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2-Slice"
+        },
+        {
+          "label": "Dimensions",
+          "value": "10.2\" x 5.9\" x 6.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Cancel/Reheat/Defrost",
+        "Adjustable Heat"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "AS-WF40",
+      "sku_sell_sheet": "AS-WF40",
+      "slug": "smart-rice-cooker-as-wf40",
+      "name": "Smart Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Smart)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.3\" x 13.4\" x 10.9\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Smart Enable",
+        "Nonstick Inner Pot",
+        "Programmed Cook Settings",
+        "Scratch & Wear Resistant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-IH40L",
+      "sku_sell_sheet": "RFB-IH40L",
+      "slug": "ih-rice-cooker-rfb-ih40l",
+      "name": "IH Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Induction)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.3\" x 13.4\" x 10.9\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nonstick Inner Pot",
+        "Touch Controls",
+        "9 Presets",
+        "1-Click Selection",
+        "Scratch & Wear Resistant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-IH50L",
+      "sku_sell_sheet": "RFB-IH50L",
+      "slug": "ih-rice-cooker-rfb-ih50l",
+      "name": "IH Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Induction)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.3\" x 13.4\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nonstick Inner Pot",
+        "Touch Controls",
+        "9 Presets",
+        "1-Click Selection",
+        "Scratch & Wear Resistant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-IH50L-DT",
+      "sku_sell_sheet": "RFB-IH50L",
+      "slug": "ih-rice-cooker-w-dual-temp-probe-rfb-ih50l-dt",
+      "name": "IH Rice Cooker w/ Dual Temp Probe",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Induction)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.3\" x 13.4\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Nonstick Inner Pot",
+        "Touch Controls",
+        "Dual Temperature Probe",
+        "Scratch & Wear Resistant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "FAMILY VARIANT — Pattern-suggested variant suffix; confirm correct SKU with Yuno",
+      "needs_verify": true
+    },
+    {
+      "sku": "RFB-IH429T",
+      "sku_sell_sheet": "RFB-IH429T",
+      "slug": "ih-rice-cooker-rfb-ih429t",
+      "name": "IH Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Induction)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Touch Button Controls",
+        "Preset Functions",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-S50L",
+      "sku_sell_sheet": "RFB-IH50L (likely typo)",
+      "slug": "rice-cooker-stainless-rfb-s50l",
+      "name": "Rice Cooker (Stainless)",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Stainless)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Touch Button Controls",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "PATTERN-CORRECTED — Sell sheet labeled this RFB-IH50L, but stainless inner pot follows the RFB-S naming pattern (IH = nonstick)",
+      "needs_verify": true
+    },
+    {
+      "sku": "RFB-S40DR13",
+      "sku_sell_sheet": "RFB-S40DR13",
+      "slug": "rice-cooker-stainless-rfb-s40dr13",
+      "name": "Rice Cooker (Stainless)",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Stainless)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Smart Enable",
+        "Touch Button Controls",
+        "Preset Functions",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-S50DR13",
+      "sku_sell_sheet": "RFB-S50DR13",
+      "slug": "rice-cooker-stainless-rfb-s50dr13",
+      "name": "Rice Cooker (Stainless)",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Stainless)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "5L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Smart Enable",
+        "Touch Button Controls",
+        "Preset Functions",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RTB-S30B1",
+      "sku_sell_sheet": "RTB-S30B1",
+      "slug": "compact-rice-cooker-rtb-s30b1",
+      "name": "Compact Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Compact)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "3L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Stainless Inner Pot",
+        "Digital Display",
+        "Auto Start/Off"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RX-50F2",
+      "sku_sell_sheet": "RX-50F2",
+      "slug": "rice-cooker-rx-50f2",
+      "name": "Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Compact)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Touch Button Controls",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RFB-V4066",
+      "sku_sell_sheet": "RFB-V4066",
+      "slug": "rice-cooker-value-rfb-v4066",
+      "name": "Rice Cooker (Value)",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Rice Cookers (Compact)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Touch Button Controls",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "YGF-606",
+      "sku_sell_sheet": "YGF-606",
+      "slug": "mini-rice-cooker-ygf-606",
+      "name": "Mini Rice Cooker",
+      "category": "Rice & Pressure Cookers",
+      "subcategory": "Mini Rice Cookers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.2L"
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Touch Button Controls",
+        "6 Preset Functions",
+        "Stainless Inner Pot",
+        "Digital Display"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "IM-1200",
+      "sku_sell_sheet": "IM-1200",
+      "slug": "portable-ice-maker-im-1200",
+      "name": "Portable Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Portable Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "0.7kg / 12kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 8.8\" x 11.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Rapid Freezing",
+        "Round Bullet Ice",
+        "Portable with Handle"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-18Q",
+      "sku_sell_sheet": "HZB-18Q",
+      "slug": "portable-ice-maker-hzb-18q",
+      "name": "Portable Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Portable Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "0.8kg / 15kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 9\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Round Bullet Ice",
+        "Portable with Handle"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-16AT",
+      "sku_sell_sheet": "HZB-16AT",
+      "slug": "countertop-ice-maker-hzb-16at",
+      "name": "Countertop Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Countertop Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "0.8kg / 15kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 9\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Round Bullet Ice"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-16A",
+      "sku_sell_sheet": "HZB-16A",
+      "slug": "countertop-ice-maker-hzb-16a",
+      "name": "Countertop Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Countertop Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "0.8kg / 15kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.8\" x 9\" x 12\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Round Bullet Ice"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-25Y",
+      "sku_sell_sheet": "HZB-25Y",
+      "slug": "countertop-ice-maker-hzb-25y",
+      "name": "Countertop Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Countertop Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "0.5kg / 22kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "6.7\" x 12.4\" x 13.5\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Rapid Freezing",
+        "Cube Shape"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-20AN",
+      "sku_sell_sheet": "HZB-20AN",
+      "slug": "countertop-ice-maker-hzb-20an",
+      "name": "Countertop Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Countertop Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.5kg / 20kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "9.8\" x 15\" x 16.5\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Rapid Freezing",
+        "Nugget Shape"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZBQ-0255",
+      "sku_sell_sheet": "HZBQ-0255",
+      "slug": "specialty-ice-maker-sphere-hzbq-0255",
+      "name": "Specialty Ice Maker — Sphere",
+      "category": "Ice Makers",
+      "subcategory": "Specialty Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.08kg / 6kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "9.4\" x 15\" x 15\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Clear Spherical Ice"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZBQ-0250",
+      "sku_sell_sheet": "HZBQ-0250",
+      "slug": "specialty-ice-maker-cube-hzbq-0250",
+      "name": "Specialty Ice Maker — Cube",
+      "category": "Ice Makers",
+      "subcategory": "Specialty Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.08kg / 6kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "9.4\" x 15\" x 15\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Clear Cube Ice"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HBZB-36F",
+      "sku_sell_sheet": "HBZB-36F",
+      "slug": "built-in-ice-maker-hbzb-36f",
+      "name": "Built-In Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Built-In Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "12kg / 36kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15\" x 21.1\" x 33.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-240V / 115V / 230V"
+        }
+      ],
+      "features": [
+        "Cube Style",
+        "Swing Door with Tray"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-36BS",
+      "sku_sell_sheet": "HZB-36BS",
+      "slug": "commercial-ice-maker-hzb-36bs",
+      "name": "Commercial Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Commercial Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "6kg / 36kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.2\" x 14.6\" x 23.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-240V / 115V / 230V"
+        }
+      ],
+      "features": [
+        "Cube Style",
+        "Lift Door Access"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HZB-45BS",
+      "sku_sell_sheet": "HZB-36BS (likely typo)",
+      "slug": "commercial-ice-maker-hzb-45bs",
+      "name": "Commercial Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Commercial Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "12kg / 45kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.2\" x 14.1\" x 31.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-240V / 115V / 230V"
+        }
+      ],
+      "features": [
+        "Cube Style",
+        "Lift Door Access"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "PATTERN-CORRECTED — HZB pattern: number = kg/day. Sell sheet labeled this 36BS but 45kg/day suggests HZB-45BS",
+      "needs_verify": true
+    },
+    {
+      "sku": "HZB-220F",
+      "sku_sell_sheet": "HZB-220F",
+      "slug": "commercial-ice-maker-hzb-220f",
+      "name": "Commercial Ice Maker",
+      "category": "Ice Makers",
+      "subcategory": "Commercial Ice Makers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "100kg / 220kg per day"
+        },
+        {
+          "label": "Dimensions",
+          "value": "22.9\" x 26.2\" x 65.2\""
+        },
+        {
+          "label": "Voltage",
+          "value": "220-240V / 115V / 230V"
+        }
+      ],
+      "features": [
+        "Cube Style",
+        "Lift Door Access"
+      ],
+      "voltage_flag": true,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "KTYD-PBJ05A",
+      "sku_sell_sheet": "KTYD-PBJ05A",
+      "slug": "pitcher-blender-ktyd-pbj05a",
+      "name": "Pitcher Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Pitcher Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.65L / 400W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "7.6\" x 7.6\" x 15.2\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multiple Modes",
+        "Touch Button Operation"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "GM-322",
+      "sku_sell_sheet": "GM-322",
+      "slug": "pitcher-blender-gm-322",
+      "name": "Pitcher Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Pitcher Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "1.5L / 800W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.9\" x 8.34\" x 10.74\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multiple Modes",
+        "Turn Dial Operation"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "380",
+      "sku_sell_sheet": "380",
+      "slug": "pitcher-blender-380",
+      "name": "Pitcher Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Pitcher Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2.5L / 800W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "19.3\" x 9\" x 15.7\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multiple Modes",
+        "Turn Dial Operation"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "8006B",
+      "sku_sell_sheet": "8006B",
+      "slug": "high-power-pitcher-blender-8006b",
+      "name": "High-Power Pitcher Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Pitcher Blenders (Power)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "4L / 1800W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "9\" x 9.44\" x 22.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Multiple Modes",
+        "Push Button Operation"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "HB3302",
+      "sku_sell_sheet": "HB3302",
+      "slug": "immersion-blender-hb3302",
+      "name": "Immersion Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Immersion Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "500W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "2.95\" x 2.95\" x 16.3\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Stainless Construction",
+        "Multifunction"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RPB106W",
+      "sku_sell_sheet": "RPB106W",
+      "slug": "mini-blender-rpb106w",
+      "name": "Mini Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Personal/Mini Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "850ml / 600W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "7.9\" x 6.3\" x 13\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Single Serve",
+        "Multifunction Push Button"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "AJL-PB102",
+      "sku_sell_sheet": "AJL-PB102",
+      "slug": "mini-blender-ajl-pb102",
+      "name": "Mini Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Personal/Mini Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "850ml / 600W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "7.9\" x 6.3\" x 13\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Single Serve",
+        "Multifunction Push Button"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RZ-28M2",
+      "sku_sell_sheet": "RZ-28M2",
+      "slug": "portable-mini-blender-rz-28m2",
+      "name": "Portable Mini Blender",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Personal/Mini Blenders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "40W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "7.9\" x 6.3\" x 13\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Single Serve",
+        "Multifunction",
+        "On-the-Go Lanyard"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BI817S3IN1",
+      "sku_sell_sheet": "BI817S3IN1",
+      "slug": "3-in-1-blender-system-bi817s3in1",
+      "name": "3-in-1 Blender System",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Combo Blenders",
+      "specs": [
+        {
+          "label": "Dimensions",
+          "value": "12.9\" x 8.34\" x 10.74\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Single Blender",
+        "Processor & Grinder",
+        "Multifunction",
+        "Push Button",
+        "Easy Clean"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "RJR301W",
+      "sku_sell_sheet": "RJR301W",
+      "slug": "food-processor-meat-grinder-rjr301w",
+      "name": "Food Processor / Meat Grinder",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Food Processors / Meat Grinders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2.2L / 300W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "12.6\" x 8.7\" x 7.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Double 4-Way Blade",
+        "Glass Bowl",
+        "Push Button"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "CP613",
+      "sku_sell_sheet": "CP613",
+      "slug": "food-processor-meat-grinder-cp613",
+      "name": "Food Processor / Meat Grinder",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Food Processors / Meat Grinders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "2.0L / 500W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "8.9\" x 8.9\" x 9.4\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Double 4-Way Blade",
+        "Glass Bowl",
+        "Push Button"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "AS-JR363L",
+      "sku_sell_sheet": "AS-JR363L",
+      "slug": "food-processor-meat-grinder-as-jr363l",
+      "name": "Food Processor / Meat Grinder",
+      "category": "Blenders & Food Processors",
+      "subcategory": "Food Processors / Meat Grinders",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "3.0L / 300W"
+        },
+        {
+          "label": "Dimensions",
+          "value": "15.4\" x 8.6\" x 6.8\""
+        },
+        {
+          "label": "Voltage",
+          "value": "110-120V, 60Hz"
+        }
+      ],
+      "features": [
+        "Double 4-Way Blade",
+        "Glass Bowl",
+        "Push Button"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": true,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-100D",
+      "sku_sell_sheet": "BDW-100D",
+      "slug": "deep-chest-freezer-bdw-100d",
+      "name": "Deep Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Deep Freezers (-60°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "100L / 3.53 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "28.3\" x 23.6\" x 33.3\""
+        }
+      ],
+      "features": [
+        "-60°C Deep Freeze",
+        "3.5\" Foam Walls",
+        "Stepped Door",
+        "Computer Controlled",
+        "304 Stainless Inner Liner"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-150D",
+      "sku_sell_sheet": "BDW-150D",
+      "slug": "deep-chest-freezer-bdw-150d",
+      "name": "Deep Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Deep Freezers (-60°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "150L / 5.29 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "37\" x 23.6\" x 33.3\""
+        }
+      ],
+      "features": [
+        "-60°C Deep Freeze",
+        "3.5\" Foam Walls",
+        "Stepped Door",
+        "Computer Controlled",
+        "304 Stainless Inner Liner"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-200D",
+      "sku_sell_sheet": "BDW-200D",
+      "slug": "deep-chest-freezer-bdw-200d",
+      "name": "Deep Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Deep Freezers (-60°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "200L / 7.06 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "44.9\" x 23.6\" x 33.3\""
+        }
+      ],
+      "features": [
+        "-60°C Deep Freeze",
+        "3.5\" Foam Walls",
+        "Stepped Door",
+        "Computer Controlled",
+        "304 Stainless Inner Liner"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-300D",
+      "sku_sell_sheet": "BDW-300D",
+      "slug": "deep-chest-freezer-bdw-300d",
+      "name": "Deep Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Deep Freezers (-60°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "300L / 10.6 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "46.9\" x 29.3\" x 33.3\""
+        }
+      ],
+      "features": [
+        "-60°C Deep Freeze",
+        "3.5\" Foam Walls",
+        "Stepped Door",
+        "Computer Controlled",
+        "304 Stainless Inner Liner"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-450D",
+      "sku_sell_sheet": "BDW-450D",
+      "slug": "deep-chest-freezer-bdw-450d",
+      "name": "Deep Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Deep Freezers (-60°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "450L / 15.9 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "64.9\" x 29.3\" x 33.3\""
+        }
+      ],
+      "features": [
+        "-60°C Deep Freeze",
+        "3.5\" Foam Walls",
+        "Stepped Door",
+        "Computer Controlled",
+        "304 Stainless Inner Liner"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-140",
+      "sku_sell_sheet": "BDW-140",
+      "slug": "chest-freezer-bdw-140",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "140L / 4.94 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "24.6\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-180",
+      "sku_sell_sheet": "BDW-180",
+      "slug": "chest-freezer-bdw-180",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "180L / 6.36 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "29.7\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-210",
+      "sku_sell_sheet": "BDW-210",
+      "slug": "chest-freezer-bdw-210",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "210L / 7.41 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "35.6\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-240",
+      "sku_sell_sheet": "BDW-240",
+      "slug": "chest-freezer-bdw-240",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "240L / 8.48 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "38.9\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-280",
+      "sku_sell_sheet": "BDW-280",
+      "slug": "chest-freezer-bdw-280",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "280L / 9.89 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "45.1\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-330",
+      "sku_sell_sheet": "BDW-330",
+      "slug": "chest-freezer-bdw-330",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "330L / 11.7 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "48.9\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-370",
+      "sku_sell_sheet": "BDW-370",
+      "slug": "chest-freezer-bdw-370",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "370L / 13.1 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "55.9\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BDW-430",
+      "sku_sell_sheet": "BDW-430",
+      "slug": "chest-freezer-bdw-430",
+      "name": "Chest Freezer",
+      "category": "Freezers",
+      "subcategory": "Chest Freezers (-18°C)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "430L / 15.2 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "64.6\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick High-Density Foam",
+        "Mechanical Temp Control",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-40",
+      "sku_sell_sheet": "BD-40",
+      "slug": "upright-freezer-bd-40",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "31L / 1.09 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 18.6\" x 19.5\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Standard Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-60",
+      "sku_sell_sheet": "BD-60",
+      "slug": "upright-freezer-bd-60",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "59L / 2.08 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 21.5\" x 25\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Standard Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-40G",
+      "sku_sell_sheet": "BD-40G",
+      "slug": "upright-freezer-glass-door-bd-40g",
+      "name": "Upright Freezer (Glass Door)",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers (Glass)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "31L / 1.09 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 18.2\" x 20\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Glass Door",
+        "Thick Foam Walls",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-60G",
+      "sku_sell_sheet": "BD-60G",
+      "slug": "upright-freezer-glass-door-bd-60g",
+      "name": "Upright Freezer (Glass Door)",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers (Glass)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "59L / 2.08 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 22\" x 25.4\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Glass Door",
+        "Thick Foam Walls",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "LSD-40",
+      "sku_sell_sheet": "LSD-40",
+      "slug": "upright-freezer-lsd-40",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers (LSD)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "35L / 1.23 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 18.6\" x 19.9\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "LSD-60",
+      "sku_sell_sheet": "LSD-60",
+      "slug": "upright-freezer-lsd-60",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers (LSD)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "65L / 11.7 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 21.5\" x 25.4\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-88",
+      "sku_sell_sheet": "BD-88",
+      "slug": "upright-freezer-bd-88",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "85L / 3.00 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.3\" x 27.2\" x 32.1\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Standard Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-88B",
+      "sku_sell_sheet": "BD-88B",
+      "slug": "upright-freezer-black-bd-88b",
+      "name": "Upright Freezer (Black)",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "85L / 3.00 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.3\" x 27.2\" x 32.1\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Black Finish",
+        "Thick Foam Walls",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-136",
+      "sku_sell_sheet": "BD-136",
+      "slug": "upright-freezer-bd-136",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "136L / 4.80 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "21.3\" x 23.6\" x 39.4\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BD-165",
+      "sku_sell_sheet": "BD-165",
+      "slug": "upright-freezer-bd-165",
+      "name": "Upright Freezer",
+      "category": "Freezers",
+      "subcategory": "Upright Freezers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "165L / 5.82 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "21.3\" x 21.9\" x 50.4\""
+        }
+      ],
+      "features": [
+        "-18°C",
+        "Thick Foam Walls",
+        "Swing Door",
+        "R170/600a Refrigerant"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "JC-128VEX",
+      "sku_sell_sheet": "JC-128VEX",
+      "slug": "wine-cabinet-jc-128vex",
+      "name": "Wine Cabinet",
+      "category": "Refrigeration",
+      "subcategory": "Wine Cabinets",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "128L / 4.52 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.3\" x 21.3\" x 31.5\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Swing Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "JC-125DB",
+      "sku_sell_sheet": "JC-125DB",
+      "slug": "wine-cabinet-dual-door-jc-125db",
+      "name": "Wine Cabinet (Dual Door)",
+      "category": "Refrigeration",
+      "subcategory": "Wine Cabinets",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "125L / 4.41 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "23.4\" x 22.6\" x 34.3\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Swing Doors",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-46",
+      "sku_sell_sheet": "BC-46",
+      "slug": "beverage-cooler-bc-46",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "46L / 1.62 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "24.6\" x 22\" x 32.6\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-70",
+      "sku_sell_sheet": "BC-70",
+      "slug": "beverage-cooler-bc-70",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "72.5L / 2.56 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 19.3\" x 25\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-90",
+      "sku_sell_sheet": "BC-90",
+      "slug": "beverage-cooler-bc-90",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "90.8L / 3.21 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 19.3\" x 31.2\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-113",
+      "sku_sell_sheet": "BC-113",
+      "slug": "beverage-cooler-bc-113",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "114.5L / 4.04 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "8.90\" x 20.9\" x 33.4\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-128",
+      "sku_sell_sheet": "BC-128",
+      "slug": "beverage-cooler-bc-128",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "128L / 4.52 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.3\" x 21.3\" x 31.5\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-128W",
+      "sku_sell_sheet": "BC-128W (H20 tap)",
+      "slug": "beverage-cooler-with-h2o-tap-bc-128w",
+      "name": "Beverage Cooler (with H2O Tap)",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers (Water Tap)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "128L / 4.52 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "20.3\" x 21.3\" x 31.5\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "H2O Tap"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "W suffix = Water tap",
+      "needs_verify": true
+    },
+    {
+      "sku": "BC-150C",
+      "sku_sell_sheet": "BC-150C",
+      "slug": "beverage-cooler-bc-150c",
+      "name": "Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "142L / 5.01 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "21.1\" x 22.7\" x 33.1\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Electric & Mechanical Temp"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BC-46R",
+      "sku_sell_sheet": "BC-46R",
+      "slug": "retro-beverage-cooler-bc-46r",
+      "name": "Retro Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers (Retro)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "46L / 1.62 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 18.3\" x 19.1\""
+        }
+      ],
+      "features": [
+        "Retro Design",
+        "Thick Foam Walls",
+        "Hinged Door"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "R suffix = Retro / Red",
+      "needs_verify": true
+    },
+    {
+      "sku": "BC-90R",
+      "sku_sell_sheet": "BC-90R",
+      "slug": "retro-beverage-cooler-bc-90r",
+      "name": "Retro Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers (Retro)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "91L / 3.21 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "17.5\" x 19.3\" x 30.9\""
+        }
+      ],
+      "features": [
+        "Retro Design",
+        "Thick Foam Walls",
+        "Hinged Door"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "R suffix = Retro / Red",
+      "needs_verify": true
+    },
+    {
+      "sku": "BC-85B",
+      "sku_sell_sheet": "BC-85B",
+      "slug": "built-in-beverage-cooler-bc-85b",
+      "name": "Built-In Beverage Cooler",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers (Built-In)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "82L / 2.89 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "14.9\" x 22.5\" x 33.6\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Built-In Application"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "B suffix = Built-in",
+      "needs_verify": true
+    },
+    {
+      "sku": "BC-145B/2T",
+      "sku_sell_sheet": "BC-145B/2T",
+      "slug": "built-in-beverage-cooler-2-drawer-bc-145b-2t",
+      "name": "Built-In Beverage Cooler (2 Drawer)",
+      "category": "Refrigeration",
+      "subcategory": "Beverage Coolers (Built-In)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "140L / 4.94 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "23.4\" x 22.5\" x 33.6\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Dual Drawer Built-In"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "B/2T suffix = Built-in / 2 Drawer",
+      "needs_verify": true
+    },
+    {
+      "sku": "BCD-87",
+      "sku_sell_sheet": "BCD-87",
+      "slug": "combo-cooler-freezer-bcd-87",
+      "name": "Combo Cooler/Freezer",
+      "category": "Refrigeration",
+      "subcategory": "Combo Cooler / Freezer",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "87L / 3.07 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "18.1\" x 19.5\" x 33.5\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Combined Refrigeration & Freezer"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BCD-90",
+      "sku_sell_sheet": "BCD-90",
+      "slug": "combo-cooler-freezer-bcd-90",
+      "name": "Combo Cooler/Freezer",
+      "category": "Refrigeration",
+      "subcategory": "Combo Cooler / Freezer",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "90L / 3.17 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "19.1\" x 20.1\" x 33.5\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Hinged Door",
+        "Combined Refrigeration & Freezer"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BCD-127B",
+      "sku_sell_sheet": "BCD-127B",
+      "slug": "combo-cooler-freezer-built-in-bcd-127b",
+      "name": "Combo Cooler/Freezer (Built-In)",
+      "category": "Refrigeration",
+      "subcategory": "Combo Cooler / Freezer",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "128L / 4.52 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "19.1\" x 20.1\" x 42.7\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Built-In",
+        "Combined Refrigeration & Freezer"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BCD-212",
+      "sku_sell_sheet": "BCD-212",
+      "slug": "combo-cooler-freezer-bcd-212",
+      "name": "Combo Cooler/Freezer",
+      "category": "Refrigeration",
+      "subcategory": "Combo Cooler / Freezer",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "212L / 7.49 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "21.2\" x 22.2\" x 55.7\""
+        }
+      ],
+      "features": [
+        "Thick Foam Walls",
+        "Top Freezer / Bottom Cooler"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "Confirmed on sell sheet",
+      "needs_verify": false
+    },
+    {
+      "sku": "BCD-212R",
+      "sku_sell_sheet": "BCD-212R",
+      "slug": "combo-cooler-freezer-retro-bcd-212r",
+      "name": "Combo Cooler/Freezer (Retro)",
+      "category": "Refrigeration",
+      "subcategory": "Combo Cooler / Freezer (Retro)",
+      "specs": [
+        {
+          "label": "Capacity / Size",
+          "value": "212L / 7.49 cu ft"
+        },
+        {
+          "label": "Dimensions",
+          "value": "21.4\" x 22.4\" x 50.1\""
+        }
+      ],
+      "features": [
+        "Retro Design",
+        "Thick Foam Walls",
+        "Top Freezer / Bottom Cooler"
+      ],
+      "voltage_flag": false,
+      "us_voltage_confirmed": false,
+      "status_note": "R suffix = Retro",
+      "needs_verify": true
+    }
+  ]
+}

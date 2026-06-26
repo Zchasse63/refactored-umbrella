@@ -7,6 +7,7 @@
  * No I/O here — callers pass the parsed arrays. The DB upsert (by external_ref)
  * lands on top of these once the dedicated Supabase project exists.
  */
+import { cleanSpecs } from "@/lib/data/clean";
 import type { PhotoState, Product, Spec } from "@/lib/types";
 
 const basename = (p?: string | null) =>
@@ -45,13 +46,13 @@ function appliancePhotoState(a: RawAppliance): { photo_state: PhotoState; export
 }
 
 export function mapAppliance(a: RawAppliance): Product {
-  const specs = a.specs ?? [];
+  const specs = cleanSpecs(a.specs);
   const file = basename(a.image);
   const { photo_state, export_ok } = appliancePhotoState(a);
   return {
     external_ref: `appliance:${a.slug}`,
     line: "appliance",
-    brand: "Yuno",
+    brand: null, // neutral / unbranded — no maker mark in the data layer
     source: "RoyalStar",
     name: a.name,
     model: null,
@@ -60,6 +61,7 @@ export function mapAppliance(a: RawAppliance): Product {
     categories: a.categories ?? [],
     specs,
     features: a.features ?? [],
+    summary: null,
     source_url: a.url ?? null,
     msrp: null,
     our_cost: null,
@@ -98,13 +100,13 @@ function beautyPhotoState(b: RawBeauty): { photo_state: PhotoState; export_ok: b
 }
 
 export function mapBeauty(b: RawBeauty): Product {
-  const specs = b.specs ?? [];
+  const specs = cleanSpecs(b.specs);
   const file = basename(b.final_image);
   const { photo_state, export_ok } = beautyPhotoState(b);
   return {
     external_ref: `beauty:${b.id}`,
     line: "beauty",
-    brand: "Yuno",
+    brand: null, // neutral / unbranded — no maker mark in the data layer
     source: "MKS",
     name: b.name,
     model: b.model ?? null,
@@ -113,6 +115,7 @@ export function mapBeauty(b: RawBeauty): Product {
     categories: b.section ? [b.section] : [],
     specs,
     features: b.selling_points ?? [],
+    summary: null,
     source_url: null,
     msrp: null,
     our_cost: null,
@@ -125,13 +128,61 @@ export function mapBeauty(b: RawBeauty): Product {
   };
 }
 
-/** Top-level shapes of the two catalog JSON files. */
+// ── Yuno Group USA — RoyalStar US sell-sheet (May 2026) ─────────────────────
+// The real US-market catalog: 110-120V, import-ready Key Features, no images yet
+// (placeholder track). Loaded alongside the legacy China-market set.
+export interface RawYunoUS {
+  sku: string;
+  sku_sell_sheet?: string | null;
+  slug: string;
+  name: string;
+  category: string;
+  subcategory?: string | null;
+  specs?: Spec[];
+  features?: string[];
+  voltage_flag?: boolean;
+  us_voltage_confirmed?: boolean;
+  status_note?: string | null;
+  needs_verify?: boolean;
+}
+
+export function mapYunoUS(p: RawYunoUS): Product {
+  return {
+    external_ref: `appliance:${p.slug}`,
+    line: "appliance",
+    brand: null, // neutral / unbranded
+    source: "RoyalStar",
+    name: p.name,
+    model: p.sku,
+    group_name: p.category,
+    subsection: p.subcategory ?? p.category,
+    categories: [p.category, p.subcategory].filter((x): x is string => !!x),
+    specs: cleanSpecs(p.specs),
+    features: p.features ?? [],
+    summary: null, // filled by the AI copy-cleanup pass
+    source_url: null,
+    msrp: null,
+    our_cost: null,
+    our_cost_source: null,
+    photo_state: "missing", // no image yet → "studio photo pending" placeholder
+    image_has_chinese: false,
+    voltage_flag: Boolean(p.voltage_flag),
+    export_ok: false,
+    primary_image_path: null,
+  };
+}
+
+/** Top-level shapes of the catalog JSON files. */
 export interface ApplianceCatalog { count?: number; products: RawAppliance[]; }
 export interface BeautyCatalog { count?: number; sections?: string[]; products: RawBeauty[]; }
+export interface YunoUSCatalog { count?: number; products: RawYunoUS[]; }
 
 export function mapAppliances(c: ApplianceCatalog): Product[] {
   return c.products.map(mapAppliance);
 }
 export function mapBeautyCatalog(c: BeautyCatalog): Product[] {
   return c.products.map(mapBeauty);
+}
+export function mapYunoUSCatalog(c: YunoUSCatalog): Product[] {
+  return c.products.map(mapYunoUS);
 }

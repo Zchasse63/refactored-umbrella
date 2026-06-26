@@ -41,55 +41,66 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </nav>
 
         {/* header band */}
-        <div className="mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h1 className="text-2xl font-semibold tracking-tight">{p.name}</h1>
-          <span className="numeric text-[12px] text-muted-foreground">
-            {p.source}{p.model ? ` · ${p.model}` : ""} · {p.external_ref}
-          </span>
+          {p.model && <span className="numeric text-[12px] text-muted-foreground">Model {p.model}</span>}
         </div>
-        <div className="mb-6 flex flex-wrap gap-1.5">
-          {selection.tier && (
-            <span className="rounded-full bg-target-muted px-2 py-0.5 text-[11px] font-semibold capitalize text-target-muted-foreground">
-              {selection.tier}
-            </span>
-          )}
-          <span className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground">New</span>
-          {p.voltage_flag && (
-            <span className="numeric rounded-full bg-fail-muted px-2 py-0.5 text-[11px] font-semibold text-fail-muted-foreground">
-              220V — verify for US
-            </span>
-          )}
-        </div>
+        {p.summary && (
+          <p className="mb-4 max-w-2xl text-[14px] leading-relaxed text-muted-foreground">{p.summary}</p>
+        )}
+        {(selection.tier || p.voltage_flag) && (
+          <div className="mb-6 flex flex-wrap gap-1.5">
+            {selection.tier && (
+              <span className="rounded-full bg-target-muted px-2 py-0.5 text-[11px] font-semibold capitalize text-target-muted-foreground">
+                {selection.tier}
+              </span>
+            )}
+            {p.voltage_flag && (
+              <span
+                className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
+                title="Factory unit is rated 220V — needs a US-spec plug/voltage to resell in the US"
+              >
+                220V input
+              </span>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
           {/* LEFT — the product */}
-          <div className="space-y-6">
-            <PhotoFrame product={p} aspect="aspect-[5/4]" className="max-w-xl" />
+          <div className="space-y-8">
+            {/* media + overview, side by side (photo no longer floats in a wide column) */}
+            <div className="grid gap-6 sm:grid-cols-[minmax(0,300px)_minmax(0,1fr)] sm:items-start">
+              <PhotoFrame product={p} aspect="aspect-square" />
+              <div className="space-y-5">
+                {/* at-a-glance */}
+                {atAGlance(p.specs).length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {atAGlance(p.specs).map((s, i) => (
+                      <span key={i} className="rounded-md border border-border bg-card px-2.5 py-1 text-[12px]">
+                        <span className="text-muted-foreground">{s.label}: </span>
+                        <span className="numeric">{s.value}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
 
-            {/* at-a-glance */}
-            <div className="flex flex-wrap gap-2">
-              {atAGlance(p.specs).map((s, i) => (
-                <span key={i} className="rounded-md border border-border bg-card px-2.5 py-1 text-[12px]">
-                  <span className="text-muted-foreground">{s.label}: </span>
-                  <span className="numeric">{s.value}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* features */}
-            {p.features.length > 0 && (
-              <div>
-                <div className="text-section-label mb-2">Overview</div>
-                <ul className="space-y-1.5">
-                  {p.features.map((f, i) => (
-                    <li key={i} className="flex gap-2 text-[14px] leading-snug">
-                      <Check className="mt-0.5 size-4 shrink-0 text-pass" aria-hidden />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* features */}
+                {p.features.length > 0 && (
+                  <div>
+                    <div className="text-section-label mb-2">Overview</div>
+                    <ul className="space-y-1.5">
+                      {p.features.map((f, i) => (
+                        <li key={i} className="flex gap-2 text-[14px] leading-snug">
+                          <Check className="mt-0.5 size-4 shrink-0 text-pass" aria-hidden />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             {/* specs table */}
             <div>
@@ -108,10 +119,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
                           <td className="numeric px-3 py-2 text-right">{s.value}</td>
                         </tr>
                       ))}
-                      <tr className="bg-card">
-                        <td className="px-3 py-2 text-muted-foreground/70 italic">Carton dims / weight</td>
-                        <td className="px-3 py-2 text-right text-[11px] italic text-muted-foreground/70">— needed for tier fee</td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>

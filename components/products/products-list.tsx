@@ -131,10 +131,10 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
                 </td>
                 <td className="px-2 py-1.5 text-right">
                   {eco.verdict ? (
-                    <span className={cn("numeric font-semibold", eco.verdict.pass ? "text-pass" : "text-fail")}>{pct(eco.quotedNetPct)} · {eco.verdict.pass ? "PASS" : "FAIL"}</span>
-                  ) : eco.targetNetPct != null ? (
-                    <span className="numeric text-muted-foreground">{pct(eco.targetNetPct)}</span>
-                  ) : <span className="text-muted-foreground/50">{EMDASH}</span>}
+                    <span className={cn("numeric font-semibold", eco.verdict.pass ? "text-pass" : "text-fail")}>{pct(eco.quotedNetPct)} net · {eco.verdict.pass ? "PASS" : "FAIL"}</span>
+                  ) : (
+                    <span className="text-muted-foreground/50" title="No factory quote yet">{EMDASH}</span>
+                  )}
                 </td>
               </tr>
             ))}

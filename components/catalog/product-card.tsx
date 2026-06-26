@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
-import { cn, money, pct } from "@/lib/utils";
+import { cn, money } from "@/lib/utils";
 import { PhotoFrame, PhotoCornerBadge } from "@/components/product/product-image";
 import type { ProductView } from "@/lib/data/fixtures";
+import type { Product, Tier } from "@/lib/types";
 
 const SOURCE_LABEL: Record<string, string> = {
   RoyalStar: "Appliance",
@@ -10,32 +10,23 @@ const SOURCE_LABEL: Record<string, string> = {
   Greenway: "Foodservice",
 };
 
-function PresenceDots({ target, quoted, actual }: { target: boolean; quoted: boolean; actual: boolean }) {
-  const dot = (on: boolean, cls: string) => (
-    <span className={cn("size-1.5 rounded-full", on ? cls : "bg-border-strong")} aria-hidden />
-  );
-  return (
-    <span className="flex items-center gap-0.5" title="Costing completeness: Target · Quoted · Actual">
-      {dot(target, "bg-target")}
-      {dot(quoted, "bg-quoted")}
-      {dot(actual, "bg-actual")}
-    </span>
-  );
+// Partner's prospect signal — the only chip on the card, shown only when actually set.
+const TIER_CLS: Record<Tier, string> = {
+  pursue: "bg-pass-muted text-pass-muted-foreground",
+  maybe: "bg-quoted-muted text-quoted-muted-foreground",
+  pass: "bg-muted text-muted-foreground",
+};
+
+/** A couple of genuinely useful at-a-glance specs (capacity / power) — real data, not a flag. */
+function keySpecs(p: Product): string {
+  const pick = (re: RegExp) => p.specs.find((s) => re.test(s.label))?.value;
+  return [pick(/capacity|volume/i), pick(/power|wattage/i)].filter(Boolean).join(" · ");
 }
 
 export function ProductCard({ view }: { view: ProductView }) {
   const { product: p, slug, economics: eco, selection } = view;
   const hasTarget = !eco.guarded;
-  const hasQuote = eco.quotedLanded != null;
-  const hasActual = eco.actualLanded != null;
-
-  const pill = !hasTarget
-    ? { label: "No target", cls: "bg-muted text-muted-foreground" }
-    : eco.verdict
-      ? eco.verdict.pass
-        ? { label: `PASS ${pct(eco.quotedNetPct)}`, cls: "bg-pass-muted text-pass-muted-foreground" }
-        : { label: "FAIL", cls: "bg-fail-muted text-fail-muted-foreground" }
-      : { label: `${pct(eco.targetNetPct)} net`, cls: "bg-target-muted text-target-muted-foreground" };
+  const ks = keySpecs(p);
 
   return (
     <Link
@@ -53,32 +44,40 @@ export function ProductCard({ view }: { view: ProductView }) {
           {SOURCE_LABEL[p.source] ?? p.line} · {p.subsection ?? p.group_name ?? "—"}
         </div>
         <div className="line-clamp-2 text-[13px] font-medium leading-snug">{p.name}</div>
+        {ks && <div className="numeric text-[11px] text-muted-foreground">{ks}</div>}
 
-        <div className="mt-auto flex items-center justify-between pt-1">
-          <div className="flex items-baseline gap-1.5">
-            {hasTarget ? (
-              <>
-                <span className="numeric text-[13px] font-semibold">{money(selection.target_sell_price)}</span>
-                <span className="numeric text-[11px] text-muted-foreground">
-                  → {money(eco.targetLanded)}
-                </span>
-              </>
-            ) : (
-              <span className="text-[11px] text-muted-foreground">No target yet</span>
-            )}
-          </div>
-          <PresenceDots target={hasTarget} quoted={hasQuote} actual={hasActual} />
-        </div>
-
-        <div className="flex items-center gap-1.5">
-          <span className={cn("rounded-full px-2 py-0.5 text-[10px] font-semibold", pill.cls)}>{pill.label}</span>
-          {hasQuote && <Zap className="size-3 text-quoted" aria-hidden />}
-          {p.voltage_flag && (
-            <span className="numeric ml-auto rounded bg-fail-muted px-1 py-0.5 text-[9px] font-semibold text-fail-muted-foreground" title="Lists 220V — verify for US">
-              220V
+        <div className="mt-auto flex items-end justify-between pt-1.5">
+          {hasTarget ? (
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-wide text-muted-foreground">Target sell</span>
+              <span className="numeric text-[14px] font-semibold">{money(selection.target_sell_price)}</span>
+            </div>
+          ) : (
+            <span className="text-[11px] text-muted-foreground">No target set yet</span>
+          )}
+          {selection.tier && (
+            <span
+              className={cn(
+                "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
+                TIER_CLS[selection.tier],
+              )}
+            >
+              {selection.tier}
             </span>
           )}
         </div>
+
+        {eco.verdict && (
+          <span
+            className={cn(
+              "numeric inline-flex w-fit items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold",
+              eco.verdict.pass ? "bg-pass-muted text-pass-muted-foreground" : "bg-fail-muted text-fail-muted-foreground",
+            )}
+            title="Owner's factory quote vs the target landed cost"
+          >
+            {money(eco.quotedLanded)} quote · {eco.verdict.pass ? "clears target" : "over target"}
+          </span>
+        )}
       </div>
     </Link>
   );

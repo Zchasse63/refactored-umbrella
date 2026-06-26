@@ -38,6 +38,8 @@ export interface Product {
   categories: string[];
   specs: Spec[];
   features: string[];
+  /** AI-cleaned one-line natural-English summary (null until the cleanup pass runs). */
+  summary: string | null;
   source_url: string | null;
   msrp: number | null;
   our_cost: number | null;
