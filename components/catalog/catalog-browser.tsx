@@ -61,7 +61,7 @@ export function CatalogBrowser({ views }: { views: ProductView[] }) {
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search 127 products by name, model, or spec"
+            placeholder={`Search ${views.length} products by name, model, or spec`}
             className="pl-8"
           />
         </div>
@@ -78,7 +78,7 @@ export function CatalogBrowser({ views }: { views: ProductView[] }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-1.5">
-        {LINE_TABS.map((t) => (
+        {LINE_TABS.filter((t) => t.key === "all" || (counts[t.key] ?? 0) > 0).map((t) => (
           <button
             key={t.key}
             onClick={() => setLine(t.key)}
