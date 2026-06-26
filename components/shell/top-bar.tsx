@@ -14,7 +14,7 @@ const NAV: { href: string; label: string; ready: boolean }[] = [
   { href: "/board", label: "Board", ready: true },
   { href: "/pipeline", label: "Pipeline", ready: true },
   { href: "/dashboard", label: "Dashboard", ready: true },
-  { href: "/exports", label: "Exports", ready: false },
+  { href: "/exports", label: "Exports", ready: true },
 ];
 
 export function TopBar({ role }: { role: Role }) {

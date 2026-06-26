@@ -123,6 +123,21 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
   }));
 }
 
+/** Selected factory MOQ per product (seeds the RFQ MOQ-ask), keyed by external_ref. */
+export async function getFactoryMoqs(): Promise<Record<string, number | null>> {
+  const sb = createSupabaseServer();
+  const { data } = await sb
+    .from("factory_quotes")
+    .select("moq, product:product_id(external_ref)")
+    .eq("is_selected", true);
+  const out: Record<string, number | null> = {};
+  for (const r of (data ?? []) as any[]) {
+    const ref = r.product?.external_ref;
+    if (ref) out[ref] = r.moq == null ? null : Number(r.moq);
+  }
+  return out;
+}
+
 export interface ProductWithPipeline extends ProductView {
   pipelineStatus: PipelineStatus;
   pipelineDecision: Decision | null;
