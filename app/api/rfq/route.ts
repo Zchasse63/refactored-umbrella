@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
   const sb = createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
+  // the owner builds + sends factory RFQs (the UI hides the button; enforce it here too)
+  const { data: membership } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();
+  if (membership?.role !== "owner") return NextResponse.json({ error: "Only the owner can export RFQs" }, { status: 403 });
 
   let body: Body;
   try {
@@ -75,8 +78,11 @@ export async function POST(req: NextRequest) {
       }
       // embed a clean product image (export_ok only)
       if (r.imagePath) {
-        const file = path.join(process.cwd(), "public", r.imagePath);
-        if (fs.existsSync(file)) {
+        // containment: never read outside public/products, regardless of the DB value
+        const productsDir = path.resolve(process.cwd(), "public", "products");
+        const file = path.resolve(process.cwd(), "public", r.imagePath.replace(/^\/+/, ""));
+        const safe = file === productsDir || file.startsWith(productsDir + path.sep);
+        if (safe && fs.existsSync(file)) {
           const ext = path.extname(file).slice(1).toLowerCase();
           const imageId = wb.addImage({ buffer: fs.readFileSync(file) as any, extension: ext === "jpg" ? "jpeg" : (ext as any) });
           row.height = 56;
