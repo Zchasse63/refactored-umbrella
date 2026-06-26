@@ -38,10 +38,13 @@ export async function keepaFinder(selection: FinderSelection): Promise<string[]>
   const url = new URL(`${KEEPA_BASE}/query`);
   url.searchParams.set("key", key);
   url.searchParams.set("domain", "1");
+  // Keepa Product Finder requires a full page size (min 50); we slice the result
+  // down to a handful of candidates for enrichment in the caller.
+  const { perPage, page, ...rest } = selection;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ asinsOnly: true, perPage: 30, page: 0, ...selection }),
+    body: JSON.stringify({ asinsOnly: true, page: page ?? 0, perPage: perPage ?? 50, ...rest }),
   });
   if (!res.ok) throw new Error(`Keepa finder ${res.status}: ${await res.text()}`);
   const data = (await res.json()) as { asinList?: string[] };

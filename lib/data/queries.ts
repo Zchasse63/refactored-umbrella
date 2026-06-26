@@ -2,7 +2,7 @@ import "server-only";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { buildView, emptySelection, type ProductView } from "@/lib/data/view";
 import { DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
-import type { Assumptions, Product, Selection } from "@/lib/types";
+import type { Assumptions, Competitor, Product, Selection } from "@/lib/types";
 
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
 
@@ -81,6 +81,39 @@ export async function getProductViewBySlug(slug: string): Promise<ProductView | 
   const p = rowToProduct(product);
   const selection = sel ? rowToSelection(sel, p.external_ref) : emptySelection(p.external_ref);
   return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions);
+}
+
+export async function getCompetitors(ref: string): Promise<Competitor[]> {
+  const sb = createSupabaseServer();
+  const refs = ["appliance", "beauty", "foodservice"].map((l) => `${l}:${ref.split(":")[1]}`);
+  const { data: product } = await sb.from("products").select("id").in("external_ref", refs).maybeSingle();
+  if (!product) return [];
+  const { data } = await sb
+    .from("competitors")
+    .select("*")
+    .eq("product_id", product.id)
+    .order("est_monthly_sales", { ascending: false, nullsFirst: false });
+  return (data ?? []).map((c: any) => ({
+    id: c.id,
+    product_external_ref: ref,
+    status: c.status,
+    title: c.title,
+    brand: c.brand,
+    marketplace: c.marketplace,
+    asin: c.asin,
+    retail_url: c.retail_url,
+    price: num(c.price),
+    currency: c.currency,
+    rating: num(c.rating),
+    review_count: c.review_count,
+    bsr: c.bsr,
+    est_monthly_sales: c.est_monthly_sales,
+    monthly_sales_source: c.monthly_sales_source,
+    image_url: c.image_url,
+    match_confidence: num(c.match_confidence),
+    match_reason: c.match_reason,
+    source: c.source,
+  }));
 }
 
 /** Current user's role (for UI affordances). */

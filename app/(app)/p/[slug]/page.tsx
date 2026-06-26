@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, FileText, Lock, PackageSearch, ChevronRight } from "lucide-react";
-import { getProductViewBySlug, getViewerRole } from "@/lib/data/queries";
+import { Check, FileText, Lock, ChevronRight } from "lucide-react";
+import { getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
 import { PhotoFrame } from "@/components/product/product-image";
 import { DealCalculator } from "@/components/economics/deal-calculator";
+import { CompetitorSection } from "@/components/competitor/competitor-section";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Spec } from "@/lib/types";
@@ -27,6 +28,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const [view, role] = await Promise.all([getProductViewBySlug(params.slug), getViewerRole()]);
   if (!view) notFound();
   const { product: p, selection } = view;
+  const competitors = await getCompetitors(p.external_ref);
 
   return (
     <div data-register="storefront" className="text-[15px]">
@@ -117,17 +119,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </div>
 
             {/* competitors */}
-            <div>
-              <div className="text-section-label mb-2">Competitors · found from this product&apos;s specs</div>
-              <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed border-border-strong py-8 text-center">
-                <PackageSearch className="size-6 text-muted-foreground" aria-hidden />
-                <p className="text-[13px] text-muted-foreground">No competitors attached yet.</p>
-                <p className="max-w-md text-[11px] text-muted-foreground">
-                  Phase&nbsp;1 discovery: Keepa Product Finder proposes real top-selling ASINs from these specs →
-                  a Claude judge verifies fit → Keepa enriches price, rating, reviews &amp; monthly sales.
-                </p>
-              </div>
-            </div>
+            <CompetitorSection productRef={p.external_ref} role={role!} competitors={competitors} />
           </div>
 
           {/* RIGHT — the Deal Panel */}
