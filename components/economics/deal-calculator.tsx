@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { User, Factory, SlidersHorizontal, RotateCcw, Lock, Check, Loader2 } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { DEFAULT_ASSUMPTIONS, LABELS, compute, opexPct } from "@/lib/calc/economics";
+import type { FbaEstimate } from "@/lib/calc/fba";
 import type { CostLine, Role, Tier } from "@/lib/types";
 import { saveSelection, saveQuote } from "@/app/actions";
 import { EconomicsWaterfall } from "./economics-waterfall";
@@ -58,6 +59,7 @@ export function DealCalculator({
   initialQuoted,
   applyOpex = true,
   actualLanded = null,
+  fbaEstimate = null,
 }: {
   productRef: string;
   role: Role;
@@ -66,6 +68,7 @@ export function DealCalculator({
   initialQuoted: number | null;
   applyOpex?: boolean;
   actualLanded?: number | null;
+  fbaEstimate?: FbaEstimate | null;
 }) {
   const [sell, setSell] = useState<number | null>(initialSell);
   const [tier, setTier] = useState<Tier | null>(initialTier);
@@ -83,8 +86,8 @@ export function DealCalculator({
   const opx = applyOpex ? opexPct(stack) : 0;
 
   const eco = useMemo(
-    () => compute({ assumptions: { grossMargin: gm, costStack: stack }, sellPrice: sell, quotedLanded: quoted, actualLanded, applyOpex }),
-    [gm, stack, sell, quoted, actualLanded, applyOpex],
+    () => compute({ assumptions: { grossMargin: gm, costStack: stack }, sellPrice: sell, quotedLanded: quoted, actualLanded, applyOpex, fbaPerUnit: fbaEstimate?.fee ?? null }),
+    [gm, stack, sell, quoted, actualLanded, applyOpex, fbaEstimate],
   );
 
   const setLine = (key: string, pctVal: number) =>
@@ -108,6 +111,20 @@ export function DealCalculator({
   return (
     <div className="space-y-3">
       <EconomicsWaterfall eco={eco} />
+
+      {fbaEstimate && (
+        <div className="rounded-md border border-quoted/30 bg-quoted-muted/40 p-2.5 text-[11px]">
+          <div className="flex items-center justify-between">
+            <span className="font-semibold text-foreground">Est. FBA fee</span>
+            <span className="numeric font-semibold">{money(fbaEstimate.fee)}/unit</span>
+          </div>
+          <p className="mt-0.5 leading-snug text-muted-foreground">
+            {fbaEstimate.tierLabel} · median of {fbaEstimate.n} competitor{fbaEstimate.n === 1 ? "" : "s"}{" "}
+            ({fbaEstimate.lengthIn}×{fbaEstimate.widthIn}×{fbaEstimate.heightIn}″, {fbaEstimate.weightLb} lb) ·{" "}
+            <span className="font-medium">estimate</span> — replaces the flat 15% FBA line in the math.
+          </p>
+        </div>
+      )}
 
       {/* Targets — partner side (violet) */}
       <div className="rounded-md border border-border bg-card p-2.5">

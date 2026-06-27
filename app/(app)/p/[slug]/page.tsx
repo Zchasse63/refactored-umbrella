@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Check, FileText, FileDown, Lock, ChevronRight } from "lucide-react";
 import { getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
+import { estimateFbaFee } from "@/lib/calc/fba";
 import { PhotoFrame } from "@/components/product/product-image";
 import { DealCalculator } from "@/components/economics/deal-calculator";
 import { CompetitorSection } from "@/components/competitor/competitor-section";
@@ -29,6 +30,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
   if (!view) notFound();
   const { product: p, selection } = view;
   const competitors = await getCompetitors(p.external_ref);
+  const fbaEstimate = estimateFbaFee(
+    competitors.map((c) => ({ length_mm: c.package_length_mm, width_mm: c.package_width_mm, height_mm: c.package_height_mm, weight_g: c.package_weight_g })),
+  );
 
   return (
     <div data-register="storefront" className="text-[15px]">
@@ -146,6 +150,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 initialQuoted={view.quotedLanded}
                 applyOpex={LINE_OPEX_APPLIES[p.line]}
                 actualLanded={p.our_cost}
+                fbaEstimate={fbaEstimate}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button asChild size="sm" variant="outline">

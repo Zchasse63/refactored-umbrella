@@ -3,6 +3,7 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import { buildView, emptySelection, type ProductView } from "@/lib/data/view";
 import { DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
 import { cleanSpecs } from "@/lib/data/clean";
+import { estimateFbaFee, type FbaEstimate } from "@/lib/calc/fba";
 import type { Assumptions, Competitor, Decision, PipelineStatus, Product, Selection } from "@/lib/types";
 
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
@@ -59,11 +60,12 @@ export async function getAssumptions(): Promise<Assumptions> {
 
 export async function getCatalog(): Promise<ProductView[]> {
   const sb = createSupabaseServer();
-  const [{ data: products }, { data: selections }, { data: quotes }, assumptions] = await Promise.all([
+  const [{ data: products }, { data: selections }, { data: quotes }, assumptions, fbaEstimates] = await Promise.all([
     sb.from("products").select("*").order("line").order("name"),
     sb.from("selections").select("*"),
     sb.from("factory_quotes").select("product_id, landed_cost_ddp").eq("is_selected", true),
     getAssumptions(),
+    getFbaEstimates(),
   ]);
   const selByProduct = new Map((selections ?? []).map((s: any) => [s.product_id, s]));
   const quoteByProduct = new Map((quotes ?? []).map((q: any) => [q.product_id, Number(q.landed_cost_ddp)]));
@@ -71,7 +73,8 @@ export async function getCatalog(): Promise<ProductView[]> {
     const product = rowToProduct(r);
     const s = selByProduct.get(r.id);
     const selection = s ? rowToSelection(s, product.external_ref) : emptySelection(product.external_ref);
-    return buildView(product, selection, quoteByProduct.get(r.id) ?? null, assumptions);
+    const fee = fbaEstimates[product.external_ref]?.fee ?? null;
+    return buildView(product, selection, quoteByProduct.get(r.id) ?? null, assumptions, fee);
   });
 }
 
@@ -80,14 +83,16 @@ export async function getProductViewBySlug(slug: string): Promise<ProductView | 
   const refs = ["appliance", "beauty", "foodservice"].map((l) => `${l}:${slug}`);
   const { data: product } = await sb.from("products").select("*").in("external_ref", refs).maybeSingle();
   if (!product) return null;
-  const [{ data: sel }, { data: quote }, assumptions] = await Promise.all([
+  const [{ data: sel }, { data: quote }, assumptions, { data: comps }] = await Promise.all([
     sb.from("selections").select("*").eq("product_id", product.id).maybeSingle(),
     sb.from("factory_quotes").select("landed_cost_ddp").eq("product_id", product.id).eq("is_selected", true).maybeSingle(),
     getAssumptions(),
+    sb.from("competitors").select("package_length_mm, package_width_mm, package_height_mm, package_weight_g").eq("product_id", product.id).eq("status", "approved"),
   ]);
   const p = rowToProduct(product);
   const selection = sel ? rowToSelection(sel, p.external_ref) : emptySelection(p.external_ref);
-  return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions);
+  const fba = estimateFbaFee((comps ?? []).map((c: any) => ({ length_mm: c.package_length_mm, width_mm: c.package_width_mm, height_mm: c.package_height_mm, weight_g: c.package_weight_g })));
+  return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions, fba?.fee ?? null);
 }
 
 export async function getCompetitors(ref: string): Promise<Competitor[]> {
@@ -120,7 +125,33 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
     match_confidence: num(c.match_confidence),
     match_reason: c.match_reason,
     source: c.source,
+    package_length_mm: c.package_length_mm ?? null,
+    package_width_mm: c.package_width_mm ?? null,
+    package_height_mm: c.package_height_mm ?? null,
+    package_weight_g: c.package_weight_g ?? null,
   }));
+}
+
+/** Per-product estimated FBA fee from approved competitors' package dims, keyed by external_ref. */
+export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
+  const sb = createSupabaseServer();
+  const { data } = await sb
+    .from("competitors")
+    .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, product:product_id(external_ref)")
+    .eq("status", "approved");
+  const byRef = new Map<string, { length_mm: number | null; width_mm: number | null; height_mm: number | null; weight_g: number | null }[]>();
+  for (const r of (data ?? []) as any[]) {
+    const ref = r.product?.external_ref;
+    if (!ref) continue;
+    if (!byRef.has(ref)) byRef.set(ref, []);
+    byRef.get(ref)!.push({ length_mm: r.package_length_mm, width_mm: r.package_width_mm, height_mm: r.package_height_mm, weight_g: r.package_weight_g });
+  }
+  const out: Record<string, FbaEstimate> = {};
+  for (const [ref, dims] of byRef) {
+    const est = estimateFbaFee(dims);
+    if (est) out[ref] = est;
+  }
+  return out;
 }
 
 /** Selected factory MOQ per product (seeds the RFQ MOQ-ask), keyed by external_ref. */

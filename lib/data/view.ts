@@ -34,6 +34,7 @@ export function buildView(
   selection: Selection,
   quotedLanded: number | null,
   assumptions: Assumptions = DEFAULT_ASSUMPTIONS,
+  fbaPerUnit: number | null = null,
 ): ProductView {
   const economics = compute({
     assumptions,
@@ -41,6 +42,7 @@ export function buildView(
     quotedLanded,
     actualLanded: product.our_cost,
     applyOpex: LINE_OPEX_APPLIES[product.line],
+    fbaPerUnit,
   });
   return { product, slug: productSlug(product), selection, quotedLanded, economics };
 }

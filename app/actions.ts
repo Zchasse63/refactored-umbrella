@@ -159,6 +159,10 @@ export async function discoverCompetitors(
           match_confidence: verdict.confidence,
           match_reason: verdict.reason,
           source: "keepa",
+          package_length_mm: cand.package_length_mm,
+          package_width_mm: cand.package_width_mm,
+          package_height_mm: cand.package_height_mm,
+          package_weight_g: cand.package_weight_g,
           created_by: r.user.id,
           enriched_at: new Date().toISOString(),
         });

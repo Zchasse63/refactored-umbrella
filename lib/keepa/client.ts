@@ -22,6 +22,11 @@ export interface KeepaProduct {
   salesRankReference: number;
   salesRanks?: Record<string, number[]>;
   stats?: KeepaStats;
+  // static package attributes (Keepa: mm + grams; -1 = unknown) — feed the FBA-tier estimate
+  packageLength?: number;
+  packageWidth?: number;
+  packageHeight?: number;
+  packageWeight?: number;
 }
 export interface KeepaResponse {
   products: KeepaProduct[];
@@ -71,7 +76,13 @@ export interface CompetitorUpsert {
   monthly_sales_source: string;
   image_url: string | null;
   source: "keepa";
+  package_length_mm: number | null;
+  package_width_mm: number | null;
+  package_height_mm: number | null;
+  package_weight_g: number | null;
 }
+
+const dim = (v?: number) => (v != null && v > 0 ? v : null); // Keepa uses -1/0 for unknown
 
 export function mapKeepaToCompetitor(p: KeepaProduct): CompetitorUpsert {
   const cur = p.stats?.current ?? [];
@@ -95,5 +106,9 @@ export function mapKeepaToCompetitor(p: KeepaProduct): CompetitorUpsert {
     monthly_sales_source: p.monthlySold != null ? "keepa:monthlySold" : "keepa:bsr-estimate",
     image_url: image,
     source: "keepa",
+    package_length_mm: dim(p.packageLength),
+    package_width_mm: dim(p.packageWidth),
+    package_height_mm: dim(p.packageHeight),
+    package_weight_g: dim(p.packageWeight),
   };
 }

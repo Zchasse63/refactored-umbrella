@@ -117,6 +117,7 @@ export interface Economics {
   liveNet: number | null;
   liveNetPct: number | null;
 
+  fbaPerUnit?: number | null; // the estimated FBA fee applied to opex (if any)
   verdict?: QuoteVerdict; // present only when a quote exists
 }
 
@@ -127,6 +128,8 @@ export interface ComputeInput {
   actualLanded?: number | null;
   /** false for foodservice (no Amazon-FBA opex). */
   applyOpex?: boolean;
+  /** Estimated FBA fulfillment fee (USD/unit). When set, replaces the flat FBA % line. */
+  fbaPerUnit?: number | null;
 }
 
 /** The one entry point the UI calls. */
@@ -136,6 +139,7 @@ export function compute({
   quotedLanded,
   actualLanded,
   applyOpex = true,
+  fbaPerUnit,
 }: ComputeInput): Economics {
   const gm = assumptions.grossMargin;
   const opx = applyOpex ? opexPct(assumptions.costStack) : 0;
@@ -158,14 +162,21 @@ export function compute({
   }
 
   const sell = sellPrice;
-  const opex = round2(opx * sell);
+  // When a competitor-derived FBA $/unit is supplied, swap the flat FBA % line for it.
+  let effOpx = opx;
+  const fbaApplied = applyOpex && fbaPerUnit != null && Number.isFinite(fbaPerUnit) && fbaPerUnit >= 0;
+  if (fbaApplied) {
+    const fbaLinePct = assumptions.costStack.find((l) => l.key === "fba")?.pct ?? 0;
+    effOpx = opx - fbaLinePct + (fbaPerUnit as number) / sell;
+  }
+  const opex = round2(effOpx * sell);
   const tLanded = targetLanded(sell, gm);
-  const tNet = netPerUnit(sell, tLanded, opx);
+  const tNet = netPerUnit(sell, tLanded, effOpx);
 
   const eco: Economics = {
     guarded: false,
     sellPrice: sell,
-    opexPct: opx,
+    opexPct: effOpx,
     opex,
     grossMarginTarget: gm,
     targetLanded: tLanded,
@@ -174,10 +185,11 @@ export function compute({
     liveColumn: "target",
     liveNet: tNet,
     liveNetPct: tNet / sell,
+    fbaPerUnit: fbaApplied ? (fbaPerUnit as number) : null,
   };
 
   if (actualLanded != null && Number.isFinite(actualLanded)) {
-    const net = netPerUnit(sell, actualLanded, opx);
+    const net = netPerUnit(sell, actualLanded, effOpx);
     eco.actualLanded = round2(actualLanded);
     eco.actualNet = net;
     eco.actualNetPct = net / sell;
@@ -187,7 +199,7 @@ export function compute({
   }
 
   if (quotedLanded != null && Number.isFinite(quotedLanded)) {
-    const net = netPerUnit(sell, quotedLanded, opx);
+    const net = netPerUnit(sell, quotedLanded, effOpx);
     eco.quotedLanded = round2(quotedLanded);
     eco.quotedNet = net;
     eco.quotedNetPct = net / sell;

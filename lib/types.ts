@@ -73,6 +73,10 @@ export interface Competitor {
   match_confidence: number | null;
   match_reason: string | null;
   source: "claude" | "manual" | "keepa";
+  package_length_mm: number | null;
+  package_width_mm: number | null;
+  package_height_mm: number | null;
+  package_weight_g: number | null;
 }
 
 /** Partner's working layer. */
