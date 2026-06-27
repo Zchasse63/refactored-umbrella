@@ -46,7 +46,61 @@ export const RFQ_COLUMNS = [
   { header: "Key Specs", key: "keySpecs", width: 50 },
   { header: "Target Landed Cost (DDP)", key: "targetLanded", width: 22, money: true },
   { header: "MOQ Ask", key: "moqAsk", width: 12 },
+  // ↓ the factory fills these two in and sends the file back (quote-import round-trip)
+  { header: "Factory Quote (DDP)", key: "factoryQuote", width: 20, money: true, factoryFill: true },
+  { header: "Factory MOQ", key: "factoryMoq", width: 14, factoryFill: true },
   { header: "Target Sell (ref)", key: "targetSell", width: 16, money: true },
   { header: "Voltage", key: "voltage", width: 18 },
   { header: "Image", key: "imageCol", width: 16 },
 ] as const;
+
+/** Header text → import field, for parsing a returned RFQ regardless of column order. */
+export const RFQ_IMPORT_HEADERS = {
+  model: ["Model / SKU", "Model/SKU", "Model", "SKU"],
+  quote: ["Factory Quote (DDP)", "Factory Quote", "Quote (DDP)", "Quoted DDP"],
+  moq: ["Factory MOQ", "MOQ"],
+} as const;
+
+export interface ImportedQuote {
+  model: string;
+  quote: number | null;
+  moq: number | null;
+}
+
+export function toNum(v: unknown): number | null {
+  if (v == null || v === "") return null;
+  const n = typeof v === "number" ? v : Number(String(v).replace(/[$,\s]/g, ""));
+  return Number.isFinite(n) ? n : null;
+}
+
+/** Parse a returned RFQ sheet (rows of cells) into the factory's quotes, by header name. */
+export function parseReturnedRfq(rows: (string | number | null)[][]): ImportedQuote[] {
+  const norm = (v: unknown) => String(v ?? "").trim().toLowerCase();
+  const findCol = (cells: string[], names: readonly string[]) =>
+    cells.findIndex((c) => names.some((n) => c === n.toLowerCase()));
+
+  let header = -1;
+  let col = { model: -1, quote: -1, moq: -1 };
+  for (let i = 0; i < rows.length; i++) {
+    const cells = (rows[i] ?? []).map(norm);
+    const m = findCol(cells, RFQ_IMPORT_HEADERS.model);
+    if (m >= 0) {
+      header = i;
+      col = { model: m, quote: findCol(cells, RFQ_IMPORT_HEADERS.quote), moq: findCol(cells, RFQ_IMPORT_HEADERS.moq) };
+      break;
+    }
+  }
+  if (header < 0) return [];
+
+  const out: ImportedQuote[] = [];
+  for (let i = header + 1; i < rows.length; i++) {
+    const r = rows[i] ?? [];
+    const model = String(r[col.model] ?? "").trim();
+    if (!model) continue;
+    const quote = col.quote >= 0 ? toNum(r[col.quote]) : null;
+    const moq = col.moq >= 0 ? toNum(r[col.moq]) : null;
+    if (quote == null && moq == null) continue; // factory left this row blank
+    out.push({ model, quote, moq });
+  }
+  return out;
+}

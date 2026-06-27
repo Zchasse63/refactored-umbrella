@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildRfqRow } from "./rfq";
+import { buildRfqRow, parseReturnedRfq, toNum } from "./rfq";
 import { buildView } from "./view";
 import { compute, DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
 import type { Product, Selection } from "@/lib/types";
@@ -46,5 +46,33 @@ describe("buildRfqRow — RFQ SAFETY", () => {
   it("joins up to 4 key specs", () => {
     const row = buildRfqRow(buildView(product(), sel(), null), 1, null);
     expect(row.keySpecs).toBe("Capacity: 1L; Power: 1000W");
+  });
+});
+
+describe("parseReturnedRfq — quote-import round-trip", () => {
+  it("toNum strips $ and commas", () => {
+    expect(toNum("$1,234.50")).toBe(1234.5);
+    expect(toNum(18)).toBe(18);
+    expect(toNum("")).toBeNull();
+    expect(toNum("n/a")).toBeNull();
+  });
+
+  it("finds the header row by name and extracts filled rows only", () => {
+    const rows: (string | number | null)[][] = [
+      ["YUNO GROUP — RFQ", null, null, null],
+      ["Model / SKU", "Target Landed Cost (DDP)", "Factory Quote (DDP)", "Factory MOQ"],
+      ["CM0591", 14, "$12.50", 1000],
+      ["HZB-20AN", 20, 18, null],          // moq blank but quote present → included
+      ["KM-C0518", 9, "", ""],             // factory left blank → skipped
+      [null, null, null, null],
+    ];
+    const out = parseReturnedRfq(rows);
+    expect(out).toHaveLength(2);
+    expect(out[0]).toEqual({ model: "CM0591", quote: 12.5, moq: 1000 });
+    expect(out[1]).toEqual({ model: "HZB-20AN", quote: 18, moq: null });
+  });
+
+  it("returns empty when no Model/SKU header is present", () => {
+    expect(parseReturnedRfq([["foo", "bar"], ["a", "b"]])).toEqual([]);
   });
 });

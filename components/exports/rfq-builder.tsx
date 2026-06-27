@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { FileSpreadsheet, Loader2, X } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FileSpreadsheet, Loader2, Upload, Check, X } from "lucide-react";
 import { cn, money, EMDASH } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,8 @@ export function RfqBuilder({
   moq: Record<string, number | null>;
   role: Role;
 }) {
-  const canExport = can(role, "factory_quotes.write"); // owner exports the RFQ
+  const router = useRouter();
+  const canExport = can(role, "factory_quotes.write"); // owner exports the RFQ + imports quotes
   const [selected, setSelected] = useState<Set<string>>(
     () => new Set(views.filter((v) => v.selection.target_sell_price != null).map((v) => v.product.external_ref)),
   );
@@ -30,6 +32,33 @@ export function RfqBuilder({
   const [q, setQ] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [importBusy, setImportBusy] = useState(false);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importResult, setImportResult] = useState<{ found: number; updated: number; skipped: { model: string; reason: string }[] } | null>(null);
+
+  async function importQuotes(file: File) {
+    setImportBusy(true);
+    setImportError(null);
+    setImportResult(null);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/rfq-import", { method: "POST", body: fd });
+      const j = await res.json().catch(() => null);
+      if (!res.ok) {
+        setImportError(j?.error ?? `Import failed (${res.status})`);
+        return;
+      }
+      setImportResult(j);
+      router.refresh();
+    } catch {
+      setImportError("Import failed — network error.");
+    } finally {
+      setImportBusy(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
 
   const rows = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -184,6 +213,49 @@ export function RfqBuilder({
         </div>
       </div>
       {!canExport && <p className="mt-2 text-[11px] text-muted-foreground">The owner builds and sends factory RFQs. You can review the selection.</p>}
+
+      {canExport && (
+        <div className="mt-6 rounded-lg border border-border bg-muted/20 p-3">
+          <div className="flex items-center gap-1.5 text-[12px] font-semibold">
+            <Upload className="size-3.5" /> Import factory quotes
+          </div>
+          <p className="mt-0.5 text-[11px] text-muted-foreground">
+            Upload the RFQ the factory filled in. We match by Model / SKU and update each quote — PASS/FAIL recomputes across the app.
+          </p>
+          {importError && (
+            <div className="mt-2 flex items-center gap-2 rounded-md border border-fail/30 bg-fail-muted px-3 py-2 text-[12px] text-fail-muted-foreground">
+              {importError}
+              <button onClick={() => setImportError(null)} className="ml-auto opacity-70 hover:opacity-100" aria-label="Dismiss"><X className="size-3.5" /></button>
+            </div>
+          )}
+          {importResult && (
+            <div className="mt-2 rounded-md border border-pass/30 bg-pass-muted px-3 py-2 text-[12px] text-pass-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <Check className="size-3.5" /> Imported {importResult.updated} of {importResult.found} quote{importResult.found === 1 ? "" : "s"}
+                {importResult.skipped.length > 0 ? <span className="text-muted-foreground"> · {importResult.skipped.length} skipped</span> : null}
+              </div>
+              {importResult.skipped.length > 0 && (
+                <div className="mt-1 max-h-24 overflow-y-auto text-[10px] text-muted-foreground">
+                  {importResult.skipped.slice(0, 20).map((sk, i) => (
+                    <div key={i}>{sk.model}: {sk.reason}</div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          <div className="mt-2 flex items-center gap-2">
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".xlsx"
+              disabled={importBusy}
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) importQuotes(f); }}
+              className="text-[12px] file:mr-2 file:rounded file:border file:border-border file:bg-card file:px-2 file:py-1 file:text-[12px] file:hover:bg-muted"
+            />
+            {importBusy && <Loader2 className="size-4 animate-spin text-muted-foreground" />}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
