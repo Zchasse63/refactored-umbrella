@@ -73,8 +73,8 @@ export async function getCatalog(): Promise<ProductView[]> {
     const product = rowToProduct(r);
     const s = selByProduct.get(r.id);
     const selection = s ? rowToSelection(s, product.external_ref) : emptySelection(product.external_ref);
-    const fee = fbaEstimates[product.external_ref]?.fee ?? null;
-    return buildView(product, selection, quoteByProduct.get(r.id) ?? null, assumptions, fee);
+    const fba = fbaEstimates[product.external_ref] ?? null;
+    return buildView(product, selection, quoteByProduct.get(r.id) ?? null, assumptions, fba);
   });
 }
 
@@ -92,7 +92,7 @@ export async function getProductViewBySlug(slug: string): Promise<ProductView | 
   const p = rowToProduct(product);
   const selection = sel ? rowToSelection(sel, p.external_ref) : emptySelection(p.external_ref);
   const fba = estimateFbaFee((comps ?? []).map((c: any) => ({ length_mm: c.package_length_mm, width_mm: c.package_width_mm, height_mm: c.package_height_mm, weight_g: c.package_weight_g })));
-  return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions, fba?.fee ?? null);
+  return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions, fba);
 }
 
 export async function getCompetitors(ref: string): Promise<Competitor[]> {

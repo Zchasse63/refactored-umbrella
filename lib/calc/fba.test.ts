@@ -31,6 +31,14 @@ describe("estimateFbaFee", () => {
     expect(est.tier).toBe("large-standard");
   });
 
+  it("prices a 3.3 lb large-standard item per 4-oz increments above 3 lb", () => {
+    // 300×200×150 mm (11.8×7.9×5.9 in), 1500 g (~3.3 lb) → large standard
+    const est = estimateFbaFee([{ length_mm: 300, width_mm: 200, height_mm: 150, weight_g: 1500 }])!;
+    expect(est.tier).toBe("large-standard");
+    // 6.92 + ceil((3.307−3)/0.25)*0.08 = 6.92 + 2*0.08 = 7.08
+    expect(est.fee).toBeCloseTo(7.08, 2);
+  });
+
   it("classifies a large heavy item as large-bulky", () => {
     // 600×500×450 mm (~23.6×19.7×17.7 in), 18 kg → large bulky
     const est = estimateFbaFee([d(600, 500, 450, 18000)])!;

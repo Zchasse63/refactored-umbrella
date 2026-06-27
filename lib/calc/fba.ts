@@ -57,8 +57,8 @@ function feeFor(tier: FbaTier, weightLb: number, weightOz: number): number {
     if (weightLb <= 2) return 5.37;
     if (weightLb <= 2.5) return 5.52;
     if (weightLb <= 3) return 5.77;
-    // 3–20 lb: 6.92 + 0.08 per half-lb above 3 lb
-    return 6.92 + Math.ceil((weightLb - 3) / 0.5) * 0.08;
+    // 3–20 lb: 6.92 + 0.08 per 4-oz (0.25 lb) increment above 3 lb
+    return 6.92 + Math.ceil((weightLb - 3) / 0.25) * 0.08;
   }
   if (tier === "large-bulky") {
     // 9.61 + 0.38 per lb above the first lb

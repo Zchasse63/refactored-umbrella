@@ -5,6 +5,7 @@ import {
   compute,
   type Economics,
 } from "@/lib/calc/economics";
+import type { FbaEstimate } from "@/lib/calc/fba";
 import type { Assumptions, Product, Selection } from "@/lib/types";
 
 export interface ProductView {
@@ -13,6 +14,7 @@ export interface ProductView {
   selection: Selection;
   quotedLanded: number | null;
   economics: Economics;
+  fbaEstimate: FbaEstimate | null;
 }
 
 export const productSlug = (p: Product) => p.external_ref.split(":")[1];
@@ -34,7 +36,7 @@ export function buildView(
   selection: Selection,
   quotedLanded: number | null,
   assumptions: Assumptions = DEFAULT_ASSUMPTIONS,
-  fbaPerUnit: number | null = null,
+  fbaEstimate: FbaEstimate | null = null,
 ): ProductView {
   const economics = compute({
     assumptions,
@@ -42,7 +44,7 @@ export function buildView(
     quotedLanded,
     actualLanded: product.our_cost,
     applyOpex: LINE_OPEX_APPLIES[product.line],
-    fbaPerUnit,
+    fbaPerUnit: fbaEstimate?.fee ?? null,
   });
-  return { product, slug: productSlug(product), selection, quotedLanded, economics };
+  return { product, slug: productSlug(product), selection, quotedLanded, economics, fbaEstimate };
 }

@@ -197,7 +197,7 @@ export function DealCalculator({
             <SlidersHorizontal className="size-3" aria-hidden /> Assumptions
             {overridden && <span className="rounded-full bg-partner-muted px-1.5 py-0.5 text-[9px] font-semibold text-partner-muted-foreground">Overriding global</span>}
           </span>
-          <span className="numeric text-[11px] text-muted-foreground">opex {pct(opx, 0)}</span>
+          <span className="numeric text-[11px] text-muted-foreground">opex {pct((applyOpex ? eco.opexPct : 0) ?? opx, 0)}</span>
         </button>
         {showAssumptions && (
           <div className="mt-2.5 space-y-2.5">
@@ -213,12 +213,18 @@ export function DealCalculator({
               {stack.map((l) => (
                 <label key={l.key} className="flex items-center justify-between gap-2 text-[12px]">
                   <span className="text-muted-foreground">{l.label}</span>
-                  <NumberField value={Math.round(l.pct * 100)} onChange={(v) => setLine(l.key, v ?? 0)} suffix="%" className="w-20" step="1" />
+                  {fbaEstimate && l.key === "fba" ? (
+                    <span className="numeric text-[11px] text-quoted" title="FBA line replaced by the competitor-derived estimate">
+                      est. {money(fbaEstimate.fee)}/u
+                    </span>
+                  ) : (
+                    <NumberField value={Math.round(l.pct * 100)} onChange={(v) => setLine(l.key, v ?? 0)} suffix="%" className="w-20" step="1" />
+                  )}
                 </label>
               ))}
               <div className="flex items-center justify-between border-t border-border pt-1.5 text-[11px] font-medium">
                 <span>= variable opex</span>
-                <span className={cn("numeric", opx > 0.6 ? "text-fail" : "text-quoted")}>{pct(opx, 0)}</span>
+                <span className={cn("numeric", (eco.opexPct ?? opx) > 0.6 ? "text-fail" : "text-quoted")}>{pct((applyOpex ? eco.opexPct : 0) ?? opx, 0)}</span>
               </div>
             </div>
             <p className="rounded-md bg-muted/50 px-2 py-1 text-[10px] leading-snug text-muted-foreground">
