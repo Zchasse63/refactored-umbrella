@@ -12,11 +12,16 @@ function cellValue(cell: ExcelJS.Cell): string | number | null {
   if (v == null) return null;
   if (typeof v === "number" || typeof v === "string") return v;
   if (typeof v === "object") {
-    if ("result" in v) return v.result ?? null;          // formula
+    if ("result" in v) {
+      const r = v.result;
+      if (r == null || (typeof r === "object" && "error" in r)) return null; // error cell
+      if (r instanceof Date) return r.getTime();
+      return r as string | number;
+    }
     if ("text" in v) return v.text ?? null;              // hyperlink
     if ("richText" in v) return v.richText.map((t: any) => t.text).join("");
   }
-  return String(v);
+  return null; // unknown object cell — never coerce to "[object Object]" (would poison matching)
 }
 
 export async function POST(req: NextRequest) {
@@ -34,6 +39,7 @@ export async function POST(req: NextRequest) {
     /* fallthrough */
   }
   if (!file) return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+  if (file.size > 5 * 1024 * 1024) return NextResponse.json({ error: "File too large (max 5 MB)" }, { status: 413 });
 
   try {
     const wb = new ExcelJS.Workbook();
@@ -57,26 +63,40 @@ export async function POST(req: NextRequest) {
     }
 
     const { data: products } = await sb.from("products").select("id, model");
+    const modelCounts = new Map<string, number>();
+    for (const p of products ?? []) if (p.model) {
+      const k = String(p.model).trim().toLowerCase();
+      modelCounts.set(k, (modelCounts.get(k) ?? 0) + 1);
+    }
     const byModel = new Map<string, string>();
-    for (const p of products ?? []) if (p.model) byModel.set(String(p.model).trim().toLowerCase(), p.id);
+    for (const p of products ?? []) if (p.model) {
+      const k = String(p.model).trim().toLowerCase();
+      if ((modelCounts.get(k) ?? 0) === 1) byModel.set(k, p.id); // skip ambiguous SKUs entirely
+    }
 
     let updated = 0;
     const skipped: { model: string; reason: string }[] = [];
     for (const row of imported) {
-      const productId = byModel.get(row.model.toLowerCase());
-      if (!productId) { skipped.push({ model: row.model, reason: "no product with that model/SKU" }); continue; }
-      if (row.quote == null) { skipped.push({ model: row.model, reason: "no quote value" }); continue; }
-      // mirror saveQuote: clear any prior selected quote, then insert the new selected one
-      await sb.from("factory_quotes").update({ is_selected: false }).eq("product_id", productId).eq("is_selected", true);
-      const { error } = await sb.from("factory_quotes").insert({
+      const key = row.model.trim().toLowerCase();
+      const productId = byModel.get(key);
+      if (!productId) {
+        const reason = (modelCounts.get(key) ?? 0) > 1 ? "ambiguous — multiple products share this SKU" : "no product with that model/SKU";
+        skipped.push({ model: row.model, reason });
+        continue;
+      }
+      if (row.quote == null) { skipped.push({ model: row.model, reason: "MOQ filled but no quote price — quote required" }); continue; }
+      // insert the new selected quote FIRST, then deselect the others, so a failed insert leaves prior state intact
+      const { data: inserted, error } = await sb.from("factory_quotes").insert({
         product_id: productId,
         landed_cost_ddp: row.quote,
         moq: row.moq,
         is_selected: true,
         supplier: "RFQ import",
         created_by: user.id,
-      });
-      if (error) { skipped.push({ model: row.model, reason: error.message }); continue; }
+      }).select("id").single();
+      if (error || !inserted) { skipped.push({ model: row.model, reason: error?.message ?? "insert failed" }); continue; }
+      await sb.from("factory_quotes").update({ is_selected: false })
+        .eq("product_id", productId).eq("is_selected", true).neq("id", inserted.id);
       updated++;
     }
 
