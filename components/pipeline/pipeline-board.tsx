@@ -37,11 +37,13 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
     const sb = createSupabaseBrowser();
     const channel = sb
       .channel("pipeline-board")
-      .on("postgres_changes", { event: "*", schema: "public", table: "pipeline_status" }, (payload) => {
-        console.log("[pipeline-rt] event", (payload as any).eventType);
-        router.refresh();
-      })
-      .subscribe((status) => console.log("[pipeline-rt] status", status));
+      .on("postgres_changes", { event: "*", schema: "public", table: "pipeline_status" }, () => router.refresh());
+    // Realtime evaluates the table's RLS against the subscriber's JWT — hand it the
+    // session token, else is_member() fails and postgres_changes events are dropped.
+    sb.auth.getSession().then(({ data }) => {
+      if (data.session) sb.realtime.setAuth(data.session.access_token);
+      channel.subscribe();
+    });
     return () => { void sb.removeChannel(channel); };
   }, [router]);
 
