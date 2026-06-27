@@ -37,8 +37,11 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
     const sb = createSupabaseBrowser();
     const channel = sb
       .channel("pipeline-board")
-      .on("postgres_changes", { event: "*", schema: "public", table: "pipeline_status" }, () => router.refresh())
-      .subscribe();
+      .on("postgres_changes", { event: "*", schema: "public", table: "pipeline_status" }, (payload) => {
+        console.log("[pipeline-rt] event", (payload as any).eventType);
+        router.refresh();
+      })
+      .subscribe((status) => console.log("[pipeline-rt] status", status));
     return () => { void sb.removeChannel(channel); };
   }, [router]);
 
