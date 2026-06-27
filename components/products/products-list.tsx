@@ -2,8 +2,10 @@
 
 import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
+import { Search } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { DEFAULT_ASSUMPTIONS, LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
+import { applyFilters, sortViews, EMPTY_FILTERS, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
 import { saveSelection, saveQuote } from "@/app/actions";
 import type { ProductView } from "@/lib/data/view";
 import type { Role } from "@/lib/types";
@@ -44,13 +46,19 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
   );
   const [, startTransition] = useTransition();
   const [savingRef, setSavingRef] = useState<string | null>(null);
+  const [filters, setFilters] = useState<CatalogFilters>(EMPTY_FILTERS);
+  const [sort, setSort] = useState<CatalogSort>("relevance");
 
   const editSell = role === "partner";
   const editQuote = role === "owner";
 
+  const filtered = useMemo(() => sortViews(applyFilters(views, filters), sort), [views, filters, sort]);
+  const lines = useMemo(() => lineFacets(views), [views]);
+  const setF = (patch: Partial<CatalogFilters>) => setFilters((f) => ({ ...f, ...patch }));
+
   const rows = useMemo(
     () =>
-      views.map((v) => {
+      filtered.map((v) => {
         const e = edits[v.product.external_ref];
         const eco = compute({
           assumptions: DEFAULT_ASSUMPTIONS,
@@ -61,7 +69,7 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
         });
         return { v, e, eco };
       }),
-    [views, edits],
+    [filtered, edits],
   );
 
   const setEdit = (ref: string, patch: Partial<{ sell: number | null; quoted: number | null }>) =>
@@ -96,6 +104,38 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
       <p className="mb-2 text-[11px] text-muted-foreground">
         {role === "partner" ? "Edit target sell inline" : "Edit factory quote inline"} — net % and PASS/FAIL recompute live and save on blur.
       </p>
+      <div className="mb-2 flex flex-wrap items-center gap-2">
+        <div className="relative min-w-[180px] flex-1">
+          <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
+          <input value={filters.q} onChange={(e) => setF({ q: e.target.value })} placeholder="Search name, model, spec…" className="h-8 w-full rounded-md border border-input bg-card pl-7 pr-2 text-[12px] outline-none focus:ring-2 focus:ring-ring" />
+        </div>
+        <select value={filters.line} onChange={(e) => setF({ line: e.target.value as CatalogFilters["line"], categories: [] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+          <option value="all">All lines</option>
+          {lines.map((l) => <option key={l.value} value={l.value}>{l.label} ({l.count})</option>)}
+        </select>
+        <select value={filters.tiers[0] ?? "all"} onChange={(e) => setF({ tiers: e.target.value === "all" ? [] : [e.target.value as any] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+          <option value="all">Any tier</option>
+          <option value="pursue">Pursue</option>
+          <option value="maybe">Maybe</option>
+          <option value="pass">Pass</option>
+          <option value="unset">No tier</option>
+        </select>
+        <select value={filters.quote} onChange={(e) => setF({ quote: e.target.value as CatalogFilters["quote"] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+          <option value="all">Any quote</option>
+          <option value="quoted">Quoted</option>
+          <option value="pass">PASS</option>
+          <option value="fail">FAIL</option>
+          <option value="none">Not quoted</option>
+        </select>
+        <select value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+          <option value="relevance">Sort</option>
+          <option value="name">Name A–Z</option>
+          <option value="target-desc">Target ↓</option>
+          <option value="net">Net ↓</option>
+          <option value="headroom">Headroom ↓</option>
+        </select>
+        <span className="ml-auto text-[11px] text-muted-foreground">{rows.length} of {views.length}</span>
+      </div>
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full min-w-[760px] text-[12px]">
           <thead>

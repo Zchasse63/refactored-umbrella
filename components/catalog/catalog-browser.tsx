@@ -1,119 +1,74 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { ProductCard } from "./product-card";
+import { CatalogSidebar } from "./catalog-sidebar";
+import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
 import type { ProductView } from "@/lib/data/fixtures";
 
-type LineFilter = "all" | "appliance" | "beauty" | "foodservice";
-type Sort = "relevance" | "margin" | "needs-photo" | "name";
-
-const LINE_TABS: { key: LineFilter; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "appliance", label: "Appliances" },
-  { key: "beauty", label: "Beauty" },
-  { key: "foodservice", label: "Foodservice" },
+const SORTS: { key: CatalogSort; label: string }[] = [
+  { key: "relevance", label: "Relevance" },
+  { key: "name", label: "Name A–Z" },
+  { key: "target-desc", label: "Target sell ↓" },
+  { key: "target-asc", label: "Target sell ↑" },
+  { key: "net", label: "Net margin ↓" },
+  { key: "headroom", label: "Headroom ↓" },
+  { key: "needs-photo", label: "Needs photo" },
 ];
 
 export function CatalogBrowser({ views }: { views: ProductView[] }) {
-  const [q, setQ] = useState("");
-  const [line, setLine] = useState<LineFilter>("all");
-  const [needsPhotoOnly, setNeedsPhotoOnly] = useState(false);
-  const [sort, setSort] = useState<Sort>("relevance");
+  const [filters, setFilters] = useState<CatalogFilters>(EMPTY_FILTERS);
+  const [sort, setSort] = useState<CatalogSort>("relevance");
+  const [showFilters, setShowFilters] = useState(false);
 
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { all: views.length, appliance: 0, beauty: 0, foodservice: 0 };
-    for (const v of views) c[v.product.line]++;
-    return c;
-  }, [views]);
-
-  const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    let out = views.filter((v) => {
-      if (line !== "all" && v.product.line !== line) return false;
-      if (needsPhotoOnly && v.product.photo_state === "good") return false;
-      if (!needle) return true;
-      const p = v.product;
-      const hay = [p.name, p.model, p.subsection, p.group_name, ...p.specs.map((s) => `${s.label} ${s.value}`)]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-      return hay.includes(needle);
-    });
-    out = [...out].sort((a, b) => {
-      if (sort === "name") return a.product.name.localeCompare(b.product.name);
-      if (sort === "needs-photo")
-        return Number(b.product.photo_state !== "good") - Number(a.product.photo_state !== "good");
-      if (sort === "margin")
-        return (b.economics.liveNetPct ?? -1) - (a.economics.liveNetPct ?? -1);
-      return 0;
-    });
-    return out;
-  }, [views, q, line, needsPhotoOnly, sort]);
+  const result = useMemo(() => sortViews(applyFilters(views, filters), sort), [views, filters, sort]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="relative flex-1 min-w-[220px]">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-          <Input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder={`Search ${views.length} products by name, model, or spec`}
-            className="pl-8"
-          />
+    <div className="flex flex-col gap-6 lg:flex-row">
+      <aside className={cn("shrink-0 lg:w-[230px]", showFilters ? "block" : "hidden lg:block")}>
+        <div className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pr-1">
+          <CatalogSidebar views={views} filters={filters} onChange={setFilters} />
         </div>
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value as Sort)}
-          className="h-9 rounded-md border border-input bg-card px-2 text-[13px]"
-        >
-          <option value="relevance">Sort: Relevance</option>
-          <option value="margin">Net margin ↓</option>
-          <option value="needs-photo">Needs photo first</option>
-          <option value="name">Name A–Z</option>
-        </select>
-      </div>
+      </aside>
 
-      <div className="flex flex-wrap items-center gap-1.5">
-        {LINE_TABS.filter((t) => t.key === "all" || (counts[t.key] ?? 0) > 0).map((t) => (
+      <div className="min-w-0 flex-1 space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
           <button
-            key={t.key}
-            onClick={() => setLine(t.key)}
-            className={cn(
-              "rounded-full px-3 py-1 text-[12px] font-medium transition",
-              line === t.key ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:bg-muted",
-            )}
+            onClick={() => setShowFilters((s) => !s)}
+            className={cn("flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-[13px] lg:hidden", isFiltered(filters) ? "border-target text-target" : "border-border")}
           >
-            {t.label}
-            <span className="numeric ml-1.5 opacity-60">{counts[t.key] ?? 0}</span>
+            <SlidersHorizontal className="size-4" /> Filters
           </button>
-        ))}
-        <button
-          onClick={() => setNeedsPhotoOnly((s) => !s)}
-          className={cn(
-            "rounded-full px-3 py-1 text-[12px] font-medium transition",
-            needsPhotoOnly ? "bg-quoted-muted text-quoted-muted-foreground" : "border border-border text-muted-foreground hover:bg-muted",
-          )}
-        >
-          Needs photo
-        </button>
-        <span className="numeric ml-auto text-[12px] text-muted-foreground">{filtered.length} products</span>
-      </div>
+          <div className="relative min-w-[200px] flex-1">
+            <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            <Input value={filters.q} onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))} placeholder={`Search ${views.length} products…`} className="pl-8" />
+          </div>
+          <select value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)} className="h-9 rounded-md border border-input bg-card px-2 text-[13px]">
+            {SORTS.map((s) => (
+              <option key={s.key} value={s.key}>Sort: {s.label}</option>
+            ))}
+          </select>
+        </div>
 
-      {filtered.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-border-strong py-16 text-center text-sm text-muted-foreground">
-          No products match. Clear the search or filters.
+        <div className="text-[12px] text-muted-foreground">
+          {result.length === views.length ? `${views.length} products` : `${result.length} of ${views.length} products`}
         </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {filtered.map((v) => (
-            <ProductCard key={v.product.external_ref} view={v} />
-          ))}
-        </div>
-      )}
+
+        {result.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-border-strong py-16 text-center text-sm text-muted-foreground">
+            No products match. Clear the search or filters.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+            {result.map((v) => (
+              <ProductCard key={v.product.external_ref} view={v} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
