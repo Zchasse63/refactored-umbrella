@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, FileText, Lock, ChevronRight } from "lucide-react";
+import { Check, FileText, FileDown, Lock, ChevronRight } from "lucide-react";
 import { getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
 import { PhotoFrame } from "@/components/product/product-image";
@@ -147,9 +147,16 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 applyOpex={LINE_OPEX_APPLIES[p.line]}
                 actualLanded={p.our_cost}
               />
-              <div className="mt-3 flex gap-2">
-                <Button size="sm" variant="outline" className="flex-1" disabled>
-                  <FileText className="size-3.5" aria-hidden /> Add to RFQ
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <Button asChild size="sm" variant="outline">
+                  <a href={`/api/spec-sheet?slug=${params.slug}`} target="_blank" rel="noopener noreferrer">
+                    <FileDown className="size-3.5" aria-hidden /> Spec sheet
+                  </a>
+                </Button>
+                <Button asChild size="sm" variant="outline">
+                  <Link href="/exports">
+                    <FileText className="size-3.5" aria-hidden /> Add to RFQ
+                  </Link>
                 </Button>
               </div>
               <p className="mt-2 text-[10px] text-muted-foreground">
