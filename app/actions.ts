@@ -48,25 +48,27 @@ export async function saveSelection(
     },
     { onConflict: "product_id,partner_user_id" },
   );
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("saveSelection:", error.message);
+    return { error: "Couldn't save. Please try again." };
+  }
   revalidate(ref);
   return { ok: true };
 }
 
-/** Owner: save a factory quote (DDP) as the selected quote (RLS gates to the owner role). */
+/**
+ * Owner: set (or clear) the selected factory quote (DDP). RLS gates to the owner role.
+ * `landed = null` is the explicit "clear quote" action — it deselects with no replacement.
+ */
 export async function saveQuote(ref: string, landed: number | null): Promise<Result> {
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
-  // clear any prior selected quote, then add the new one (one selected per product)
-  await r.sb.from("factory_quotes").update({ is_selected: false }).eq("product_id", r.productId).eq("is_selected", true);
-  if (landed != null) {
-    const { error } = await r.sb.from("factory_quotes").insert({
-      product_id: r.productId,
-      landed_cost_ddp: landed,
-      is_selected: true,
-      created_by: r.user.id,
-    });
-    if (error) return { error: error.message };
+  // Atomic deselect+insert in one transaction (set_selected_quote RPC): a re-quote can
+  // never strand a product mid-swap. landed=null deselects only (intended clear path).
+  const { error } = await r.sb.rpc("set_selected_quote", { p_product_id: r.productId, p_landed: landed });
+  if (error) {
+    console.error("saveQuote:", error.message);
+    return { error: "Couldn't save the quote. Please try again." };
   }
   revalidate(ref);
   return { ok: true };
@@ -90,7 +92,8 @@ export async function movePipeline(
   const { error } = await r.sb.from("pipeline_status").update(patch).eq("product_id", r.productId);
   if (error) {
     if (/illegal pipeline transition/i.test(error.message)) return { error: "Move not allowed for your role" };
-    return { error: error.message };
+    console.error("movePipeline:", error.message);
+    return { error: "Couldn't move the card. Please try again." };
   }
   revalidatePath("/pipeline");
   revalidatePath("/dashboard");
@@ -122,8 +125,8 @@ export async function discoverCompetitors(
     const asins = (
       await keepaFinder({
         title: profile.title,
-        current_AMAZON_gte: profile.price_low != null ? Math.round(profile.price_low * 100) : undefined,
-        current_AMAZON_lte: profile.price_high != null ? Math.round(profile.price_high * 100) : undefined,
+        current_AMAZON_gte: Number.isFinite(profile.price_low) ? Math.round((profile.price_low as number) * 100) : undefined,
+        current_AMAZON_lte: Number.isFinite(profile.price_high) ? Math.round((profile.price_high as number) * 100) : undefined,
         sort: [["monthlySold", "desc"]],
       })
     ).slice(0, 5);
@@ -168,14 +171,25 @@ export async function discoverCompetitors(
         });
       }
     }
-    await r.sb.from("competitors").delete().eq("product_id", r.productId);
-    if (rows.length) {
-      const { error } = await r.sb.from("competitors").insert(rows);
-      if (error) return { error: error.message };
+    // Insert-first replacement: NEVER delete the existing competitor set before the new
+    // one is safely persisted. If discovery verified zero candidates, keep what's there
+    // (a failed re-run must not wipe a product's competitors and its derived FBA fee).
+    if (!rows.length) {
+      revalidate(ref);
+      return { ok: true, found: kp.length, kept: 0 };
     }
+    const { data: existing } = await r.sb.from("competitors").select("id").eq("product_id", r.productId);
+    const oldIds = (existing ?? []).map((e: { id: string }) => e.id);
+    const { error: insErr } = await r.sb.from("competitors").insert(rows);
+    if (insErr) {
+      console.error("discoverCompetitors insert:", insErr.message); // old set left intact
+      return { error: "Discovery couldn't save its results. Your existing competitors are unchanged." };
+    }
+    if (oldIds.length) await r.sb.from("competitors").delete().in("id", oldIds);
     revalidate(ref);
     return { ok: true, found: kp.length, kept: rows.length };
   } catch (e) {
-    return { error: (e instanceof Error ? e.message : "Discovery failed").slice(0, 200) };
+    console.error("discoverCompetitors:", e instanceof Error ? e.message : e);
+    return { error: "Discovery failed. Please try again." };
   }
 }

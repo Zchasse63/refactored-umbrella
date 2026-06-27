@@ -4,6 +4,7 @@ import ExcelJS from "exceljs";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { getCatalog } from "@/lib/data/queries";
 import { buildRfqRow, RFQ_COLUMNS } from "@/lib/data/rfq";
+import { siteOrigin } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -15,12 +16,6 @@ interface Body {
 
 // only same-origin /products/*.jpg|png paths may be fetched (no SSRF, no traversal)
 const SAFE_IMAGE = /^\/products\/[a-z0-9/_-]+\.(jpe?g|png)$/i;
-
-function requestOrigin(req: NextRequest): string {
-  const proto = req.headers.get("x-forwarded-proto") ?? "https";
-  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
-  return host ? `${proto}://${host}` : req.nextUrl.origin;
-}
 
 export async function POST(req: NextRequest) {
   const sb = createSupabaseServer();
@@ -51,14 +46,14 @@ export async function POST(req: NextRequest) {
 
     // Pre-fetch clean product images from the CDN (public/ is not on the function's disk
     // on Netlify). Same-origin /products/*.{jpg,png} only.
-    const origin = requestOrigin(req);
+    const origin = siteOrigin();
     const imageBuffers = new Map<string, { buf: Buffer; ext: "jpeg" | "png" }>();
     await Promise.all(
       rows
         .filter((r) => r.imagePath && SAFE_IMAGE.test(r.imagePath))
         .map(async (r) => {
           try {
-            const resp = await fetch(new URL(r.imagePath!, origin).toString());
+            const resp = await fetch(new URL(r.imagePath!, origin).toString(), { redirect: "error" });
             if (!resp.ok) return;
             const ab = await resp.arrayBuffer();
             const e = path.extname(r.imagePath!).slice(1).toLowerCase();
@@ -127,6 +122,7 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (e) {
-    return NextResponse.json({ error: (e instanceof Error ? e.message : "RFQ build failed").slice(0, 300) }, { status: 500 });
+    console.error("rfq build:", e instanceof Error ? e.message : e);
+    return NextResponse.json({ error: "Couldn't build the RFQ. Please try again." }, { status: 500 });
   }
 }

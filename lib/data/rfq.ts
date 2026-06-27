@@ -76,8 +76,16 @@ export function toNum(v: unknown): number | null {
 /** Parse a returned RFQ sheet (rows of cells) into the factory's quotes, by header name. */
 export function parseReturnedRfq(rows: (string | number | null)[][]): ImportedQuote[] {
   const norm = (v: unknown) => String(v ?? "").trim().toLowerCase();
-  const findCol = (cells: string[], names: readonly string[]) =>
-    cells.findIndex((c) => names.some((n) => c === n.toLowerCase()));
+  // Exact alias match first (precise); then startsWith on ONLY the distinctive canonical
+  // header (names[0]) to tolerate appended units/notes like "Factory Quote (DDP) USD".
+  // Canonical-only avoids the "MOQ Ask" column wrongly matching the bare "MOQ" alias.
+  const findCol = (cells: string[], names: readonly string[]) => {
+    const aliases = names.map((n) => n.toLowerCase());
+    const exact = cells.findIndex((c) => aliases.includes(c));
+    if (exact >= 0) return exact;
+    const canonical = aliases[0];
+    return cells.findIndex((c) => c.startsWith(canonical));
+  };
 
   let header = -1;
   let col = { model: -1, quote: -1, moq: -1 };

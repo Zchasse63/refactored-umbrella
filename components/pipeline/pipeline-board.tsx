@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Lock, X } from "lucide-react";
+import { ArrowRightLeft, Lock, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { canTransition } from "@/lib/auth/capabilities";
@@ -80,11 +80,8 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
     });
   }
 
-  function onDrop(to: PipelineStatus) {
-    const ref = dragRef;
-    setDragRef(null);
-    setOverStage(null);
-    if (!ref) return;
+  // Shared move path for BOTH drag-and-drop and the keyboard/click "Move" menu.
+  function requestMove(ref: string, to: PipelineStatus) {
     const v = views.find((x) => x.product.external_ref === ref);
     if (!v) return;
     const from = stageOf(v);
@@ -98,10 +95,17 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
     commit(ref, to);
   }
 
+  function onDrop(to: PipelineStatus) {
+    const ref = dragRef;
+    setDragRef(null);
+    setOverStage(null);
+    if (ref) requestMove(ref, to);
+  }
+
   return (
     <div>
       {error && (
-        <div className="mb-3 flex items-center gap-2 rounded-md border border-fail/30 bg-fail-muted px-3 py-2 text-[12px] text-fail-muted-foreground">
+        <div role="alert" className="mb-3 flex items-center gap-2 rounded-md border border-fail/30 bg-fail-muted px-3 py-2 text-[12px] text-fail-muted-foreground">
           {error}
           <button onClick={() => setError(null)} className="ml-auto opacity-70 hover:opacity-100" aria-label="Dismiss"><X className="size-3.5" /></button>
         </div>
@@ -141,6 +145,8 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
                     key={v.product.external_ref}
                     view={v}
                     inDecision={stage.id === "decision"}
+                    moveTargets={STAGES.filter((s) => s.id !== stage.id && canTransition(stage.id, s.id, role))}
+                    onMove={(to) => requestMove(v.product.external_ref, to)}
                     onDragStart={() => setDragRef(v.product.external_ref)}
                     onDragEnd={() => { setDragRef(null); setOverStage(null); }}
                     onDecide={(d) => commit(v.product.external_ref, "decision", d)}
@@ -153,7 +159,7 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
         })}
       </div>
       <p className="mt-3 text-[11px] text-muted-foreground">
-        Drag a card to move it. Partner moves New ↔ Shortlisted; owner moves Shortlisted → Costing → Quoted; either may send to Decision. Saved to Supabase, gated by role.
+        Drag a card or use its <b className="font-medium text-foreground">Move</b> button to change stage. Partner moves New ↔ Shortlisted; owner moves Shortlisted → Costing → Quoted; either may send to Decision. Saved to Supabase, gated by role.
       </p>
     </div>
   );
@@ -162,12 +168,16 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
 function PipelineCard({
   view: v,
   inDecision,
+  moveTargets,
+  onMove,
   onDragStart,
   onDragEnd,
   onDecide,
 }: {
   view: ProductWithPipeline;
   inDecision: boolean;
+  moveTargets: { id: PipelineStatus; label: string }[];
+  onMove: (to: PipelineStatus) => void;
   onDragStart: () => void;
   onDragEnd: () => void;
   onDecide: (d: Decision) => void;
@@ -184,12 +194,14 @@ function PipelineCard({
           {v.product.name}
         </Link>
       </div>
+      {v.product.model && <div className="mt-0.5 font-mono text-[10px] text-muted-foreground">{v.product.model}</div>}
       <div className="mt-1 flex flex-wrap items-center gap-1">
         {v.selection.tier && <Badge variant={TIER_VARIANT[v.selection.tier]} className="capitalize">{v.selection.tier}</Badge>}
         {v.economics.verdict && <Badge variant={v.economics.verdict.pass ? "pass" : "fail"}>{v.economics.verdict.pass ? "PASS" : "FAIL"}</Badge>}
         {v.product.voltage_flag && <span className="numeric rounded bg-muted px-1 py-0.5 text-[9px] text-muted-foreground">220V</span>}
         {v.pipelineDecision && <Badge variant={DECISION_VARIANT[v.pipelineDecision]} className="capitalize">{v.pipelineDecision}</Badge>}
       </div>
+      {!inDecision && moveTargets.length > 0 && <MoveMenu name={v.product.name} targets={moveTargets} onMove={onMove} />}
       {inDecision && (
         <div className="mt-1.5 flex gap-1">
           {(["go", "hold", "pass"] as Decision[]).map((d) => (
@@ -205,6 +217,51 @@ function PipelineCard({
             </button>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+/** Keyboard/click-accessible stage mover — the non-drag path to move a card. */
+function MoveMenu({
+  name,
+  targets,
+  onMove,
+}: {
+  name: string;
+  targets: { id: PipelineStatus; label: string }[];
+  onMove: (to: PipelineStatus) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="relative mt-1.5" onKeyDown={(e) => e.key === "Escape" && setOpen(false)}>
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label={`Move ${name} to another stage`}
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center justify-center gap-1 rounded border border-border px-1 py-0.5 text-[10px] font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+      >
+        <ArrowRightLeft className="size-3" aria-hidden /> Move
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} aria-hidden />
+          <div role="menu" className="absolute inset-x-0 z-20 mt-1 overflow-hidden rounded-md border border-border bg-card shadow-card">
+            {targets.map((s) => (
+              <button
+                key={s.id}
+                role="menuitem"
+                type="button"
+                onClick={() => { setOpen(false); onMove(s.id); }}
+                className="block w-full px-2 py-1 text-left text-[11px] hover:bg-muted"
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

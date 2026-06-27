@@ -1,9 +1,20 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { PRODUCTS } from "@/lib/data/fixtures";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
+
+/** Constant-time compare against a DEDICATED seed secret (never the RLS-bypassing
+ *  service-role key). HMAC both sides to a fixed 32-byte digest so neither the result
+ *  NOR the secret's length leaks via timing. */
+function seedSecretOk(provided: string | null): boolean {
+  const expected = process.env.SEED_SECRET;
+  if (!expected || !provided) return false;
+  const digest = (s: string) => createHmac("sha256", "portal-seed-compare").update(s).digest();
+  return timingSafeEqual(digest(provided), digest(expected));
+}
 
 async function ensureUser(admin: ReturnType<typeof createSupabaseAdmin>, email: string, password: string, display: string) {
   const { data: list } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
@@ -20,7 +31,11 @@ async function ensureUser(admin: ReturnType<typeof createSupabaseAdmin>, email: 
 }
 
 export async function POST(req: NextRequest) {
-  if (req.headers.get("x-seed-secret") !== process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  // Seeding is a privileged, RLS-bypassing operation: off in production unless
+  // explicitly enabled, and gated by a dedicated secret (not the service-role key).
+  const seedingAllowed = process.env.NODE_ENV !== "production" || process.env.ALLOW_SEED === "1";
+  if (!seedingAllowed) return NextResponse.json({ error: "seeding disabled" }, { status: 403 });
+  if (!seedSecretOk(req.headers.get("x-seed-secret"))) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
   const admin = createSupabaseAdmin();

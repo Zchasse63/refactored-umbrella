@@ -26,14 +26,25 @@ export function BoardTable({ views }: { views: ProductView[]; role: Role }) {
     else { setSortKey(key); setDir(key === "name" ? "asc" : "desc"); }
   }
 
+  // Sortable header: the trigger is a real <button> (focusable + Enter/Space) inside the
+  // th; aria-sort stays on the th. A persistent ↕ marks every sortable column; the active
+  // one shows a stronger ↑/↓ — so sortable vs. plain headers read differently at a glance.
   const Th = ({ k, label, right }: { k: SortKey; label: string; right?: boolean }) => (
     <th
-      onClick={() => toggle(k)}
-      className={cn("cursor-pointer select-none px-2 py-2 font-semibold hover:text-foreground", right && "text-right")}
+      scope="col"
+      className={cn("px-2 py-2 font-semibold", right && "text-right")}
       aria-sort={sortKey === k ? (dir === "asc" ? "ascending" : "descending") : "none"}
     >
-      {label}
-      <span className="ml-0.5 text-foreground/40">{sortKey === k ? (dir === "asc" ? "↑" : "↓") : ""}</span>
+      <button
+        type="button"
+        onClick={() => toggle(k)}
+        className="inline-flex select-none items-center gap-0.5 rounded hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {label}
+        <span aria-hidden className={cn(sortKey === k ? "text-foreground/70" : "text-foreground/30")}>
+          {sortKey === k ? (dir === "asc" ? "↑" : "↓") : "↕"}
+        </span>
+      </button>
     </th>
   );
 

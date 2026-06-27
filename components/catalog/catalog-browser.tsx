@@ -1,9 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search, SearchX, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { EmptyState } from "@/components/ui/empty-state";
 import { ProductCard } from "./product-card";
 import { CatalogSidebar } from "./catalog-sidebar";
 import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
@@ -46,11 +48,11 @@ export function CatalogBrowser({ views }: { views: ProductView[] }) {
             <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
             <Input value={filters.q} onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))} placeholder={`Search ${views.length} products…`} className="pl-8" />
           </div>
-          <select value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)} className="h-9 rounded-md border border-input bg-card px-2 text-[13px]">
+          <Select aria-label="Sort products" value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)}>
             {SORTS.map((s) => (
               <option key={s.key} value={s.key}>Sort: {s.label}</option>
             ))}
-          </select>
+          </Select>
         </div>
 
         <div className="text-[12px] text-muted-foreground">
@@ -58,9 +60,18 @@ export function CatalogBrowser({ views }: { views: ProductView[] }) {
         </div>
 
         {result.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-border-strong py-16 text-center text-sm text-muted-foreground">
-            No products match. Clear the search or filters.
-          </div>
+          <EmptyState
+            icon={SearchX}
+            title="No products match"
+            hint="Nothing matches your search and filters. Clear them to see the full catalog."
+            action={
+              isFiltered(filters) ? (
+                <button onClick={() => setFilters(EMPTY_FILTERS)} className="rounded-md border border-border px-3 py-1.5 text-[12px] font-medium text-target hover:bg-muted">
+                  Clear filters
+                </button>
+              ) : null
+            }
+          />
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
             {result.map((v) => (

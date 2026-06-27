@@ -189,8 +189,10 @@ export function compute({
   };
 
   if (actualLanded != null && Number.isFinite(actualLanded)) {
-    const net = netPerUnit(sell, actualLanded, effOpx);
-    eco.actualLanded = round2(actualLanded);
+    // round the landed cost ONCE so net/pct and the displayed figure agree exactly
+    const a = round2(actualLanded);
+    const net = netPerUnit(sell, a, effOpx);
+    eco.actualLanded = a;
     eco.actualNet = net;
     eco.actualNetPct = net / sell;
     eco.liveColumn = "actual";
@@ -199,12 +201,15 @@ export function compute({
   }
 
   if (quotedLanded != null && Number.isFinite(quotedLanded)) {
-    const net = netPerUnit(sell, quotedLanded, effOpx);
-    eco.quotedLanded = round2(quotedLanded);
+    // round ONCE; verdict/gross/net must evaluate the same number the UI shows,
+    // else a >2-decimal quote can display at-ceiling yet pass/fail off the raw value
+    const q = round2(quotedLanded);
+    const net = netPerUnit(sell, q, effOpx);
+    eco.quotedLanded = q;
     eco.quotedNet = net;
     eco.quotedNetPct = net / sell;
-    eco.quotedGross = (sell - quotedLanded) / sell;
-    eco.verdict = quoteCheck(sell, quotedLanded, tLanded, gm);
+    eco.quotedGross = (sell - q) / sell;
+    eco.verdict = quoteCheck(sell, q, tLanded, gm);
     // Quoted is the live column whenever a quote exists (precedence: quoted > actual > target).
     eco.liveColumn = "quoted";
     eco.liveNet = net;

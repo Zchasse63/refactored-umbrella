@@ -108,10 +108,10 @@ export function CatalogSidebar({
 
       <Section title="Target sell ($)">
         <div className="flex items-center gap-1.5">
-          <input type="number" placeholder="min" value={f.priceMin ?? ""} onChange={(e) => set({ priceMin: e.target.value === "" ? null : Number(e.target.value) })}
+          <input type="number" placeholder="min" aria-label="Minimum target sell price" value={f.priceMin ?? ""} onChange={(e) => set({ priceMin: e.target.value === "" ? null : Number(e.target.value) })}
             className="numeric w-full rounded border border-input bg-card px-1.5 py-1 text-[12px] outline-none focus:ring-2 focus:ring-ring [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none" />
           <span className="text-muted-foreground">–</span>
-          <input type="number" placeholder="max" value={f.priceMax ?? ""} onChange={(e) => set({ priceMax: e.target.value === "" ? null : Number(e.target.value) })}
+          <input type="number" placeholder="max" aria-label="Maximum target sell price" value={f.priceMax ?? ""} onChange={(e) => set({ priceMax: e.target.value === "" ? null : Number(e.target.value) })}
             className="numeric w-full rounded border border-input bg-card px-1.5 py-1 text-[12px] outline-none focus:ring-2 focus:ring-ring [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none" />
         </div>
       </Section>

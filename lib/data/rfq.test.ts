@@ -75,4 +75,17 @@ describe("parseReturnedRfq — quote-import round-trip", () => {
   it("returns empty when no Model/SKU header is present", () => {
     expect(parseReturnedRfq([["foo", "bar"], ["a", "b"]])).toEqual([]);
   });
+
+  it("tolerates appended units on headers AND ignores our own 'MOQ Ask' column", () => {
+    // full exported layout: MOQ Ask (ours) precedes Factory Quote/Factory MOQ (theirs);
+    // factory appended units to the quote header. Must read THEIR columns, not the ask.
+    const rows: (string | number | null)[][] = [
+      ["Model / SKU", "MOQ Ask", "Factory Quote (DDP) USD", "Factory MOQ (units)"],
+      ["CM0591", 500, "$12.50", 1000],
+    ];
+    const out = parseReturnedRfq(rows);
+    expect(out).toEqual([{ model: "CM0591", quote: 12.5, moq: 1000 }]);
+    // crucially the moq is the factory's 1000, NOT our ask of 500
+    expect(out[0].moq).toBe(1000);
+  });
 });

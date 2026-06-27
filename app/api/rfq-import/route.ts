@@ -85,24 +85,22 @@ export async function POST(req: NextRequest) {
         continue;
       }
       if (row.quote == null) { skipped.push({ model: row.model, reason: "MOQ filled but no quote price — quote required" }); continue; }
-      // insert the new selected quote FIRST, then deselect the others, so a failed insert leaves prior state intact
-      const { data: inserted, error } = await sb.from("factory_quotes").insert({
-        product_id: productId,
-        landed_cost_ddp: row.quote,
-        moq: row.moq,
-        is_selected: true,
-        supplier: "RFQ import",
-        created_by: user.id,
-      }).select("id").single();
-      if (error || !inserted) { skipped.push({ model: row.model, reason: error?.message ?? "insert failed" }); continue; }
-      await sb.from("factory_quotes").update({ is_selected: false })
-        .eq("product_id", productId).eq("is_selected", true).neq("id", inserted.id);
+      // Atomic deselect+insert in one transaction (set_selected_quote RPC) — no race with
+      // the partial unique index, no window where the product has zero selected quotes.
+      const { error } = await sb.rpc("set_selected_quote", {
+        p_product_id: productId,
+        p_landed: row.quote,
+        p_moq: row.moq,
+        p_supplier: "RFQ import",
+      });
+      if (error) { console.error("rfq-import set_selected_quote:", error.message); skipped.push({ model: row.model, reason: "couldn't save this quote" }); continue; }
       updated++;
     }
 
     for (const path of ["/dashboard", "/board", "/products", "/exports"]) revalidatePath(path);
     return NextResponse.json({ ok: true, found: imported.length, updated, skipped });
   } catch (e) {
-    return NextResponse.json({ error: (e instanceof Error ? e.message : "Import failed").slice(0, 300) }, { status: 500 });
+    console.error("rfq-import:", e instanceof Error ? e.message : e);
+    return NextResponse.json({ error: "Couldn't read that file. Make sure it's the exported RFQ workbook." }, { status: 500 });
   }
 }

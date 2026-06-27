@@ -26,6 +26,14 @@ describe("the headline math", () => {
     expect(net / 40).toBeCloseTo(0.16, 10);
     expect(net / 40).not.toBeCloseTo(0.65, 2);
   });
+
+  it("a >2-decimal quote is rounded ONCE so the verdict matches the displayed number", () => {
+    const eco = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 40, quotedLanded: 14.005, applyOpex: true });
+    expect(eco.quotedLanded).toBe(14.01); // displayed value (round2)
+    // headroom evaluates the SAME rounded 14.01, not the raw 14.005
+    expect(eco.verdict!.headroom).toBe(-0.01);
+    expect(eco.quotedGross).toBeCloseTo((40 - 14.01) / 40, 10);
+  });
 });
 
 describe("quote check", () => {

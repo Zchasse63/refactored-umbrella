@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { buildView, emptySelection, type ProductView } from "@/lib/data/view";
 import { DEFAULT_ASSUMPTIONS } from "@/lib/calc/economics";
@@ -9,7 +10,9 @@ import type { Assumptions, Competitor, Decision, PipelineStatus, Product, Select
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
 
 function rowToProduct(r: any): Product {
-  // Prefer AI-cleaned copy where present; fall back to the raw factory import.
+  // Prefer AI-cleaned COPY (name/features) where present — factory marketing text is noisy.
+  // Model is the exception: the raw sell-sheet model number is authoritative, so it wins and
+  // model_clean is only a fallback when the import had no model.
   const cleanFeatures: string[] = Array.isArray(r.features_clean) && r.features_clean.length
     ? r.features_clean
     : (r.features ?? []);
@@ -19,7 +22,6 @@ function rowToProduct(r: any): Product {
     brand: r.brand,
     source: r.source,
     name: r.name_clean || r.name,
-    // model_clean (AI-extracted) survives re-seed, which only rewrites the mapper-owned model col
     model: r.model || r.model_clean,
     group_name: r.group_name,
     subsection: r.subsection,
@@ -199,11 +201,12 @@ export async function getPipelineStatuses(): Promise<Record<string, { status: st
   return out;
 }
 
-/** Current user's role (for UI affordances). */
-export async function getViewerRole(): Promise<"owner" | "partner" | null> {
+/** Current user's role (for UI affordances). cache() dedupes the auth + membership
+ *  round-trips when several server components ask for the role within one request. */
+export const getViewerRole = cache(async (): Promise<"owner" | "partner" | null> => {
   const sb = createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   const { data } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();
   return (data?.role as "owner" | "partner") ?? null;
-}
+});

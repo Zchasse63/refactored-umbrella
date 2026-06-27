@@ -2,10 +2,12 @@
 
 import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, SearchX } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
+import { Select } from "@/components/ui/select";
+import { EmptyState } from "@/components/ui/empty-state";
 import { DEFAULT_ASSUMPTIONS, LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
-import { applyFilters, sortViews, EMPTY_FILTERS, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
+import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
 import { saveSelection, saveQuote } from "@/app/actions";
 import type { ProductView } from "@/lib/data/view";
 import type { Role } from "@/lib/types";
@@ -19,11 +21,13 @@ function CellInput({
   onChange,
   onCommit,
   disabled,
+  ariaLabel,
 }: {
   value: number | null;
   onChange: (v: number | null) => void;
   onCommit?: () => void;
   disabled?: boolean;
+  ariaLabel?: string;
 }) {
   return (
     <input
@@ -32,6 +36,7 @@ function CellInput({
       value={value ?? ""}
       placeholder="—"
       disabled={disabled}
+      aria-label={ariaLabel}
       onChange={(e) => onChange(e.target.value === "" ? null : Number(e.target.value))}
       onBlur={onCommit}
       onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
@@ -109,33 +114,47 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
           <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
           <input value={filters.q} onChange={(e) => setF({ q: e.target.value })} placeholder="Search name, model, spec…" className="h-8 w-full rounded-md border border-input bg-card pl-7 pr-2 text-[12px] outline-none focus:ring-2 focus:ring-ring" />
         </div>
-        <select value={filters.line} onChange={(e) => setF({ line: e.target.value as CatalogFilters["line"], categories: [] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+        <Select aria-label="Filter by line" value={filters.line} onChange={(e) => setF({ line: e.target.value as CatalogFilters["line"], categories: [] })} className="h-8 text-[12px]">
           <option value="all">All lines</option>
           {lines.map((l) => <option key={l.value} value={l.value}>{l.label} ({l.count})</option>)}
-        </select>
-        <select value={filters.tiers[0] ?? "all"} onChange={(e) => setF({ tiers: e.target.value === "all" ? [] : [e.target.value as any] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+        </Select>
+        <Select aria-label="Filter by tier" value={filters.tiers[0] ?? "all"} onChange={(e) => setF({ tiers: e.target.value === "all" ? [] : [e.target.value as any] })} className="h-8 text-[12px]">
           <option value="all">Any tier</option>
           <option value="pursue">Pursue</option>
           <option value="maybe">Maybe</option>
           <option value="pass">Pass</option>
           <option value="unset">No tier</option>
-        </select>
-        <select value={filters.quote} onChange={(e) => setF({ quote: e.target.value as CatalogFilters["quote"] })} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+        </Select>
+        <Select aria-label="Filter by quote" value={filters.quote} onChange={(e) => setF({ quote: e.target.value as CatalogFilters["quote"] })} className="h-8 text-[12px]">
           <option value="all">Any quote</option>
           <option value="quoted">Quoted</option>
           <option value="pass">PASS</option>
           <option value="fail">FAIL</option>
           <option value="none">Not quoted</option>
-        </select>
-        <select value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)} className="h-8 rounded-md border border-input bg-card px-1.5 text-[12px]">
+        </Select>
+        <Select aria-label="Sort" value={sort} onChange={(e) => setSort(e.target.value as CatalogSort)} className="h-8 text-[12px]">
           <option value="relevance">Sort</option>
           <option value="name">Name A–Z</option>
           <option value="target-desc">Target ↓</option>
           <option value="net">Net ↓</option>
           <option value="headroom">Headroom ↓</option>
-        </select>
+        </Select>
         <span className="ml-auto text-[11px] text-muted-foreground">{rows.length} of {views.length}</span>
       </div>
+      {rows.length === 0 ? (
+        <EmptyState
+          icon={SearchX}
+          title="No products match"
+          hint="No rows match your search and filters. Clear them to see the full list."
+          action={
+            isFiltered(filters) || sort !== "relevance" ? (
+              <button onClick={() => { setFilters(EMPTY_FILTERS); setSort("relevance"); }} className="rounded-md border border-border px-3 py-1.5 text-[12px] font-medium text-target hover:bg-muted">
+                Clear filters
+              </button>
+            ) : null
+          }
+        />
+      ) : (
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full min-w-[760px] text-[12px]">
           <thead>
@@ -153,7 +172,10 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
             {rows.map(({ v, e, eco }, i) => (
               <tr key={v.product.external_ref} className={cn("border-b border-border last:border-0", i % 2 && "bg-muted/20", savingRef === v.product.external_ref && "bg-target-muted/40")}>
                 <td className="px-3 py-1.5">
-                  <Link href={`/p/${v.slug}`} className="font-sans font-medium hover:text-target">{v.product.name}</Link>
+                  <div className="flex items-baseline gap-1.5">
+                    <Link href={`/p/${v.slug}`} className="font-sans font-medium hover:text-target">{v.product.name}</Link>
+                    {v.product.model && <span className="numeric text-[10px] text-muted-foreground">{v.product.model}</span>}
+                  </div>
                   <div className="text-[10px] text-muted-foreground">{v.product.subsection ?? v.product.group_name}</div>
                 </td>
                 <td className="px-2 py-1.5 text-muted-foreground">{LINE_SHORT[v.product.line]}</td>
@@ -163,11 +185,11 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
                   ) : <span className="text-muted-foreground/50">—</span>}
                 </td>
                 <td className="px-2 py-1.5 text-right">
-                  <CellInput value={e.sell} disabled={!editSell} onChange={(val) => setEdit(v.product.external_ref, { sell: val })} onCommit={() => commitSell(v.product.external_ref, v.selection.tier)} />
+                  <CellInput ariaLabel={`Target sell for ${v.product.name}`} value={e.sell} disabled={!editSell} onChange={(val) => setEdit(v.product.external_ref, { sell: val })} onCommit={() => commitSell(v.product.external_ref, v.selection.tier)} />
                 </td>
                 <td className="numeric px-2 py-1.5 text-right text-muted-foreground">{eco.targetLanded == null ? EMDASH : money(eco.targetLanded)}</td>
                 <td className="px-2 py-1.5 text-right">
-                  <CellInput value={e.quoted} disabled={!editQuote} onChange={(val) => setEdit(v.product.external_ref, { quoted: val })} onCommit={() => commitQuote(v.product.external_ref)} />
+                  <CellInput ariaLabel={`Factory quote for ${v.product.name}`} value={e.quoted} disabled={!editQuote} onChange={(val) => setEdit(v.product.external_ref, { quoted: val })} onCommit={() => commitQuote(v.product.external_ref)} />
                 </td>
                 <td className="px-2 py-1.5 text-right">
                   {eco.verdict ? (
@@ -181,6 +203,7 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
           </tbody>
         </table>
       </div>
+      )}
 
       <div className="mt-3 flex flex-wrap gap-4 text-[12px] text-muted-foreground">
         <span className="numeric"><b className="text-foreground">{totals.pursue}</b> Pursue</span>

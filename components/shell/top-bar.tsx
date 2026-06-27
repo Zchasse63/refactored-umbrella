@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { Command, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
+import { CommandPalette } from "./command-palette";
 import type { Role } from "@/lib/types";
 
 const NAV: { href: string; label: string; ready: boolean }[] = [
@@ -57,9 +58,7 @@ export function TopBar({ role }: { role: Role }) {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <span className="hidden items-center gap-1 rounded-md border border-border px-2 py-1 text-[11px] text-muted-foreground md:flex">
-            <Command className="size-3" aria-hidden /> K
-          </span>
+          <CommandPalette />
           <span className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-[11px] capitalize">
             <span
               className={cn(

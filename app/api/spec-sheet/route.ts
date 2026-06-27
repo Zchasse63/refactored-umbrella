@@ -4,6 +4,7 @@ import { renderToBuffer } from "@react-pdf/renderer";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { getProductViewBySlug } from "@/lib/data/queries";
 import { SpecSheet, type SpecSheetData } from "@/lib/pdf/spec-sheet";
+import { siteOrigin } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -27,10 +28,7 @@ export async function GET(req: NextRequest) {
   let imageDataUri: string | null = null;
   if (p.export_ok && p.primary_image_path && SAFE_IMAGE.test(p.primary_image_path)) {
     try {
-      const proto = req.headers.get("x-forwarded-proto") ?? "https";
-      const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
-      const origin = host ? `${proto}://${host}` : req.nextUrl.origin;
-      const r = await fetch(new URL(p.primary_image_path, origin).toString());
+      const r = await fetch(new URL(p.primary_image_path, siteOrigin()).toString(), { redirect: "error" });
       if (r.ok) {
         const b = Buffer.from(await r.arrayBuffer());
         const mime = p.primary_image_path.toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg";
@@ -64,6 +62,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (e) {
-    return NextResponse.json({ error: (e instanceof Error ? e.message : "PDF build failed").slice(0, 300) }, { status: 500 });
+    console.error("spec-sheet:", e instanceof Error ? e.message : e);
+    return NextResponse.json({ error: "Couldn't build the spec sheet. Please try again." }, { status: 500 });
   }
 }

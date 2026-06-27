@@ -72,6 +72,8 @@ function tierFor(lengthIn: number, widthIn: number, heightIn: number, weightLb: 
   const sides = [lengthIn, widthIn, heightIn].sort((a, b) => b - a); // longest → shortest
   const [longest, median_, shortest] = sides;
   const oz = weightLb * 16;
+  // shortest <= 0.75in is INTENTIONAL: Amazon's small-standard envelope thickness cap,
+  // not a unit bug. Appliances are thicker than 0.75in so they never qualify here.
   if (oz <= 16 && longest <= 15 && median_ <= 12 && shortest <= 0.75) return "small-standard";
   if (weightLb <= 20 && longest <= 18 && median_ <= 14 && shortest <= 8) return "large-standard";
   if (weightLb <= 50 && longest <= 59 && median_ <= 33 && longest + 2 * (median_ + shortest) <= 130) return "large-bulky";
