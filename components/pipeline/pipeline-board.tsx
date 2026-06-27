@@ -2,10 +2,12 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Lock, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { canTransition } from "@/lib/auth/capabilities";
+import { createSupabaseBrowser } from "@/lib/supabase/client";
 import { movePipeline } from "@/app/actions";
 import type { ProductWithPipeline } from "@/lib/data/queries";
 import type { Decision, PipelineStatus, Role, Tier } from "@/lib/types";
@@ -21,11 +23,24 @@ const TIER_VARIANT: Record<Tier, "pass" | "warn" | "neutral"> = { pursue: "pass"
 const DECISION_VARIANT: Record<Decision, "pass" | "warn" | "fail"> = { go: "pass", hold: "warn", pass: "fail" };
 
 export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; role: Role }) {
+  const router = useRouter();
   const [optimistic, setOptimistic] = useState<Record<string, PipelineStatus>>({});
   const [, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [dragRef, setDragRef] = useState<string | null>(null);
   const [overStage, setOverStage] = useState<PipelineStatus | null>(null);
+
+  // Live sync: when either partner moves a card, re-fetch server data so the other
+  // board updates without a refresh. RLS gates the stream to members; the reconcile
+  // effect below evicts our optimistic entry once the fresh `views` reflect it.
+  useEffect(() => {
+    const sb = createSupabaseBrowser();
+    const channel = sb
+      .channel("pipeline-board")
+      .on("postgres_changes", { event: "*", schema: "public", table: "pipeline_status" }, () => router.refresh())
+      .subscribe();
+    return () => { void sb.removeChannel(channel); };
+  }, [router]);
 
   const stageOf = (v: ProductWithPipeline) => optimistic[v.product.external_ref] ?? v.pipelineStatus;
 
