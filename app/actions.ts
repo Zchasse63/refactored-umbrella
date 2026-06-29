@@ -122,14 +122,18 @@ export async function discoverCompetitors(
 
   try {
     const profile = await buildSearchProfile(product, []);
-    const asins = (
-      await keepaFinder({
-        title: profile.title,
-        current_AMAZON_gte: Number.isFinite(profile.price_low) ? Math.round((profile.price_low as number) * 100) : undefined,
-        current_AMAZON_lte: Number.isFinite(profile.price_high) ? Math.round((profile.price_high as number) * 100) : undefined,
-        sort: [["monthlySold", "desc"]],
-      })
-    ).slice(0, 5);
+    const gte = Number.isFinite(profile.price_low) ? Math.round((profile.price_low as number) * 100) : undefined;
+    const lte = Number.isFinite(profile.price_high) ? Math.round((profile.price_high as number) * 100) : undefined;
+    const sort: [string, "asc" | "desc"][] = [["monthlySold", "desc"]];
+    // Graceful fallback: an over-tight AI price band or over-specific title can zero out a
+    // valid search. Try title+price → title-only → trimmed title before giving up.
+    let asins = await keepaFinder({ title: profile.title, current_AMAZON_gte: gte, current_AMAZON_lte: lte, sort });
+    if (!asins.length) asins = await keepaFinder({ title: profile.title, sort });
+    if (!asins.length) {
+      const short = profile.title.split(/\s+/).slice(0, 3).join(" ");
+      if (short && short.toLowerCase() !== profile.title.toLowerCase()) asins = await keepaFinder({ title: short, sort });
+    }
+    asins = asins.slice(0, 5);
     if (!asins.length) return { ok: true, found: 0, kept: 0 };
 
     const { products: kp } = await getKeepaProducts(asins);
