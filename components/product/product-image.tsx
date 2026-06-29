@@ -1,4 +1,4 @@
-import { Camera, CameraOff, Languages } from "lucide-react";
+import { CameraOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/types";
 
@@ -11,10 +11,13 @@ const initials = (name: string) =>
     .map((w) => w[0]!.toUpperCase())
     .join("") || "··";
 
-const hasImage = (p: Product) =>
-  p.primary_image_path && (p.photo_state === "good" || p.photo_state === "clean-photo-needed");
+/** A product is illustrated if it has an image file we can show. The factory deck
+ *  images (incl. ones with Chinese text) count — we show them as-is; real studio
+ *  photos come later with samples. Only a genuinely absent image is "no photo". */
+export const hasImage = (p: Product) =>
+  !!p.primary_image_path && (p.photo_state === "good" || p.photo_state === "clean-photo-needed");
 
-/** The branded "Studio photo pending" placeholder — never a broken-image icon. */
+/** The branded "photo pending" placeholder — never a broken-image icon. */
 function StudioPhotoPending({ product, className }: { product: Product; className?: string }) {
   return (
     <div
@@ -27,12 +30,12 @@ function StudioPhotoPending({ product, className }: { product: Product; classNam
       <span className="font-mono text-lg font-semibold tracking-tight text-foreground/40">
         {initials(product.name)}
       </span>
-      <span className="text-[11px]">Studio photo pending</span>
+      <span className="text-[11px]">Photo pending</span>
     </div>
   );
 }
 
-/** Full product image frame (PDP / large card). Honest about photo quality. */
+/** Full product image frame (PDP / large card). Shows the deck photo as-is. */
 export function PhotoFrame({
   product,
   className,
@@ -60,34 +63,17 @@ export function PhotoFrame({
         className="absolute inset-0 h-full w-full object-contain p-3"
         loading="lazy"
       />
-      <div className="absolute left-2 top-2 flex flex-col items-start gap-1">
-        {product.photo_state === "clean-photo-needed" && (
-          <span className="inline-flex items-center gap-1 rounded-md bg-quoted-muted px-2 py-0.5 text-[10px] font-semibold text-quoted-muted-foreground">
-            <Camera className="size-3" aria-hidden /> Clean photo needed
-          </span>
-        )}
-        {product.image_has_chinese && (
-          <span className="inline-flex items-center gap-1 rounded-md bg-background/80 px-2 py-0.5 text-[10px] font-medium text-muted-foreground backdrop-blur">
-            <Languages className="size-3" aria-hidden /> Contains Chinese text
-          </span>
-        )}
-      </div>
     </div>
   );
 }
 
-/** Tiny corner badge for catalog cards. */
+/** Tiny corner badge — only when there is genuinely no image to show. */
 export function PhotoCornerBadge({ product }: { product: Product }) {
-  if (product.photo_state === "good") return null;
-  const label =
-    product.photo_state === "missing"
-      ? "No photo"
-      : product.photo_state === "reshoot"
-        ? "Reshoot"
-        : "Clean photo";
+  if (hasImage(product)) return null;
+  const label = product.photo_state === "reshoot" ? "Reshoot" : "No photo";
   return (
     <span
-      className="inline-flex items-center gap-1 rounded-md bg-quoted-muted px-1.5 py-0.5 text-[10px] font-semibold text-quoted-muted-foreground"
+      className="inline-flex items-center gap-1 rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground"
       title={`Photo state: ${product.photo_state}`}
     >
       <CameraOff className="size-3" aria-hidden /> {label}
