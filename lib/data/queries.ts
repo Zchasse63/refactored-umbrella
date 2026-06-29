@@ -89,11 +89,14 @@ export async function getProductViewBySlug(slug: string): Promise<ProductView | 
     sb.from("selections").select("*").eq("product_id", product.id).maybeSingle(),
     sb.from("factory_quotes").select("landed_cost_ddp").eq("product_id", product.id).eq("is_selected", true).maybeSingle(),
     getAssumptions(),
-    sb.from("competitors").select("package_length_mm, package_width_mm, package_height_mm, package_weight_g").eq("product_id", product.id).eq("status", "approved"),
+    sb.from("competitors").select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, fba_pick_pack_fee").eq("product_id", product.id).eq("status", "approved"),
   ]);
   const p = rowToProduct(product);
   const selection = sel ? rowToSelection(sel, p.external_ref) : emptySelection(p.external_ref);
-  const fba = estimateFbaFee((comps ?? []).map((c: any) => ({ length_mm: c.package_length_mm, width_mm: c.package_width_mm, height_mm: c.package_height_mm, weight_g: c.package_weight_g })));
+  const fba = estimateFbaFee(
+    (comps ?? []).map((c: any) => ({ length_mm: c.package_length_mm, width_mm: c.package_width_mm, height_mm: c.package_height_mm, weight_g: c.package_weight_g })),
+    (comps ?? []).map((c: any) => num(c.fba_pick_pack_fee)),
+  );
   return buildView(p, selection, quote ? Number(quote.landed_cost_ddp) : null, assumptions, fba);
 }
 
@@ -131,6 +134,19 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
     package_width_mm: c.package_width_mm ?? null,
     package_height_mm: c.package_height_mm ?? null,
     package_weight_g: c.package_weight_g ?? null,
+    price_avg90: num(c.price_avg90),
+    price_min90: num(c.price_min90),
+    price_max90: num(c.price_max90),
+    bsr_avg90: c.bsr_avg90 ?? null,
+    bsr_best: c.bsr_best ?? null,
+    reviews_added_90d: c.reviews_added_90d ?? null,
+    variations_count: c.variations_count ?? null,
+    buy_box_is_fba: c.buy_box_is_fba ?? null,
+    buy_box_price: num(c.buy_box_price),
+    offer_count: c.offer_count ?? null,
+    listed_since: c.listed_since ?? null,
+    fba_pick_pack_fee: num(c.fba_pick_pack_fee),
+    referral_pct: num(c.referral_pct),
   }));
 }
 
@@ -139,18 +155,21 @@ export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
   const sb = createSupabaseServer();
   const { data } = await sb
     .from("competitors")
-    .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, product:product_id(external_ref)")
+    .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, fba_pick_pack_fee, product:product_id(external_ref)")
     .eq("status", "approved");
-  const byRef = new Map<string, { length_mm: number | null; width_mm: number | null; height_mm: number | null; weight_g: number | null }[]>();
+  type Dim = { length_mm: number | null; width_mm: number | null; height_mm: number | null; weight_g: number | null };
+  const byRef = new Map<string, { dims: Dim[]; fees: (number | null)[] }>();
   for (const r of (data ?? []) as any[]) {
     const ref = r.product?.external_ref;
     if (!ref) continue;
-    if (!byRef.has(ref)) byRef.set(ref, []);
-    byRef.get(ref)!.push({ length_mm: r.package_length_mm, width_mm: r.package_width_mm, height_mm: r.package_height_mm, weight_g: r.package_weight_g });
+    if (!byRef.has(ref)) byRef.set(ref, { dims: [], fees: [] });
+    const g = byRef.get(ref)!;
+    g.dims.push({ length_mm: r.package_length_mm, width_mm: r.package_width_mm, height_mm: r.package_height_mm, weight_g: r.package_weight_g });
+    g.fees.push(num(r.fba_pick_pack_fee));
   }
   const out: Record<string, FbaEstimate> = {};
-  for (const [ref, dims] of byRef) {
-    const est = estimateFbaFee(dims);
+  for (const [ref, { dims, fees }] of byRef) {
+    const est = estimateFbaFee(dims, fees);
     if (est) out[ref] = est;
   }
   return out;

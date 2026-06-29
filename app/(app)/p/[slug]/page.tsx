@@ -126,7 +126,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </div>
 
             {/* competitors */}
-            <CompetitorSection productRef={p.external_ref} role={role!} competitors={competitors} />
+            <CompetitorSection
+              productRef={p.external_ref}
+              role={role!}
+              competitors={competitors}
+              fbaEstimate={view.fbaEstimate}
+              targetSellPrice={selection.target_sell_price}
+            />
           </div>
 
           {/* RIGHT — the Deal Panel */}

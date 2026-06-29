@@ -18,10 +18,11 @@ export interface PackageDims {
 export type FbaTier = "small-standard" | "large-standard" | "large-bulky" | "extra-large";
 
 export interface FbaEstimate {
-  fee: number; // estimated per-unit fulfillment fee (USD)
-  tier: FbaTier;
+  fee: number; // per-unit fulfillment fee (USD)
+  source: "amazon-actual" | "dims-estimate"; // median of competitors' real Keepa fees vs dims-table estimate
+  tier: FbaTier | null; // null when source=amazon-actual and dims unusable
   tierLabel: string;
-  n: number; // competitors the estimate is based on
+  n: number; // data points the estimate is based on
   confidence: "low" | "medium" | "high";
   lengthIn: number;
   widthIn: number;
@@ -87,32 +88,44 @@ const TIER_LABEL: Record<FbaTier, string> = {
   "extra-large": "Extra-large",
 };
 
-/** Median competitor dims → estimated FBA fulfillment fee, or null if no usable dims. */
-export function estimateFbaFee(dims: PackageDims[]): FbaEstimate | null {
+const round2 = (n: number) => Math.round(n * 100) / 100;
+const round1 = (n: number) => Math.round(n * 10) / 10;
+
+/**
+ * Per-unit FBA fulfillment fee. PRECEDENCE: the median of competitors' REAL Keepa
+ * pick&pack fees beats the dims-table estimate — the real fee already bakes in Amazon's
+ * Low-Price-FBA rate (≤$10 items) and the exact tier, which the table can't. Falls back to
+ * the dims→tier→table path when no real fees are available. Returns null if neither works.
+ */
+export function estimateFbaFee(dims: PackageDims[], realFees: (number | null)[] = []): FbaEstimate | null {
+  const fees = realFees.filter((f): f is number => f != null && Number.isFinite(f) && f > 0);
+  const medianReal = median(fees);
+
+  // Dims-derived measurements/tier (for display, and as the fallback fee source).
   const usable = dims.filter((d) => d.length_mm && d.width_mm && d.height_mm && d.weight_g);
-  if (usable.length === 0) return null;
+  let d: { tier: FbaTier; lengthIn: number; widthIn: number; heightIn: number; weightLb: number; weightOz: number } | null = null;
+  if (usable.length) {
+    const lengthIn = (median(usable.map((x) => x.length_mm!)) ?? 0) / MM_PER_IN;
+    const widthIn = (median(usable.map((x) => x.width_mm!)) ?? 0) / MM_PER_IN;
+    const heightIn = (median(usable.map((x) => x.height_mm!)) ?? 0) / MM_PER_IN;
+    const weightG = median(usable.map((x) => x.weight_g!)) ?? 0;
+    const weightLb = weightG / G_PER_LB;
+    if (weightLb > 0 && lengthIn > 0)
+      d = { tier: tierFor(lengthIn, widthIn, heightIn, weightLb), lengthIn, widthIn, heightIn, weightLb, weightOz: weightG / G_PER_OZ };
+  }
 
-  const lengthIn = (median(usable.map((d) => d.length_mm!)) ?? 0) / MM_PER_IN;
-  const widthIn = (median(usable.map((d) => d.width_mm!)) ?? 0) / MM_PER_IN;
-  const heightIn = (median(usable.map((d) => d.height_mm!)) ?? 0) / MM_PER_IN;
-  const weightG = median(usable.map((d) => d.weight_g!)) ?? 0;
-  const weightLb = weightG / G_PER_LB;
-  const weightOz = weightG / G_PER_OZ;
-  if (weightLb <= 0 || lengthIn <= 0) return null;
-
-  const tier = tierFor(lengthIn, widthIn, heightIn, weightLb);
-  const fee = Math.round(feeFor(tier, weightLb, weightOz) * 100) / 100;
-  const confidence = usable.length >= 4 ? "high" : usable.length >= 2 ? "medium" : "low";
-
-  return {
-    fee,
-    tier,
-    tierLabel: TIER_LABEL[tier],
-    n: usable.length,
-    confidence,
-    lengthIn: Math.round(lengthIn * 10) / 10,
-    widthIn: Math.round(widthIn * 10) / 10,
-    heightIn: Math.round(heightIn * 10) / 10,
-    weightLb: Math.round(weightLb * 100) / 100,
+  const dimsFields = {
+    tier: d?.tier ?? null,
+    tierLabel: d ? TIER_LABEL[d.tier] : "Unknown",
+    lengthIn: d ? round1(d.lengthIn) : 0,
+    widthIn: d ? round1(d.widthIn) : 0,
+    heightIn: d ? round1(d.heightIn) : 0,
+    weightLb: d ? round2(d.weightLb) : 0,
   };
+  const conf = (n: number, hi: number): "low" | "medium" | "high" => (n >= hi ? "high" : n >= 2 ? "medium" : "low");
+
+  if (medianReal != null)
+    return { fee: round2(medianReal), source: "amazon-actual", n: fees.length, confidence: conf(fees.length, 3), ...dimsFields };
+  if (!d) return null;
+  return { fee: round2(feeFor(d.tier, d.weightLb, d.weightOz)), source: "dims-estimate", n: usable.length, confidence: conf(usable.length, 4), ...dimsFields };
 }

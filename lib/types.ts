@@ -77,6 +77,20 @@ export interface Competitor {
   package_width_mm: number | null;
   package_height_mm: number | null;
   package_weight_g: number | null;
+  // competitor-intel (Keepa) — all nullable (NULL = unknown)
+  price_avg90: number | null;
+  price_min90: number | null;
+  price_max90: number | null;
+  bsr_avg90: number | null;
+  bsr_best: number | null;
+  reviews_added_90d: number | null;
+  variations_count: number | null;
+  buy_box_is_fba: boolean | null;
+  buy_box_price: number | null;
+  offer_count: number | null;
+  listed_since: string | null;
+  fba_pick_pack_fee: number | null;
+  referral_pct: number | null;
 }
 
 /** Partner's working layer. */

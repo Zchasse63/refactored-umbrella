@@ -15,8 +15,24 @@ describe("estimateFbaFee", () => {
     expect(est).not.toBeNull();
     expect(est.tier).toBe("large-standard");
     expect(est.fee).toBeCloseTo(4.99, 2); // 1–1.5 lb large standard
+    expect(est.source).toBe("dims-estimate");
     expect(est.n).toBe(1);
     expect(est.confidence).toBe("low");
+  });
+
+  it("PREFERS the median of real competitor fees over the dims-table estimate (Low-Price FBA)", () => {
+    // same ~1 lb box (table would say $4.99) but real Keepa fees say $4.28 (sub-$10 low-price)
+    const est = estimateFbaFee([d(250, 180, 120, 500)], [4.28, 4.28, null, 4.82])!;
+    expect(est.source).toBe("amazon-actual");
+    expect(est.fee).toBeCloseTo(4.28, 2); // median of [4.28,4.28,4.82], nulls dropped
+    expect(est.n).toBe(3);
+    expect(est.tier).toBe("large-standard"); // dims still shown for context
+  });
+
+  it("falls back to dims when real fees are all null/invalid", () => {
+    const est = estimateFbaFee([d(250, 180, 120, 500)], [null, -1, 0])!;
+    expect(est.source).toBe("dims-estimate");
+    expect(est.fee).toBeCloseTo(4.99, 2);
   });
 
   it("uses the MEDIAN across competitors and raises confidence", () => {

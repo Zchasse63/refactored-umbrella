@@ -119,9 +119,12 @@ export function DealCalculator({
             <span className="numeric font-semibold">{money(fbaEstimate.fee)}/unit</span>
           </div>
           <p className="mt-0.5 leading-snug text-muted-foreground">
-            {fbaEstimate.tierLabel} · median of {fbaEstimate.n} competitor{fbaEstimate.n === 1 ? "" : "s"}{" "}
-            ({fbaEstimate.lengthIn}×{fbaEstimate.widthIn}×{fbaEstimate.heightIn}″, {fbaEstimate.weightLb} lb) ·{" "}
-            <span className="font-medium">estimate</span> — replaces the flat 15% FBA line in the math.
+            {fbaEstimate.source === "amazon-actual" ? (
+              <>Median of {fbaEstimate.n} competitor{fbaEstimate.n === 1 ? "" : "s"}&apos; actual Amazon FBA fee{fbaEstimate.n === 1 ? "" : "s"}</>
+            ) : (
+              <>{fbaEstimate.tierLabel} · estimated from {fbaEstimate.n} competitor box{fbaEstimate.n === 1 ? "" : "es"} ({fbaEstimate.lengthIn}×{fbaEstimate.widthIn}×{fbaEstimate.heightIn}″, {fbaEstimate.weightLb} lb)</>
+            )}{" "}
+            — replaces the flat 15% FBA line in the math.
           </p>
         </div>
       )}
