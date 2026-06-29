@@ -6,6 +6,7 @@ import {
   type Economics,
 } from "@/lib/calc/economics";
 import type { FbaEstimate } from "@/lib/calc/fba";
+import { estimateFobCost, type FobEstimate } from "@/lib/calc/fob";
 import type { Assumptions, Product, Selection } from "@/lib/types";
 
 export interface ProductView {
@@ -15,6 +16,7 @@ export interface ProductView {
   quotedLanded: number | null;
   economics: Economics;
   fbaEstimate: FbaEstimate | null;
+  fobEstimate: FobEstimate | null; // extrapolated Greenway FOB cost when no real quote exists
 }
 
 export const productSlug = (p: Product) => p.external_ref.split(":")[1];
@@ -38,13 +40,16 @@ export function buildView(
   assumptions: Assumptions = DEFAULT_ASSUMPTIONS,
   fbaEstimate: FbaEstimate | null = null,
 ): ProductView {
+  // No real Greenway quote? Extrapolate the FOB cost from the product's own specs.
+  const fobEstimate = product.our_cost == null ? estimateFobCost(product.group_name, product.specs) : null;
+  const effectiveCost = product.our_cost ?? fobEstimate?.fobPerPack ?? null;
   const economics = compute({
     assumptions,
     sellPrice: selection.target_sell_price,
     quotedLanded,
-    actualLanded: product.our_cost,
+    actualLanded: effectiveCost,
     applyOpex: LINE_OPEX_APPLIES[product.line],
     fbaPerUnit: fbaEstimate?.fee ?? null,
   });
-  return { product, slug: productSlug(product), selection, quotedLanded, economics, fbaEstimate };
+  return { product, slug: productSlug(product), selection, quotedLanded, economics, fbaEstimate, fobEstimate };
 }

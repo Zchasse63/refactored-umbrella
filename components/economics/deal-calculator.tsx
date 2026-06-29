@@ -5,6 +5,7 @@ import { User, Factory, SlidersHorizontal, RotateCcw, Lock, Check, Loader2 } fro
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { DEFAULT_ASSUMPTIONS, LABELS, compute, opexPct } from "@/lib/calc/economics";
 import type { FbaEstimate } from "@/lib/calc/fba";
+import type { FobEstimate } from "@/lib/calc/fob";
 import type { CostLine, Role, Tier } from "@/lib/types";
 import { saveSelection, saveQuote } from "@/app/actions";
 import { EconomicsWaterfall } from "./economics-waterfall";
@@ -60,6 +61,7 @@ export function DealCalculator({
   applyOpex = true,
   actualLanded = null,
   fbaEstimate = null,
+  fobEstimate = null,
 }: {
   productRef: string;
   role: Role;
@@ -69,6 +71,7 @@ export function DealCalculator({
   applyOpex?: boolean;
   actualLanded?: number | null;
   fbaEstimate?: FbaEstimate | null;
+  fobEstimate?: FobEstimate | null;
 }) {
   const [sell, setSell] = useState<number | null>(initialSell);
   const [tier, setTier] = useState<Tier | null>(initialTier);
@@ -111,6 +114,18 @@ export function DealCalculator({
   return (
     <div className="space-y-3">
       <EconomicsWaterfall eco={eco} />
+
+      {fobEstimate && (
+        <div className="rounded-md border border-target/30 bg-target-muted/40 p-2.5 text-[11px]">
+          <div className="flex items-center justify-between">
+            <span className="font-semibold text-foreground">Est. FOB cost</span>
+            <span className="numeric font-semibold">{money(fobEstimate.fobPerPack)}/pack</span>
+          </div>
+          <p className="mt-0.5 leading-snug text-muted-foreground">
+            No factory quote yet — <span className="font-medium">extrapolated</span> from the Greenway cost model ({fobEstimate.method}). Used as the landed cost until a real quote lands.
+          </p>
+        </div>
+      )}
 
       {fbaEstimate && (
         <div className="rounded-md border border-quoted/30 bg-quoted-muted/40 p-2.5 text-[11px]">

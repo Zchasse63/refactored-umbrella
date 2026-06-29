@@ -151,8 +151,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 initialTier={selection.tier}
                 initialQuoted={view.quotedLanded}
                 applyOpex={LINE_OPEX_APPLIES[p.line]}
-                actualLanded={p.our_cost}
+                actualLanded={p.our_cost ?? view.fobEstimate?.fobPerPack ?? null}
                 fbaEstimate={view.fbaEstimate}
+                fobEstimate={view.fobEstimate}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button asChild size="sm" variant="outline">
