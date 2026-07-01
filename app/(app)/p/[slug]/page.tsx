@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, FileText, FileDown, Lock, ChevronRight } from "lucide-react";
-import { getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
+import { getAssumptions, getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
 import { PhotoFrame } from "@/components/product/product-image";
 import { DealCalculator } from "@/components/economics/deal-calculator";
@@ -25,7 +25,7 @@ function atAGlance(specs: Spec[]): Spec[] {
 }
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const [view, role] = await Promise.all([getProductViewBySlug(params.slug), getViewerRole()]);
+  const [view, role, assumptions] = await Promise.all([getProductViewBySlug(params.slug), getViewerRole(), getAssumptions()]);
   if (!view) notFound();
   const { product: p, selection } = view;
   const competitors = await getCompetitors(p.external_ref);
@@ -154,6 +154,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 actualLanded={p.our_cost ?? view.fobEstimate?.fobPerPack ?? null}
                 fbaEstimate={view.fbaEstimate}
                 fobEstimate={view.fobEstimate}
+                assumptions={assumptions}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button asChild size="sm" variant="outline">

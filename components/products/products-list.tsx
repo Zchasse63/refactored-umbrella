@@ -6,11 +6,11 @@ import { Search, SearchX } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { Select } from "@/components/ui/select";
 import { EmptyState } from "@/components/ui/empty-state";
-import { DEFAULT_ASSUMPTIONS, LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
+import { LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
 import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
 import { saveSelection, saveQuote } from "@/app/actions";
 import type { ProductView } from "@/lib/data/view";
-import type { Role } from "@/lib/types";
+import type { Assumptions, Role } from "@/lib/types";
 
 type Edits = Record<string, { sell: number | null; quoted: number | null }>;
 
@@ -22,33 +22,39 @@ function CellInput({
   onCommit,
   disabled,
   ariaLabel,
+  error,
 }: {
   value: number | null;
   onChange: (v: number | null) => void;
   onCommit?: () => void;
   disabled?: boolean;
   ariaLabel?: string;
+  error?: boolean;
 }) {
   return (
     <input
       type="number"
       step="0.01"
+      min="0"
       value={value ?? ""}
       placeholder="—"
       disabled={disabled}
       aria-label={ariaLabel}
+      aria-invalid={error || undefined}
       onChange={(e) => onChange(e.target.value === "" ? null : Number(e.target.value))}
       onBlur={onCommit}
       onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
-      className="numeric w-20 rounded border border-input bg-card px-1.5 py-0.5 text-right text-[12px] outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+      className={cn(
+        "numeric w-20 rounded border bg-card px-1.5 py-0.5 text-right text-[12px] outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none",
+        error ? "border-fail ring-1 ring-fail/40" : "border-input",
+      )}
     />
   );
 }
 
-export function ProductsList({ views, role }: { views: ProductView[]; role: Role }) {
-  const [edits, setEdits] = useState<Edits>(() =>
-    Object.fromEntries(views.map((v) => [v.product.external_ref, { sell: v.selection.target_sell_price, quoted: v.quotedLanded }])),
-  );
+export function ProductsList({ views, role, assumptions }: { views: ProductView[]; role: Role; assumptions: Assumptions }) {
+  const [edits, setEdits] = useState<Edits>({});
+  const [saveErrs, setSaveErrs] = useState<Record<string, string | null>>({});
   const [, startTransition] = useTransition();
   const [savingRef, setSavingRef] = useState<string | null>(null);
   const [filters, setFilters] = useState<CatalogFilters>(EMPTY_FILTERS);
@@ -61,35 +67,51 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
   const lines = useMemo(() => lineFacets(views), [views]);
   const setF = (patch: Partial<CatalogFilters>) => setFilters((f) => ({ ...f, ...patch }));
 
+  // Edits map holds ONLY rows the user touched; everything else falls back to server
+  // values, so a revalidate that adds/changes rows can never strand a stale entry.
+  const effEdit = (v: ProductView) =>
+    edits[v.product.external_ref] ?? { sell: v.selection.target_sell_price, quoted: v.quotedLanded };
+
   const rows = useMemo(
     () =>
       filtered.map((v) => {
-        const e = edits[v.product.external_ref];
-        const eco = compute({
-          assumptions: DEFAULT_ASSUMPTIONS,
-          sellPrice: e.sell,
-          quotedLanded: e.quoted,
-          actualLanded: v.product.our_cost,
-          applyOpex: LINE_OPEX_APPLIES[v.product.line],
-        });
+        const e = effEdit(v);
+        const edited = e.sell !== v.selection.target_sell_price || e.quoted !== v.quotedLanded;
+        // Unedited rows use the SERVER-computed economics verbatim (single source of truth);
+        // edited rows recompute with the exact same inputs the server used.
+        const eco = edited
+          ? compute({
+              assumptions,
+              sellPrice: e.sell,
+              quotedLanded: e.quoted,
+              actualLanded: v.product.our_cost ?? v.fobEstimate?.fobPerPack ?? null,
+              applyOpex: LINE_OPEX_APPLIES[v.product.line],
+              fbaPerUnit: v.fbaEstimate?.fee ?? null,
+            })
+          : v.economics;
         return { v, e, eco };
       }),
-    [filtered, edits],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filtered, edits, assumptions],
   );
 
-  const setEdit = (ref: string, patch: Partial<{ sell: number | null; quoted: number | null }>) =>
-    setEdits((s) => ({ ...s, [ref]: { ...s[ref], ...patch } }));
+  const setEdit = (v: ProductView, patch: Partial<{ sell: number | null; quoted: number | null }>) =>
+    setEdits((s) => ({ ...s, [v.product.external_ref]: { ...effEdit(v), ...patch } }));
 
-  const commitSell = (ref: string, tier: ProductView["selection"]["tier"]) =>
+  const commitSell = (v: ProductView) =>
     startTransition(async () => {
+      const ref = v.product.external_ref;
       setSavingRef(ref);
-      await saveSelection(ref, { tier, target_sell_price: edits[ref].sell });
+      const res = await saveSelection(ref, { tier: v.selection.tier, target_sell_price: effEdit(v).sell });
+      setSaveErrs((s) => ({ ...s, [ref]: "error" in res ? res.error : null }));
       setSavingRef(null);
     });
-  const commitQuote = (ref: string) =>
+  const commitQuote = (v: ProductView) =>
     startTransition(async () => {
+      const ref = v.product.external_ref;
       setSavingRef(ref);
-      await saveQuote(ref, edits[ref].quoted);
+      const res = await saveQuote(ref, effEdit(v).quoted);
+      setSaveErrs((s) => ({ ...s, [ref]: "error" in res ? res.error : null }));
       setSavingRef(null);
     });
 
@@ -185,11 +207,16 @@ export function ProductsList({ views, role }: { views: ProductView[]; role: Role
                   ) : <span className="text-muted-foreground/50">—</span>}
                 </td>
                 <td className="px-2 py-1.5 text-right">
-                  <CellInput ariaLabel={`Target sell for ${v.product.name}`} value={e.sell} disabled={!editSell} onChange={(val) => setEdit(v.product.external_ref, { sell: val })} onCommit={() => commitSell(v.product.external_ref, v.selection.tier)} />
+                  <CellInput ariaLabel={`Target sell for ${v.product.name}`} value={e.sell} disabled={!editSell} error={!!saveErrs[v.product.external_ref]} onChange={(val) => setEdit(v, { sell: val })} onCommit={() => commitSell(v)} />
                 </td>
                 <td className="numeric px-2 py-1.5 text-right text-muted-foreground">{eco.targetLanded == null ? EMDASH : money(eco.targetLanded)}</td>
                 <td className="px-2 py-1.5 text-right">
-                  <CellInput ariaLabel={`Factory quote for ${v.product.name}`} value={e.quoted} disabled={!editQuote} onChange={(val) => setEdit(v.product.external_ref, { quoted: val })} onCommit={() => commitQuote(v.product.external_ref)} />
+                  <CellInput ariaLabel={`Factory quote for ${v.product.name}`} value={e.quoted} disabled={!editQuote} error={!!saveErrs[v.product.external_ref]} onChange={(val) => setEdit(v, { quoted: val })} onCommit={() => commitQuote(v)} />
+                  {saveErrs[v.product.external_ref] && (
+                    <div role="alert" className="mt-0.5 text-right text-[10px] font-medium text-fail">
+                      Not saved — {saveErrs[v.product.external_ref]}
+                    </div>
+                  )}
                 </td>
                 <td className="px-2 py-1.5 text-right">
                   {eco.verdict ? (

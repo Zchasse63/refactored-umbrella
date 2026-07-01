@@ -31,19 +31,21 @@ export function TopBar({ role }: { role: Role }) {
   return (
     <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-full max-w-[1400px] items-center gap-4 px-4">
-        <Link href="/catalog" className="flex items-center gap-1.5 font-semibold tracking-tight">
+        <Link href="/catalog" className="flex shrink-0 items-center gap-1.5 font-semibold tracking-tight">
           <span className="grid size-6 place-items-center rounded-md bg-primary text-[11px] text-primary-foreground">P</span>
-          Portal
+          <span className="hidden sm:inline">Portal</span>
         </Link>
 
-        <nav className="flex items-center gap-1 text-[13px]">
+        {/* Scrollable on narrow screens so every destination stays reachable; brand and
+            role/sign-out stay pinned. */}
+        <nav className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-[13px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {NAV.map((n) =>
             n.ready ? (
               <Link
                 key={n.href}
                 href={n.href}
                 className={cn(
-                  "rounded-md px-2.5 py-1.5 transition",
+                  "shrink-0 whitespace-nowrap rounded-md px-2.5 py-1.5 transition",
                   path.startsWith(n.href) ? "bg-muted font-medium text-foreground" : "text-muted-foreground hover:bg-muted",
                 )}
               >
@@ -57,7 +59,7 @@ export function TopBar({ role }: { role: Role }) {
           )}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-3">
           <CommandPalette />
           <span className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-[11px] capitalize">
             <span

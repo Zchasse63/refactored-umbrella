@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { User, Factory, SlidersHorizontal, RotateCcw, Lock, Check, Loader2 } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { DEFAULT_ASSUMPTIONS, LABELS, compute, opexPct } from "@/lib/calc/economics";
+import type { Assumptions } from "@/lib/types";
 import type { FbaEstimate } from "@/lib/calc/fba";
 import type { FobEstimate } from "@/lib/calc/fob";
 import type { CostLine, Role, Tier } from "@/lib/types";
@@ -62,6 +63,7 @@ export function DealCalculator({
   actualLanded = null,
   fbaEstimate = null,
   fobEstimate = null,
+  assumptions = null,
 }: {
   productRef: string;
   role: Role;
@@ -72,12 +74,16 @@ export function DealCalculator({
   actualLanded?: number | null;
   fbaEstimate?: FbaEstimate | null;
   fobEstimate?: FobEstimate | null;
+  /** LIVE global assumptions from the DB — the client must never fall back to compiled-in
+   *  constants when the server provides these (split-brain guard). */
+  assumptions?: Assumptions | null;
 }) {
+  const base = assumptions ?? DEFAULT_ASSUMPTIONS;
   const [sell, setSell] = useState<number | null>(initialSell);
   const [tier, setTier] = useState<Tier | null>(initialTier);
   const [quoted, setQuoted] = useState<number | null>(initialQuoted);
-  const [gm, setGm] = useState(DEFAULT_ASSUMPTIONS.grossMargin);
-  const [stack, setStack] = useState<CostLine[]>(DEFAULT_ASSUMPTIONS.costStack);
+  const [gm, setGm] = useState(base.grossMargin);
+  const [stack, setStack] = useState<CostLine[]>(base.costStack);
   const [showAssumptions, setShowAssumptions] = useState(false);
   const [pending, startTransition] = useTransition();
   const [saved, setSaved] = useState<"targets" | "quote" | null>(null);
@@ -85,7 +91,7 @@ export function DealCalculator({
 
   const editTargets = role === "partner";
   const editQuote = role === "owner";
-  const overridden = gm !== DEFAULT_ASSUMPTIONS.grossMargin || stack !== DEFAULT_ASSUMPTIONS.costStack;
+  const overridden = gm !== base.grossMargin || stack !== base.costStack;
   const opx = applyOpex ? opexPct(stack) : 0;
 
   const eco = useMemo(
@@ -249,7 +255,7 @@ export function DealCalculator({
               {pct(gm, 0)} gross = COGS ÷ price (landed ≤ {pct(1 - gm, 0)}). Opex {pct(opx, 0)} is <span className="font-semibold">separate</span> → net ≈ {pct(eco.liveNetPct ?? 0, 0)}, not {pct(gm, 0)}.
             </p>
             {overridden && (
-              <button type="button" onClick={() => { setGm(DEFAULT_ASSUMPTIONS.grossMargin); setStack(DEFAULT_ASSUMPTIONS.costStack); }} className="flex items-center gap-1 text-[11px] text-partner">
+              <button type="button" onClick={() => { setGm(base.grossMargin); setStack(base.costStack); }} className="flex items-center gap-1 text-[11px] text-partner">
                 <RotateCcw className="size-3" aria-hidden /> Reset to global
               </button>
             )}

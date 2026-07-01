@@ -69,8 +69,18 @@ export interface ImportedQuote {
 
 export function toNum(v: unknown): number | null {
   if (v == null || v === "") return null;
-  const n = typeof v === "number" ? v : Number(String(v).replace(/[$,\s]/g, ""));
-  return Number.isFinite(n) ? n : null;
+  let n: number;
+  if (typeof v === "number") {
+    n = v;
+  } else {
+    let s = String(v).replace(/[$\s]/g, "");
+    // decimal-comma ("12,50") means 12.50 — stripping it would silently 100× the quote
+    if (/^\d+,\d{1,2}$/.test(s)) s = s.replace(",", ".");
+    else s = s.replace(/,/g, ""); // thousands separators
+    n = Number(s);
+  }
+  // money fields only: a non-positive quote/MOQ is never valid — reject rather than import
+  return Number.isFinite(n) && n > 0 ? n : null;
 }
 
 /** Parse a returned RFQ sheet (rows of cells) into the factory's quotes, by header name. */

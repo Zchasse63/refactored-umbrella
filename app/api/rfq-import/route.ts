@@ -73,6 +73,9 @@ export async function POST(req: NextRequest) {
       const k = String(p.model).trim().toLowerCase();
       if ((modelCounts.get(k) ?? 0) === 1) byModel.set(k, p.id); // skip ambiguous SKUs entirely
     }
+    // target landed per product — sanity band for the incoming quotes
+    const { data: sels } = await sb.from("selections").select("product_id, target_landed_cost");
+    const targetByProduct = new Map((sels ?? []).map((s: any) => [s.product_id, Number(s.target_landed_cost)]));
 
     let updated = 0;
     const skipped: { model: string; reason: string }[] = [];
@@ -85,6 +88,13 @@ export async function POST(req: NextRequest) {
         continue;
       }
       if (row.quote == null) { skipped.push({ model: row.model, reason: "MOQ filled but no quote price — quote required" }); continue; }
+      // Units sanity: a quote wildly off the target landed is almost always a unit/locale
+      // error (per-case vs per-unit, mangled decimal). Skip for human verification.
+      const target = targetByProduct.get(productId);
+      if (target != null && Number.isFinite(target) && target > 0 && (row.quote > 5 * target || row.quote < 0.2 * target)) {
+        skipped.push({ model: row.model, reason: `quote $${row.quote} is >5x off the $${target.toFixed(2)} target — check units, then re-import or enter manually` });
+        continue;
+      }
       // Atomic deselect+insert in one transaction (set_selected_quote RPC) — no race with
       // the partial unique index, no window where the product has zero selected quotes.
       const { error } = await sb.rpc("set_selected_quote", {

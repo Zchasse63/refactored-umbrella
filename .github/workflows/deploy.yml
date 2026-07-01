@@ -20,6 +20,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Dependency audit (critical gate)
+        run: npm audit --audit-level=critical --omit=dev
       - name: Unit tests
         run: npm test
       - name: Build + deploy to Netlify (production)

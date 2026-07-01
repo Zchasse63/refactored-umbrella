@@ -28,6 +28,11 @@ function revalidate(ref: string) {
   revalidatePath(`/p/${ref.split(":")[1]}`);
 }
 
+/** Money inputs must be a sane positive dollar amount (or null = cleared). */
+function badMoney(v: number | null | undefined): boolean {
+  return v != null && (!Number.isFinite(v) || v <= 0 || v > 99999);
+}
+
 /** Partner: save prospect tier + target sell (RLS gates to the partner role). */
 export async function saveSelection(
   ref: string,
@@ -36,7 +41,11 @@ export async function saveSelection(
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
   const sell = patch.target_sell_price ?? null;
-  const target_landed_cost = sell != null ? targetLanded(sell, DEFAULT_GROSS_MARGIN) : null;
+  if (badMoney(sell)) return { error: "Target sell must be a positive dollar amount." };
+  // derive against the LIVE global assumptions, not the compiled-in default
+  const { data: a } = await r.sb.from("assumptions").select("gross_margin").eq("id", 1).maybeSingle();
+  const gm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
+  const target_landed_cost = sell != null ? targetLanded(sell, gm) : null;
   const { error } = await r.sb.from("selections").upsert(
     {
       product_id: r.productId,
@@ -63,6 +72,7 @@ export async function saveSelection(
 export async function saveQuote(ref: string, landed: number | null): Promise<Result> {
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
+  if (badMoney(landed)) return { error: "Quote must be a positive dollar amount." };
   // Atomic deselect+insert in one transaction (set_selected_quote RPC): a re-quote can
   // never strand a product mid-swap. landed=null deselects only (intended clear path).
   const { error } = await r.sb.rpc("set_selected_quote", { p_product_id: r.productId, p_landed: landed });
