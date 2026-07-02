@@ -91,6 +91,7 @@ export interface Competitor {
   listed_since: string | null;
   fba_pick_pack_fee: number | null;
   referral_pct: number | null;
+  enriched_at: string | null; // when this row's Keepa data was last refreshed
 }
 
 /** Partner's working layer. */
@@ -102,6 +103,7 @@ export interface Selection {
   target_landed_cost: number | null; // derived + persisted
   calc_inputs: CalcInputs | null; // per-product override bag
   notes: string | null;
+  updated_at: string | null;
 }
 
 export interface FactoryQuote {

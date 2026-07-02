@@ -3,6 +3,7 @@ import {
   DEFAULT_ASSUMPTIONS,
   LINE_OPEX_APPLIES,
   compute,
+  resolveAssumptions,
   type Economics,
 } from "@/lib/calc/economics";
 import type { FbaEstimate } from "@/lib/calc/fba";
@@ -30,6 +31,7 @@ export function emptySelection(ref: string): Selection {
     target_landed_cost: null,
     calc_inputs: null,
     notes: null,
+    updated_at: null,
   };
 }
 
@@ -43,8 +45,12 @@ export function buildView(
   // No real Greenway quote? Extrapolate the FOB cost from the product's own specs.
   const fobEstimate = product.our_cost == null ? estimateFobCost(product.group_name, product.specs) : null;
   const effectiveCost = product.our_cost ?? fobEstimate?.fobPerPack ?? null;
+  // Per-product override (selections.calc_inputs) beats the global assumptions — this is
+  // the single place the override applies, so EVERY surface (catalog, board, products,
+  // PDP, dashboard, RFQ) honors it identically.
+  const effAssumptions = resolveAssumptions(assumptions, selection.calc_inputs);
   const economics = compute({
-    assumptions,
+    assumptions: effAssumptions,
     sellPrice: selection.target_sell_price,
     quotedLanded,
     actualLanded: effectiveCost,

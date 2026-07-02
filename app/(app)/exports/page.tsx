@@ -1,5 +1,7 @@
+import { Download } from "lucide-react";
 import { getCatalog, getViewerRole, getFactoryMoqs } from "@/lib/data/queries";
 import { RfqBuilder } from "@/components/exports/rfq-builder";
+import { Button } from "@/components/ui/button";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Exports · Portal" };
@@ -16,6 +18,22 @@ export default async function ExportsPage() {
           Clean product images embed automatically.
         </p>
         <RfqBuilder views={views} moq={moq} role={role!} />
+
+        <div className="mt-8 flex flex-wrap items-center gap-3 rounded-lg border border-border bg-muted/20 p-3">
+          <div className="text-[12px]">
+            <div className="font-semibold">Spreadsheet export</div>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">
+              Every product in the catalog as a CSV — name, tier, target sell, target landed (DDP), quote, net % and pipeline stage.
+            </p>
+          </div>
+          <div className="ml-auto">
+            <Button asChild variant="outline" size="sm">
+              <a href="/api/export" download>
+                <Download className="size-3.5" /> Download full catalog CSV
+              </a>
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

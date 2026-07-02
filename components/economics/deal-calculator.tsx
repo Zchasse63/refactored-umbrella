@@ -4,7 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { User, Factory, SlidersHorizontal, RotateCcw, Lock, Check, Loader2 } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { DEFAULT_ASSUMPTIONS, LABELS, compute, opexPct } from "@/lib/calc/economics";
-import type { Assumptions } from "@/lib/types";
+import type { Assumptions, CalcInputs } from "@/lib/types";
 import type { FbaEstimate } from "@/lib/calc/fba";
 import type { FobEstimate } from "@/lib/calc/fob";
 import type { CostLine, Role, Tier } from "@/lib/types";
@@ -64,12 +64,19 @@ export function DealCalculator({
   fbaEstimate = null,
   fobEstimate = null,
   assumptions = null,
+  initialCalcInputs = null,
+  initialMoq = null,
+  initialLeadTime = null,
+  initialSupplier = null,
 }: {
   productRef: string;
   role: Role;
   initialSell: number | null;
   initialTier: Tier | null;
   initialQuoted: number | null;
+  initialMoq?: number | null;
+  initialLeadTime?: number | null;
+  initialSupplier?: string | null;
   applyOpex?: boolean;
   actualLanded?: number | null;
   fbaEstimate?: FbaEstimate | null;
@@ -77,13 +84,19 @@ export function DealCalculator({
   /** LIVE global assumptions from the DB — the client must never fall back to compiled-in
    *  constants when the server provides these (split-brain guard). */
   assumptions?: Assumptions | null;
+  /** Persisted per-product override (selections.calc_inputs), if any. */
+  initialCalcInputs?: CalcInputs | null;
 }) {
   const base = assumptions ?? DEFAULT_ASSUMPTIONS;
+  const savedOverride = initialCalcInputs && initialCalcInputs.overridden !== false ? initialCalcInputs : null;
   const [sell, setSell] = useState<number | null>(initialSell);
   const [tier, setTier] = useState<Tier | null>(initialTier);
   const [quoted, setQuoted] = useState<number | null>(initialQuoted);
-  const [gm, setGm] = useState(base.grossMargin);
-  const [stack, setStack] = useState<CostLine[]>(base.costStack);
+  const [moq, setMoq] = useState<number | null>(initialMoq);
+  const [leadTime, setLeadTime] = useState<number | null>(initialLeadTime);
+  const [supplier, setSupplier] = useState<string>(initialSupplier ?? "");
+  const [gm, setGm] = useState(savedOverride?.grossMargin ?? base.grossMargin);
+  const [stack, setStack] = useState<CostLine[]>(savedOverride?.costStack ?? base.costStack);
   const [showAssumptions, setShowAssumptions] = useState(false);
   const [pending, startTransition] = useTransition();
   const [saved, setSaved] = useState<"targets" | "quote" | null>(null);
@@ -112,9 +125,27 @@ export function DealCalculator({
   const persistQuote = () =>
     startTransition(async () => {
       setErr(null);
-      const r = await saveQuote(productRef, quoted);
+      const r = await saveQuote(productRef, quoted, { moq, lead_time_days: leadTime, supplier: supplier || null });
       if ("error" in r) setErr(r.error);
       else { setSaved("quote"); setTimeout(() => setSaved(null), 2000); }
+    });
+  // Persist / clear the per-product calculator override (selections.calc_inputs) so a
+  // what-if stops evaporating on refresh. Only the partner owns selections.
+  const saveOverride = () =>
+    startTransition(async () => {
+      setErr(null);
+      const r = await saveSelection(productRef, { tier, target_sell_price: sell, calc_inputs: { grossMargin: gm, costStack: stack, overridden: true } });
+      if ("error" in r) setErr(r.error);
+      else { setSaved("targets"); setTimeout(() => setSaved(null), 2000); }
+    });
+  const clearOverride = () =>
+    startTransition(async () => {
+      setErr(null);
+      setGm(base.grossMargin);
+      setStack(base.costStack);
+      const r = await saveSelection(productRef, { tier, target_sell_price: sell, calc_inputs: { overridden: false } });
+      if ("error" in r) setErr(r.error);
+      else { setSaved("targets"); setTimeout(() => setSaved(null), 2000); }
     });
 
   return (
@@ -202,6 +233,30 @@ export function DealCalculator({
           <span className="text-muted-foreground">Quoted DDP</span>
           <NumberField value={quoted} onChange={setQuoted} prefix="$" className="w-28" disabled={!editQuote} />
         </label>
+        {(editQuote || moq != null || leadTime != null || supplier) && (
+          <div className="mt-1.5 space-y-1.5 border-t border-border pt-1.5">
+            <label className="flex items-center justify-between gap-2 text-[12px]">
+              <span className="text-muted-foreground">MOQ</span>
+              <NumberField value={moq} onChange={setMoq} suffix="units" className="w-28" step="1" disabled={!editQuote} />
+            </label>
+            <label className="flex items-center justify-between gap-2 text-[12px]">
+              <span className="text-muted-foreground">Lead time</span>
+              <NumberField value={leadTime} onChange={setLeadTime} suffix="days" className="w-28" step="1" disabled={!editQuote} />
+            </label>
+            <label className="flex items-center justify-between gap-2 text-[12px]">
+              <span className="text-muted-foreground">Supplier</span>
+              <input
+                type="text"
+                value={supplier}
+                onChange={(e) => setSupplier(e.target.value)}
+                disabled={!editQuote}
+                placeholder="—"
+                maxLength={120}
+                className="w-28 rounded-md border border-input bg-card px-2 py-1 text-right text-[13px] outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </label>
+          </div>
+        )}
         {editQuote ? (
           <button type="button" onClick={persistQuote} disabled={pending} className="mt-2 flex w-full items-center justify-center gap-1 rounded-md bg-primary py-1.5 text-[12px] font-medium text-primary-foreground disabled:opacity-60">
             {pending && saved !== "targets" ? <Loader2 className="size-3 animate-spin" /> : saved === "quote" ? <Check className="size-3" /> : null}
@@ -254,7 +309,19 @@ export function DealCalculator({
             <p className="rounded-md bg-muted/50 px-2 py-1 text-[10px] leading-snug text-muted-foreground">
               {pct(gm, 0)} gross = COGS ÷ price (landed ≤ {pct(1 - gm, 0)}). Opex {pct(opx, 0)} is <span className="font-semibold">separate</span> → net ≈ {pct(eco.liveNetPct ?? 0, 0)}, not {pct(gm, 0)}.
             </p>
-            {overridden && (
+            {editTargets && (overridden || savedOverride) && (
+              <div className="flex items-center gap-3 border-t border-border pt-2">
+                {overridden && (
+                  <button type="button" onClick={saveOverride} disabled={pending} className="inline-flex items-center gap-1 rounded-md bg-partner-muted px-2 py-1 text-[11px] font-semibold text-partner-muted-foreground disabled:opacity-50">
+                    {pending ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />} Save override for this product
+                  </button>
+                )}
+                <button type="button" onClick={clearOverride} disabled={pending} className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground">
+                  <RotateCcw className="size-3" aria-hidden /> {savedOverride ? "Clear saved override" : "Reset to global"}
+                </button>
+              </div>
+            )}
+            {!editTargets && overridden && (
               <button type="button" onClick={() => { setGm(base.grossMargin); setStack(base.costStack); }} className="flex items-center gap-1 text-[11px] text-partner">
                 <RotateCcw className="size-3" aria-hidden /> Reset to global
               </button>

@@ -5,6 +5,23 @@
  * fresh collection triggers). Server-only.
  */
 const KEEPA_BASE = "https://api.keepa.com";
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Token-aware retry (mirrors lib/keepa/client): wait out Keepa's `refillIn` on 429. */
+async function keepaFetch(url: URL, init?: RequestInit, tries = 3): Promise<Response> {
+  for (let i = 0; ; i++) {
+    const res = await fetch(url, init);
+    if (res.status !== 429 || i >= tries - 1) return res;
+    let waitMs = 3000;
+    try {
+      const body = await res.clone().json();
+      if (typeof body?.refillIn === "number" && body.refillIn > 0) waitMs = body.refillIn;
+    } catch {
+      /* default wait */
+    }
+    await sleep(Math.min(waitMs, 65_000) + 250);
+  }
+}
 
 export interface FinderSelection {
   categories_include?: number[];
@@ -41,7 +58,7 @@ export async function keepaFinder(selection: FinderSelection): Promise<string[]>
   // Keepa Product Finder requires a full page size (min 50); we slice the result
   // down to a handful of candidates for enrichment in the caller.
   const { perPage, page, ...rest } = selection;
-  const res = await fetch(url, {
+  const res = await keepaFetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ asinsOnly: true, page: page ?? 0, perPage: perPage ?? 50, ...rest }),

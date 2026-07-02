@@ -52,6 +52,7 @@ export function SpecSheet({ data }: { data: SpecSheetData }) {
 
         <View style={s.row}>
           {data.imageDataUri ? (
+            // eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf Image, not a DOM <img>; alt is not a valid prop
             <Image src={data.imageDataUri} style={s.image} />
           ) : (
             <View style={s.imagePlaceholder}>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Search, SearchX, SlidersHorizontal } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search, SearchX, SlidersHorizontal, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -22,9 +23,26 @@ const SORTS: { key: CatalogSort; label: string }[] = [
 ];
 
 export function CatalogBrowser({ views }: { views: ProductView[] }) {
-  const [filters, setFilters] = useState<CatalogFilters>(EMPTY_FILTERS);
-  const [sort, setSort] = useState<CatalogSort>("relevance");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  // Filters + sort live in the URL: back-button restores the working set, and a filtered
+  // view is a shareable link ("triage these 12"). The filter model is already serializable.
+  const [filters, setFilters] = useState<CatalogFilters>(() => {
+    const f = searchParams.get("f");
+    if (f) { try { return { ...EMPTY_FILTERS, ...JSON.parse(f) }; } catch { /* malformed → defaults */ } }
+    return EMPTY_FILTERS;
+  });
+  const [sort, setSort] = useState<CatalogSort>(() => (searchParams.get("sort") as CatalogSort) || "relevance");
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (isFiltered(filters)) params.set("f", JSON.stringify(filters));
+    if (sort !== "relevance") params.set("sort", sort);
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [filters, sort, pathname, router]);
 
   const result = useMemo(() => sortViews(applyFilters(views, filters), sort), [views, filters, sort]);
 
@@ -53,6 +71,13 @@ export function CatalogBrowser({ views }: { views: ProductView[] }) {
               <option key={s.key} value={s.key}>Sort: {s.label}</option>
             ))}
           </Select>
+          <a
+            href={`/api/export${(() => { const p = new URLSearchParams(); if (isFiltered(filters)) p.set("f", JSON.stringify(filters)); if (sort !== "relevance") p.set("sort", sort); const q = p.toString(); return q ? `?${q}` : ""; })()}`}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-[13px] text-muted-foreground transition hover:bg-muted"
+            title="Download this filtered view as CSV"
+          >
+            <Download className="size-4" aria-hidden /> CSV
+          </a>
         </div>
 
         <div className="text-[12px] text-muted-foreground">

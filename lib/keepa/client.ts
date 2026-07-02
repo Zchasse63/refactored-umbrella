@@ -53,6 +53,29 @@ function keyOrThrow(): string {
   return k;
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Fetch with token-aware backoff. Keepa's plan refills ~20 tokens/min; when depleted it
+ * answers 429 with `refillIn` (ms until the next refill tick). Historically that 429 just
+ * threw and killed batch runs — now we wait out `refillIn` (capped) and retry a couple of
+ * times before giving up. Non-429 errors still throw immediately.
+ */
+async function keepaFetch(url: URL, tries = 3): Promise<Response> {
+  for (let i = 0; ; i++) {
+    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    if (res.status !== 429 || i >= tries - 1) return res;
+    let waitMs = 3000;
+    try {
+      const body = await res.clone().json();
+      if (typeof body?.refillIn === "number" && body.refillIn > 0) waitMs = body.refillIn;
+    } catch {
+      /* no JSON body — fall back to the default wait */
+    }
+    await sleep(Math.min(waitMs, 65_000) + 250); // cap so we never hang a request forever
+  }
+}
+
 /** Fetch up to 100 ASINs in one call. Rich pull for competitor intel: stats=90 (90d
  *  avg/min/max), history=1 (review-velocity csv), buybox=1 (buy-box FBA + price), rating=1.
  *  fbaFees + referralFeePercent come by default. NO `offers` param (the only expensive one):
@@ -69,7 +92,7 @@ export async function getKeepaProducts(asins: string[]): Promise<KeepaResponse> 
   url.searchParams.set("rating", "1");
   url.searchParams.set("history", "1");
   url.searchParams.set("buybox", "1");
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  const res = await keepaFetch(url);
   if (!res.ok) throw new Error(`Keepa ${res.status}: ${await res.text()}`);
   return (await res.json()) as KeepaResponse;
 }

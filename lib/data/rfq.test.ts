@@ -14,7 +14,7 @@ const product = (over: Partial<Product> = {}): Product => ({
 });
 const sel = (over: Partial<Selection> = {}): Selection => ({
   product_external_ref: "appliance:x", tier: "pursue", priority: null, target_sell_price: 40,
-  target_landed_cost: null, calc_inputs: null, notes: null, ...over,
+  target_landed_cost: null, calc_inputs: null, notes: null, updated_at: null, ...over,
 });
 
 describe("buildRfqRow — RFQ SAFETY", () => {

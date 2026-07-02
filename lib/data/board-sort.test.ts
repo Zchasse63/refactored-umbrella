@@ -11,7 +11,7 @@ const product = (ref: string, name: string): Product => ({
 });
 const sel = (over: Partial<Selection> = {}): Selection => ({
   product_external_ref: "x", tier: null, priority: null, target_sell_price: null,
-  target_landed_cost: null, calc_inputs: null, notes: null, ...over,
+  target_landed_cost: null, calc_inputs: null, notes: null, updated_at: null, ...over,
 });
 
 describe("sortBoardViews", () => {

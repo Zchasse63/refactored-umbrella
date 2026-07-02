@@ -5,6 +5,7 @@ import { computeDashboardStats } from "@/lib/data/stats";
 import { can } from "@/lib/auth/capabilities";
 import { KpiCards } from "@/components/dashboard/kpi-cards";
 import { SelectionsTable } from "@/components/dashboard/selections-table";
+import { ColdStartBanner } from "@/components/shell/cold-start-banner";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Dashboard · Portal" };
@@ -12,6 +13,7 @@ export const metadata = { title: "Dashboard · Portal" };
 export default async function DashboardPage() {
   const [views, role, pipeline] = await Promise.all([getCatalog(), getViewerRole(), getPipelineStatuses()]);
   const stats = computeDashboardStats(views);
+  const hasTargets = views.some((v) => v.selection.tier != null || v.selection.target_sell_price != null);
 
   return (
     <div data-register="cockpit" className="text-[13px]">
@@ -21,6 +23,7 @@ export default async function DashboardPage() {
           The negotiation at a glance — what’s targeted, quoted, and clearing.
         </p>
 
+        {!hasTargets && <ColdStartBanner role={role!} />}
         <KpiCards stats={stats} />
 
         <div className="mt-6">

@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import path from "node:path";
 import ExcelJS from "exceljs";
 import { createSupabaseServer } from "@/lib/supabase/server";
-import { getCatalog } from "@/lib/data/queries";
+import { getAssumptions, getCatalog } from "@/lib/data/queries";
 import { buildRfqRow, RFQ_COLUMNS } from "@/lib/data/rfq";
 import { siteOrigin } from "@/lib/site-url";
 
@@ -43,6 +43,16 @@ export async function POST(req: NextRequest) {
       .sort((a, b) => order.get(a.product.external_ref)! - order.get(b.product.external_ref)!);
 
     const rows = selected.map((v, i) => buildRfqRow(v, i + 1, moqEdits[v.product.external_ref] ?? null));
+
+    // Snapshot exactly what we're sending + the assumptions it was computed under, so a
+    // later global-assumptions change can never silently diverge from a sent RFQ.
+    const assumptionsSnapshot = await getAssumptions();
+    await sb.from("rfq_exports").insert({
+      created_by: user.id,
+      product_refs: selected.map((v) => v.product.external_ref),
+      assumptions_snapshot: assumptionsSnapshot,
+      rows_snapshot: rows,
+    });
 
     // Pre-fetch clean product images from the CDN (public/ is not on the function's disk
     // on Netlify). Same-origin /products/*.{jpg,png} only.

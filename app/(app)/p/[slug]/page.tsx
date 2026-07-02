@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, FileText, FileDown, Lock, ChevronRight } from "lucide-react";
-import { getAssumptions, getProductViewBySlug, getViewerRole, getCompetitors } from "@/lib/data/queries";
+import { getAssumptions, getProductViewBySlug, getViewerRole, getCompetitors, getComments, getSelectedQuoteMeta } from "@/lib/data/queries";
+import { ProductCollab } from "@/components/collab/product-collab";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
 import { PhotoFrame } from "@/components/product/product-image";
 import { DealCalculator } from "@/components/economics/deal-calculator";
@@ -28,7 +29,11 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const [view, role, assumptions] = await Promise.all([getProductViewBySlug(params.slug), getViewerRole(), getAssumptions()]);
   if (!view) notFound();
   const { product: p, selection } = view;
-  const competitors = await getCompetitors(p.external_ref);
+  const [competitors, comments, quoteMeta] = await Promise.all([
+    getCompetitors(p.external_ref),
+    getComments(p.external_ref),
+    getSelectedQuoteMeta(p.external_ref),
+  ]);
 
   return (
     <div data-register="storefront" className="text-[15px]">
@@ -133,6 +138,18 @@ export default async function ProductPage({ params }: { params: { slug: string }
               fbaEstimate={view.fbaEstimate}
               targetSellPrice={selection.target_sell_price}
             />
+
+            {/* collaboration — shared notes + discussion */}
+            <div className="mt-6">
+              <div className="text-section-label mb-2">Collaboration</div>
+              <ProductCollab
+                productRef={p.external_ref}
+                role={role!}
+                initialNotes={selection.notes}
+                notesUpdatedAt={selection.updated_at}
+                comments={comments}
+              />
+            </div>
           </div>
 
           {/* RIGHT — the Deal Panel */}
@@ -155,6 +172,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 fbaEstimate={view.fbaEstimate}
                 fobEstimate={view.fobEstimate}
                 assumptions={assumptions}
+                initialCalcInputs={selection.calc_inputs}
+                initialMoq={quoteMeta.moq}
+                initialLeadTime={quoteMeta.lead_time_days}
+                initialSupplier={quoteMeta.supplier}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button asChild size="sm" variant="outline">
@@ -172,7 +193,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 {role === "partner"
                   ? "You set the targets; the owner enters the factory quote."
                   : "You enter the factory quote; the partner sets the targets."}{" "}
-                Saved to Supabase, gated by role.
+                Both partners see every number live.
               </p>
             </div>
           </div>

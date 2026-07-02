@@ -50,7 +50,60 @@ function rowToSelection(s: any, ref: string): Selection {
     target_landed_cost: num(s.target_landed_cost),
     calc_inputs: s.calc_inputs,
     notes: s.notes,
+    updated_at: s.updated_at ?? null,
   };
+}
+
+export interface CommentView {
+  id: string;
+  body: string;
+  created_at: string;
+  author: string;
+  role: string | null;
+  isMine: boolean;
+}
+
+/** Comments thread for a product, newest last, with author display name + role. */
+export const getComments = cache(async (ref: string): Promise<CommentView[]> => {
+  const sb = createSupabaseServer();
+  const [{ data: { user } }, { data: product }] = await Promise.all([
+    sb.auth.getUser(),
+    sb.from("products").select("id").eq("external_ref", ref).maybeSingle(),
+  ]);
+  if (!product) return [];
+  const { data: rows } = await sb
+    .from("comments")
+    .select("id, body, created_at, user_id")
+    .eq("product_id", product.id)
+    .order("created_at", { ascending: true });
+  if (!rows?.length) return [];
+  const { data: members } = await sb.from("memberships").select("user_id, display_name, role");
+  const byUser = new Map((members ?? []).map((m: any) => [m.user_id, m]));
+  return rows.map((c: any) => {
+    const m = byUser.get(c.user_id);
+    return {
+      id: c.id,
+      body: c.body,
+      created_at: c.created_at,
+      author: m?.display_name ?? (m?.role === "owner" ? "Owner" : "Partner"),
+      role: m?.role ?? null,
+      isMine: user?.id === c.user_id,
+    };
+  });
+});
+
+/** The selected factory quote's non-price detail (MOQ / lead time / supplier) for pre-fill. */
+export async function getSelectedQuoteMeta(ref: string): Promise<{ moq: number | null; lead_time_days: number | null; supplier: string | null }> {
+  const sb = createSupabaseServer();
+  const { data: product } = await sb.from("products").select("id").eq("external_ref", ref).maybeSingle();
+  if (!product) return { moq: null, lead_time_days: null, supplier: null };
+  const { data } = await sb
+    .from("factory_quotes")
+    .select("moq, lead_time_days, supplier")
+    .eq("product_id", product.id)
+    .eq("is_selected", true)
+    .maybeSingle();
+  return { moq: data?.moq ?? null, lead_time_days: data?.lead_time_days ?? null, supplier: data?.supplier ?? null };
 }
 
 export async function getAssumptions(): Promise<Assumptions> {
@@ -109,6 +162,7 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
     .from("competitors")
     .select("*")
     .eq("product_id", product.id)
+    .neq("status", "rejected") // rejected rows are kept only to exclude the ASIN from re-discovery
     .order("est_monthly_sales", { ascending: false, nullsFirst: false });
   return (data ?? []).map((c: any) => ({
     id: c.id,
@@ -147,6 +201,7 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
     listed_since: c.listed_since ?? null,
     fba_pick_pack_fee: num(c.fba_pick_pack_fee),
     referral_pct: num(c.referral_pct),
+    enriched_at: c.enriched_at ?? null,
   }));
 }
 

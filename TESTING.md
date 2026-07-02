@@ -12,8 +12,10 @@ number still "displays." So the suite is layered; each layer catches what the on
 | **L4 — Data / semantic** | orphaned rows, image paths that 404, photo↔path mismatch, copy gaps, dup slugs, junk specs, image framing | `scripts/audit-data.mjs`, `scripts/audit-images.py` | manual / pre-deploy |
 
 ## L1 — Unit (Vitest)
-`npm test` — 45 tests across:
+`npm test` — 90+ tests across (count grows; run `npm test` for the live total):
 - `lib/calc/economics.test.ts` — the calculator (gross≠net trap, guards, verdict).
+- `lib/calc/fba.test.ts`, `lib/calc/fob.test.ts` — FBA fee tiers + FOB extrapolation (validated against real Greenway quote anchors).
+- `lib/auth/capabilities.rls.test.ts` — exhaustive capability + pipeline-transition matrix drift guard (the RLS/UI intent, unit-asserted).
 - `lib/import/mappers.test.ts`, `lib/import/yuno-mappers.test.ts` — importers (220V count, namespaced refs, photo states, neutral brand, has_photo).
 - `lib/data/clean.test.ts` — junk-spec filtering (the marketing-sentence-as-label trap).
 - `lib/data/stats.test.ts` — dashboard aggregation invariants (tier counts sum to total).

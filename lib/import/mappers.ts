@@ -189,3 +189,28 @@ export function mapBeautyCatalog(c: BeautyCatalog): Product[] {
 export function mapYunoUSCatalog(c: YunoUSCatalog): Product[] {
   return c.products.map(mapYunoUS);
 }
+
+/**
+ * Foodservice fixtures are stored ALREADY in Product shape (lib/data/source/foodservice.json,
+ * dumped from the live catalog — hand-authored Greenway quotes + researched Amazon top-seller
+ * sizes). This mapper just normalizes numerics and re-asserts required flags so a malformed
+ * edit to the JSON fails loudly in tests rather than silently seeding garbage.
+ */
+export function mapFoodservice(rows: unknown[]): Product[] {
+  return (rows as Record<string, unknown>[]).map((r) => {
+    if (!r.external_ref || !r.name || r.line !== "foodservice") {
+      throw new Error(`foodservice fixture row missing external_ref/name/line: ${JSON.stringify(r).slice(0, 120)}`);
+    }
+    return {
+      ...(r as unknown as Product),
+      msrp: r.msrp != null ? Number(r.msrp) : null,
+      our_cost: r.our_cost != null ? Number(r.our_cost) : null,
+      categories: (r.categories as string[]) ?? [],
+      specs: (r.specs as Product["specs"]) ?? [],
+      features: (r.features as string[]) ?? [],
+      image_has_chinese: Boolean(r.image_has_chinese),
+      voltage_flag: Boolean(r.voltage_flag),
+      export_ok: Boolean(r.export_ok),
+    };
+  });
+}

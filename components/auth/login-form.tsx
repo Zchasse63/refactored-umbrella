@@ -31,7 +31,10 @@ export function LoginForm({ next }: { next: string }) {
     setLoading("magic");
     const { error } = await createSupabaseBrowser().auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent(next || "/catalog")}` },
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent(next || "/catalog")}`,
+      },
     });
     setLoading("");
     setMsg(error ? error.message : "Check your inbox for a sign-in link.");

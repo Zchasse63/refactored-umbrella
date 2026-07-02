@@ -1,6 +1,8 @@
-import { cn, money, int } from "@/lib/utils";
+import { cn, money, int, relativeTime } from "@/lib/utils";
 import type { Competitor } from "@/lib/types";
 import type { FbaEstimate } from "@/lib/calc/fba";
+
+const DAY = 86_400_000;
 
 const median = (xs: number[]): number | null => {
   const v = xs.filter((x) => Number.isFinite(x)).sort((a, b) => a - b);
@@ -48,9 +50,21 @@ export function CompetitorRollup({
 
   const targetDelta = targetSellPrice != null && medPrice != null ? targetSellPrice - medPrice : null;
 
+  // Freshest enrichment across the set — prices/BSR drift, so flag when data is aging.
+  const enrichedTimes = competitors.map((c) => (c.enriched_at ? Date.parse(c.enriched_at) : NaN)).filter((n) => Number.isFinite(n));
+  const newest = enrichedTimes.length ? Math.max(...enrichedTimes) : null;
+  const ageDays = newest != null ? (Date.now() - newest) / DAY : null;
+
   return (
     <div className="rounded-lg border border-border-strong bg-card p-3 shadow-card">
-      <div className="mb-2 text-section-label">Market read · {competitors.length} listing{competitors.length === 1 ? "" : "s"}</div>
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <span className="text-section-label">Market read · {competitors.length} listing{competitors.length === 1 ? "" : "s"}</span>
+        {newest != null && (
+          <span className={cn("text-[10px]", ageDays != null && ageDays > 21 ? "font-medium text-warn-muted-foreground" : "text-muted-foreground")}>
+            {ageDays != null && ageDays > 21 ? "⚠ prices " : "refreshed "}{relativeTime(newest)}
+          </span>
+        )}
+      </div>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         <Stat
           label="Median price"

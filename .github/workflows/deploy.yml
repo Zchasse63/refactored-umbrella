@@ -24,6 +24,13 @@ jobs:
         run: npm audit --audit-level=critical --omit=dev
       - name: Unit tests
         run: npm test
+      - name: Lint
+        run: npx next lint
+      - name: Data invariants (prod audit — fails on hard invariant breaks)
+        run: node scripts/audit-data.mjs
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       - name: Build + deploy to Netlify (production)
         run: npx --yes netlify-cli@17 deploy --build --prod --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN"
         env:

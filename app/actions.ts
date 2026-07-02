@@ -5,9 +5,9 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import { targetLanded, DEFAULT_GROSS_MARGIN } from "@/lib/calc/economics";
 import { buildSearchProfile } from "@/lib/ai/build-profile";
 import { verifyCompetitor } from "@/lib/ai/verify-competitor";
-import { keepaFinder } from "@/lib/keepa/product-finder";
+import { keepaFinder, searchCategories } from "@/lib/keepa/product-finder";
 import { getKeepaProducts, mapKeepaToCompetitor } from "@/lib/keepa/client";
-import type { Decision, PipelineStatus, Product, Tier } from "@/lib/types";
+import type { Assumptions, CalcInputs, Decision, PipelineStatus, Product, Tier } from "@/lib/types";
 
 type Result = { ok: true } | { error: string };
 
@@ -33,30 +33,35 @@ function badMoney(v: number | null | undefined): boolean {
   return v != null && (!Number.isFinite(v) || v <= 0 || v > 99999);
 }
 
-/** Partner: save prospect tier + target sell (RLS gates to the partner role). */
+/** Partner: save prospect tier + target sell + notes + per-product calc override.
+ *  RLS gates to the partner role. calc_inputs persists the "what-if" so it stops
+ *  evaporating on refresh; the derived target landed uses the OVERRIDE margin when set. */
 export async function saveSelection(
   ref: string,
-  patch: { tier?: Tier | null; target_sell_price?: number | null },
+  patch: { tier?: Tier | null; target_sell_price?: number | null; notes?: string | null; calc_inputs?: CalcInputs | null },
 ): Promise<Result> {
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
   const sell = patch.target_sell_price ?? null;
   if (badMoney(sell)) return { error: "Target sell must be a positive dollar amount." };
-  // derive against the LIVE global assumptions, not the compiled-in default
+  if (patch.notes != null && patch.notes.length > 4000) return { error: "Note is too long (4000 char max)." };
+  // derive against the effective margin: per-product override beats the LIVE global row
   const { data: a } = await r.sb.from("assumptions").select("gross_margin").eq("id", 1).maybeSingle();
-  const gm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
+  const globalGm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
+  const ov = patch.calc_inputs;
+  const gm = ov && ov.overridden !== false && ov.grossMargin != null ? ov.grossMargin : globalGm;
   const target_landed_cost = sell != null ? targetLanded(sell, gm) : null;
-  const { error } = await r.sb.from("selections").upsert(
-    {
-      product_id: r.productId,
-      partner_user_id: r.user.id,
-      tier: patch.tier ?? null,
-      target_sell_price: sell,
-      target_landed_cost,
-      updated_by: r.user.id,
-    },
-    { onConflict: "product_id,partner_user_id" },
-  );
+  const row: Record<string, unknown> = {
+    product_id: r.productId,
+    partner_user_id: r.user.id,
+    tier: patch.tier ?? null,
+    target_sell_price: sell,
+    target_landed_cost,
+    updated_by: r.user.id,
+  };
+  if ("notes" in patch) row.notes = patch.notes ?? null;
+  if ("calc_inputs" in patch) row.calc_inputs = patch.calc_inputs ?? null;
+  const { error } = await r.sb.from("selections").upsert(row, { onConflict: "product_id,partner_user_id" });
   if (error) {
     console.error("saveSelection:", error.message);
     return { error: "Couldn't save. Please try again." };
@@ -66,16 +71,63 @@ export async function saveSelection(
 }
 
 /**
+ * Owner: save global assumptions (cost stack + gross margin) and RIPPLE the change —
+ * recompute target_landed_cost for every persisted selection that isn't per-product
+ * overridden. This is the BRIEF's "change once → all products recompute" feature.
+ */
+export async function saveAssumptions(next: Assumptions): Promise<Result> {
+  const sb = createSupabaseServer();
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) return { error: "Not signed in" };
+  const { data: mem } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();
+  if (mem?.role !== "owner") return { error: "Only the owner can change global assumptions." };
+
+  const gm = Number(next.grossMargin);
+  if (!Number.isFinite(gm) || gm <= 0 || gm >= 1) return { error: "Gross margin must be between 0 and 1 (e.g. 0.65)." };
+  const stack = (next.costStack ?? []).map((l) => ({ ...l, pct: Number(l.pct) }));
+  if (stack.some((l) => !Number.isFinite(l.pct) || l.pct < 0 || l.pct > 1)) return { error: "Each cost-stack line must be a fraction between 0 and 1." };
+
+  const { error: upErr } = await sb.from("assumptions").update({ gross_margin: gm, cost_stack: stack, updated_by: user.id }).eq("id", 1);
+  if (upErr) { console.error("saveAssumptions:", upErr.message); return { error: "Couldn't save assumptions." }; }
+
+  // Ripple: recompute persisted target landed for non-overridden selections at the new margin.
+  const { data: sels } = await sb.from("selections").select("id, product_id, target_sell_price, calc_inputs");
+  for (const s of sels ?? []) {
+    const ov = (s as any).calc_inputs as CalcInputs | null;
+    if (ov && ov.overridden !== false && ov.grossMargin != null) continue; // per-product override wins
+    const sell = (s as any).target_sell_price != null ? Number((s as any).target_sell_price) : null;
+    const tl = sell != null ? targetLanded(sell, gm) : null;
+    await sb.from("selections").update({ target_landed_cost: tl }).eq("id", (s as any).id);
+  }
+  for (const p of ["/catalog", "/products", "/board", "/dashboard", "/exports", "/settings/assumptions"]) revalidatePath(p);
+  return { ok: true };
+}
+
+/**
  * Owner: set (or clear) the selected factory quote (DDP). RLS gates to the owner role.
  * `landed = null` is the explicit "clear quote" action — it deselects with no replacement.
  */
-export async function saveQuote(ref: string, landed: number | null): Promise<Result> {
+export async function saveQuote(
+  ref: string,
+  landed: number | null,
+  meta?: { moq?: number | null; lead_time_days?: number | null; supplier?: string | null },
+): Promise<Result> {
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
   if (badMoney(landed)) return { error: "Quote must be a positive dollar amount." };
+  const moq = meta?.moq ?? null;
+  const lead = meta?.lead_time_days ?? null;
+  if (moq != null && (!Number.isFinite(moq) || moq <= 0)) return { error: "MOQ must be a positive whole number." };
+  if (lead != null && (!Number.isFinite(lead) || lead < 0)) return { error: "Lead time must be zero or more days." };
   // Atomic deselect+insert in one transaction (set_selected_quote RPC): a re-quote can
   // never strand a product mid-swap. landed=null deselects only (intended clear path).
-  const { error } = await r.sb.rpc("set_selected_quote", { p_product_id: r.productId, p_landed: landed });
+  const { error } = await r.sb.rpc("set_selected_quote", {
+    p_product_id: r.productId,
+    p_landed: landed,
+    p_moq: moq != null ? Math.round(moq) : null,
+    p_lead_time: lead != null ? Math.round(lead) : null,
+    p_supplier: meta?.supplier?.trim() || null,
+  });
   if (error) {
     console.error("saveQuote:", error.message);
     return { error: "Couldn't save the quote. Please try again." };
@@ -111,6 +163,30 @@ export async function movePipeline(
   return { ok: true };
 }
 
+/** Post a comment on a product (either role; RLS pins user_id = auth.uid()). */
+export async function saveComment(ref: string, body: string): Promise<Result> {
+  const r = await resolveProduct(ref);
+  if (!r.ok) return { error: r.error };
+  const text = body.trim();
+  if (!text) return { error: "Comment is empty." };
+  if (text.length > 4000) return { error: "Comment is too long (4000 char max)." };
+  const { error } = await r.sb.from("comments").insert({ product_id: r.productId, user_id: r.user.id, body: text });
+  if (error) { console.error("saveComment:", error.message); return { error: "Couldn't post the comment." }; }
+  revalidate(ref);
+  return { ok: true };
+}
+
+/** Delete your own comment (RLS own_comment_d gates to the author). */
+export async function deleteComment(ref: string, id: string): Promise<Result> {
+  const sb = createSupabaseServer();
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) return { error: "Not signed in" };
+  const { error } = await sb.from("comments").delete().eq("id", id).eq("user_id", user.id);
+  if (error) { console.error("deleteComment:", error.message); return { error: "Couldn't delete the comment." }; }
+  revalidate(ref);
+  return { ok: true };
+}
+
 /**
  * Owner-triggered competitor discovery (AI_LAYER §2). Bounded + defensive:
  * Claude builds a search profile → Keepa Product Finder returns real top-selling
@@ -131,35 +207,85 @@ export async function discoverCompetitors(
   const ourDesc = `${product.name} | ${(product.specs || []).map((s) => `${s.label}: ${s.value}`).join("; ")}`;
 
   try {
-    const profile = await buildSearchProfile(product, []);
+    // ── Learn-loop inputs (AI_LAYER §2): past reject reasons feed the exclude list, and
+    //    previously-rejected ASINs are filtered so a bad match can't keep coming back.
+    const { data: fb } = await r.sb
+      .from("competitor_feedback")
+      .select("reason_text")
+      .eq("product_id", r.productId)
+      .eq("verdict", "reject")
+      .not("reason_text", "is", null)
+      .limit(30);
+    const learnedExcludes = Array.from(new Set((fb ?? []).map((f: any) => f.reason_text).filter(Boolean))).slice(0, 12) as string[];
+    const { data: rej } = await r.sb.from("competitors").select("asin").eq("product_id", r.productId).eq("status", "rejected");
+    const rejectedAsins = new Set((rej ?? []).map((x: any) => x.asin).filter(Boolean));
+
+    const profile = await buildSearchProfile(product, learnedExcludes);
+
+    // Persist a versioned search profile (owner-writable) so the recipe is inspectable + reusable.
+    const { data: prevProf } = await r.sb
+      .from("search_profiles")
+      .select("version")
+      .eq("product_id", r.productId)
+      .order("version", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    // Best-effort category-node resolution (KEEPA §step 0): narrows the search when it works,
+    // silently skipped when it doesn't — the title fallback chain below still covers recall.
+    let categories_include: number[] | undefined;
+    let categoryNode: number | null = null;
+    try {
+      const catRes = (await searchCategories(profile.category_keyword)) as any;
+      const firstId = catRes?.categories && Object.keys(catRes.categories)[0];
+      if (firstId && Number.isFinite(Number(firstId))) { categoryNode = Number(firstId); categories_include = [categoryNode]; }
+    } catch { /* category lookup is best-effort */ }
+    await r.sb.from("search_profiles").insert({
+      product_id: r.productId,
+      query: profile.title,
+      include_terms: [profile.title],
+      exclude_terms: profile.exclude_terms ?? [],
+      category_node: categoryNode,
+      version: (prevProf?.version ?? 0) + 1,
+      updated_by: r.user.id,
+    });
+
     const gte = Number.isFinite(profile.price_low) ? Math.round((profile.price_low as number) * 100) : undefined;
     const lte = Number.isFinite(profile.price_high) ? Math.round((profile.price_high as number) * 100) : undefined;
     const sort: [string, "asc" | "desc"][] = [["monthlySold", "desc"]];
-    // Graceful fallback: an over-tight AI price band or over-specific title can zero out a
-    // valid search. Try title+price → title-only → trimmed title before giving up.
-    let asins = await keepaFinder({ title: profile.title, current_AMAZON_gte: gte, current_AMAZON_lte: lte, sort });
+    // Graceful fallback: category → title+price → title-only → trimmed title. An over-tight
+    // AI price band, wrong category node, or over-specific title can each zero out a valid
+    // search, so we widen step by step before giving up.
+    let asins = categories_include
+      ? await keepaFinder({ title: profile.title, categories_include, current_AMAZON_gte: gte, current_AMAZON_lte: lte, sort })
+      : [];
+    if (!asins.length) asins = await keepaFinder({ title: profile.title, current_AMAZON_gte: gte, current_AMAZON_lte: lte, sort });
     if (!asins.length) asins = await keepaFinder({ title: profile.title, sort });
     if (!asins.length) {
       const short = profile.title.split(/\s+/).slice(0, 3).join(" ");
       if (short && short.toLowerCase() !== profile.title.toLowerCase()) asins = await keepaFinder({ title: short, sort });
     }
-    asins = asins.slice(0, 5);
+    asins = asins.filter((a) => !rejectedAsins.has(a)).slice(0, 6);
     if (!asins.length) return { ok: true, found: 0, kept: 0 };
 
     const { products: kp } = await getKeepaProducts(asins);
     const rows: Record<string, unknown>[] = [];
     for (const p of kp) {
       const cand = mapKeepaToCompetitor(p);
+      if (rejectedAsins.has(cand.asin)) continue;
       let verdict;
       try {
         verdict = await verifyCompetitor(ourDesc, `${cand.title} (ASIN ${cand.asin}, $${cand.price ?? "?"})`);
       } catch {
         continue;
       }
-      if (verdict.is_match && verdict.confidence >= 0.5) {
+      // REVIEW GATE (AI_LAYER §2): high-confidence auto-approves; borderline lands as a
+      // candidate the owner confirms/rejects — no silent auto-approval feeding the margin math.
+      if (!verdict.is_match || verdict.confidence < 0.5) continue;
+      const status = verdict.confidence >= 0.75 ? "approved" : "candidate";
+      {
         rows.push({
           product_id: r.productId,
-          status: "approved",
+          status,
           title: cand.title ?? cand.asin,
           brand: cand.brand,
           marketplace: "amazon",
@@ -205,7 +331,13 @@ export async function discoverCompetitors(
       revalidate(ref);
       return { ok: true, found: kp.length, kept: 0 };
     }
-    const { data: existing } = await r.sb.from("competitors").select("id").eq("product_id", r.productId);
+    // Replace only the prior approved/candidate set — PRESERVE rejected rows (they exist
+    // solely to keep their ASIN out of future discovery).
+    const { data: existing } = await r.sb
+      .from("competitors")
+      .select("id")
+      .eq("product_id", r.productId)
+      .in("status", ["approved", "candidate"]);
     const oldIds = (existing ?? []).map((e: { id: string }) => e.id);
     const { error: insErr } = await r.sb.from("competitors").insert(rows);
     if (insErr) {
@@ -214,9 +346,47 @@ export async function discoverCompetitors(
     }
     if (oldIds.length) await r.sb.from("competitors").delete().in("id", oldIds);
     revalidate(ref);
-    return { ok: true, found: kp.length, kept: rows.length };
+    const kept = rows.filter((x) => x.status === "approved").length;
+    return { ok: true, found: kp.length, kept };
   } catch (e) {
     console.error("discoverCompetitors:", e instanceof Error ? e.message : e);
     return { error: "Discovery failed. Please try again." };
   }
+}
+
+/** Owner: confirm a borderline candidate competitor → it joins the approved set + margin math. */
+export async function approveCompetitor(ref: string, competitorId: string): Promise<Result> {
+  const r = await resolveProduct(ref);
+  if (!r.ok) return { error: r.error };
+  const { data: m } = await r.sb.from("memberships").select("role").eq("user_id", r.user.id).maybeSingle();
+  if (m?.role !== "owner") return { error: "Only the owner can review competitors." };
+  const { error } = await r.sb.from("competitors").update({ status: "approved" }).eq("id", competitorId).eq("product_id", r.productId);
+  if (error) { console.error("approveCompetitor:", error.message); return { error: "Couldn't approve." }; }
+  revalidate(ref);
+  return { ok: true };
+}
+
+/**
+ * Owner: reject a competitor. Writes competitor_feedback (the reject reason becomes a
+ * learned exclude next discovery) and marks the row 'rejected' so its ASIN is kept out of
+ * future searches instead of silently reappearing. This is what closes the learn-loop.
+ */
+export async function rejectCompetitor(ref: string, competitorId: string, reason: string): Promise<Result> {
+  const r = await resolveProduct(ref);
+  if (!r.ok) return { error: r.error };
+  const { data: m } = await r.sb.from("memberships").select("role").eq("user_id", r.user.id).maybeSingle();
+  if (m?.role !== "owner") return { error: "Only the owner can review competitors." };
+  const text = (reason ?? "").trim().slice(0, 200) || "not a like-for-like competitor";
+  await r.sb.from("competitor_feedback").insert({
+    competitor_id: competitorId,
+    product_id: r.productId,
+    user_id: r.user.id,
+    verdict: "reject",
+    reason_code: "not_match",
+    reason_text: text,
+  });
+  const { error } = await r.sb.from("competitors").update({ status: "rejected" }).eq("id", competitorId).eq("product_id", r.productId);
+  if (error) { console.error("rejectCompetitor:", error.message); return { error: "Couldn't reject." }; }
+  revalidate(ref);
+  return { ok: true };
 }

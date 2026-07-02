@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRightLeft, Lock, X } from "lucide-react";
@@ -29,6 +29,22 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
   const [error, setError] = useState<string | null>(null);
   const [dragRef, setDragRef] = useState<string | null>(null);
   const [overStage, setOverStage] = useState<PipelineStatus | null>(null);
+  // In-flight moves, keyed by ref → { to, ackedViews }. We hold the optimistic card
+  // (skip generic eviction) for the whole flight. `ackedViews` is set to the CURRENT
+  // `views` reference at the moment movePipeline returns ok; it stays null while the
+  // action is still running. The silent no-op — the action succeeds while updating
+  // zero rows (e.g. a product with no pipeline_status row), which would otherwise
+  // strand the card — is only diagnosed once a NEW `views` (a genuine server refresh,
+  // different reference from `ackedViews`) has arrived and STILL doesn't reflect the
+  // target. Keying off a real data refresh, not action-ack timing, is what prevents
+  // falsely reverting an ordinary success whose fresh `views` simply hasn't landed
+  // yet (the realtime refresh is a separate round-trip from the action's response).
+  // A ref, not state: mutating it must not itself re-render.
+  const pendingAck = useRef<Record<string, { to: PipelineStatus; ackedViews: ProductWithPipeline[] | null }>>({});
+  // Always-current `views` reference, so an async commit callback can stamp the
+  // reference as of when the server acked (not the possibly-stale closure value).
+  const viewsRef = useRef(views);
+  viewsRef.current = views;
 
   // Live sync: when either partner moves a card, re-fetch server data so the other
   // board updates without a refresh. RLS gates the stream to members; the reconcile
@@ -51,32 +67,81 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
 
   const columns = useMemo(() => {
     const m: Record<PipelineStatus, ProductWithPipeline[]> = { new: [], shortlisted: [], costing: [], quoted: [], decision: [] };
-    for (const v of views) m[stageOf(v)]?.push(v);
+    for (const v of views) m[optimistic[v.product.external_ref] ?? v.pipelineStatus]?.push(v);
     return m;
   }, [views, optimistic]);
 
   // Evict each optimistic entry once the revalidated server props catch up to it — no
   // flicker on success, and no stranded cards if a concurrent user moves one further.
+  // Also reconciles server-ACKed moves: if the action reported success but a fresh
+  // `views` shows the card DIDN'T actually land in the target stage, the move was a
+  // silent no-op — revert the optimistic card and tell the user, rather than leaving
+  // it stranded until it snaps back on some later render.
   useEffect(() => {
+    // Decide what to do PURELY first (no ref mutation / setState inside the render
+    // path), then apply side effects once. Keeps the setOptimistic updater pure so
+    // a Strict-Mode double-invoke can't drop half the reconciliation.
+    const landed: string[] = []; // in-flight refs the server now reflects
+    const noOp: string[] = []; // acked refs a fresh refresh still doesn't reflect
+    for (const v of views) {
+      const ref = v.product.external_ref;
+      const flight = pendingAck.current[ref];
+      if (!flight) continue;
+      if (v.pipelineStatus === flight.to) {
+        landed.push(ref);
+      } else if (
+        flight.ackedViews !== null && // action returned ok
+        flight.ackedViews !== views && // AND a genuinely newer `views` has since arrived
+        (optimistic[ref] ?? null) === flight.to // and we still show the optimistic move
+      ) {
+        // Server acked and a real refresh landed, yet the card isn't at the target
+        // → the update touched zero rows: a silent no-op, not a slow success.
+        noOp.push(ref);
+      }
+      // else: still in flight (not acked, or no fresh `views` yet) — hold the card.
+    }
+    for (const ref of landed) delete pendingAck.current[ref];
+    for (const ref of noOp) delete pendingAck.current[ref];
+
     setOptimistic((prev) => {
       let changed = false;
       const next = { ...prev };
+      for (const ref of noOp) {
+        if (ref in next) { delete next[ref]; changed = true; } // revert the stranded card
+      }
       for (const v of views) {
         const ref = v.product.external_ref;
+        if (pendingAck.current[ref]) continue; // still in flight — leave its overlay alone
+        // Drop the overlay once (or if) the server data matches it.
         if (ref in next && next[ref] === v.pipelineStatus) { delete next[ref]; changed = true; }
       }
       return changed ? next : prev;
     });
-  }, [views]);
+    if (noOp.length) setError("That move didn’t take — the card was reset. Please try again.");
+  }, [views, optimistic]);
 
   function commit(ref: string, to: PipelineStatus, decision: Decision | null = null) {
+    // Track the move as awaiting server confirmation BEFORE dispatching, so the
+    // reconcile effect owns this ref no matter when the revalidated `views` lands
+    // (it can arrive before the await below resolves). On success the effect either
+    // confirms it landed (evict, no flicker) or detects a silent no-op (revert +
+    // surface an error). On an explicit error we clear it and revert here.
+    pendingAck.current[ref] = { to, ackedViews: null };
     startTransition(async () => {
       const res = await movePipeline(ref, to, decision);
       if ("error" in res) {
+        delete pendingAck.current[ref];
         setOptimistic((s) => { const n = { ...s }; delete n[ref]; return n; }); // revert
         setError(res.error);
+        return;
       }
-      // on success: keep the optimistic entry until the effect above evicts it (no flicker)
+      // Arm the no-op check: stamp the `views` reference that was current when the
+      // server acked. The reconcile effect only flags a no-op once a DIFFERENT
+      // `views` (a real refresh) has since arrived — never against this stale one,
+      // so an ordinary success whose fresh data hasn't landed yet isn't reverted.
+      // If the reconcile effect already saw the move land, the flight is gone.
+      const flight = pendingAck.current[ref];
+      if (flight) flight.ackedViews = viewsRef.current;
     });
   }
 
@@ -159,7 +224,7 @@ export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; r
         })}
       </div>
       <p className="mt-3 text-[11px] text-muted-foreground">
-        Drag a card or use its <b className="font-medium text-foreground">Move</b> button to change stage. Partner moves New ↔ Shortlisted; owner moves Shortlisted → Costing → Quoted; either may send to Decision. Saved to Supabase, gated by role.
+        Drag a card or use its <b className="font-medium text-foreground">Move</b> button to change stage. Partner moves New ↔ Shortlisted; owner moves Shortlisted → Costing → Quoted; either may send to Decision. Changes sync live for both partners.
       </p>
     </div>
   );

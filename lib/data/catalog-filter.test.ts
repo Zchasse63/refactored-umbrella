@@ -10,7 +10,7 @@ const product = (over: Partial<Product> = {}): Product => ({
   image_has_chinese: false, voltage_flag: false, export_ok: true, primary_image_path: "/x.jpg", ...over,
 });
 const sel = (over: Partial<Selection> = {}): Selection => ({
-  product_external_ref: "x", tier: null, priority: null, target_sell_price: null, target_landed_cost: null, calc_inputs: null, notes: null, ...over,
+  product_external_ref: "x", tier: null, priority: null, target_sell_price: null, target_landed_cost: null, calc_inputs: null, notes: null, updated_at: null, ...over,
 });
 const f = (over: Partial<CatalogFilters> = {}): CatalogFilters => ({ ...EMPTY_FILTERS, ...over });
 

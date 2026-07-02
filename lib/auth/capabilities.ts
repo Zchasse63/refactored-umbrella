@@ -1,8 +1,9 @@
 /**
  * The ONE role-capability map (BUILD_PLAN §7). Both the UI "isEditable" affordance
  * and the Supabase RLS policies (0002_rls.sql) derive from this — if they ever drift,
- * the two-sided trust model breaks. An integration test asserts each capability here
- * against the DB policy for each role.
+ * the two-sided trust model breaks. NOTE: the RLS integration test asserting each
+ * capability against the live DB policies is NOT yet written (tracked — Week-2 safety
+ * net); until it lands, canTransition's unit tests are the only drift guard.
  */
 import type { Role } from "@/lib/types";
 
@@ -37,8 +38,12 @@ export function canTransition(from: string, to: string, role: Role): boolean {
   if (role === "partner")
     return (from === "new" && to === "shortlisted") || (from === "shortlisted" && to === "new");
   if (role === "owner")
-    return ["shortlisted->costing", "costing->quoted", "quoted->costing", "costing->shortlisted"].includes(
-      `${from}->${to}`,
-    );
+    return [
+      "shortlisted->costing",
+      "costing->quoted",
+      "quoted->costing",
+      "costing->shortlisted",
+      "decision->costing", // escape the decision dead-end: owner may re-cost
+    ].includes(`${from}->${to}`);
   return false;
 }

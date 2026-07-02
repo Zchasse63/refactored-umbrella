@@ -9,18 +9,20 @@ import { createSupabaseBrowser } from "@/lib/supabase/client";
 import { CommandPalette } from "./command-palette";
 import type { Role } from "@/lib/types";
 
-const NAV: { href: string; label: string; ready: boolean }[] = [
+const NAV: { href: string; label: string; ready: boolean; ownerOnly?: boolean }[] = [
   { href: "/catalog", label: "Catalog", ready: true },
   { href: "/products", label: "Products", ready: true },
   { href: "/board", label: "Board", ready: true },
   { href: "/pipeline", label: "Pipeline", ready: true },
   { href: "/dashboard", label: "Dashboard", ready: true },
   { href: "/exports", label: "Exports", ready: true },
+  { href: "/settings/assumptions", label: "Assumptions", ready: true, ownerOnly: true },
 ];
 
 export function TopBar({ role }: { role: Role }) {
   const path = usePathname();
   const router = useRouter();
+  const nav = NAV.filter((n) => !n.ownerOnly || role === "owner");
 
   async function signOut() {
     await createSupabaseBrowser().auth.signOut();
@@ -39,7 +41,7 @@ export function TopBar({ role }: { role: Role }) {
         {/* Scrollable on narrow screens so every destination stays reachable; brand and
             role/sign-out stay pinned. */}
         <nav className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-[13px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {NAV.map((n) =>
+          {nav.map((n) =>
             n.ready ? (
               <Link
                 key={n.href}

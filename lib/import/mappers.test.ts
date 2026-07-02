@@ -4,6 +4,7 @@ import beautyJson from "@/lib/data/source/beauty.json";
 import {
   mapAppliances,
   mapBeautyCatalog,
+  mapFoodservice,
   type ApplianceCatalog,
   type BeautyCatalog,
 } from "./mappers";
@@ -58,5 +59,22 @@ describe("import mappers — real fixtures", () => {
   it("images resolve to local public paths", () => {
     expect(appliances.every((p) => p.primary_image_path?.startsWith("/products/appliance/"))).toBe(true);
     expect(beauty.every((p) => p.primary_image_path?.startsWith("/products/beauty/"))).toBe(true);
+  });
+});
+
+describe("mapFoodservice (committed prod fixture)", () => {
+  it("reproduces the live foodservice line: 29 products, Greenway costs intact", async () => {
+    const json = (await import("@/lib/data/source/foodservice.json")).default as unknown[];
+    const rows = mapFoodservice(json);
+    expect(rows).toHaveLength(29);
+    expect(rows.every((r) => r.line === "foodservice" && r.external_ref.startsWith("foodservice:"))).toBe(true);
+    // the real Greenway cost anchors must survive the round-trip
+    const tsack = rows.find((r) => r.external_ref === "foodservice:thank-you-tshirt-bag-350ct")!;
+    expect(tsack.our_cost).toBeCloseTo(4.2, 2);
+    expect(rows.filter((r) => r.our_cost != null).length).toBe(16);
+  });
+
+  it("fails loudly on a malformed fixture row", () => {
+    expect(() => mapFoodservice([{ name: "no ref" }])).toThrow(/external_ref/);
   });
 });
