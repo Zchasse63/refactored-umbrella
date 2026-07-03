@@ -10,11 +10,18 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { requireEnv } from "./env";
 
-/** The one designated test product. Appliance line — safe to mutate. */
+/**
+ * The one designated test product. Appliance line — safe to mutate.
+ * displayName/model are what the UI renders (products.name_clean || name and
+ * model || model_clean — see rowToProduct in lib/data/queries.ts). NOTE: five
+ * appliance SKUs share the display name "Electric Kettle"; the model "602"
+ * (and the search term "602") uniquely identify this one.
+ */
 export const KETTLE = {
   slug: "602-electric-kettle",
   ref: "appliance:602-electric-kettle",
-  name: "602 Electric kettle",
+  displayName: "Electric Kettle",
+  model: "602",
 } as const;
 
 export function adminClient(): SupabaseClient {
@@ -51,8 +58,13 @@ export async function resetKettle(): Promise<void> {
   if (selections.error) throw new Error(`selections cleanup failed: ${selections.error.message}`);
 }
 
-/** Current DB state for the kettle — used to verify cleanup actually landed. */
-export async function kettleState(): Promise<{ selections: unknown[]; quotes: unknown[] }> {
+export interface KettleState {
+  selections: Array<{ id: string; tier: string | null; target_sell_price: string | number | null }>;
+  quotes: Array<{ id: string; landed_cost_ddp: string | number }>;
+}
+
+/** Current DB state for the kettle — verifies persistence in specs and cleanup in teardown. */
+export async function kettleState(): Promise<KettleState> {
   const sb = adminClient();
   const productId = await kettleProductId(sb);
   const [sel, q] = await Promise.all([

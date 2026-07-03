@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:setup": "node scripts/e2e-setup-accounts.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.106.0",

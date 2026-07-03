@@ -1,7 +1,8 @@
 /**
  * AUTHENTICATED MONEY-PATH E2E — runs against the DEPLOYED site with real
  * sessions (see e2e/auth.setup.ts). All four specs exercise ONE designated
- * safe-to-mutate product: the 602 electric kettle.
+ * safe-to-mutate product: the 602 electric kettle (rendered "Electric Kettle",
+ * model 602 — see the KETTLE constant for the display-name caveat).
  *
  * Project wiring (playwright.config.ts):
  *   setup → partner (@partner tests, partner storageState)
@@ -20,7 +21,7 @@
  * PASS (gross 68.8% ≥ 65.0%), headroom = 14.00 − 12.50 = +$1.50.
  */
 import { test, expect, type Page } from "@playwright/test";
-import { KETTLE } from "./support/admin";
+import { KETTLE, kettleState } from "./support/admin";
 
 const PDP = `/p/${KETTLE.slug}`;
 const EMDASH = "—";
@@ -37,12 +38,19 @@ const derivedLanded = (page: Page) =>
     .locator("xpath=following-sibling::span[1]");
 // The VerdictLamp is the PDP's only role="status" element.
 const verdictLamp = (page: Page) => page.getByRole("status");
+// Five SKUs render as "Electric Kettle" — the model span "602" pins ours.
+const kettleRow = (page: Page) =>
+  page
+    .locator("tbody tr", { hasText: KETTLE.displayName })
+    .filter({ has: page.getByText(KETTLE.model, { exact: true }) });
 
 test("(a) partner sets tier Pursue + target sell $40 → target landed derives to $14.00 and persists @partner", async ({
   page,
 }) => {
   await page.goto(PDP);
-  await expect(page.getByRole("heading", { name: KETTLE.name })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: KETTLE.displayName, level: 1 }),
+  ).toBeVisible();
 
   // Clean slate (reset in auth.setup.ts): no quote yet → no PASS/FAIL lamp.
   await expect(verdictLamp(page)).toHaveCount(0);
@@ -61,18 +69,23 @@ test("(a) partner sets tier Pursue + target sell $40 → target landed derives t
   // Reload → everything persisted server-side.
   await page.reload();
   await expect(sellInput(page)).toHaveValue("40");
-  // The header band renders a "pursue" chip only when selection.tier is persisted.
-  await expect(page.locator("span.rounded-full", { hasText: /^pursue$/ })).toBeVisible();
   await expect(derivedLanded(page)).toHaveText("$14.00");
   // Still no quote → PASS/FAIL only appears once a quote exists (owner's step).
   await expect(verdictLamp(page)).toHaveCount(0);
+
+  // Tier persistence, asserted at the source of truth (tier text renders through
+  // CSS `capitalize`, which makes DOM-text matching flaky — the DB row is exact).
+  const state = await kettleState();
+  expect(state.selections).toHaveLength(1);
+  expect(state.selections[0].tier).toBe("pursue");
+  expect(Number(state.selections[0].target_sell_price)).toBe(40);
 });
 
 test("(d) partner /board shows the kettle with net % populated (not em-dash) @partner", async ({
   page,
 }) => {
   await page.goto("/board");
-  const row = page.locator("tbody tr", { hasText: KETTLE.name });
+  const row = kettleRow(page);
   await expect(row).toBeVisible();
 
   // Column order: Product · Line · Tier · Target sell · Landed · Quote · Headroom · Net % · Status
@@ -80,15 +93,18 @@ test("(d) partner /board shows the kettle with net % populated (not em-dash) @pa
   await expect(netCell).not.toHaveText(EMDASH);
   await expect(netCell).toHaveText(/-?\d+(\.\d+)?%/);
 
-  // And the partner's tier landed on the board too.
-  await expect(row.getByText("pursue", { exact: true })).toBeVisible();
+  // And the partner's tier landed on the board too. Substring + case-insensitive
+  // on the Tier cell: the deployed badge decorates the text (e.g. "●Pursue").
+  await expect(row.locator("td").nth(2)).toContainText(/pursue/i);
 });
 
 test("(b) owner enters quoted DDP $12.50 → PASS verdict + headroom, persists @owner", async ({
   page,
 }) => {
   await page.goto(PDP);
-  await expect(page.getByRole("heading", { name: KETTLE.name })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: KETTLE.displayName, level: 1 }),
+  ).toBeVisible();
 
   await quotedInput(page).fill("12.50");
 
@@ -112,14 +128,20 @@ test("(b) owner enters quoted DDP $12.50 → PASS verdict + headroom, persists @
 test("(c) owner selects the kettle on /exports → RFQ .xlsx download fires @owner", async ({
   page,
 }) => {
+  // The RFQ builds server-side (exceljs + embedded images); give this test its
+  // own ceiling so the 90s download wait below isn't cut off by the global 60s.
+  test.setTimeout(120_000);
   await page.goto("/exports");
   await expect(page.getByRole("heading", { name: "Factory RFQ" })).toBeVisible();
 
   // Scope the export to exactly the kettle: clear the default selection
-  // (pre-selects every product with a target sell), find the row, tick it.
+  // (pre-selects every product with a target sell), then filter down to the
+  // kettle — the search matches "name model", and "602" is unique to it.
   await page.getByRole("button", { name: "Clear", exact: true }).click();
-  await page.getByPlaceholder("Search name or model…").fill(KETTLE.name);
-  await page.getByRole("checkbox", { name: `Include ${KETTLE.name}` }).check();
+  await page.getByPlaceholder("Search name or model…").fill(KETTLE.model);
+  await page
+    .getByRole("checkbox", { name: `Include ${KETTLE.displayName}` })
+    .check();
 
   // The RFQ builds server-side (exceljs + embedded images) — allow a cold start.
   const downloadPromise = page.waitForEvent("download", { timeout: 90_000 });
