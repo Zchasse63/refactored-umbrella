@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, SearchX } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { Select } from "@/components/ui/select";
+import { TierBadge } from "@/components/ui/tier-badge";
 import { EmptyState } from "@/components/ui/empty-state";
 import { LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
 import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
@@ -203,7 +204,7 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
                 <td className="px-2 py-1.5 text-muted-foreground">{LINE_SHORT[v.product.line]}</td>
                 <td className="px-2 py-1.5">
                   {v.selection.tier ? (
-                    <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] font-semibold capitalize", v.selection.tier === "pursue" ? "bg-target-muted text-target-muted-foreground" : "border border-border text-muted-foreground")}>{v.selection.tier}</span>
+                    <TierBadge tier={v.selection.tier} className="text-[10px]" />
                   ) : <span className="text-muted-foreground/50">—</span>}
                 </td>
                 <td className="px-2 py-1.5 text-right">

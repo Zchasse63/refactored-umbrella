@@ -4,12 +4,12 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { TierBadge } from "@/components/ui/tier-badge";
 import { sortBoardViews, type BoardSortKey } from "@/lib/data/board-sort";
 import type { ProductView } from "@/lib/data/view";
 import type { Role, Tier } from "@/lib/types";
 
 const LINE_SHORT: Record<string, string> = { appliance: "Appl", beauty: "Beauty", foodservice: "Food" };
-const TIER_VARIANT: Record<Tier, "pass" | "warn" | "neutral"> = { pursue: "pass", maybe: "warn", pass: "neutral" };
 
 type SortKey = BoardSortKey;
 
@@ -98,7 +98,7 @@ export function BoardTable({ views }: { views: ProductView[]; role: Role }) {
                   <td className="px-2 py-1.5 text-muted-foreground">{LINE_SHORT[v.product.line]}</td>
                   <td className="px-2 py-1.5">
                     {v.selection.tier ? (
-                      <Badge variant={TIER_VARIANT[v.selection.tier]} className="capitalize">{v.selection.tier}</Badge>
+                      <TierBadge tier={v.selection.tier} />
                     ) : <span className="text-muted-foreground/50">{EMDASH}</span>}
                   </td>
                   <td className="numeric px-2 py-1.5 text-right">{money(v.selection.target_sell_price)}</td>

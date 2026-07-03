@@ -106,6 +106,39 @@ export async function getSelectedQuoteMeta(ref: string): Promise<{ moq: number |
   return { moq: data?.moq ?? null, lead_time_days: data?.lead_time_days ?? null, supplier: data?.supplier ?? null };
 }
 
+export interface QuoteHistoryItem {
+  id: string;
+  landed_cost_ddp: number;
+  moq: number | null;
+  lead_time_days: number | null;
+  supplier: string | null;
+  quote_date: string | null; // date column — "YYYY-MM-DD"
+  is_selected: boolean;
+}
+
+/** Every factory-quote revision for a product, newest first (`is_selected` marks the
+ *  one the economics run on). Powers the PDP quote-history strip. */
+export async function getQuoteHistory(ref: string): Promise<QuoteHistoryItem[]> {
+  const sb = createSupabaseServer();
+  const { data: product } = await sb.from("products").select("id").eq("external_ref", ref).maybeSingle();
+  if (!product) return [];
+  const { data } = await sb
+    .from("factory_quotes")
+    .select("id, landed_cost_ddp, moq, lead_time_days, supplier, quote_date, is_selected, created_at")
+    .eq("product_id", product.id)
+    .order("quote_date", { ascending: false })
+    .order("created_at", { ascending: false });
+  return (data ?? []).map((q: any) => ({
+    id: q.id,
+    landed_cost_ddp: Number(q.landed_cost_ddp),
+    moq: q.moq == null ? null : Number(q.moq),
+    lead_time_days: q.lead_time_days == null ? null : Number(q.lead_time_days),
+    supplier: q.supplier ?? null,
+    quote_date: q.quote_date ?? null,
+    is_selected: !!q.is_selected,
+  }));
+}
+
 export async function getAssumptions(): Promise<Assumptions> {
   const sb = createSupabaseServer();
   const { data } = await sb.from("assumptions").select("gross_margin, cost_stack").eq("id", 1).single();

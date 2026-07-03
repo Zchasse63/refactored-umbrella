@@ -1,20 +1,14 @@
 import Link from "next/link";
 import { cn, money } from "@/lib/utils";
 import { PhotoFrame, PhotoCornerBadge } from "@/components/product/product-image";
+import { TierBadge } from "@/components/ui/tier-badge";
 import type { ProductView } from "@/lib/data/fixtures";
-import type { Product, Tier } from "@/lib/types";
+import type { Product } from "@/lib/types";
 
 const SOURCE_LABEL: Record<string, string> = {
   RoyalStar: "Appliance",
   MKS: "Beauty",
   Greenway: "Foodservice",
-};
-
-// Partner's prospect signal — the only chip on the card, shown only when actually set.
-const TIER_CLS: Record<Tier, string> = {
-  pursue: "bg-pass-muted text-pass-muted-foreground",
-  maybe: "bg-quoted-muted text-quoted-muted-foreground",
-  pass: "bg-muted text-muted-foreground",
 };
 
 /** A couple of genuinely useful at-a-glance specs (capacity / power) — real data, not a flag. */
@@ -55,16 +49,8 @@ export function ProductCard({ view }: { view: ProductView }) {
           ) : (
             <span className="text-[11px] text-muted-foreground">No target set yet</span>
           )}
-          {selection.tier && (
-            <span
-              className={cn(
-                "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
-                TIER_CLS[selection.tier],
-              )}
-            >
-              {selection.tier}
-            </span>
-          )}
+          {/* Partner's prospect signal — the only chip on the card, shown only when actually set. */}
+          {selection.tier && <TierBadge tier={selection.tier} className="text-[10px]" />}
         </div>
 
         {eco.verdict && (

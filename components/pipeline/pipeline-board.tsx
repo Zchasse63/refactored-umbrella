@@ -6,11 +6,13 @@ import { useRouter } from "next/navigation";
 import { ArrowRightLeft, Lock, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { TierBadge } from "@/components/ui/tier-badge";
+import { VoltageBadge } from "@/components/ui/voltage-badge";
 import { canTransition } from "@/lib/auth/capabilities";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
 import { movePipeline } from "@/app/actions";
 import type { ProductWithPipeline } from "@/lib/data/queries";
-import type { Decision, PipelineStatus, Role, Tier } from "@/lib/types";
+import type { Decision, PipelineStatus, Role } from "@/lib/types";
 
 const STAGES: { id: PipelineStatus; label: string; hint: string }[] = [
   { id: "new", label: "New", hint: "Unscreened" },
@@ -19,7 +21,6 @@ const STAGES: { id: PipelineStatus; label: string; hint: string }[] = [
   { id: "quoted", label: "Quoted", hint: "Factory quote in" },
   { id: "decision", label: "Decision", hint: "Go / Hold / Pass" },
 ];
-const TIER_VARIANT: Record<Tier, "pass" | "warn" | "neutral"> = { pursue: "pass", maybe: "warn", pass: "neutral" };
 const DECISION_VARIANT: Record<Decision, "pass" | "warn" | "fail"> = { go: "pass", hold: "warn", pass: "fail" };
 
 export function PipelineBoard({ views, role }: { views: ProductWithPipeline[]; role: Role }) {
@@ -261,9 +262,9 @@ function PipelineCard({
       </div>
       {v.product.model && <div className="mt-0.5 font-mono text-[10px] text-muted-foreground">{v.product.model}</div>}
       <div className="mt-1 flex flex-wrap items-center gap-1">
-        {v.selection.tier && <Badge variant={TIER_VARIANT[v.selection.tier]} className="capitalize">{v.selection.tier}</Badge>}
+        {v.selection.tier && <TierBadge tier={v.selection.tier} className="text-[10px]" />}
         {v.economics.verdict && <Badge variant={v.economics.verdict.pass ? "pass" : "fail"}>{v.economics.verdict.pass ? "PASS" : "FAIL"}</Badge>}
-        {v.product.voltage_flag && <span className="numeric rounded bg-muted px-1 py-0.5 text-[9px] text-muted-foreground">220V</span>}
+        {v.product.voltage_flag && <VoltageBadge className="text-[10px]" />}
         {v.pipelineDecision && <Badge variant={DECISION_VARIANT[v.pipelineDecision]} className="capitalize">{v.pipelineDecision}</Badge>}
       </div>
       {!inDecision && moveTargets.length > 0 && <MoveMenu name={v.product.name} targets={moveTargets} onMove={onMove} />}

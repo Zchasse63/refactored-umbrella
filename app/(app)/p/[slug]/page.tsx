@@ -6,8 +6,11 @@ import { ProductCollab } from "@/components/collab/product-collab";
 import { LINE_OPEX_APPLIES } from "@/lib/calc/economics";
 import { PhotoFrame } from "@/components/product/product-image";
 import { DealCalculator } from "@/components/economics/deal-calculator";
+import { QuoteHistory } from "@/components/economics/quote-history";
 import { CompetitorSection } from "@/components/competitor/competitor-section";
 import { Button } from "@/components/ui/button";
+import { TierBadge } from "@/components/ui/tier-badge";
+import { VoltageBadge } from "@/components/ui/voltage-badge";
 import { cn } from "@/lib/utils";
 import type { Spec } from "@/lib/types";
 
@@ -55,19 +58,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
         )}
         {(selection.tier || p.voltage_flag) && (
           <div className="mb-6 flex flex-wrap gap-1.5">
-            {selection.tier && (
-              <span className="rounded-full bg-target-muted px-2 py-0.5 text-[11px] font-semibold capitalize text-target-muted-foreground">
-                {selection.tier}
-              </span>
-            )}
-            {p.voltage_flag && (
-              <span
-                className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
-                title="Factory unit is rated 220V — needs a US-spec plug/voltage to resell in the US"
-              >
-                220V input
-              </span>
-            )}
+            {selection.tier && <TierBadge tier={selection.tier} />}
+            {p.voltage_flag && <VoltageBadge />}
           </div>
         )}
 
@@ -195,6 +187,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   : "You enter the factory quote; the partner sets the targets."}{" "}
                 Both partners see every number live.
               </p>
+              {/* Every quote revision, newest first — renders nothing until a quote exists. */}
+              <QuoteHistory productRef={p.external_ref} />
             </div>
           </div>
         </div>

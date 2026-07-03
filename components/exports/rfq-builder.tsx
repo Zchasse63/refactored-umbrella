@@ -4,14 +4,13 @@ import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FileSpreadsheet, Loader2, Upload, Check, X } from "lucide-react";
 import { cn, money, EMDASH } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TierBadge } from "@/components/ui/tier-badge";
 import { can } from "@/lib/auth/capabilities";
 import type { ProductView } from "@/lib/data/view";
 import type { Role, Tier } from "@/lib/types";
 
 const LINE_SHORT: Record<string, string> = { appliance: "Appl", beauty: "Beauty", foodservice: "Food" };
-const TIER_VARIANT: Record<Tier, "pass" | "warn" | "neutral"> = { pursue: "pass", maybe: "warn", pass: "neutral" };
 
 export function RfqBuilder({
   views,
@@ -169,7 +168,7 @@ export function RfqBuilder({
                   </td>
                   <td className="px-2 py-1.5 text-muted-foreground">{LINE_SHORT[v.product.line]}</td>
                   <td className="px-2 py-1.5">
-                    {v.selection.tier ? <Badge variant={TIER_VARIANT[v.selection.tier]} className="capitalize">{v.selection.tier}</Badge> : <span className="text-muted-foreground/50">{EMDASH}</span>}
+                    {v.selection.tier ? <TierBadge tier={v.selection.tier} /> : <span className="text-muted-foreground/50">{EMDASH}</span>}
                   </td>
                   <td className="numeric px-2 py-1.5 text-right text-target">{v.economics.targetLanded == null ? EMDASH : money(v.economics.targetLanded)}</td>
                   <td className="px-2 py-1.5 text-right">
