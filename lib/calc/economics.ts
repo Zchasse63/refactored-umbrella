@@ -26,11 +26,15 @@ export const DEFAULT_ASSUMPTIONS: Assumptions = {
   costStack: DEFAULT_COST_STACK,
 };
 
-/** Amazon FBA opex applies to appliance/beauty; foodservice (B2B) is cost-only. */
+/** Amazon FBA opex applies to every line we retail on Amazon. Foodservice was
+ *  originally B2B-only (cost display, no Amazon stack) — that changed 2026-07:
+ *  foodservice is the Amazon-FIRST line (thank-you bags, straws, liners), so its
+ *  economics must carry the full referral/ads/returns stack + real FBA fee, or the
+ *  partner sees inflated margins on exactly the launch SKUs. */
 export const LINE_OPEX_APPLIES: Record<Line, boolean> = {
   appliance: true,
   beauty: true,
-  foodservice: false,
+  foodservice: true,
 };
 
 /** Structurally-safe labels so the UI can never misread gross (65%) as net (~16%). */
