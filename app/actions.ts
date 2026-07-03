@@ -61,7 +61,9 @@ export async function saveSelection(
   };
   if ("notes" in patch) row.notes = patch.notes ?? null;
   if ("calc_inputs" in patch) row.calc_inputs = patch.calc_inputs ?? null;
-  const { error } = await r.sb.from("selections").upsert(row, { onConflict: "product_id,partner_user_id" });
+  // ONE shared selection per product (migration 0015): the partner side speaks with one
+  // voice — any partner may edit; partner_user_id/updated_by attribute the last editor.
+  const { error } = await r.sb.from("selections").upsert(row, { onConflict: "product_id" });
   if (error) {
     console.error("saveSelection:", error.message);
     return { error: "Couldn't save. Please try again." };
