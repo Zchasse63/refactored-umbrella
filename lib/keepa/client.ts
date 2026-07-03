@@ -23,7 +23,8 @@ export interface KeepaProduct {
   asin: string;
   title: string | null;
   brand: string | null;
-  imagesCSV: string | null;
+  imagesCSV: string | null; // legacy — Keepa now returns null here
+  images?: { l?: string; m?: string }[] | null; // current image field (large/medium filenames)
   monthlySold: number | null; // real "bought past month"; null when Amazon doesn't show it
   salesRankReference: number;
   salesRanks?: Record<string, number[]>;
@@ -175,7 +176,9 @@ export function mapKeepaToCompetitor(p: KeepaProduct): CompetitorUpsert {
   const rating = cur[CsvType.RATING] >= 0 ? cur[CsvType.RATING] / 10 : null;
   const reviews = cur[CsvType.COUNT_REVIEWS] >= 0 ? cur[CsvType.COUNT_REVIEWS] : null;
   const bsr = cur[CsvType.SALES] >= 0 ? cur[CsvType.SALES] : null;
-  const image = p.imagesCSV ? `https://m.media-amazon.com/images/I/${p.imagesCSV.split(",")[0]}` : null;
+  // Keepa replaced imagesCSV with an images[] array of {l,m} filenames — prefer it, keep the legacy fallback
+  const imgFile = p.images?.[0]?.l ?? p.images?.[0]?.m ?? (p.imagesCSV ? p.imagesCSV.split(",")[0] : null);
+  const image = imgFile ? `https://m.media-amazon.com/images/I/${imgFile}` : null;
   const fbaFee = p.fbaFees?.pickAndPackFee;
   return {
     asin: p.asin,
