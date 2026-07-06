@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Partner Excel backup — a product/competitor comparison workbook with live deal math.
+"""Partner Excel backup — product/competitor comparison with an honest deal calculator.
 
-Products & Competitors sheet: each product's economics (cost → target sell → FBA +
-selling fees → net/unit → margin) is pinned in FROZEN left columns merged once per
-product; Net and Margin are LIVE FORMULAS (edit Target Sell and they recompute). Its
-competitors read to the right; lowest competitor price per group is shaded green.
+Only fees we actually KNOW are baked in: our Greenway cost (+7% buffer), Amazon's 15%
+referral, and the real Keepa FBA fee. "Other Fees" is left blank for the partner to add
+ads / returns / storage. Net and Margin are live formulas. Each product's economics is
+pinned in frozen left columns merged once per product; its competitors read to the right.
 
 Run: python3 scripts/build-backup.py   →   ~/Desktop/Portal-Backup-<date>.xlsx
 """
@@ -25,7 +25,8 @@ def get(path):
     return json.loads(urllib.request.urlopen(r, timeout=90).read())
 
 SITE = "https://the-portal-sourcing.netlify.app"
-OPEX = 0.34  # referral 15% + ads 15% + returns 4% (FBA is charged separately, in $)
+COST_BUFFER = 1.07   # 7% padding over the Greenway cost (freight / prep / variance)
+REFERRAL = 0.15      # Amazon referral fee, this category
 prods = get("/rest/v1/products?select=id,external_ref,line,group_name,name,model,specs,our_cost&order=line,name")
 comps = get("/rest/v1/competitors?status=eq.approved&select=product_id,title,retail_url,price,bsr,est_monthly_sales,review_count,fba_pick_pack_fee&order=est_monthly_sales.desc")
 costs = json.load(open("/tmp/fs-costs.json")) if os.path.exists("/tmp/fs-costs.json") else {}
@@ -55,7 +56,7 @@ wb = Workbook()
 
 # ═══ 1. Overview ═══════════════════════════════════════════════════
 ov = wb.active; ov.title = "Overview"; ov.sheet_view.showGridLines = False
-ov.column_dimensions["A"].width = 2; ov.column_dimensions["B"].width = 27; ov.column_dimensions["C"].width = 74
+ov.column_dimensions["A"].width = 2; ov.column_dimensions["B"].width = 27; ov.column_dimensions["C"].width = 76
 ov["B2"] = "THE PORTAL"; ov["B2"].font = Font(bold=True, size=22, color=INK)
 ov["B3"] = f"Product & Competitor Backup   ·   {datetime.date.today().strftime('%B %-d, %Y')}"; ov["B3"].font = Font(size=11, color=MUT)
 r = 5
@@ -65,7 +66,7 @@ def ov_line(label, val, bold=False, hue=None, small=False):
     b = ov.cell(row=r, column=3, value=val); b.font = Font(bold=bold, color=hue or ("FF64748B" if small else "FF0F172A"), size=10 if small else 11)
     b.alignment = Alignment(wrap_text=True, vertical="top"); r += 1
 fs = [p for p in prods if p["line"] == "foodservice"]; ap = [p for p in prods if p["line"] == "appliance"]; be = [p for p in prods if p["line"] == "beauty"]
-ov_line("What this is", "An offline snapshot of the Portal for reviewing and pricing products if the site is unavailable. Each product carries its full deal math and sits beside its own Amazon competitors.")
+ov_line("What this is", "An offline snapshot of the Portal for reviewing and pricing products if the site is unavailable. Each product carries an honest deal calculator and sits beside its own Amazon competitors.")
 r += 1
 ov_line("Live site", SITE, hue=LINK)
 ov_line("Products", str(len(prods)), bold=True)
@@ -75,16 +76,20 @@ ov_line("   Beauty", f"{len(be)}", hue=HUE['beauty'])
 ov_line("Competitors", f"{len(comps)} verified listings across {len(cby)} products — each links to Amazon", bold=True)
 r += 1
 ov_line("Tabs", "")
-ov_line("   Products & Competitors", "The working view. Each product's deal math is pinned on the left; its competitors line up to the right. Net and Margin are live formulas — type a new Target Sell and they update.")
+ov_line("   Products & Competitors", "The working view. Each product's deal math is pinned on the left; its competitors line up to the right. Change the Target Sell or add Other Fees and Net/Margin recalculate.")
 ov_line("   Catalog", "The full 278-product index with specs, cost, competitor count, and a link to each live page.")
 r += 1
 ov_line("The deal math (left block, per product)", "")
-for t, d in [("Target Sell", "the price we'd list at — pre-filled at the market median, editable"),
-             ("FBA / Unit", "Amazon's real fulfillment fee (median of this product's competitors)"),
-             ("Sell Fees (34%)", "referral 15% + ads 15% + returns 4% of the sell price"),
-             ("Net / Unit", "Target Sell − our cost − sell fees − FBA"),
+for t, d in [("Our Cost", "Greenway factory cost + a 7% buffer (freight / prep / variance)"),
+             ("Target Sell", "the price we'd list at — pre-filled at the market median, editable"),
+             ("Referral 15%", "Amazon's referral fee — 15% of the sell price"),
+             ("FBA Fee", "Amazon's real fulfillment fee (median of this product's competitors)"),
+             ("Other Fees", "BLANK for you to fill — ads, returns, storage, anything else you expect"),
+             ("Net / Unit", "Target Sell − cost − referral − FBA − other"),
              ("Margin", "Net ÷ Target Sell   ·   green ≥ 15%,  amber 8–15%,  red < 8%")]:
     ov_line("   " + t, d, small=True)
+r += 1
+ov_line("Only known costs", "We bake in only the fees we actually know — our cost, Amazon's referral, and the real FBA fee. Ads and returns vary, so Other Fees is left blank for you to add rather than us guessing and inflating the number.", small=True)
 r += 1
 ov_line("Competitor columns (right)", "")
 for t, d in [("Price", "current Amazon price — lowest in each group is shaded green"),
@@ -96,16 +101,16 @@ for t, d in [("Price", "current Amazon price — lowest in each group is shaded 
 
 # ═══ 2. Products & Competitors ═════════════════════════════════════
 rv = wb.create_sheet("Products & Competitors"); rv.sheet_view.showGridLines = False
-cols = ["Product", "Our Cost", "Target Sell", "FBA Fee", "Sell Fees 34%", "Net / Unit", "Margin",
+cols = ["Product", "Our Cost", "Target Sell", "Referral 15%", "FBA Fee", "Other Fees", "Net / Unit", "Margin",
         "Competitor  (click to open)", "Price", "BSR", "Sold/Mo", "Reviews", "Their FBA"]
-wds = [30, 10, 11, 9, 11, 10, 9, 42, 9, 9, 8, 8, 9]
-right_num = {2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13}
+wds = [30, 10, 11, 10, 9, 10, 10, 9, 40, 9, 9, 8, 8, 9]
+right_num = {2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14}
 for i, (t, w) in enumerate(zip(cols, wds), 1):
     cc = rv.cell(row=1, column=i, value=t); cc.fill = H_FILL; cc.font = H_FONT
     cc.alignment = Alignment(horizontal="right" if i in right_num else "left", vertical="center", wrap_text=True)
     rv.column_dimensions[get_column_letter(i)].width = w
 rv.row_dimensions[1].height = 40
-rv.freeze_panes = "H2"          # pin header + the economics block
+rv.freeze_panes = "I2"          # pin header + the economics block
 rv.print_title_rows = "1:1"
 rr = 2; gi = 0
 for p in [p for p in prods_sorted if cby.get(p["id"])]:
@@ -116,48 +121,50 @@ for p in [p for p in prods_sorted if cby.get(p["id"])]:
     lowp = min(prices) if prices else None
     m = med(prices)
     fba = med([float(c["fba_pick_pack_fee"]) for c in grp if c.get("fba_pick_pack_fee") is not None])
-    cost = costs.get(p["external_ref"])
-    for c in grp:                   # competitors → columns 8-13
+    base = costs.get(p["external_ref"])
+    for c in grp:                   # competitors → columns 9-14
         cvals = [c["title"], c.get("price"), c.get("bsr"), c.get("est_monthly_sales"), c.get("review_count"), c.get("fba_pick_pack_fee")]
         for j, v in enumerate(cvals):
-            ci = 8 + j
-            cc = rv.cell(row=rr, column=ci, value=(float(v) if ci in (9, 13) and v is not None else v))
+            ci = 9 + j
+            cc = rv.cell(row=rr, column=ci, value=(float(v) if ci in (10, 14) and v is not None else v))
             cc.font = Font(size=10, color="FF0F172A")
-            cc.alignment = LEFT if ci == 8 else RIGHT
+            cc.alignment = LEFT if ci == 9 else RIGHT
             cc.border = Border(bottom=GRIDL, top=(GROUPL if rr == start else None))
             if band: cc.fill = band
-        link = rv.cell(row=rr, column=8)
+        link = rv.cell(row=rr, column=9)
         if c.get("retail_url"): link.hyperlink = c["retail_url"]; link.font = Font(color=LINK, underline="single", size=10)
-        money(rv.cell(row=rr, column=9)); money(rv.cell(row=rr, column=13))
-        for ci in (10, 11, 12): intfmt(rv.cell(row=rr, column=ci))
+        money(rv.cell(row=rr, column=10)); money(rv.cell(row=rr, column=14))
+        for ci in (11, 12, 13): intfmt(rv.cell(row=rr, column=ci))
         if lowp is not None and c.get("price") is not None and float(c["price"]) == lowp:
-            pc = rv.cell(row=rr, column=9); pc.fill = PatternFill("solid", fgColor=LOWFILL); pc.font = Font(size=10, bold=True, color="FF065F46")
+            pc = rv.cell(row=rr, column=10); pc.fill = PatternFill("solid", fgColor=LOWFILL); pc.font = Font(size=10, bold=True, color="FF065F46")
         rv.row_dimensions[rr].height = 32; rr += 1
     end = rr - 1
-    for ci in range(1, 8):          # merge the economics block once per product
+    for ci in range(1, 9):          # merge the economics block once per product
         if end > start: rv.merge_cells(start_row=start, start_column=ci, end_row=end, end_column=ci)
     pc = rv.cell(row=start, column=1, value=p["name"]); pc.font = Font(size=11, bold=True, color=HUE.get(p["line"], INK)); pc.alignment = Alignment(vertical="center", wrap_text=True)
-    if cost is not None:            # live deal math — Net & Margin recompute if Target Sell is edited
-        Cs, Bs, Ds, Es, Fs = f"C{start}", f"B{start}", f"D{start}", f"E{start}", f"F{start}"
-        rv.cell(row=start, column=2, value=cost)
-        rv.cell(row=start, column=3, value=round(m, 2) if m else None)      # target sell = market median (editable)
-        rv.cell(row=start, column=4, value=round(fba, 2) if fba else None)  # our FBA = competitor median
-        rv.cell(row=start, column=5, value=f"=0.34*{Cs}")
-        rv.cell(row=start, column=6, value=f"={Cs}-{Bs}-{Es}-{Ds}")
-        rv.cell(row=start, column=7, value=f'=IF({Cs}>0,{Fs}/{Cs},"")')
-        for ci in (2, 3, 4, 5, 6): money(rv.cell(row=start, column=ci))
-        rv.cell(row=start, column=7).number_format = "0.0%"
-        sell = m or 0; net = sell - (cost or 0) - OPEX * sell - (fba or 0); marg = net / sell if sell else 0
+    if base is not None:            # live deal math — only known fees (cost+7%, referral, real FBA); partner adds Other
+        padded = round(base * COST_BUFFER, 2)
+        Cs, Bs, Ds, Es, Fs, Gs = f"C{start}", f"B{start}", f"D{start}", f"E{start}", f"F{start}", f"G{start}"
+        rv.cell(row=start, column=2, value=padded)                          # our cost + 7% buffer
+        rv.cell(row=start, column=3, value=round(m, 2) if m else None)      # target sell (editable)
+        rv.cell(row=start, column=4, value=f"={REFERRAL}*{Cs}")            # referral 15%
+        rv.cell(row=start, column=5, value=round(fba, 2) if fba else None)  # FBA (Keepa median)
+        # column 6 (Other Fees) left blank for the partner
+        rv.cell(row=start, column=7, value=f"={Cs}-{Bs}-{Ds}-{Es}-{Fs}")    # net
+        rv.cell(row=start, column=8, value=f'=IF({Cs}>0,{Gs}/{Cs},"")')     # margin
+        for ci in (2, 3, 4, 5, 6, 7): money(rv.cell(row=start, column=ci))
+        rv.cell(row=start, column=8).number_format = "0.0%"
+        sell = m or 0; net = sell - padded - REFERRAL * sell - (fba or 0); marg = net / sell if sell else 0
         hue = "FF047857" if marg >= 0.15 else ("FFB45309" if marg >= 0.08 else "FFB91C1C")
         rv.cell(row=start, column=2).font = Font(size=11, bold=True, color="FF0F172A")
         for ci in (3, 4, 5): rv.cell(row=start, column=ci).font = Font(size=10, color=SLATE)
-        rv.cell(row=start, column=6).font = Font(size=11, bold=True, color=hue)
         rv.cell(row=start, column=7).font = Font(size=11, bold=True, color=hue)
-    for ci in range(2, 8): rv.cell(row=start, column=ci).alignment = CENTER
-    for ci in range(1, 8):          # re-apply band + separators across the merged block
+        rv.cell(row=start, column=8).font = Font(size=11, bold=True, color=hue)
+    for ci in range(2, 9): rv.cell(row=start, column=ci).alignment = CENTER
+    for ci in range(1, 9):          # re-apply band + separators across the merged block
         for rw in range(start, end + 1):
             cell = rv.cell(row=rw, column=ci)
-            cell.border = Border(top=GROUPL if rw == start else None, bottom=GRIDL if rw == end else None, right=(VDIV if ci == 7 else None))
+            cell.border = Border(top=GROUPL if rw == start else None, bottom=GRIDL if rw == end else None, right=(VDIV if ci == 8 else None))
             if band: cell.fill = band
 
 # ═══ 3. Catalog ════════════════════════════════════════════════════
@@ -173,8 +180,9 @@ rr = 2
 for p in prods_sorted:
     specs = "; ".join(f'{s["label"]}: {s["value"]}' for s in (p.get("specs") or [])[:5])
     ncomp = len(cby.get(p["id"], []))
+    base = costs.get(p["external_ref"])
     vals = [p["line"].title(), p.get("group_name") or "—", p["name"], p.get("model") or "—", specs,
-            costs.get(p["external_ref"]), ncomp if ncomp else None, None]
+            round(base * COST_BUFFER, 2) if base is not None else None, ncomp if ncomp else None, None]
     for ci, v in enumerate(vals, 1):
         cc = cat.cell(row=rr, column=ci, value=v); cc.border = Border(bottom=GRIDL)
         cc.alignment = RIGHT if ci in (6, 7) else LEFT
