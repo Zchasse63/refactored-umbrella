@@ -3,23 +3,32 @@
  * The old script's agency lines (3% commission + $100/SKU flat fee) and FOB/freight
  * math are intentionally absent. Pure, deterministic, no I/O. See BUILD_PLAN §8.
  *
- * Cost stack: referral 15 + ads 15 + FBA 15 + returns 4 (+ partner-split 0) = 49% opex.
+ * Cost stack = KNOWN Amazon fees only: referral 15% + the real FBA fee (per-unit, swapped
+ * in from competitor data) + an "Other fees" line the partner fills in (ads/returns/etc).
+ * We never bake in fees we can't source — this mirrors the partner Excel backup so the site
+ * and the workbook speak with one voice. OUR booked cost is padded by COST_BUFFER (7%) for
+ * freight/prep/variance, exactly like the workbook's 1.07 pad.
  * Target gross margin 65% → target landed ≤ 35% of sell (DDP, duty-paid, no FOB).
  *
- * TERMINOLOGY SAFEGUARD: "gross margin" is COGS-vs-price (landed ≤ 35%); the 49% opex
- * is SEPARATE, so NET ≈ 16% of price — never conflate the two. Labels below enforce it.
+ * TERMINOLOGY SAFEGUARD: "gross margin" is COGS-vs-price (landed ≤ 35%); variable opex is
+ * SEPARATE — never conflate the two. Labels below enforce it.
  */
 import type { Assumptions, CalcInputs, CostLine, Line } from "@/lib/types";
 
+// KNOWN fees only. "fba" is a placeholder % that gets swapped for the real per-unit FBA fee
+// whenever competitor data supplies one; "other" starts at 0 for the partner to fill in the
+// fees we can't know up front (ads, returns, etc). Ads/returns are intentionally NOT defaulted.
 export const DEFAULT_COST_STACK: CostLine[] = [
   { key: "referral", label: "Referral", pct: 0.15 },
-  { key: "ads", label: "Ads", pct: 0.15 },
   { key: "fba", label: "FBA logistics", pct: 0.15 },
-  { key: "returns", label: "Returns", pct: 0.04 },
-  { key: "partner_split", label: "Partner split", pct: 0 },
+  { key: "other", label: "Other fees", pct: 0 },
 ];
 
 export const DEFAULT_GROSS_MARGIN = 0.65;
+
+/** Buffer padded onto OUR booked cost for freight/prep/variance — mirrors the 1.07 pad in
+ *  the partner Excel backup so the site's "our cost" and the workbook's agree to the cent. */
+export const COST_BUFFER = 0.07;
 
 export const DEFAULT_ASSUMPTIONS: Assumptions = {
   grossMargin: DEFAULT_GROSS_MARGIN,
@@ -42,7 +51,7 @@ export const LABELS = {
   grossMargin: "Gross margin (COGS vs price)",
   targetLandedCaption:
     "= (1 − gross margin) × sell price (DDP, duty-paid, no freight breakout)",
-  net: "Net margin (~16% of price · opex is separate)",
+  net: "Net margin (after known Amazon fees · opex is separate)",
   opex: "Amazon variable opex — separate from gross margin",
 } as const;
 
@@ -193,8 +202,10 @@ export function compute({
   };
 
   if (actualLanded != null && Number.isFinite(actualLanded)) {
-    // round the landed cost ONCE so net/pct and the displayed figure agree exactly
-    const a = round2(actualLanded);
+    // Pad OUR booked cost by COST_BUFFER (freight/prep/variance), then round ONCE so net/pct
+    // and the displayed figure agree exactly. The quoted/target columns stay UN-buffered —
+    // those are the raw factory number and the price-derived RFQ ceiling, not our cost.
+    const a = round2(actualLanded * (1 + COST_BUFFER));
     const net = netPerUnit(sell, a, effOpx);
     eco.actualLanded = a;
     eco.actualNet = net;

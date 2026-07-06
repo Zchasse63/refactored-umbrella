@@ -1,6 +1,6 @@
 import { Check, X } from "lucide-react";
 import { cn, money, pct, EMDASH } from "@/lib/utils";
-import { LABELS, type Economics, type LiveColumn } from "@/lib/calc/economics";
+import { COST_BUFFER, LABELS, type Economics, type LiveColumn } from "@/lib/calc/economics";
 
 function ColHead({ label, sub, dotClass, live }: { label: string; sub: string; dotClass: string; live: boolean }) {
   return (
@@ -115,6 +115,11 @@ export function EconomicsWaterfall({ eco }: { eco: Economics }) {
       <p className="text-[9px] leading-snug text-muted-foreground">
         {LABELS.net}. Live margin uses {live} · {LABELS.targetLandedCaption}.
       </p>
+      {eco.actualLanded != null && (
+        <p className="text-[9px] leading-snug text-muted-foreground">
+          Booked cost includes a {pct(COST_BUFFER, 0)} landed buffer (freight/prep/variance).
+        </p>
+      )}
     </div>
   );
 }

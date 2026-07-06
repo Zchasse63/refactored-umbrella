@@ -10,8 +10,8 @@ import {
 } from "./economics";
 
 describe("cost stack", () => {
-  it("default opex is exactly 49% (agency lines removed)", () => {
-    expect(opexPct(DEFAULT_ASSUMPTIONS.costStack)).toBeCloseTo(0.49, 10);
+  it("default opex is 30% — known fees only (referral 15 + FBA 15 placeholder); ads/returns are the partner's to add", () => {
+    expect(opexPct(DEFAULT_ASSUMPTIONS.costStack)).toBeCloseTo(0.3, 10);
   });
 });
 
@@ -20,10 +20,10 @@ describe("the headline math", () => {
     expect(targetLanded(40, 0.65)).toBe(14);
   });
 
-  it("net ≈ 16% of price at the ceiling — NOT 65% (the terminology trap)", () => {
-    const net = netPerUnit(40, 14, 0.49);
-    expect(net).toBeCloseTo(6.4, 10);
-    expect(net / 40).toBeCloseTo(0.16, 10);
+  it("net at the ceiling is SEPARATE from the 65% gross margin (the terminology trap)", () => {
+    const net = netPerUnit(40, 14, 0.3); // default opex 30% (known fees)
+    expect(net).toBeCloseTo(14, 10); // 40 − 14 − 12
+    expect(net / 40).toBeCloseTo(0.35, 10);
     expect(net / 40).not.toBeCloseTo(0.65, 2);
   });
 
@@ -69,19 +69,27 @@ describe("compute()", () => {
 
   it("produces the canonical $40 example end to end", () => {
     const e = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 40, quotedLanded: 12.5 });
-    expect(e.opex).toBe(19.6);
+    expect(e.opex).toBe(12); // 0.30 × 40 (known fees only)
     expect(e.targetLanded).toBe(14);
-    expect(e.targetNet).toBeCloseTo(6.4, 10);
-    expect(e.quotedNet).toBeCloseTo(7.9, 10); // 40 − 12.5 − 19.6
+    expect(e.targetNet).toBeCloseTo(14, 10); // 40 − 14 − 12
+    expect(e.quotedNet).toBeCloseTo(15.5, 10); // 40 − 12.5 − 12 (quote un-buffered)
     expect(e.verdict?.pass).toBe(true);
     expect(e.verdict?.headroom).toBe(1.5);
     expect(e.liveColumn).toBe("quoted");
   });
 
-  it("foodservice skips Amazon opex (cost-only line)", () => {
+  it("pads OUR booked (actual) cost by the 7% buffer; quoted/target stay raw", () => {
+    const e = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 40, actualLanded: 10, quotedLanded: 12 });
+    expect(e.actualLanded).toBeCloseTo(10.7, 10); // 10 × 1.07 — buffered, rounded once
+    expect(e.quotedLanded).toBe(12); // raw factory number
+    expect(e.targetLanded).toBe(14); // price-derived ceiling
+  });
+
+  it("foodservice skips Amazon opex but still pads our booked cost by the 7% buffer", () => {
     const e = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 18, actualLanded: 4.1, applyOpex: false });
     expect(e.opexPct).toBe(0);
-    expect(e.actualNet).toBeCloseTo(18 - 4.1, 10);
+    expect(e.actualLanded).toBeCloseTo(4.39, 10); // 4.1 × 1.07, rounded once
+    expect(e.actualNet).toBeCloseTo(18 - 4.39, 10);
   });
 });
 

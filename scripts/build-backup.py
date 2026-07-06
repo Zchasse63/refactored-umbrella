@@ -54,53 +54,8 @@ order = {"foodservice": 0, "appliance": 1, "beauty": 2}
 prods_sorted = sorted(prods, key=lambda p: (order.get(p["line"], 9), p.get("group_name") or "", p["name"]))
 wb = Workbook()
 
-# ═══ 1. Overview ═══════════════════════════════════════════════════
-ov = wb.active; ov.title = "Overview"; ov.sheet_view.showGridLines = False
-ov.column_dimensions["A"].width = 2; ov.column_dimensions["B"].width = 27; ov.column_dimensions["C"].width = 76
-ov["B2"] = "THE PORTAL"; ov["B2"].font = Font(bold=True, size=22, color=INK)
-ov["B3"] = f"Product & Competitor Backup   ·   {datetime.date.today().strftime('%B %-d, %Y')}"; ov["B3"].font = Font(size=11, color=MUT)
-r = 5
-def ov_line(label, val, bold=False, hue=None, small=False):
-    global r
-    a = ov.cell(row=r, column=2, value=label); a.font = Font(bold=not small, color=SLATE, size=10 if small else 11)
-    b = ov.cell(row=r, column=3, value=val); b.font = Font(bold=bold, color=hue or ("FF64748B" if small else "FF0F172A"), size=10 if small else 11)
-    b.alignment = Alignment(wrap_text=True, vertical="top"); r += 1
-fs = [p for p in prods if p["line"] == "foodservice"]; ap = [p for p in prods if p["line"] == "appliance"]; be = [p for p in prods if p["line"] == "beauty"]
-ov_line("What this is", "An offline snapshot of the Portal for reviewing and pricing products if the site is unavailable. Each product carries an honest deal calculator and sits beside its own Amazon competitors.")
-r += 1
-ov_line("Live site", SITE, hue=LINK)
-ov_line("Products", str(len(prods)), bold=True)
-ov_line("   Foodservice", f"{len(fs)}   ready to sell — has costs, deal math, and competitor data", hue=HUE['foodservice'])
-ov_line("   Appliances", f"{len(ap)}   no cost yet — set a target sell price to generate one", hue=HUE['appliance'])
-ov_line("   Beauty", f"{len(be)}", hue=HUE['beauty'])
-ov_line("Competitors", f"{len(comps)} verified listings across {len(cby)} products — each links to Amazon", bold=True)
-r += 1
-ov_line("Tabs", "")
-ov_line("   Products & Competitors", "The working view. Each product's deal math is pinned on the left; its competitors line up to the right. Change the Target Sell or add Other Fees and Net/Margin recalculate.")
-ov_line("   Catalog", "The full 278-product index with specs, cost, competitor count, and a link to each live page.")
-r += 1
-ov_line("The deal math (left block, per product)", "")
-for t, d in [("Our Cost", "Greenway factory cost + a 7% buffer (freight / prep / variance)"),
-             ("Target Sell", "the price we'd list at — pre-filled at the market median, editable"),
-             ("Referral 15%", "Amazon's referral fee — 15% of the sell price"),
-             ("FBA Fee", "Amazon's real fulfillment fee (median of this product's competitors)"),
-             ("Other Fees", "BLANK for you to fill — ads, returns, storage, anything else you expect"),
-             ("Net / Unit", "Target Sell − cost − referral − FBA − other"),
-             ("Margin", "Net ÷ Target Sell   ·   green ≥ 15%,  amber 8–15%,  red < 8%")]:
-    ov_line("   " + t, d, small=True)
-r += 1
-ov_line("Only known costs", "We bake in only the fees we actually know — our cost, Amazon's referral, and the real FBA fee. Ads and returns vary, so Other Fees is left blank for you to add rather than us guessing and inflating the number.", small=True)
-r += 1
-ov_line("Competitor columns (right)", "")
-for t, d in [("Price", "current Amazon price — lowest in each group is shaded green"),
-             ("BSR", "sales rank — lower is stronger"),
-             ("Sold/Mo", "estimated units sold last month"),
-             ("Reviews", "total ratings — how entrenched the listing is"),
-             ("Their FBA", "that listing's own fulfillment fee")]:
-    ov_line("   " + t, d, small=True)
-
-# ═══ 2. Products & Competitors ═════════════════════════════════════
-rv = wb.create_sheet("Products & Competitors"); rv.sheet_view.showGridLines = False
+# ═══ 1. Products & Competitors ═════════════════════════════════════
+rv = wb.active; rv.title = "Products & Competitors"; rv.sheet_view.showGridLines = False
 cols = ["Product", "Our Cost", "Target Sell", "Referral 15%", "FBA Fee", "Other Fees", "Net / Unit", "Margin",
         "Competitor  (click to open)", "Price", "BSR", "Sold/Mo", "Reviews", "Their FBA"]
 wds = [30, 10, 11, 10, 9, 10, 10, 9, 40, 9, 9, 8, 8, 9]
@@ -167,7 +122,7 @@ for p in [p for p in prods_sorted if cby.get(p["id"])]:
             cell.border = Border(top=GROUPL if rw == start else None, bottom=GRIDL if rw == end else None, right=(VDIV if ci == 8 else None))
             if band: cell.fill = band
 
-# ═══ 3. Catalog ════════════════════════════════════════════════════
+# ═══ 2. Catalog ════════════════════════════════════════════════════
 cat = wb.create_sheet("Catalog"); cat.sheet_view.showGridLines = False
 cols = ["Line", "Category", "Product", "Model", "Key Specs", "Our Cost", "Competitors", "Live Page"]
 wds = [13, 22, 42, 16, 50, 11, 12, 11]
@@ -195,7 +150,7 @@ for p in prods_sorted:
     cat.row_dimensions[rr].height = 30; rr += 1
 cat.auto_filter.ref = f"A1:{get_column_letter(len(cols))}{rr-1}"
 
-for ws, land in [(ov, False), (rv, True), (cat, True)]:
+for ws, land in [(rv, True), (cat, True)]:
     ws.page_setup.orientation = "landscape" if land else "portrait"
     ws.page_setup.fitToWidth = 1; ws.page_setup.fitToHeight = 0
     ws.sheet_properties.pageSetUpPr = PageSetupProperties(fitToPage=True)
