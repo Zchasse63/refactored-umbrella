@@ -68,7 +68,9 @@ rv.row_dimensions[1].height = 40
 rv.freeze_panes = "I2"          # pin header + the economics block
 rv.print_title_rows = "1:1"
 rr = 2; gi = 0
-for p in [p for p in prods_sorted if cby.get(p["id"])]:
+# Working deal view: only products that have BOTH competitors AND a cost (real deal math).
+# A product with competitors but no cost has no economics to show here — it lives on Catalog.
+for p in [p for p in prods_sorted if cby.get(p["id"]) and costs.get(p["external_ref"]) is not None]:
     grp = sorted(cby[p["id"]], key=lambda c: -(c.get("est_monthly_sales") or 0))
     gi += 1; band = PatternFill("solid", fgColor=BAND) if gi % 2 == 0 else None
     start = rr

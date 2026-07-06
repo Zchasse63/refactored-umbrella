@@ -1,1387 +1,545 @@
 [
- {
-  "external_ref": "foodservice:boba-straw-9in-black-1600",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Boba/Smoothie Straw 9\" Black \u2014 Pointed \u2014 1600 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Boba",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "9\""
-   },
-   {
-    "label": "Bore",
-    "value": "10 mm"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1600 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:boba-straw-9in-clear-1600",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Boba/Smoothie Straw 9\" Clear \u2014 Pointed \u2014 1600 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Boba",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "9\""
-   },
-   {
-    "label": "Bore",
-    "value": "10 mm"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1600 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-12-16gal-24x33-1mil-ld",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "12-16 Gal Can Liner \u2014 1 mil LDPE \u2014 250 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "Low-Density",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "LDPE"
-   },
-   {
-    "label": "Size",
-    "value": "24\" x 33\""
-   },
-   {
-    "label": "Gauge",
-    "value": "1 mil"
-   },
-   {
-    "label": "Capacity",
-    "value": "12-16 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "250 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-33gal-33x39-1-2mil-ld",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "33 Gal Can Liner \u2014 1.2 mil LDPE \u2014 100 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "Low-Density",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "LDPE"
-   },
-   {
-    "label": "Size",
-    "value": "33\" x 39\""
-   },
-   {
-    "label": "Gauge",
-    "value": "1.2 mil"
-   },
-   {
-    "label": "Capacity",
-    "value": "33 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "100 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-40-45gal-40x48-16mic-hd",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "40-45 Gal Can Liner \u2014 16 micron HDPE \u2014 250 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "High-Density",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "40\" x 48\""
-   },
-   {
-    "label": "Gauge",
-    "value": "16 micron"
-   },
-   {
-    "label": "Capacity",
-    "value": "40-45 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "250 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Natural"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-45gal-40x46-2mil-contractor",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "45 Gal Contractor Can Liner \u2014 2 mil LDPE Heavy-Duty \u2014 100 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "Heavy-Duty",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "LDPE"
-   },
-   {
-    "label": "Size",
-    "value": "40\" x 46\""
-   },
-   {
-    "label": "Gauge",
-    "value": "2 mil"
-   },
-   {
-    "label": "Capacity",
-    "value": "45 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "100 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-55-60gal-38x60-22mic-hd",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "55-60 Gal Can Liner \u2014 22 micron HDPE \u2014 150 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "High-Density",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "38\" x 60\""
-   },
-   {
-    "label": "Gauge",
-    "value": "22 micron"
-   },
-   {
-    "label": "Capacity",
-    "value": "55-60 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "150 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Natural"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:can-liner-60gal-black-ldpe-100ct",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "60 Gal Can Liner \u2014 1.3 mil Black LDPE \u2014 100 ct",
-  "model": null,
-  "group_name": "Can Liners",
-  "subsection": "Low-Density",
-  "categories": [
-   "Can Liners"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "LDPE"
-   },
-   {
-    "label": "Size",
-    "value": "38\" x 58\""
-   },
-   {
-    "label": "Gauge",
-    "value": "1.3 mil"
-   },
-   {
-    "label": "Capacity",
-    "value": "55-60 gal"
-   },
-   {
-    "label": "Pack",
-    "value": "100 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 18.05,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:coffee-stirrer-5in-10000",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Coffee Stirrer / Sip Straw 5\" \u2014 10000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Stirrer",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "5\""
-   },
-   {
-    "label": "Bore",
-    "value": "3 mm"
-   },
-   {
-    "label": "Pack",
-    "value": "10000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:colossal-straw-8-5in-1600",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Colossal Straw 8.5\" \u2014 Extra-Wide \u2014 1600 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Colossal",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "8.5\""
-   },
-   {
-    "label": "Bore",
-    "value": "12 mm"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1600 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-10-25in-blue-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 10.25\" Blue \u2014 Paper Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Blue"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 8.0,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-10-25in-blue-poly",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 10.25\" Blue \u2014 Poly Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Poly"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Blue"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 9.0,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-10-25in-orange-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 10.25\" Orange \u2014 Paper Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Orange"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 8.0,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-8-5in-black-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 8.5\" Black \u2014 Paper Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "8.5\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 6.5,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-8-5in-blue-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 8.5\" Blue \u2014 Paper Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "8.5\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Blue"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 6.5,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:giant-straw-8-5in-orange-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Giant Straw 8.5\" Orange \u2014 Paper Wrapped \u2014 1200 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Giant",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "8.5\""
-   },
-   {
-    "label": "Bore",
-    "value": "Giant (~8 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "1200 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Orange"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 6.5,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-10-25in-black-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 10.25\" Black \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 8.4,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-10-25in-blue-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 10.25\" Blue \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Blue"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 8.4,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-10-25in-clear-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 10.25\" Clear \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "10.25\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 8.4,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-7-75in-black-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 7.75\" Black \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "7.75\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Black"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 5.95,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-7-75in-blue-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 7.75\" Blue \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "7.75\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Blue"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 5.95,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:jumbo-straw-7-75in-clear-paper",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Jumbo Straw 7.75\" Clear \u2014 Paper Wrapped \u2014 2000 ct",
-  "model": null,
-  "group_name": "Straws",
-  "subsection": "Jumbo",
-  "categories": [
-   "Straws"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "PP"
-   },
-   {
-    "label": "Length",
-    "value": "7.75\""
-   },
-   {
-    "label": "Bore",
-    "value": "Jumbo (~6 mm)"
-   },
-   {
-    "label": "Wrap",
-    "value": "Paper"
-   },
-   {
-    "label": "Pack",
-    "value": "2000 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 5.95,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:produce-bag-11x19-ld-case",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Produce Bag 11x19 \u2014 1.2 mil LD \u2014 case",
-  "model": null,
-  "group_name": "Produce Bags",
-  "subsection": "Roll/Flat",
-  "categories": [
-   "Produce Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "LDPE"
-   },
-   {
-    "label": "Size",
-    "value": "11\" x 19\""
-   },
-   {
-    "label": "Gauge",
-    "value": "1.2 mil"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 18.5,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:produce-roll-10x15-hd-1400",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Produce Roll Bag 10x15 \u2014 9 micron HDPE \u2014 1400 ct",
-  "model": null,
-  "group_name": "Produce Bags",
-  "subsection": "Roll",
-  "categories": [
-   "Produce Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "10\" x 15\""
-   },
-   {
-    "label": "Gauge",
-    "value": "9 micron"
-   },
-   {
-    "label": "Pack",
-    "value": "1400 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:produce-roll-12x20-hd-875",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Produce Roll Bag 12x20 \u2014 0.5 mil HDPE \u2014 875 ct",
-  "model": null,
-  "group_name": "Produce Bags",
-  "subsection": "Roll",
-  "categories": [
-   "Produce Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "12\" x 20\""
-   },
-   {
-    "label": "Gauge",
-    "value": "0.5 mil"
-   },
-   {
-    "label": "Pack",
-    "value": "875 ct"
-   },
-   {
-    "label": "Color",
-    "value": "Clear"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:thank-you-1-8-small-100ct",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Thank You T-Shirt Bag 1/8 Small \u2014 100 ct",
-  "model": null,
-  "group_name": "Carryout Bags",
-  "subsection": "Thank You / T-Shirt",
-  "categories": [
-   "Carryout Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "10\" x 5\" x 18\""
-   },
-   {
-    "label": "Gauge",
-    "value": "13 micron"
-   },
-   {
-    "label": "Pack",
-    "value": "100 ct"
-   },
-   {
-    "label": "Color",
-    "value": "White"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:thank-you-1-8-small-350ct",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Thank You T-Shirt Bag 1/8 Small \u2014 350 ct",
-  "model": null,
-  "group_name": "Carryout Bags",
-  "subsection": "Thank You / T-Shirt",
-  "categories": [
-   "Carryout Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "10\" x 5\" x 18\""
-   },
-   {
-    "label": "Gauge",
-    "value": "13 micron"
-   },
-   {
-    "label": "Pack",
-    "value": "350 ct"
-   },
-   {
-    "label": "Color",
-    "value": "White"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": null,
-  "our_cost_source": "Extrapolated (Greenway model)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:thank-you-tshirt-bag-100ct",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Thank You T-Shirt Bag \u2014 100 ct",
-  "model": null,
-  "group_name": "Carryout Bags",
-  "subsection": "Thank You / T-Shirt",
-  "categories": [
-   "Carryout Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "11.5\" x 6.5\" x 21\""
-   },
-   {
-    "label": "Gauge",
-    "value": "12 micron"
-   },
-   {
-    "label": "Pack",
-    "value": "100 ct"
-   },
-   {
-    "label": "Color",
-    "value": "White"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 1.2,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- },
- {
-  "external_ref": "foodservice:thank-you-tshirt-bag-350ct",
-  "line": "foodservice",
-  "brand": "Greenway",
-  "source": "Greenway",
-  "name": "Thank You T-Shirt Bag \u2014 350 ct",
-  "model": null,
-  "group_name": "Carryout Bags",
-  "subsection": "Thank You / T-Shirt",
-  "categories": [
-   "Carryout Bags"
-  ],
-  "specs": [
-   {
-    "label": "Material",
-    "value": "HDPE"
-   },
-   {
-    "label": "Size",
-    "value": "11.5\" x 6.5\" x 21\""
-   },
-   {
-    "label": "Gauge",
-    "value": "12 micron"
-   },
-   {
-    "label": "Pack",
-    "value": "350 ct"
-   },
-   {
-    "label": "Color",
-    "value": "White"
-   }
-  ],
-  "features": [],
-  "source_url": null,
-  "msrp": null,
-  "our_cost": 4.2,
-  "our_cost_source": "Greenway quote (DDP, FOB Houston)",
-  "photo_state": "missing",
-  "image_has_chinese": false,
-  "voltage_flag": false,
-  "export_ok": false,
-  "primary_image_path": null
- }
+  {
+    "external_ref": "foodservice:can-liner-12-16gal-24x33-1mil-ld",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "12-16 Gal Can Liner — 1 mil LDPE — 250 ct",
+    "model": null,
+    "group_name": "Can Liners",
+    "subsection": "Low-Density",
+    "categories": [
+      "Can Liners"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "LDPE"
+      },
+      {
+        "label": "Size",
+        "value": "24\" x 33\""
+      },
+      {
+        "label": "Gauge",
+        "value": "1 mil"
+      },
+      {
+        "label": "Capacity",
+        "value": "12-16 gal"
+      },
+      {
+        "label": "Pack",
+        "value": "250 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": false,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:can-liner-33gal-33x39-1-2mil-ld",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "33 Gal Can Liner — 1.2 mil LDPE — 100 ct",
+    "model": null,
+    "group_name": "Can Liners",
+    "subsection": "Low-Density",
+    "categories": [
+      "Can Liners"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "LDPE"
+      },
+      {
+        "label": "Size",
+        "value": "33\" x 39\""
+      },
+      {
+        "label": "Gauge",
+        "value": "1.2 mil"
+      },
+      {
+        "label": "Capacity",
+        "value": "33 gal"
+      },
+      {
+        "label": "Pack",
+        "value": "100 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": false,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:jumbo-straw-10-25in-clear-paper",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Jumbo Straw 10.25\" Clear — Paper Wrapped — 2000 ct",
+    "model": null,
+    "group_name": "Straws",
+    "subsection": "Jumbo",
+    "categories": [
+      "Straws"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "PP"
+      },
+      {
+        "label": "Length",
+        "value": "10.25\""
+      },
+      {
+        "label": "Bore",
+        "value": "Jumbo (~6 mm)"
+      },
+      {
+        "label": "Wrap",
+        "value": "Paper"
+      },
+      {
+        "label": "Pack",
+        "value": "2000 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Clear"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": 8.4,
+    "our_cost_source": "Greenway quote (DDP, FOB Houston)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": false,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:thank-you-tshirt-bag-100ct",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Thank You T-Shirt Bag — 100 ct",
+    "model": null,
+    "group_name": "Carryout Bags",
+    "subsection": "Thank You / T-Shirt",
+    "categories": [
+      "Carryout Bags"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "HDPE"
+      },
+      {
+        "label": "Size",
+        "value": "11.5\" x 6.5\" x 21\""
+      },
+      {
+        "label": "Gauge",
+        "value": "12 micron"
+      },
+      {
+        "label": "Pack",
+        "value": "100 ct"
+      },
+      {
+        "label": "Color",
+        "value": "White"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": 1.2,
+    "our_cost_source": "Greenway quote (DDP, FOB Houston)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": false,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:thank-you-tshirt-bag-350ct",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Thank You T-Shirt Bag — 350 ct",
+    "model": null,
+    "group_name": "Carryout Bags",
+    "subsection": "Thank You / T-Shirt",
+    "categories": [
+      "Carryout Bags"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "HDPE"
+      },
+      {
+        "label": "Size",
+        "value": "11.5\" x 6.5\" x 21\""
+      },
+      {
+        "label": "Gauge",
+        "value": "12 micron"
+      },
+      {
+        "label": "Pack",
+        "value": "350 ct"
+      },
+      {
+        "label": "Color",
+        "value": "White"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": 4.2,
+    "our_cost_source": "Greenway quote (DDP, FOB Houston)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": false,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:can-liner-33gal-twist-250",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "33 Gal Can Liner — Twist-Tie — 0.6 mil LDPE — 250 ct",
+    "model": null,
+    "group_name": "Can Liners",
+    "subsection": "Twist-Tie",
+    "categories": [
+      "Can Liners"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "LDPE"
+      },
+      {
+        "label": "Size",
+        "value": "33\" x 39\""
+      },
+      {
+        "label": "Gauge",
+        "value": "0.6 mil"
+      },
+      {
+        "label": "Capacity",
+        "value": "30-33 gal"
+      },
+      {
+        "label": "Closure",
+        "value": "Twist-Tie"
+      },
+      {
+        "label": "Pack",
+        "value": "250 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:can-liner-55gal-contractor-flat-40",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "55 Gal Contractor Can Liner — 1.8 mil LDPE — 40 ct",
+    "model": null,
+    "group_name": "Can Liners",
+    "subsection": "Contractor",
+    "categories": [
+      "Can Liners"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "LDPE"
+      },
+      {
+        "label": "Size",
+        "value": "38\" x 58\""
+      },
+      {
+        "label": "Gauge",
+        "value": "1.8 mil"
+      },
+      {
+        "label": "Capacity",
+        "value": "55 gal"
+      },
+      {
+        "label": "Closure",
+        "value": "Flat"
+      },
+      {
+        "label": "Pack",
+        "value": "40 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:can-liner-55-60gal-twist-150",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "55-60 Gal Can Liner — Twist-Tie — 0.7 mil LDPE — 150 ct",
+    "model": null,
+    "group_name": "Can Liners",
+    "subsection": "Twist-Tie",
+    "categories": [
+      "Can Liners"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "LDPE"
+      },
+      {
+        "label": "Size",
+        "value": "38\" x 58\""
+      },
+      {
+        "label": "Gauge",
+        "value": "0.7 mil"
+      },
+      {
+        "label": "Capacity",
+        "value": "55-60 gal"
+      },
+      {
+        "label": "Closure",
+        "value": "Twist-Tie"
+      },
+      {
+        "label": "Pack",
+        "value": "150 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:boba-straw-11mm-9-45in-black-400",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Boba Straw 11mm 9.45\" Black — Paper Wrapped — 400 ct",
+    "model": null,
+    "group_name": "Straws",
+    "subsection": "Boba",
+    "categories": [
+      "Straws"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "PP"
+      },
+      {
+        "label": "Length",
+        "value": "9.45\""
+      },
+      {
+        "label": "Bore",
+        "value": "11 mm"
+      },
+      {
+        "label": "Wrap",
+        "value": "Paper"
+      },
+      {
+        "label": "Pack",
+        "value": "400 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Black"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:boba-straw-11mm-9-45in-multi-300",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Boba Straw 11mm 9.45\" Multicolor — Paper Wrapped — 300 ct",
+    "model": null,
+    "group_name": "Straws",
+    "subsection": "Boba",
+    "categories": [
+      "Straws"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "PP"
+      },
+      {
+        "label": "Length",
+        "value": "9.45\""
+      },
+      {
+        "label": "Bore",
+        "value": "11 mm"
+      },
+      {
+        "label": "Wrap",
+        "value": "Paper"
+      },
+      {
+        "label": "Pack",
+        "value": "300 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Multicolor"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  },
+  {
+    "external_ref": "foodservice:boba-straw-11mm-9in-multi-700",
+    "line": "foodservice",
+    "brand": "Greenway",
+    "source": "Greenway",
+    "name": "Boba Straw 11mm 9\" Multicolor — Paper Wrapped — 700 ct",
+    "model": null,
+    "group_name": "Straws",
+    "subsection": "Boba",
+    "categories": [
+      "Straws"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "PP"
+      },
+      {
+        "label": "Length",
+        "value": "9\""
+      },
+      {
+        "label": "Bore",
+        "value": "11 mm"
+      },
+      {
+        "label": "Wrap",
+        "value": "Paper"
+      },
+      {
+        "label": "Pack",
+        "value": "700 ct"
+      },
+      {
+        "label": "Color",
+        "value": "Multicolor"
+      }
+    ],
+    "features": [],
+    "source_url": null,
+    "msrp": null,
+    "our_cost": null,
+    "our_cost_source": "Extrapolated (Greenway model)",
+    "photo_state": "missing",
+    "image_has_chinese": false,
+    "voltage_flag": false,
+    "export_ok": true,
+    "primary_image_path": null
+  }
 ]
