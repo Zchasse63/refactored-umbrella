@@ -35,10 +35,11 @@ for c in comps: cby.setdefault(c["product_id"], []).append(c)
 # palette — restrained, professional
 INK, SLATE, MUT, LINK = "FF1E293B", "FF475569", "FF64748B", "FF2563EB"
 HUE = {"foodservice": "FF0E7490", "appliance": "FF6D28D9", "beauty": "FFBE185D"}
-BAND = "FFF8FAFC"          # alternating group band
-LOWFILL = "FFDCFCE7"       # lowest-price highlight (subtle green)
-GRIDL = Side(style="thin", color="FFE5E9EF")     # hairline row rule
-GROUPL = Side(style="thin", color="FFCBD5E1")    # group separator (slightly darker)
+BAND = "FFEDF2F8"          # alternating group band (more visible)
+LOWFILL = "FFCFF7E0"       # lowest-price highlight (green)
+GRIDL = Side(style="thin", color="FFDCE2EA")       # hairline rule between competitors
+GROUPL = Side(style="medium", color="FF8DA0B6")    # clear divider between products
+VDIV = Side(style="medium", color="FF8DA0B6")      # vertical divider: our info | competitors
 def money(c): c.number_format = '"$"#,##0.00'
 def intfmt(c): c.number_format = '#,##0'
 H_FILL, H_FONT = PatternFill("solid", fgColor=INK), Font(bold=True, color="FFFFFFFF", size=10)
@@ -127,13 +128,13 @@ for p in [p for p in prods_sorted if cby.get(p["id"])]:
         for ci in (7, 8, 9): intfmt(rv.cell(row=rr, column=ci))
         if lowp is not None and c.get("price") is not None and float(c["price"]) == lowp:
             pc = rv.cell(row=rr, column=5); pc.fill = PatternFill("solid", fgColor=LOWFILL); pc.font = Font(size=10, bold=True, color="FF065F46")
-        rv.row_dimensions[rr].height = 30; rr += 1
+        rv.row_dimensions[rr].height = 34; rr += 1
     end = rr - 1
     # merge the pinned left block once per product
     for ci in (1, 2, 3):
         if end > start: rv.merge_cells(start_row=start, start_column=ci, end_row=end, end_column=ci)
-    pc = rv.cell(row=start, column=1, value=p["name"]); pc.font = Font(size=10, bold=True, color=HUE.get(p["line"], INK)); pc.alignment = Alignment(vertical="center", wrap_text=True)
-    oc = rv.cell(row=start, column=2, value=ce); oc.alignment = CENTER; money(oc); oc.font = Font(size=10, color="FF0F172A")
+    pc = rv.cell(row=start, column=1, value=p["name"]); pc.font = Font(size=11, bold=True, color=HUE.get(p["line"], INK)); pc.alignment = Alignment(vertical="center", wrap_text=True)
+    oc = rv.cell(row=start, column=2, value=ce); oc.alignment = CENTER; money(oc); oc.font = Font(size=11, bold=True, color="FF0F172A")
     mc = rv.cell(row=start, column=3, value=m); mc.alignment = CENTER; money(mc); mc.font = Font(size=10, color=SLATE)
     for ci in (1, 2, 3):  # re-apply band + group top border to the merged block
         for rw in range(start, end + 1):
