@@ -7,8 +7,10 @@
 const KEEPA_BASE = "https://api.keepa.com";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/** Token-aware retry (mirrors lib/keepa/client): wait out Keepa's `refillIn` on 429. */
-async function keepaFetch(url: URL, init?: RequestInit, tries = 3): Promise<Response> {
+/** Token-aware retry (mirrors lib/keepa/client): wait out Keepa's `refillIn` on 429.
+ *  6 tries (not 3) so a deeply-overdrawn bucket (tokensLeft can go negative under a
+ *  sustained batch) gets enough refill ticks to recover instead of throwing. */
+async function keepaFetch(url: URL, init?: RequestInit, tries = 6): Promise<Response> {
   for (let i = 0; ; i++) {
     const res = await fetch(url, init);
     if (res.status !== 429 || i >= tries - 1) return res;
