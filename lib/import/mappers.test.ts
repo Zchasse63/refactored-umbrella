@@ -63,15 +63,17 @@ describe("import mappers — real fixtures", () => {
 });
 
 describe("mapFoodservice (committed prod fixture)", () => {
-  it("reproduces the live foodservice line: 29 products, Greenway costs intact", async () => {
+  it("reproduces the live foodservice line: 11 curated products, Greenway costs intact", async () => {
+    // 2026-07-06: the line was curated to the 11 all-green launch SKUs (22 retired,
+    // 6 researched market formats added) — the fixture mirrors the DB exactly.
     const json = (await import("@/lib/data/source/foodservice.json")).default as unknown[];
     const rows = mapFoodservice(json);
-    expect(rows).toHaveLength(29);
+    expect(rows).toHaveLength(11);
     expect(rows.every((r) => r.line === "foodservice" && r.external_ref.startsWith("foodservice:"))).toBe(true);
     // the real Greenway cost anchors must survive the round-trip
     const tsack = rows.find((r) => r.external_ref === "foodservice:thank-you-tshirt-bag-350ct")!;
     expect(tsack.our_cost).toBeCloseTo(4.2, 2);
-    expect(rows.filter((r) => r.our_cost != null).length).toBe(16);
+    expect(rows.filter((r) => r.our_cost != null).length).toBe(3);
   });
 
   it("fails loudly on a malformed fixture row", () => {
