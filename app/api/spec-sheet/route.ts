@@ -13,7 +13,7 @@ const SAFE_IMAGE = /^\/products\/[a-z0-9/_-]+\.(jpe?g|png)$/i;
 
 export async function GET(req: NextRequest) {
   // members only (product info; both roles may download)
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
 

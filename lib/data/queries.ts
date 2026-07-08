@@ -68,7 +68,7 @@ export interface CommentView {
 
 /** Comments thread for a product, newest last, with author display name + role. */
 export const getComments = cache(async (ref: string): Promise<CommentView[]> => {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const [{ data: { user } }, { data: product }] = await Promise.all([
     sb.auth.getUser(),
     sb.from("products").select("id").eq("external_ref", ref).maybeSingle(),
@@ -97,7 +97,7 @@ export const getComments = cache(async (ref: string): Promise<CommentView[]> => 
 
 /** The selected factory quote's non-price detail (MOQ / lead time / supplier) for pre-fill. */
 export async function getSelectedQuoteMeta(ref: string): Promise<{ moq: number | null; lead_time_days: number | null; supplier: string | null }> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: product } = await sb.from("products").select("id").eq("external_ref", ref).maybeSingle();
   if (!product) return { moq: null, lead_time_days: null, supplier: null };
   const { data } = await sb
@@ -122,7 +122,7 @@ export interface QuoteHistoryItem {
 /** Every factory-quote revision for a product, newest first (`is_selected` marks the
  *  one the economics run on). Powers the PDP quote-history strip. */
 export async function getQuoteHistory(ref: string): Promise<QuoteHistoryItem[]> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: product } = await sb.from("products").select("id").eq("external_ref", ref).maybeSingle();
   if (!product) return [];
   const { data } = await sb
@@ -143,14 +143,14 @@ export async function getQuoteHistory(ref: string): Promise<QuoteHistoryItem[]> 
 }
 
 export async function getAssumptions(): Promise<Assumptions> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data } = await sb.from("assumptions").select("gross_margin, cost_stack").eq("id", 1).single();
   if (!data) return DEFAULT_ASSUMPTIONS;
   return { grossMargin: Number(data.gross_margin), costStack: data.cost_stack };
 }
 
 export async function getCatalog(): Promise<ProductView[]> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const [{ data: products }, { data: selections }, { data: quotes }, assumptions, fbaEstimates] = await Promise.all([
     sb.from("products").select("*").order("line").order("name"),
     sb.from("selections").select("*"),
@@ -170,7 +170,7 @@ export async function getCatalog(): Promise<ProductView[]> {
 }
 
 export async function getProductViewBySlug(slug: string): Promise<ProductView | null> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const refs = ["appliance", "beauty", "foodservice"].map((l) => `${l}:${slug}`);
   const { data: product } = await sb.from("products").select("*").in("external_ref", refs).maybeSingle();
   if (!product) return null;
@@ -190,7 +190,7 @@ export async function getProductViewBySlug(slug: string): Promise<ProductView | 
 }
 
 export async function getCompetitors(ref: string): Promise<Competitor[]> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const refs = ["appliance", "beauty", "foodservice"].map((l) => `${l}:${ref.split(":")[1]}`);
   const { data: product } = await sb.from("products").select("id").in("external_ref", refs).maybeSingle();
   if (!product) return [];
@@ -243,7 +243,7 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
 
 /** Per-product estimated FBA fee from approved competitors' package dims, keyed by external_ref. */
 export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   // Approved competitors exceed the 1,000-row cap, so page through them all. The stable
   // id order keeps pages from shuffling mid-iteration.
   const rows: any[] = [];
@@ -284,7 +284,7 @@ export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
 
 /** Selected factory MOQ per product (seeds the RFQ MOQ-ask), keyed by external_ref. */
 export async function getFactoryMoqs(): Promise<Record<string, number | null>> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data } = await sb
     .from("factory_quotes")
     .select("moq, product:product_id(external_ref)")
@@ -317,7 +317,7 @@ export async function getCatalogWithPipeline(): Promise<ProductWithPipeline[]> {
 
 /** Pipeline stage per product, keyed by external_ref (serializable Record for client props). */
 export async function getPipelineStatuses(): Promise<Record<string, { status: string; decision: string | null }>> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data } = await sb.from("pipeline_status").select("status, decision, product:product_id(external_ref)");
   const out: Record<string, { status: string; decision: string | null }> = {};
   for (const r of (data ?? []) as any[]) {
@@ -330,7 +330,7 @@ export async function getPipelineStatuses(): Promise<Record<string, { status: st
 /** Current user's role (for UI affordances). cache() dedupes the auth + membership
  *  round-trips when several server components ask for the role within one request. */
 export const getViewerRole = cache(async (): Promise<"owner" | "partner" | null> => {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   const { data } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();

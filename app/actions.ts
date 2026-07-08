@@ -11,7 +11,7 @@ import type { Assumptions, CalcInputs, Decision, PipelineStatus, Product, Tier }
 type Result = { ok: true } | { error: string };
 
 async function resolveProduct(ref: string) {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const {
     data: { user },
   } = await sb.auth.getUser();
@@ -77,7 +77,7 @@ export async function saveSelection(
  * overridden. This is the BRIEF's "change once → all products recompute" feature.
  */
 export async function saveAssumptions(next: Assumptions): Promise<Result> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return { error: "Not signed in" };
   const { data: mem } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();
@@ -179,7 +179,7 @@ export async function saveComment(ref: string, body: string): Promise<Result> {
 
 /** Delete your own comment (RLS own_comment_d gates to the author). */
 export async function deleteComment(ref: string, id: string): Promise<Result> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return { error: "Not signed in" };
   const { error } = await sb.from("comments").delete().eq("id", id).eq("user_id", user.id);

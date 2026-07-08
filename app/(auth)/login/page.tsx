@@ -9,6 +9,7 @@ function safeNext(next?: string): string {
   return next;
 }
 
-export default function LoginPage({ searchParams }: { searchParams: { next?: string } }) {
-  return <LoginForm next={safeNext(searchParams.next)} />;
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const { next } = await searchParams; // async request API since Next 15
+  return <LoginForm next={safeNext(next)} />;
 }

@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code");
   const next = safeNext(searchParams.get("next"));
   if (code) {
-    const supabase = createSupabaseServer();
+    const supabase = await createSupabaseServer();
     await supabase.auth.exchangeCodeForSession(code);
   }
   return NextResponse.redirect(`${origin}${next}`);

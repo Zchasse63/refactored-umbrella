@@ -28,8 +28,9 @@ function atAGlance(specs: Spec[]): Spec[] {
   return (hits.length ? hits : specs).slice(0, 4);
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const [view, role, assumptions] = await Promise.all([getProductViewBySlug(params.slug), getViewerRole(), getAssumptions()]);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // async request API since Next 15
+  const [view, role, assumptions] = await Promise.all([getProductViewBySlug(slug), getViewerRole(), getAssumptions()]);
   if (!view) notFound();
   const { product: p, selection } = view;
   const [competitors, comments, quoteMeta] = await Promise.all([
@@ -171,7 +172,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <Button asChild size="sm" variant="outline">
-                  <a href={`/api/spec-sheet?slug=${params.slug}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`/api/spec-sheet?slug=${slug}`} target="_blank" rel="noopener noreferrer">
                     <FileDown className="size-3.5" aria-hidden /> Spec sheet
                   </a>
                 </Button>

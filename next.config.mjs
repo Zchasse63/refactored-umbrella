@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   // @react-pdf/renderer (spec-sheet PDFs) must run as a real Node module, not be bundled by webpack
-  experimental: { serverComponentsExternalPackages: ["@react-pdf/renderer"] },
+  serverExternalPackages: ["@react-pdf/renderer"], // top-level since Next 15 (was experimental.serverComponentsExternalPackages)
   images: {
     // Product imagery is local (public/products/**) for now; remote loaders (m.media-amazon.com
     // for Keepa competitor thumbnails) are added when enrichment is wired.

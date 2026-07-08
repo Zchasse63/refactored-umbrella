@@ -131,7 +131,7 @@ async function buildCsvResponse(
 
 /** Auth mirrors the RFQ route, but export is read-only so EITHER role may run it. */
 async function requireMember(): Promise<Response | null> {
-  const sb = createSupabaseServer();
+  const sb = await createSupabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
   const { data: membership } = await sb.from("memberships").select("role").eq("user_id", user.id).maybeSingle();
