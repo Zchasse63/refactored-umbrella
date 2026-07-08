@@ -248,12 +248,19 @@ export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
   // id order keeps pages from shuffling mid-iteration.
   const rows: any[] = [];
   for (let offset = 0; ; offset += PAGE) {
-    const { data } = await sb
+    const { data, error } = await sb
       .from("competitors")
       .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, fba_pick_pack_fee, product:product_id(external_ref)")
       .eq("status", "approved")
       .order("id")
       .range(offset, offset + PAGE - 1);
+    if (error) {
+      // All-or-nothing: a missing estimate makes compute() fall back to the flat 15% FBA
+      // line (the designed, visibly-labeled absence path). A partial map would mix real
+      // fees with silently degraded ones, so on any page error return nothing.
+      console.error("getFbaEstimates page:", error.message);
+      return {};
+    }
     rows.push(...(data ?? []));
     if ((data ?? []).length < PAGE) break;
   }

@@ -26,9 +26,10 @@ as $$
 declare
   n int;
 begin
-  -- coalesce: is_owner() is NULL for a caller with no membership row, and
-  -- `if not NULL` does NOT raise (three-valued logic) — only a confirmed owner passes.
-  if not coalesce(public.is_owner(), false) then
+  -- NOTE (historical): this gate has a NULL hole — is_owner() is NULL for a caller
+  -- with no membership row and `if not NULL` does not raise. Fixed in 0018, kept
+  -- as-applied here so this file matches prod's fix_silent_write_paths ledger entry.
+  if not public.is_owner() then
     raise exception 'owner only';
   end if;
   if p_gross_margin is null or p_gross_margin <= 0 or p_gross_margin >= 1 then

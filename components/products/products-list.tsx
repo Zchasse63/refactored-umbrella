@@ -7,7 +7,7 @@ import { cn, money, pct, EMDASH } from "@/lib/utils";
 import { Select } from "@/components/ui/select";
 import { TierBadge } from "@/components/ui/tier-badge";
 import { EmptyState } from "@/components/ui/empty-state";
-import { LINE_OPEX_APPLIES, compute } from "@/lib/calc/economics";
+import { LINE_OPEX_APPLIES, compute, resolveAssumptions } from "@/lib/calc/economics";
 import { applyFilters, sortViews, EMPTY_FILTERS, isFiltered, lineFacets, type CatalogFilters, type CatalogSort } from "@/lib/data/catalog-filter";
 import { saveSelection, saveQuote } from "@/app/actions";
 import type { ProductView } from "@/lib/data/view";
@@ -82,7 +82,9 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
         // edited rows recompute with the exact same inputs the server used.
         const eco = edited
           ? compute({
-              assumptions,
+              // Same override chain as the server (lib/data/view.ts): a per-product
+              // calc_inputs override must keep applying while the row is being edited.
+              assumptions: resolveAssumptions(assumptions, v.selection.calc_inputs),
               sellPrice: e.sell,
               quotedLanded: e.quoted,
               actualLanded: v.product.our_cost ?? v.fobEstimate?.fobPerPack ?? null,
@@ -107,7 +109,9 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
     startTransition(async () => {
       const ref = v.product.external_ref;
       setSavingRef(ref);
-      const res = await saveSelection(ref, { tier: v.selection.tier, target_sell_price: effEdit(v).sell });
+      // Patch ONLY the edited field: saveSelection is partial-patch, so re-asserting the
+      // render-time tier here could stomp another partner's tier change made since render.
+      const res = await saveSelection(ref, { target_sell_price: effEdit(v).sell });
       setSaveErrs((s) => ({ ...s, [ref]: "error" in res ? res.error : null }));
       setSavingRef(null);
     });

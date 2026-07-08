@@ -146,7 +146,9 @@ export interface ComputeInput {
   sellPrice: number | null | undefined;
   quotedLanded?: number | null;
   actualLanded?: number | null;
-  /** false for foodservice (no Amazon-FBA opex). */
+  /** false → skip the Amazon fee stack entirely (opex = 0). No line sets this today —
+   *  every line carries opex per LINE_OPEX_APPLIES (foodservice was the false case
+   *  until 2026-07). Kept for cost-only displays and callers outside the line map. */
   applyOpex?: boolean;
   /** Estimated FBA fulfillment fee (USD/unit). When set, replaces the flat FBA % line. */
   fbaPerUnit?: number | null;

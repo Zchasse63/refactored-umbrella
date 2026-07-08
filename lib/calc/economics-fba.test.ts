@@ -23,7 +23,8 @@ describe("compute — fbaPerUnit override", () => {
     expect(est.targetNet).toBeCloseTo(11, 5);
   });
 
-  it("ignores the estimate when opex doesn't apply (foodservice)", () => {
+  it("ignores the FBA estimate when applyOpex is false", () => {
+    // (foodservice used to be the applyOpex:false line; it carries the full stack since 2026-07)
     const est = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 40, applyOpex: false, fbaPerUnit: 4 });
     expect(est.opexPct).toBe(0);
     expect(est.fbaPerUnit ?? null).toBeNull();

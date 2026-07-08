@@ -116,7 +116,10 @@ describe("compute()", () => {
     expect(e.targetLanded).toBe(14); // price-derived ceiling
   });
 
-  it("foodservice skips Amazon opex but still pads our booked cost by the 7% buffer", () => {
+  it("applyOpex:false skips the fee stack but still pads our booked cost by the 7% buffer", () => {
+    // Note: no line uses applyOpex:false today — foodservice did until 2026-07, when it
+    // became Amazon-first and picked up the full stack (see the LINE_OPEX_APPLIES pin above).
+    // The flag itself is still a real compute() path, so its behavior stays pinned here.
     const e = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 18, actualLanded: 4.1, applyOpex: false });
     expect(e.opexPct).toBe(0);
     expect(e.actualLanded).toBeCloseTo(4.39, 10); // 4.1 × 1.07, rounded once

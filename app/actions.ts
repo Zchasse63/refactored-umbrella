@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { createSupabaseServer } from "@/lib/supabase/server";
-import { targetLanded, DEFAULT_GROSS_MARGIN } from "@/lib/calc/economics";
 import { buildSearchProfile } from "@/lib/ai/build-profile";
 import { verifyCompetitor } from "@/lib/ai/verify-competitor";
 import { keepaFinder, searchCategories } from "@/lib/keepa/product-finder";
@@ -35,7 +34,8 @@ function badMoney(v: number | null | undefined): boolean {
 
 /** Partner: save prospect tier + target sell + notes + per-product calc override.
  *  RLS gates to the partner role. calc_inputs persists the "what-if" so it stops
- *  evaporating on refresh; the derived target landed uses the OVERRIDE margin when set. */
+ *  evaporating on refresh; the DB trigger (migration 0019) owns target_landed_cost
+ *  derivation, using the OVERRIDE margin when set. */
 export async function saveSelection(
   ref: string,
   patch: { tier?: Tier | null; target_sell_price?: number | null; notes?: string | null; calc_inputs?: CalcInputs | null },
@@ -56,24 +56,10 @@ export async function saveSelection(
   if ("notes" in patch) row.notes = patch.notes ?? null;
   if ("calc_inputs" in patch) row.calc_inputs = patch.calc_inputs ?? null;
   if ("target_sell_price" in patch) row.target_sell_price = patch.target_sell_price ?? null;
-  // The landed target derives from (sell, effective margin) — recompute whenever the patch
-  // touches either input, pulling the untouched half from the existing shared row.
-  if ("target_sell_price" in patch || "calc_inputs" in patch) {
-    const { data: existing } = await r.sb
-      .from("selections")
-      .select("target_sell_price, calc_inputs")
-      .eq("product_id", r.productId)
-      .maybeSingle();
-    const sell = "target_sell_price" in patch
-      ? patch.target_sell_price ?? null
-      : existing?.target_sell_price != null ? Number(existing.target_sell_price) : null;
-    const ov = ("calc_inputs" in patch ? patch.calc_inputs : (existing?.calc_inputs as CalcInputs | null)) ?? null;
-    // derive against the effective margin: per-product override beats the LIVE global row
-    const { data: a } = await r.sb.from("assumptions").select("gross_margin").eq("id", 1).maybeSingle();
-    const globalGm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
-    const gm = ov && ov.overridden !== false && ov.grossMargin != null ? ov.grossMargin : globalGm;
-    row.target_landed_cost = sell != null ? targetLanded(sell, gm) : null;
-  }
+  // target_landed_cost is NOT set here: the DB trigger selections_derive_landed (migration
+  // 0019) derives it whenever target_sell_price or calc_inputs change, with the same
+  // override semantics as resolveAssumptions. The trigger sees the POST-merge row, so the
+  // derivation is atomic — no read-then-upsert race, no stale-half recompute.
   // ONE shared selection per product (migration 0015): the partner side speaks with one
   // voice — any partner may edit; partner_user_id/updated_by attribute the last editor.
   const { error } = await r.sb.from("selections").upsert(row, { onConflict: "product_id" });
