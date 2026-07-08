@@ -18,8 +18,15 @@ const sleep = (ms:number)=>new Promise(r=>setTimeout(r,ms));
 const LINE = process.argv.find(a=>["appliance","beauty","foodservice"].includes(a)) ?? "appliance";
 const li = process.argv.indexOf("--limit"); const LIMIT = li>=0 ? Number(process.argv[li+1]) : Infinity;
 const { data: allP } = await sb.from("products").select("id, external_ref, name, line, specs").eq("line", LINE).order("name");
-const { data: comps } = await sb.from("competitors").select("product_id");
-const has = new Set((comps??[]).map((c:any)=>c.product_id));
+// Paginate past PostgREST's 1000-row cap — a single unbounded select truncates, making the
+// missing-set wrong and re-discovering (duplicating) products that already have competitors.
+const comps:any[] = [];
+for (let from = 0; ; from += 1000) {
+  const { data: page } = await sb.from("competitors").select("product_id").order("id").range(from, from+999);
+  comps.push(...(page??[]));
+  if (!page || page.length < 1000) break;
+}
+const has = new Set(comps.map((c:any)=>c.product_id));
 let products = (allP??[]).filter((p:any)=>!has.has(p.id));   // only missing
 products = products.slice(0, LIMIT);
 console.log(`[${LINE}] discovering ${products.length} products (missing competitors)\n`);
@@ -28,18 +35,23 @@ for (const prow of products as any[]) {
   const product = { name: prow.name, line: prow.line, specs: prow.specs ?? [] } as any;
   const ourDesc = `${product.name} | ${(product.specs||[]).map((s:any)=>`${s.label}: ${s.value}`).join("; ")}`;
   try {
+    // Learn-loop (mirrors app/actions.ts discoverCompetitors): previously-rejected ASINs are
+    // filtered out of the candidate list so a bad match can't keep coming back.
+    const { data: rej } = await sb.from("competitors").select("asin").eq("product_id", prow.id).eq("status", "rejected");
+    const rejectedAsins = new Set((rej??[]).map((x:any)=>x.asin).filter(Boolean));
     const profile = await buildSearchProfile(product, []);
     const sort = [["monthlySold","desc"]] as [string,"asc"|"desc"][];
     let asins = await keepaFinder({ title: profile.title, sort });
     if (!asins.length) { const short = profile.title.split(/\s+/).slice(0,3).join(" "); if (short && short.toLowerCase()!==profile.title.toLowerCase()) asins = await keepaFinder({ title: short, sort }); }
-    asins = asins.slice(0,8);
+    asins = asins.filter(a=>!rejectedAsins.has(a)).slice(0,8);
     if (!asins.length) { console.log(`  ✗ ${product.name} — 0 candidates (title="${profile.title}")`); await sleep(3000); continue; }
     const { products: kp } = await getKeepaProducts(asins);
     const rows:any[]=[];
     for (const p of kp) {
       const cand = mapKeepaToCompetitor(p);
       let verdict; try { verdict = await verifyCompetitor(ourDesc, `${cand.title} (ASIN ${cand.asin}, $${cand.price ?? "?"})`); } catch { continue; }
-      if (verdict.is_match && verdict.confidence >= 0.5) rows.push({ product_id: prow.id, status:"approved", ...cand, match_confidence: verdict.confidence, match_reason: verdict.reason, created_by: OWNER, enriched_at: new Date().toISOString() });
+      // REVIEW GATE (mirrors app/actions.ts): >=0.75 auto-approves, 0.5–0.75 lands as a candidate for owner review, <0.5 dropped.
+      if (verdict.is_match && verdict.confidence >= 0.5) rows.push({ product_id: prow.id, status: verdict.confidence >= 0.75 ? "approved" : "candidate", ...cand, match_confidence: verdict.confidence, match_reason: verdict.reason, created_by: OWNER, enriched_at: new Date().toISOString() });
     }
     if (!rows.length) { console.log(`  ✗ ${product.name} — found ${kp.length}, kept 0`); await sleep(3000); continue; }
     const { error: insErr } = await sb.from("competitors").insert(rows);

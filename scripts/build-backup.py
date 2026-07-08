@@ -6,9 +6,12 @@ referral, and the real Keepa FBA fee. "Other Fees" is left blank for the partner
 ads / returns / storage. Net and Margin are live formulas. Each product's economics is
 pinned in frozen left columns merged once per product; its competitors read to the right.
 
+Foodservice costs come live from scripts/dump-costs.mts (our_cost, else the FOB extrapolation)
+— no temp files, and the build hard-fails rather than ship a workbook with missing costs.
+
 Run: python3 scripts/build-backup.py   →   ~/Desktop/Portal-Backup-<date>.xlsx
 """
-import json, os, urllib.request, datetime, statistics
+import json, os, sys, subprocess, urllib.request, datetime, statistics
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
@@ -20,18 +23,40 @@ for line in open(os.path.join(ROOT, ".env.local")):
     if "=" in line and not line.strip().startswith("#"):
         k, v = line.split("=", 1); env[k.strip()] = v.strip().strip('"').strip("'")
 URL, KEY = env["NEXT_PUBLIC_SUPABASE_URL"], env["SUPABASE_SERVICE_ROLE_KEY"]
-def get(path):
-    r = urllib.request.Request(URL + path, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
-    return json.loads(urllib.request.urlopen(r, timeout=90).read())
+def get(path, page=1000):
+    """Paged PostgREST fetch (Range headers) — nothing truncates at the 1,000-row cap."""
+    rows, offset = [], 0
+    while True:
+        r = urllib.request.Request(URL + path, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}",
+                                                        "Range-Unit": "items", "Range": f"{offset}-{offset + page - 1}"})
+        batch = json.loads(urllib.request.urlopen(r, timeout=90).read())
+        rows += batch
+        if len(batch) < page: return rows
+        offset += page
+def load_costs():
+    """Foodservice cost map (external_ref → base cost) from the committed tsx dump — no temp files."""
+    r = subprocess.run(["npx", "tsx", "scripts/dump-costs.mts"], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.exit(f"FATAL: dump-costs.mts failed (exit {r.returncode})\n{r.stderr.strip()}")
+    try:
+        costs = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        sys.exit(f"FATAL: dump-costs.mts printed non-JSON stdout: {r.stdout[:200]!r}")
+    if not costs:
+        sys.exit("FATAL: dump-costs.mts returned an empty cost map")
+    return costs
 
 SITE = "https://the-portal-sourcing.netlify.app"
 COST_BUFFER = 1.07   # 7% padding over the Greenway cost (freight / prep / variance)
 REFERRAL = 0.15      # Amazon referral fee, this category
-prods = get("/rest/v1/products?select=id,external_ref,line,group_name,name,model,specs,our_cost&order=line,name")
-comps = get("/rest/v1/competitors?status=eq.approved&select=product_id,title,retail_url,price,bsr,est_monthly_sales,review_count,fba_pick_pack_fee&order=est_monthly_sales.desc")
-costs = json.load(open("/tmp/fs-costs.json")) if os.path.exists("/tmp/fs-costs.json") else {}
+prods = get("/rest/v1/products?select=id,external_ref,line,group_name,name,model,specs,our_cost&order=line,name,id")
+comps = get("/rest/v1/competitors?status=eq.approved&select=product_id,title,retail_url,price,bsr,est_monthly_sales,review_count,fba_pick_pack_fee&order=id")
+costs = load_costs()
 cby = {}
 for c in comps: cby.setdefault(c["product_id"], []).append(c)
+missing = [p["external_ref"] for p in prods if p["line"] == "foodservice" and cby.get(p["id"]) and p["external_ref"] not in costs]
+if missing:
+    sys.exit(f"FATAL: foodservice products with competitors but no cost: {', '.join(missing)}")
 
 INK, SLATE, MUT, LINK = "FF1E293B", "FF475569", "FF64748B", "FF2563EB"
 HUE = {"foodservice": "FF0E7490", "appliance": "FF6D28D9", "beauty": "FFBE185D"}
@@ -162,3 +187,5 @@ out = os.path.expanduser(f"~/Desktop/Portal-Backup-{datetime.date.today().isofor
 wb.save(out)
 print("saved:", out)
 print(f"products {len(prods)} | competitors {len(comps)} across {len(cby)} products")
+fs = [p for p in prods if p["line"] == "foodservice"]
+print(f"foodservice: {len(fs)} products | {sum(len(cby.get(p['id'], [])) for p in fs)} approved competitors | {len(costs)} costs in map")

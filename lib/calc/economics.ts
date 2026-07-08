@@ -71,8 +71,8 @@ export function netPerUnit(sell: number, landed: number, opex: number): number {
 }
 
 export interface QuoteVerdict {
-  gross: number; // actual gross margin at the quote
-  pass: boolean;
+  gross: number; // actual gross margin at the quote (display only — NOT the verdict)
+  pass: boolean; // quoted ≤ printed (rounded) target, i.e. headroom ≥ 0
   headroom: number; // targetLanded − quotedLanded (positive = under the ceiling)
   target: number; // gross-margin target it was checked against
 }
@@ -83,11 +83,18 @@ export function quoteCheck(
   target: number,
   grossMarginTarget: number,
 ): QuoteVerdict {
-  const gross = (sell - quotedLanded) / sell;
+  // Pass/fail is judged on the ROUNDED cents the factory actually sees: the RFQ sheet
+  // and UI print round2 targets, so a quote AT the printed ceiling must PASS even when
+  // the raw target rounded UP (sell 40.10 @ 65% → raw 14.035 → printed 14.04; raw gross
+  // at 14.04 is 0.64988 < 0.65). compute() already passes round2'd numbers — round
+  // defensively here so pass and the displayed headroom can never disagree.
+  const q = round2(quotedLanded);
+  const t = round2(target);
+  const gross = (sell - q) / sell; // kept for display; NOT the verdict
   return {
     gross,
-    pass: gross >= grossMarginTarget,
-    headroom: round2(target - quotedLanded),
+    pass: q <= t,
+    headroom: round2(t - q),
     target: grossMarginTarget,
   };
 }

@@ -9,6 +9,9 @@ import type { Assumptions, Competitor, Decision, PipelineStatus, Product, Select
 
 const num = (v: unknown): number | null => (v == null ? null : Number(v));
 
+// PostgREST silently caps a response at 1,000 rows — any query that can exceed that must page.
+const PAGE = 1000;
+
 function rowToProduct(r: any): Product {
   // Prefer AI-cleaned COPY (name/features) where present — factory marketing text is noisy.
   // Model is the exception: the raw sell-sheet model number is authoritative, so it wins and
@@ -241,13 +244,22 @@ export async function getCompetitors(ref: string): Promise<Competitor[]> {
 /** Per-product estimated FBA fee from approved competitors' package dims, keyed by external_ref. */
 export async function getFbaEstimates(): Promise<Record<string, FbaEstimate>> {
   const sb = createSupabaseServer();
-  const { data } = await sb
-    .from("competitors")
-    .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, fba_pick_pack_fee, product:product_id(external_ref)")
-    .eq("status", "approved");
+  // Approved competitors exceed the 1,000-row cap, so page through them all. The stable
+  // id order keeps pages from shuffling mid-iteration.
+  const rows: any[] = [];
+  for (let offset = 0; ; offset += PAGE) {
+    const { data } = await sb
+      .from("competitors")
+      .select("package_length_mm, package_width_mm, package_height_mm, package_weight_g, fba_pick_pack_fee, product:product_id(external_ref)")
+      .eq("status", "approved")
+      .order("id")
+      .range(offset, offset + PAGE - 1);
+    rows.push(...(data ?? []));
+    if ((data ?? []).length < PAGE) break;
+  }
   type Dim = { length_mm: number | null; width_mm: number | null; height_mm: number | null; weight_g: number | null };
   const byRef = new Map<string, { dims: Dim[]; fees: (number | null)[] }>();
-  for (const r of (data ?? []) as any[]) {
+  for (const r of rows) {
     const ref = r.product?.external_ref;
     if (!ref) continue;
     if (!byRef.has(ref)) byRef.set(ref, { dims: [], fees: [] });

@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   DEFAULT_ASSUMPTIONS,
+  LINE_OPEX_APPLIES,
   compute,
   netPerUnit,
   opexPct,
@@ -47,6 +48,36 @@ describe("quote check", () => {
     const v = quoteCheck(40, 15, 14, 0.65);
     expect(v.pass).toBe(false);
     expect(v.headroom).toBe(-1);
+  });
+  it("PASSES a quote exactly at the PRINTED ceiling when the raw target rounds UP", () => {
+    // sell 40.10 @ 65%: raw target 14.035 → the RFQ sheet prints $14.04. A factory
+    // quoting exactly $14.04 hit the published ceiling — raw gross 0.64988 < 0.65
+    // must NOT flunk it. The verdict judges rounded cents, not the raw ratio.
+    const t = targetLanded(40.1, 0.65);
+    expect(t).toBe(14.04); // what the sheet prints
+    const v = quoteCheck(40.1, 14.04, t, 0.65);
+    expect(v.pass).toBe(true);
+    expect(v.headroom).toBe(0);
+    expect(v.gross).toBeCloseTo((40.1 - 14.04) / 40.1, 10); // display keeps the true gross
+  });
+  it("FAILS one cent over the printed ceiling with headroom −0.01", () => {
+    const v = quoteCheck(40.1, 14.05, targetLanded(40.1, 0.65), 0.65);
+    expect(v.pass).toBe(false);
+    expect(v.headroom).toBe(-0.01);
+  });
+  it("end to end through compute(): the at-ceiling quote passes and headroom is 0", () => {
+    const e = compute({ assumptions: DEFAULT_ASSUMPTIONS, sellPrice: 40.1, quotedLanded: 14.04 });
+    expect(e.targetLanded).toBe(14.04);
+    expect(e.verdict?.pass).toBe(true);
+    expect(e.verdict?.headroom).toBe(0);
+  });
+});
+
+describe("LINE_OPEX_APPLIES", () => {
+  it("every line carries the Amazon opex stack — pinned", () => {
+    // foodservice: false was a REAL past bug — the Amazon-first launch line rendered
+    // with 0% Amazon fees, showing the partner inflated margins on exactly those SKUs.
+    expect(LINE_OPEX_APPLIES).toEqual({ appliance: true, beauty: true, foodservice: true });
   });
 });
 

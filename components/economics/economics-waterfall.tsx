@@ -65,8 +65,10 @@ export function VerdictLamp({ eco }: { eco: Economics }) {
     >
       {pass ? <Check className="size-3.5" aria-hidden /> : <X className="size-3.5" aria-hidden />}
       <span className="numeric">
+        {/* Headroom IS the verdict (quoted vs the printed ceiling) — never assert
+            gross ≥/< target here; at-ceiling quotes can pass with raw gross a hair under. */}
         {pass ? "PASS" : "FAIL"} · {headroom >= 0 ? "+" : ""}
-        {money(headroom)} headroom · gross {pct(gross)} {pass ? "≥" : "<"} {pct(target)}
+        {money(headroom)} headroom · gross {pct(gross)} (target {pct(target)})
       </span>
     </div>
   );

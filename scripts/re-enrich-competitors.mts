@@ -19,10 +19,17 @@ for (const line of readFileSync(".env.local", "utf8").split("\n")) {
 const { getKeepaProducts, mapKeepaToCompetitor } = await import("@/lib/keepa/client");
 const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
-const { data: comps, error } = await sb.from("competitors").select("id, asin").not("asin", "is", null);
-if (error) throw error;
-const asins = Array.from(new Set(comps!.map((c) => c.asin as string)));
-console.log(`re-enriching ${comps!.length} competitor rows across ${asins.length} ASINs`);
+// Paginate past PostgREST's 1000-row cap — a single unbounded select truncates, silently
+// leaving every row past the first 1000 unrefreshed.
+const comps: { id: string; asin: string }[] = [];
+for (let from = 0; ; from += 1000) {
+  const { data: page, error } = await sb.from("competitors").select("id, asin").not("asin", "is", null).order("id").range(from, from + 999);
+  if (error) throw error;
+  comps.push(...(page ?? []));
+  if (!page || page.length < 1000) break;
+}
+const asins = Array.from(new Set(comps.map((c) => c.asin)));
+console.log(`re-enriching ${comps.length} competitor rows across ${asins.length} ASINs`);
 
 const byAsin = new Map<string, ReturnType<typeof mapKeepaToCompetitor>>();
 for (let i = 0; i < asins.length; i += 100) {
@@ -32,8 +39,8 @@ for (let i = 0; i < asins.length; i += 100) {
 }
 
 let updated = 0, missing = 0;
-for (const c of comps!) {
-  const cand = byAsin.get(c.asin as string);
+for (const c of comps) {
+  const cand = byAsin.get(c.asin);
   if (!cand) { missing++; continue; }
   const { error: upErr } = await sb.from("competitors").update({
     title: cand.title ?? undefined,

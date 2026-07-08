@@ -99,7 +99,11 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
   const setEdit = (v: ProductView, patch: Partial<{ sell: number | null; quoted: number | null }>) =>
     setEdits((s) => ({ ...s, [v.product.external_ref]: { ...effEdit(v), ...patch } }));
 
-  const commitSell = (v: ProductView) =>
+  // Commit ONLY real changes: every save appends a revision (quotes are append-style via
+  // set_selected_quote), so tabbing/arrow-keying through an untouched field must be a no-op.
+  // Strict !== against the last persisted value keeps an explicit clear (value → null) saving.
+  const commitSell = (v: ProductView) => {
+    if (effEdit(v).sell === v.selection.target_sell_price) return;
     startTransition(async () => {
       const ref = v.product.external_ref;
       setSavingRef(ref);
@@ -107,7 +111,9 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
       setSaveErrs((s) => ({ ...s, [ref]: "error" in res ? res.error : null }));
       setSavingRef(null);
     });
-  const commitQuote = (v: ProductView) =>
+  };
+  const commitQuote = (v: ProductView) => {
+    if (effEdit(v).quoted === v.quotedLanded) return;
     startTransition(async () => {
       const ref = v.product.external_ref;
       setSavingRef(ref);
@@ -115,6 +121,7 @@ export function ProductsList({ views, role, assumptions }: { views: ProductView[
       setSaveErrs((s) => ({ ...s, [ref]: "error" in res ? res.error : null }));
       setSavingRef(null);
     });
+  };
 
   const totals = useMemo(() => {
     let pursue = 0, quoted = 0, pass = 0, fail = 0;

@@ -42,25 +42,38 @@ export async function saveSelection(
 ): Promise<Result> {
   const r = await resolveProduct(ref);
   if (!r.ok) return { error: r.error };
-  const sell = patch.target_sell_price ?? null;
-  if (badMoney(sell)) return { error: "Target sell must be a positive dollar amount." };
+  if ("target_sell_price" in patch && badMoney(patch.target_sell_price ?? null)) return { error: "Target sell must be a positive dollar amount." };
   if (patch.notes != null && patch.notes.length > 4000) return { error: "Note is too long (4000 char max)." };
-  // derive against the effective margin: per-product override beats the LIVE global row
-  const { data: a } = await r.sb.from("assumptions").select("gross_margin").eq("id", 1).maybeSingle();
-  const globalGm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
-  const ov = patch.calc_inputs;
-  const gm = ov && ov.overridden !== false && ov.grossMargin != null ? ov.grossMargin : globalGm;
-  const target_landed_cost = sell != null ? targetLanded(sell, gm) : null;
+  // PARTIAL-PATCH semantics (audit v2 critical): the upsert payload carries ONLY the keys
+  // present in the patch, so a notes-only save can never wipe tier / target sell / landed
+  // target that another surface set. Omitted columns are untouched on conflict-update.
   const row: Record<string, unknown> = {
     product_id: r.productId,
-    partner_user_id: r.user.id,
-    tier: patch.tier ?? null,
-    target_sell_price: sell,
-    target_landed_cost,
+    partner_user_id: r.user.id, // RLS WITH CHECK pins this to auth.uid(); doubles as last-editor attribution
     updated_by: r.user.id,
   };
+  if ("tier" in patch) row.tier = patch.tier ?? null;
   if ("notes" in patch) row.notes = patch.notes ?? null;
   if ("calc_inputs" in patch) row.calc_inputs = patch.calc_inputs ?? null;
+  if ("target_sell_price" in patch) row.target_sell_price = patch.target_sell_price ?? null;
+  // The landed target derives from (sell, effective margin) — recompute whenever the patch
+  // touches either input, pulling the untouched half from the existing shared row.
+  if ("target_sell_price" in patch || "calc_inputs" in patch) {
+    const { data: existing } = await r.sb
+      .from("selections")
+      .select("target_sell_price, calc_inputs")
+      .eq("product_id", r.productId)
+      .maybeSingle();
+    const sell = "target_sell_price" in patch
+      ? patch.target_sell_price ?? null
+      : existing?.target_sell_price != null ? Number(existing.target_sell_price) : null;
+    const ov = ("calc_inputs" in patch ? patch.calc_inputs : (existing?.calc_inputs as CalcInputs | null)) ?? null;
+    // derive against the effective margin: per-product override beats the LIVE global row
+    const { data: a } = await r.sb.from("assumptions").select("gross_margin").eq("id", 1).maybeSingle();
+    const globalGm = a?.gross_margin != null ? Number(a.gross_margin) : DEFAULT_GROSS_MARGIN;
+    const gm = ov && ov.overridden !== false && ov.grossMargin != null ? ov.grossMargin : globalGm;
+    row.target_landed_cost = sell != null ? targetLanded(sell, gm) : null;
+  }
   // ONE shared selection per product (migration 0015): the partner side speaks with one
   // voice — any partner may edit; partner_user_id/updated_by attribute the last editor.
   const { error } = await r.sb.from("selections").upsert(row, { onConflict: "product_id" });
@@ -92,14 +105,14 @@ export async function saveAssumptions(next: Assumptions): Promise<Result> {
   const { error: upErr } = await sb.from("assumptions").update({ gross_margin: gm, cost_stack: stack, updated_by: user.id }).eq("id", 1);
   if (upErr) { console.error("saveAssumptions:", upErr.message); return { error: "Couldn't save assumptions." }; }
 
-  // Ripple: recompute persisted target landed for non-overridden selections at the new margin.
-  const { data: sels } = await sb.from("selections").select("id, product_id, target_sell_price, calc_inputs");
-  for (const s of sels ?? []) {
-    const ov = (s as any).calc_inputs as CalcInputs | null;
-    if (ov && ov.overridden !== false && ov.grossMargin != null) continue; // per-product override wins
-    const sell = (s as any).target_sell_price != null ? Number((s as any).target_sell_price) : null;
-    const tl = sell != null ? targetLanded(sell, gm) : null;
-    await sb.from("selections").update({ target_landed_cost: tl }).eq("id", (s as any).id);
+  // Ripple: recompute persisted target landed for non-overridden selections at the new
+  // margin — via the SECURITY DEFINER RPC (migration 0017). The old per-row loop ran as
+  // the OWNER against selections whose write policy is partner-only, so it matched zero
+  // rows and failed silently (audit v2). The RPC is set-based and owner-gated internally.
+  const { error: ripErr } = await sb.rpc("ripple_target_landed", { p_gross_margin: gm });
+  if (ripErr) {
+    console.error("saveAssumptions ripple:", ripErr.message);
+    return { error: "Assumptions saved, but recomputing landed targets failed — reload and retry." };
   }
   for (const p of ["/catalog", "/products", "/board", "/dashboard", "/exports", "/settings/assumptions"]) revalidatePath(p);
   return { ok: true };
@@ -215,7 +228,7 @@ export async function discoverCompetitors(
       .from("competitor_feedback")
       .select("reason_text")
       .eq("product_id", r.productId)
-      .eq("verdict", "reject")
+      .eq("verdict", "not_a_fit") // the CHECK's vocabulary — 'reject' matched nothing (audit v2)
       .not("reason_text", "is", null)
       .limit(30);
     const learnedExcludes = Array.from(new Set((fb ?? []).map((f: any) => f.reason_text).filter(Boolean))).slice(0, 12) as string[];
@@ -241,7 +254,9 @@ export async function discoverCompetitors(
       const firstId = catRes?.categories && Object.keys(catRes.categories)[0];
       if (firstId && Number.isFinite(Number(firstId))) { categoryNode = Number(firstId); categories_include = [categoryNode]; }
     } catch { /* category lookup is best-effort */ }
-    await r.sb.from("search_profiles").insert({
+    // product_id is UNIQUE (one live profile per product) — a plain insert violated it on
+    // every re-discovery and the unchecked await hid that, freezing profiles at v1 (audit v2).
+    const { error: profErr } = await r.sb.from("search_profiles").upsert({
       product_id: r.productId,
       query: profile.title,
       include_terms: [profile.title],
@@ -249,7 +264,8 @@ export async function discoverCompetitors(
       category_node: categoryNode,
       version: (prevProf?.version ?? 0) + 1,
       updated_by: r.user.id,
-    });
+    }, { onConflict: "product_id" });
+    if (profErr) console.error("discoverCompetitors search_profiles:", profErr.message); // profile persistence is best-effort
 
     const gte = Number.isFinite(profile.price_low) ? Math.round((profile.price_low as number) * 100) : undefined;
     const lte = Number.isFinite(profile.price_high) ? Math.round((profile.price_high as number) * 100) : undefined;
@@ -379,14 +395,17 @@ export async function rejectCompetitor(ref: string, competitorId: string, reason
   const { data: m } = await r.sb.from("memberships").select("role").eq("user_id", r.user.id).maybeSingle();
   if (m?.role !== "owner") return { error: "Only the owner can review competitors." };
   const text = (reason ?? "").trim().slice(0, 200) || "not a like-for-like competitor";
-  await r.sb.from("competitor_feedback").insert({
+  // 'not_a_fit' is the CHECK constraint's vocabulary — the old 'reject' violated it and the
+  // unchecked await swallowed the failure, so NO feedback row was ever written (audit v2).
+  const { error: fbErr } = await r.sb.from("competitor_feedback").insert({
     competitor_id: competitorId,
     product_id: r.productId,
     user_id: r.user.id,
-    verdict: "reject",
+    verdict: "not_a_fit",
     reason_code: "not_match",
     reason_text: text,
   });
+  if (fbErr) console.error("rejectCompetitor feedback:", fbErr.message); // learn-loop is best-effort; the reject itself still proceeds
   const { error } = await r.sb.from("competitors").update({ status: "rejected" }).eq("id", competitorId).eq("product_id", r.productId);
   if (error) { console.error("rejectCompetitor:", error.message); return { error: "Couldn't reject." }; }
   revalidate(ref);
